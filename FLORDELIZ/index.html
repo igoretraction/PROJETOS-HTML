@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Flor de Lis Home — O luxo que se sente</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- GSAP -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+    ></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+      :root {
+        --bg: #f7f3ef;
+        --bg-2: #f0ebe6;
+        --ink: #2e2a26;
+        --muted: #6d655e; /* tom acinzentado do texto do layout */
+        --gold: #b49a6b;
+        --max: 1180px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: "Poppins", sans-serif;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      .container {
+        max-width: var(--max);
+        margin: 0 auto;
+      }
+
+      /* Utilities */
+      .center {
+        display: grid;
+        place-items: center;
+      }
+      .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .eyebrow {
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        color: var(--gold);
+      }
+      .lede {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.1rem, 1rem + 0.8vw, 1.6rem);
+        color: #fff;
+        text-align: center;
+        max-width: 720px;
+      }
+      .lede.dark {
+        color: var(--ink);
+      }
+
+      /* Sections with imagery */
+      section.hero {
+        position: relative;
+        height: 79vh;
+        min-height: 520px;
+        width: 100%;
+        background: #ccc center/cover no-repeat;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        overflow: hidden;
+      }
+      section.split {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0;
+        min-height: 70vh;
+      }
+      @media (min-width: 900px) {
+        section.split {
+          overflow: hidden;
+          margin-top: 8px;
+        }
+      }
+
+      /* === BLOCO 2: imagem e texto iguais ao layout === */
+      .split .image {
+        position: relative;
+        min-height: 72vh;
+        background: #ddd center/cover no-repeat;
+      }
+      .split .copy {
+        position: absolute;
+        right: clamp(16px, 8vw, 70px);
+        bottom: clamp(16px, 8vw, 110px);
+        background: #f1f1f18f;
+        padding: 25px;
+        border-radius: 10px;
+        backdrop-filter: blur(8px);
+      }
+
+      /* bloco de texto (duas linhas), cinza, alinhado à direita */
+      .textblock {
+        max-width: 540px; /* largura próxima ao mock */
+        text-align: right;
+        color: var(--muted);
+      }
+      .copyline {
+        margin: 0;
+        font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto,
+          Arial, sans-serif;
+        font-weight: 400;
+        font-size: clamp(
+          0.95rem,
+          0.9rem + 0.45vw,
+          1.05rem
+        ); /* tamanho mais contido que o hero */
+        line-height: 1.55;
+      }
+      .copyline + .copyline {
+        margin-top: 18px;
+      }
+
+      /* mobile: centraliza embaixo para não colar nas bordas */
+      @media (max-width: 780px) {
+        .split .copy {
+          left: 50%;
+          right: auto;
+          transform: translateX(-50%);
+          bottom: 100px;
+          padding: 20px 30px;
+          text-align: center;
+          width: 90%;
+        }
+        .textblock {
+          text-align: center;
+          max-width: 640px;
+        }
+        .copyline {
+          margin: auto !important;
+        }
+      }
+
+      section.full-image {
+        position: relative;
+        min-height: 72vh;
+        background: #ccc center/cover no-repeat;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        overflow: hidden;
+      }
+
+      /* Three-up gallery */
+      .gallery {
+        background: #fff;
+        padding: 64px 24px;
+      }
+      .gallery .intro {
+        max-width: var(--max);
+        margin: 0 auto 32px;
+        text-align: center;
+      }
+      .gallery-grid {
+        max-width: var(--max);
+        margin: 0 auto;
+        display: grid;
+        gap: 16px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 900px) {
+        .gallery-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      .gallery img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Brand block */
+      .brand {
+        text-align: center;
+      }
+      .brand .mark {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2.2rem;
+        letter-spacing: 0.08em;
+      }
+      .tagline {
+        font-family: "Cormorant Garamond", serif;
+        font-weight: 500;
+        color: var(--gold);
+        font-size: clamp(1.6rem, 1.1rem + 2.2vw, 3rem);
+        letter-spacing: 0.12em;
+        margin-top: 6px;
+      }
+
+      /* Reveal base state (animated) */
+      .reveal {
+        opacity: 0;
+        transform: translateY(24px);
+        color: #232323;
+      }
+
+      /* Word-splitting for text animations */
+      .anim-text .word {
+        display: inline-block;
+        will-change: transform, opacity;
+      }
+
+      /* Accessibility: reduce motion */
+      @media (prefers-reduced-motion: reduce) {
+        [data-animate],
+        .reveal,
+        .anim-text .word {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <!-- HERO (mãos + bordado) -->
+      <section
+        class="hero"
+        id="hero"
+        style="
+          background-image: url('https://magazord-public.s3.amazonaws.com/dlz/img/2025/10/produto/43561/lp-manifesto-banner-01.jpg');
+        "
+      >
+        <div class="reveal anim-text" data-animate>
+          <p class="lede">
+            Acreditamos que o verdadeiro luxo não está apenas no que se vê, mas
+            sobretudo no que se sente. É o toque que acaricia a pele, a maciez
+            que embala os sonhos, o conforto que transforma o repouso em
+            plenitude.
+          </p>
+        </div>
+      </section>
+
+      <!-- BLOCO 2 (algodão egípcio) -->
+      <section class="split" id="algodao">
+        <div
+          class="image"
+          style="
+            background-image: url('https://magazord-public.s3.amazonaws.com/dlz/img/2025/10/produto/43562/lp-manifesto-banner-02.jpg');
+          "
+        >
+          <div class="copy">
+            <div class="textblock reveal anim-text" data-animate>
+              <p class="copyline" style="width: 100%">
+                Nossos enxovais são confeccionados em puro Algodão Egípcio 600
+                fios, um dos tecidos mais nobres e desejados do mundo.
+              </p>
+              <p class="copyline" style="width: 100%">
+                Cada fibra carrega a herança da tradição, traduzida em peças de
+                beleza atemporal, resistência incomparável e suavidade
+                inconfundível.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BLOCO 3 (travesseiros com flor-de-lis) -->
+      <section
+        class="full-image"
+        id="travesseiros"
+        style="
+          background-image: url('https://magazord-public.s3.amazonaws.com/dlz/img/2025/10/produto/43563/lp-manifesto-banner-03.jpg');
+        "
+      >
+        <div class="reveal anim-text" data-animate>
+          <p class="lede">
+            Mais do que vestir camas, criamos experiências. Refúgios de
+            bem-estar, onde cada detalhe revela cuidado e sofisticação. Cada
+            costura, cada acabamento, cada textura foi pensada para refletir
+            exclusividade e elegância discreta.
+          </p>
+        </div>
+      </section>
+
+      <!-- TEXTOS curtos antes da galeria -->
+      <section
+        class="container"
+        style="
+          padding: 50px 24px 48px;
+          background-color: var(--bg);
+          max-width: none;
+        "
+      >
+        <div class="center reveal anim-text" data-animate>
+          <p></p>
+          <p
+            class="lede dark"
+            style="max-width: 820px; text-align: center; margin-top: 35px"
+          >
+            A Flor de Lis Home é o encontro entre design minimalista, excelência
+            e a busca por uma vida com mais significado.
+          </p>
+        </div>
+      </section>
+
+      <section class="container" style="padding: 72px 24px 18px">
+        <div class="center reveal anim-text" data-animate>
+          <p class="lede dark" style="max-width: 820px; text-align: center">
+            Não oferecemos apenas roupas de cama. Oferecemos um ritual de
+            conforto, uma experiência sensorial e um convite a celebrar o luxo
+            do cotidiano.
+          </p>
+        </div>
+      </section>
+
+      <!-- GALERIA 3 IMAGENS -->
+      <section class="gallery" style="padding: 64px 0px; margin-bottom: -60px">
+        <div class="gallery-grid" style="max-width: 100%">
+          <img
+            class="reveal"
+            src="https://magazord-public.s3.amazonaws.com/dlz/img/2025/10/produto/43565/lp-manifesto-banner-05.jpg"
+            alt="Etiqueta Flor de Lis Home"
+            loading="lazy"
+          />
+          <img
+            class="reveal"
+            src="https://magazord-public.s3.amazonaws.com/dlz/img/2025/10/produto/43566/lp-manifesto-banner-06.jpg"
+            alt="Cama com enxoval"
+            loading="lazy"
+          />
+          <img
+            class="reveal"
+            src="https://magazord-public.s3.amazonaws.com/dlz/img/2025/10/produto/43567/lp-manifesto-banner-07.jpg"
+            alt="Mulher sorrindo na cama"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      <!-- MARCA / ASSINATURA -->
+      <section class="brand">
+        <div class="reveal anim-text" data-animate>
+          <img
+            style="
+              margin: auto;
+              display: flex;
+              justify-content: center;
+              max-width: 100%;
+            "
+            src="https://magazord-public.s3.amazonaws.com/dlz/img/2025/10/produto/43581/design-sem-nome-70.png"
+            alt=""
+          />
+        </div>
+      </section>
+      <div class="cta-home" style="display: flex;">
+        <a
+          href="https://www.flordelishome.com.br/"
+          style="
+            text-align: center;
+    justify-content: center;
+    margin: auto;
+    padding: 10px 20px;
+    background: #818181;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    text-decoration: none;
+    list-style: none;
+    color: white;
+          "
+          >Voltar para Home</a
+        >
+      </div>
+    </main>
+
+    <script>
+      function splitWords(el) {
+        if (!el) return;
+        const nodes = Array.from(el.childNodes);
+        nodes.forEach((node) => {
+          if (node.nodeType === 3) {
+            const words = node.textContent.split(/(\s+)/);
+            const frag = document.createDocumentFragment();
+            words.forEach((w) => {
+              if (w.trim().length === 0) {
+                frag.appendChild(document.createTextNode(w));
+                return;
+              }
+              const span = document.createElement("span");
+              span.className = "word";
+              span.textContent = w;
+              frag.appendChild(span);
+            });
+            node.parentNode.replaceChild(frag, node);
+          } else if (node.nodeType === 1) {
+            splitWords(node);
+          }
+        });
+      }
+
+      window.addEventListener("load", () => {
+        gsap.registerPlugin(ScrollTrigger);
+        const reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+        document.querySelectorAll(".anim-text").forEach((wrap) => {
+          splitWords(wrap);
+        });
+
+        if (!reduceMotion) {
+          gsap.to("#hero", {
+            scale: 1.03,
+            ease: "none",
+            scrollTrigger: {
+              trigger: "#hero",
+              start: "top top",
+              end: "bottom top",
+              scrub: true,
+            },
+          });
+        }
+
+        document.querySelectorAll(".reveal").forEach((el, i) => {
+          gsap.fromTo(
+            el,
+            { opacity: 0, y: 24 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.9,
+              ease: "power2.out",
+              delay: i === 0 ? 0.15 : 0,
+              scrollTrigger: { trigger: el, start: "top 80%" },
+            }
+          );
+        });
+
+        document.querySelectorAll(".anim-text").forEach((block) => {
+          const words = block.querySelectorAll(".word");
+          if (!words.length) return;
+          gsap.set(words, { opacity: 0, yPercent: 30 });
+          gsap.to(words, {
+            opacity: 1,
+            yPercent: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            stagger: { each: 0.03, from: "start" },
+            scrollTrigger: { trigger: block, start: "top 85%" },
+          });
+        });
+
+        if (!reduceMotion) {
+          document.querySelectorAll(".image, .full-image").forEach((el) => {
+            gsap.fromTo(
+              el,
+              { scale: 1 },
+              {
+                scale: 1.05,
+                ease: "none",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top bottom",
+                  end: "bottom top",
+                  scrub: true,
+                },
+              }
+            );
+          });
+        }
+
+        const galleryImgs = document.querySelectorAll(".gallery img");
+        gsap.fromTo(
+          galleryImgs,
+          { opacity: 0, y: 24 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.12,
+            ease: "power2.out",
+            scrollTrigger: { trigger: ".gallery-grid", start: "top 75%" },
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

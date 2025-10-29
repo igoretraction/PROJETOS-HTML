@@ -1,0 +1,264 @@
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Michroma&display=swap");
+  /* ====== BANNER BLACK Homenow (injeção topo) ====== */
+ 
+  :root {
+    --bg1: #d1c9c7;
+    --bg2: #dfc2bd;
+    --txt: #ffffff;
+    --cyan: #7e5148;
+    --pink: #7e5148;
+    --white: #fff;
+  }
+
+  .hnw-banner {
+    width: 100%;
+    z-index: 1500;
+    background: linear-gradient(345deg, var(--bg1), var(--bg2), var(--bg1));
+    padding: 0.75rem 1rem;
+    box-sizing: border-box;
+    position: relative; /* vira fixed ao rolar */
+    transition: transform 0.2s ease, top 0.2s ease;
+    text-decoration: none;
+    display: block;
+  }
+  .hnw-fixed {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  .hnw-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .hnw-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--txt);
+    margin: 0;
+    font-family: "Michroma", sans-serif;
+    font-size: 0.95rem;
+  }
+  .hnw-title strong {
+    color: var(--pink);
+  }
+
+  .hnw-sub {
+    color: var(--cyan);
+    font-weight: 600;
+    margin: 0;
+    font-family: "Michroma", sans-serif;
+    font-size: 0.95rem;
+  }
+
+  .hnw-countdown {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .hnw-unit {
+    position: relative;
+    text-align: center;
+    min-width: 3.5rem;
+  }
+  .hnw-num {
+    display: block;
+    font-variant-numeric: tabular-nums;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--white);
+    font-family: "Michroma", sans-serif !important;
+  }
+  .hnw-label {
+    margin-top: 0.25rem;
+    font-size: 0.5rem;
+    color: var(--cyan);
+    letter-spacing: 0.08rem;
+    font-family: "Michroma", sans-serif !important;
+  }
+  .hnw-unit:not(:last-child)::after {
+    content: ":";
+    position: absolute;
+    right: -0.8rem;
+    top: 0.1rem;
+    color: var(--white);
+    font-size: 1.1rem;
+    font-family: "Michroma", sans-serif;
+  }
+
+  .hnw-cta {
+    display: inline-block;
+    text-decoration: none;
+    background: var(--pink);
+    color: #fff;
+    font-weight: 700;
+    padding: 0.75rem 1rem;
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 20px),
+      calc(100% - 20px) 100%,
+      0 100%
+    );
+    white-space: nowrap;
+    transition: transform 0.2s ease;
+    font-family: "Chakra Petch", sans-serif !important;
+  }
+  .hnw-cta:hover {
+    transform: translateY(1px);
+  }
+
+  .hnw-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 1600;
+  }
+  .hnw-close:hover {
+    color: yellow;
+  }
+
+  @media (min-width: 768px) {
+    .hnw-title {
+      text-align: left;
+    }
+  }
+  @media (max-width: 767.98px) {
+    .hnw-container {
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  (function () {
+    // ===== Helpers
+    const two = (n) => String(n).padStart(2, "0");
+
+    // ===== HTML do banner (injetado no topo)
+    const deadlineISO = "2025-10-31T23:59:59"; // ajuste se quiser
+    const hrefCTA = "/"; // opcional: link do CTA
+
+    const bannerHTML = `
+    <div class="hnw-banner" id="hnw-banner" role="region" aria-label="Esquenta Black Homenow">
+      <button class="hnw-close" type="button" aria-label="Fechar banner">×</button>
+      <div class="hnw-container">
+        <h1 class="hnw-title">
+          <span style="text-align:center">
+            <strong>Esquenta Black Homenow</strong><br/>Confira Nossas Promoções
+          </span>
+        </h1>
+
+        <p class="hnw-sub" aria-hidden="true">Por Tempo Limitado!</p>
+
+        <div class="hnw-countdown" id="hnw-countdown" data-deadline="${deadlineISO}">
+          <div class="hnw-unit">
+            <span class="hnw-num" data-days>00</span><span class="hnw-label">DIAS</span>
+          </div>
+          <div class="hnw-unit">
+            <span class="hnw-num" data-hours>00</span><span class="hnw-label">HORAS</span>
+          </div>
+          <div class="hnw-unit">
+            <span class="hnw-num" data-mins>00</span><span class="hnw-label">MIN</span>
+          </div>
+          <div class="hnw-unit">
+            <span class="hnw-num" data-secs>00</span><span class="hnw-label">SEG</span>
+          </div>
+        </div>
+
+        <!-- CTA opcional -->
+        <!-- <a class="hnw-cta" href="${hrefCTA}">APROVEITE</a> -->
+      </div>
+    </div>
+  `;
+
+    // ===== Injeta no topo da página (mesma lógica do Modelo 1: prepend)
+    document.body.insertAdjacentHTML("afterbegin", bannerHTML);
+
+    const banner = document.getElementById("hnw-banner");
+    const countdown = document.getElementById("hnw-countdown");
+    const closeBtn = banner.querySelector(".hnw-close");
+
+    // ===== Corrige empurrão do layout quando fixo
+    let lastFixed = false;
+    function applyBodyPadding() {
+      const isFixed = banner.classList.contains("hnw-fixed");
+      if (isFixed && !lastFixed) {
+        document.body.style.paddingTop = banner.offsetHeight + "px";
+      } else if (!isFixed && lastFixed) {
+        document.body.style.paddingTop = "";
+      }
+      lastFixed = isFixed;
+    }
+
+    // ===== Fixar ao rolar (como no Modelo 1)
+    function onScroll() {
+      if (window.scrollY > 100) {
+        banner.classList.add("hnw-fixed");
+      } else {
+        banner.classList.remove("hnw-fixed");
+      }
+      applyBodyPadding();
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    // Estado inicial
+    onScroll();
+
+    // ===== Botão fechar (como no Modelo 1)
+    closeBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      banner.style.display = "none";
+      document.body.style.paddingTop = "";
+    });
+
+    // ===== Countdown por data-deadline (como no seu primeiro código)
+    function startCountdown() {
+      if (!countdown) return;
+      const attr = countdown.getAttribute("data-deadline");
+      const deadline = attr
+        ? new Date(attr)
+        : new Date(Date.now() + 10 * 60 * 60 * 1000); // fallback 10h
+
+      function tick() {
+        const now = new Date();
+        let ms = deadline - now;
+        if (ms <= 0) {
+          ms = 0;
+          clearInterval(timer);
+        }
+
+        const s = Math.floor(ms / 1000);
+        const days = Math.floor(s / 86400);
+        const hours = Math.floor((s % 86400) / 3600);
+        const mins = Math.floor((s % 3600) / 60);
+        const secs = s % 60;
+
+        countdown.querySelector("[data-days]").textContent = two(days);
+        countdown.querySelector("[data-hours]").textContent = two(hours);
+        countdown.querySelector("[data-mins]").textContent = two(mins);
+        countdown.querySelector("[data-secs]").textContent = two(secs);
+      }
+
+      tick();
+      const timer = setInterval(tick, 1000);
+    }
+    startCountdown();
+  })();
+</script>
