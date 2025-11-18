@@ -1,460 +1,228 @@
-<!-- ===== Estilo ===== -->
-<style>
-  .modal-medidas {
-    text-align: left;
-  }
-  .modal-medidas .swal2-title {
-    display: none !important;
-  }
-  .modal-medidas .swal2-html-container {
-    margin: 0 !important;
-    padding: 10px !important;
-  }
-
-  /* GRID DESKTOP: 2 colunas (imagem | medidas). No mobile vira 1 coluna */
-  .mm-grid {
-    display: grid;
-    gap: 16px;
-    align-items: start;
-    grid-template-columns: 1fr 1.2fr;
-    padding: 0 10px 10px;
-  }
-  @media (max-width: 768px) {
-    .mm-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  /* Wrapper da imagem para permitir overlay das medidas no desktop */
-  .mm-hero-wrap {
-    position: relative;
-    border-radius: 12px;
-    overflow: hidden;
-    background: #f7f7f7;
-  }
-  .mm-hero {
-    width: 100%;
-    aspect-ratio: 3/4;
-    display: block;
-    overflow: hidden;
-  }
-  .mm-hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-
-  /* —— MEDIDAS DA MODELO (overlay à direita no desktop) —— */
-  /* ---- Medidas da modelo: só texto no canto inferior direito ---- */
-  .mm-modelo-float {
-    position: absolute;
-    right: 14px;
-    bottom: 14px;
-    transform: none;
-    background: transparent;
-    border: none;
-    padding: 0;
-    width: auto;
-    max-width: 45%;
-    color: #fff; /* texto branco sobre a foto */
-    text-align: right;
-    pointer-events: none; /* não bloqueia clique/zoom na imagem */
-  }
-
-  /* títulos e linhas de medida */
-  .mm-modelo-title {
-    margin: 0 0 6px;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    /* leve contorno para legibilidade */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 0 1px rgba(0, 0, 0, 0.35);
-  }
-  .mm-modelo-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 6px;
-  }
-  .mm-modelo-item {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    font-size: 13px;
-    line-height: 1.2;
-  }
-  .mm-modelo-item .k {
-    font-weight: 700;
-  }
-  .mm-modelo-item .v {
-    opacity: 0.95;
-  }
-
-  /* reforça a leitura do texto sobre fundos claros */
-  .mm-modelo-item .k,
-  .mm-modelo-item .v {
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55), 0 0 1px rgba(0, 0, 0, 0.35);
-  }
-
-  /* Mobile: vira bloco abaixo da imagem, cor escura e sem sombra */
-  @media (max-width: 768px) {
-    .mm-modelo-title,
-    .mm-modelo-item .k,
-    .mm-modelo-item .v {
-      text-align: end;
-    }
-  }
-
-  /* Abas */
-  .mm-tabs {
-    display: flex;
-    gap: 8px;
-    padding: 10px 0;
-    position: sticky;
-    top: 0;
-    background: #fff;
-    z-index: 2;
-    border-bottom: 1px solid #eee;
-  }
-  .mm-tab {
-    appearance: none;
-    border: 1px solid #e6e6e6;
-    background: #fff;
-    padding: 10px 14px;
-    border-radius: 999px;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  .mm-tab.is-active {
-    border-color: #222;
-    font-weight: 600;
-  }
-
-  /* Cards (usados no mobile e no desktop) */
-  .cards-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-    padding: 10px 0;
-  }
-  @media (min-width: 1024px) {
-    .cards-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  .mm-card {
-    border: 1px solid #eee;
-    border-radius: 14px;
-    padding: 12px;
-    background: #fff;
-  }
-  .mm-card h4 {
-    margin: 0 0 8px;
-    font-size: 15px;
-  }
-  .mm-dl {
-    margin: 0;
-  }
-  .mm-dl .row {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 8px 0;
-    border-bottom: 1px dashed #f0f0f0;
-    font-size: 14px;
-  }
-  .mm-dl .row:last-child {
-    border-bottom: none;
-  }
-  .mm-dl .k {
-    font-weight: 600;
-    color: #333;
-  }
-  .mm-dl .v {
-    color: #555;
-  }
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-  // <![CDATA[
-  $(function () {
-    /* ========================
-     * DADOS DAS MEDIDAS
-     * ======================== */
-    const MEASURES = {
-      Legging: {
-        order: ["Cintura", "Quadril", "Comprimento", "Manequim"],
-        sizes: ["P", "M", "G", "GG"],
-        rows: {
-          Cintura: { P: "65", M: "72", G: "81", GG: "89" },
-          Quadril: { P: "91", M: "98", G: "107", GG: "115" },
-          Comprimento: { P: "90", M: "92", G: "94", GG: "96" },
-          Manequim: { P: "36/38", M: "38/40", G: "42/44", GG: "46/48" },
-        },
-        unit: { Cintura: "cm", Quadril: "cm", Comprimento: "cm" },
-      },
-      Short: {
-        order: ["Cintura", "Quadril", "Comprimento", "Manequim"],
-        sizes: ["P", "M", "G", "GG"],
-        rows: {
-          Cintura: { P: "65", M: "72", G: "81", GG: "89" },
-          Quadril: { P: "91", M: "98", G: "107", GG: "115" },
-          Comprimento: { P: "38", M: "40", G: "42", GG: "44" },
-          Manequim: { P: "36/38", M: "38/40", G: "42/44", GG: "46/48" },
-        },
-        unit: { Cintura: "cm", Quadril: "cm", Comprimento: "cm" },
-      },
-      "Top Nadador": {
-        order: ["Cintura", "Busto", "Comprimento", "Manequim"],
-        sizes: ["P", "M", "G", "GG"],
-        rows: {
-          Cintura: { P: "65", M: "72", G: "81", GG: "89" },
-          Busto: { P: "80", M: "88", G: "98", GG: "107" },
-          Comprimento: { P: "30", M: "32", G: "34", GG: "36" },
-          Manequim: { P: "36/38", M: "38/40", G: "42/44", GG: "46/48" },
-        },
-        unit: { Cintura: "cm", Busto: "cm", Comprimento: "cm" },
-      },
-      "Top Alcinha": {
-        order: ["Cintura", "Busto", "Comprimento", "Manequim"],
-        sizes: ["P", "M", "G", "GG"],
-        rows: {
-          Cintura: { P: "65", M: "72", G: "81", GG: "89" },
-          Busto: { P: "74", M: "82", G: "92", GG: "101" },
-          Comprimento: { P: "26", M: "27", G: "28", GG: "29" },
-          Manequim: { P: "36/38", M: "38/40", G: "42/44", GG: "46/48" },
-        },
-        unit: { Cintura: "cm", Busto: "cm", Comprimento: "cm" },
-      },
-    };
-
-    /* ========================
-     * CONFIG
-     * ======================== */
-    const PRODUCT_TITLE_SELECTORS = [
-      ".informacoes-compra-produto > h1",
-      ".informacoes-compra-produto h1",
-      ".product-title h1",
-      "h1.product-title",
-      "h1.product-name",
-      ".product-name",
-      ".prd-title",
-      "h1.titulo",
-      "h1",
-    ];
-    const SIZE_ORDER = ["PP", "P", "M", "G", "GG", "Único"];
-    const stripAcc = (s) =>
-      (s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    const norm = (s) =>
-      stripAcc(
-        String(s || "")
-          .toLowerCase()
-          .trim()
-      );
-    const isMobile = () => window.matchMedia("(max-width: 768px)").matches;
-
-    function getProductTitle() {
-      for (const sel of PRODUCT_TITLE_SELECTORS) {
-        const t = $(sel).first().text().trim();
-        if (t) return t;
-      }
-      return $('meta[property="og:title"]').attr("content") || "";
+<style type="text/css">body {
+        font-family: 'Montserrat', sans-serif;
     }
 
-    /* ========================
-     * DETECTAR CATEGORIAS
-     * ======================== */
-    function detectCategoriesByName(nameRaw) {
-      const name = norm(nameRaw);
-      const hasLegging = /\blegg?ing\b/.test(name);
-      const hasShort = /\bshorts?\b/.test(name);
-      const isConjunto = /\bconjunto\b/.test(name);
-      const topIsNadador = /\bnadador(a)?\b/.test(name);
-      const topIsAlca = /\balcinha\b|\balca\b|\bde alca\b/.test(name);
-      const allow = new Set();
+    .container-destaque {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+    }
 
-      if (!isConjunto) {
-        if (hasLegging) allow.add("Legging");
-        if (hasShort) allow.add("Short");
-        if (/\btop\b/.test(name)) {
-          if (topIsNadador) allow.add("Top Nadador");
-          if (topIsAlca) allow.add("Top Alcinha");
-          if (!topIsNadador && !topIsAlca) {
-            allow.add("Top Nadador");
-            allow.add("Top Alcinha");
-          }
+    .destaque-descricao {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    .destaque-descricao img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 5px;
+    }
+
+    .content-card-descricao {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 40px;
+        flex-wrap: wrap;
+    }
+
+    .card-item {
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        width: 350px;
+        padding: 25px;
+        text-align: center;
+        background: white;
+    }
+
+    .card-item img {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .card-txt {
+        font-size: 14px;
+        color: #222;
+        font-weight: 500;
+        margin-top: 10px;
+    }
+
+    .container-descricao-geral {
+        width: 100%;
+        max-width: 1000px;
+        margin: auto;
+        padding: 20px;
+    }
+
+    .content-descricao-geral {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .item-descricao {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .item-imagem-descricao img {
+        width: 100%;
+        max-width: 300px;
+        border-radius: 20px;
+    }
+
+    .item-texto-descricao {
+        max-width: 500px;
+        font-size: 16px;
+        color: #444;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .caracteristicas-container {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        background: #f9f9f9;
+    }
+
+    .caracteristicas-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .caracteristicas-grid div {
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+        .content-card-descricao {
+            flex-direction: column;
+            align-items: center;
         }
-        if (!allow.size) Object.keys(MEASURES).forEach((c) => allow.add(c));
-        return Array.from(allow);
-      }
-      if (hasLegging) allow.add("Legging");
-      if (hasShort) allow.add("Short");
-      if (!hasLegging && !hasShort) {
-        allow.add("Legging");
-        allow.add("Short");
-      }
-      if (topIsNadador) allow.add("Top Nadador");
-      if (topIsAlca) allow.add("Top Alcinha");
-      if (!topIsNadador && !topIsAlca) {
-        allow.add("Top Nadador");
-        allow.add("Top Alcinha");
-      }
-      return Array.from(allow);
+
+        .card-item {
+            width: 90%;
+        }
+
+        .item-descricao {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .item-imagem-descricao,
+        .item-texto-descricao {
+            width: 100%;
+        }
+
+        .caracteristicas-grid {
+            grid-template-columns: 1fr;
+        }
     }
+</style>
+<div class="container-destaque">
+<div class="destaque-descricao"><img alt="" src="https://images.tcdn.com.br/img/editor/up/1357280/ferramentas.png" />Montagem: Montado</div>
 
-    function orderCats(cats) {
-      const order = ["Legging", "Short", "Top Nadador", "Top Alcinha"];
-      return cats.slice().sort((a, b) => order.indexOf(a) - order.indexOf(b));
-    }
+<div class="destaque-descricao"><img alt="" src="https://images.tcdn.com.br/img/editor/up/1357280/qualidade.png" />Garantia: 90 Dias</div>
 
-    /* ========================
-     * RENDER COMPONENTES
-     * ======================== */
-    function renderHeroWrap() {
-      const $img = $(".gallery-main img").first();
-      const src = $img.attr("data-src") || $img.attr("src") || "";
-      let lis = "";
-      $(".medidas-modelo .infoModelo > div").each(function () {
-        lis += `<li class="mm-modelo-item"><span class="k">${(
-          $(this).data("atributo") || ""
-        ).toUpperCase()}</span><span class="v">${$(this).text()}</span></li>`;
-      });
-      return `
-      <div class="mm-hero-wrap">
-        <div class="mm-hero">${
-          src ? `<img src="${src}" alt="Modelo">` : ``
-        }</div>
-        <div class="mm-modelo-float">
-          <div class="mm-modelo-title">Modelo veste P</div>
-          <ul class="mm-modelo-list">${lis}</ul>
-        </div>
-      </div>
-    `;
-    }
+<div class="destaque-descricao"><img alt="" src="https://images.tcdn.com.br/img/editor/up/1357280/madeira.png" />Material: Madeira Maci&ccedil;a</div>
 
-    function renderCards(cat) {
-      const m = MEASURES[cat];
-      if (!m) return "";
-      const sizes = (m.sizes || [])
-        .slice()
-        .sort((a, b) => SIZE_ORDER.indexOf(a) - SIZE_ORDER.indexOf(b));
-      let html = '<div class="cards-grid">';
-      sizes.forEach((tam) => {
-        html += `<div class="mm-card"><h4>Tamanho ${tam}</h4><div class="mm-dl">`;
-        m.order.forEach((attr) => {
-          const val = (m.rows[attr] || {})[tam] ?? "—";
-          const unit = m.unit && m.unit[attr] ? ` ${m.unit[attr]}` : "";
-          html += `<div class="row"><span class="k">${attr}</span><span class="v">${val}${unit}</span></div>`;
-        });
-        html += `</div></div>`;
-      });
-      html += "</div>";
-      return html;
-    }
+</div>
 
-    function tabs(categorias, atual) {
-      if (categorias.length <= 1) return "";
-      return `
-      <div class="mm-tabs">
-        ${categorias
-          .map(
-            (c) => `
-          <button class="mm-tab ${
-            c === atual ? "is-active" : ""
-          }" data-tab="${c}">
-            ${c}
-          </button>`
-          )
-          .join("")}
-      </div>`;
-    }
+<div class="content-card-descricao">
+<div class="card-item"><img alt="" src="https://images.tcdn.com.br/img/img_prod/1357280/rack_com_painel_ripado_santorini_para_sala_180m_co_1_20251113134317_d3042706b9df.jpg" />
+<div class="card-txt"><strong>Estética Sofisticada</strong><br />
+O Painel Ripado Santorini transforma sua sala com um visual moderno, elegante e imponente. Ideal para quem busca um ambiente refinado e com personalidade.</div>
+</div>
 
-    /* ========================
-     * INSERIR BOTÃO AUTOMATICAMENTE APÓS .area-derivacoes
-     * ======================== */
-    function ensureButtonExists() {
-      if ($(".ver-tabela-de-medidas").length) return;
+<div class="card-item"><img alt="" src="https://images.tcdn.com.br/img/img_prod/1357280/rack_com_painel_ripado_santorini_para_sala_180m_co_2_20251113134019_2b5816a074b0.jpg" />
+<div class="card-txt"><strong>Qualidade Garantida</strong><br />
+Produto que tr&aacute;s conforto, eleg&acirc;ncia e indispensabilidade para seu ambiente gourmet, com ele, voc&ecirc; ter&aacute; sofistica&ccedil;&atilde;o e autenticidade.</div>
+</div>
 
-      const btnHtml = `
-    <div id="button-measure-table" class="mt-space-16">
-      <div class="mt-space-20 flex items-center p-[6px]">
-        <button type="button" role="button" tabindex="0"
-          class="ver-tabela-de-medidas flex w-fit items-center gap-space-8 rounded-sm border border-solid border-secondary-100 p-space-8"
-          style="cursor:pointer; pointer-events:auto;">
-          <img src="https://public-resources.cdn.magazord.com.br/assets/global/common-icons/commerce/icon-ruler.svg" width="18" height="17" alt="Tabela de medidas" title="Tabela de medidas">
-          <span class="text text-xs text-secondary-800">Tabela de medidas</span>
-        </button>
-      </div>
-    </div>`;
+<div class="card-item"><img alt="" src="https://images.tcdn.com.br/img/editor/up/1357280/Mesa_de_Cabeceira_Eros_img5.png" />
+<div class="card-txt"><strong>Durabilidade e Resistência</strong><br />
+Produzido com materiais de alta qualidade, o painel oferece longa vida útil, estabilidade e acabamento premium para deixar sua parede impecável.</div>
+</div>
+</div>
 
-      if ($(".area-derivacoes").length) {
-        $(".area-derivacoes").last().after(btnHtml);
-      } else if ($("#content-price-product").length) {
-        $("#content-price-product").after(btnHtml);
-      } else if ($(".informacoes-compra-produto").length) {
-        $(".informacoes-compra-produto").append(btnHtml);
-      } else {
-        $("body").append(btnHtml);
-      }
-    }
+<div class="container-descricao-geral">
+<div class="content-descricao-geral">&nbsp;</div>
+</div>
 
-    /* ========================
-     * MODAL
-     * ======================== */
-    function openMeasureModal() {
-      const productTitle = getProductTitle();
-      const allow = detectCategoriesByName(productTitle);
-      let categorias = Object.keys(MEASURES).filter((c) => allow.includes(c));
-      if (!categorias.length) categorias = Object.keys(MEASURES);
-      const categoriasFinal = orderCats(categorias);
-      let catAtual = categoriasFinal[0];
+<div class="item-descricao">
+<div class="item-texto-descricao"><strong>Descrição Completa:
+</strong>
 
-      function layout() {
-        const hero = renderHeroWrap();
-        const tbs = tabs(categoriasFinal, catAtual);
-        const cards = renderCards(catAtual);
-        if (isMobile()) return `${hero}${tbs}${cards}`;
-        return `<div class="mm-grid"><div class="mm-col">${hero}</div><div class="mm-col">${tbs}${cards}</div></div>`;
-      }
+<p>Rack Suspenso Com Painel Ripado Santorini para TV até 65? ? Design Moderno com Gavetas em Palhinha Sintética
 
-      Swal.fire({
-        html: layout(),
-        showCloseButton: true,
-        showConfirmButton: false,
-        width: "min(92vw, 1000px)",
-        background: "#fff",
-        customClass: { popup: "modal-medidas" },
-        didRender: () => {
-          $(".mm-tab")
-            .off("click")
-            .on("click", function () {
-              catAtual = $(this).data("tab");
-              $(".swal2-html-container").html(layout());
-              $(".mm-tab").off("click").on("click", arguments.callee);
-            });
-        },
-      });
-    }
+Transforme sua sala de estar com o Rack Suspenso Santorini, um móvel que une praticidade, elegância e funcionalidade. Produzido em MDF de alta qualidade, ele oferece design contemporâneo com detalhes que fazem a diferença. Com 2 gavetas com corrediças telescópicas para abertura suave, silenciosa e resistente.  </p>
+</div>
 
-    $(document).on("click", ".ver-tabela-de-medidas", function (e) {
-      e.preventDefault();
-      if (typeof Swal === "undefined") {
-        $.getScript(
-          "https://cdn.jsdelivr.net/npm/sweetalert2@11",
-          openMeasureModal
-        );
-      } else {
-        openMeasureModal();
-      }
-    });
+<div class="item-imagem-descricao"><img alt="" src="https://images.tcdn.com.br/img/img_prod/1357280/rack_com_painel_ripado_santorini_para_sala_180m_co_1_20251113134317_d3042706b9df.jpg" /></div>
+</div>
 
-    // cria o botão se não existir
-    ensureButtonExists();
-  });
-  // ]]>
-</script>
+<div class="caracteristicas-container">
+<div class="caracteristicas-grid">
+<div><strong>Material:</strong>&nbsp;MDF de Alta Qualidade</div>
+
+<div><strong>Altura:</strong>2,30 m</div>
+
+<div><strong>Largura:</strong>2,20 m</div>
+
+<div><strong>Rack:</strong> Altura 20cm | Largura 180cm | Profundidade 35cm.
+
+</div>
+
+<div><strong>Instalação:</strong>Fixado na Parede</div>
+
+<div><strong>Estilo:</strong>Ripado Moderno</div>
+
+<div><strong>Ambientes:</strong> Sala de Estar / Home Theater</div>
+
+<div><strong>Acabamento:</strong>Premium Fosco / Ripado Decor</div>
+
+</div>
+</div>
+
+<div style="
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    background: #f9f9f9;
+    width: auto;
+    max-width: 1320px;
+    margin: auto;
+    justify-content: center;
+    margin-top: 15px;
+  ">
+<p style="
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+      border: none;
+      width: 100%;
+    "><strong>Entregas: </strong> Devido às políticas das transportadoras, as entregas são realizadas somente até o térreo. Os entregadores não sobem escadas ou elevadores; o produto será entregue na portaria ou recepção.
+
+</p>
+</div>
+
+<p class="card-item" style="
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: 20px;
+    border: none;
+    width: 100%;
+    max-width: 960px;
+  "><strong>Trocas: </strong> O produto deve ser devolvido nas mesmas condições em que foi entregue, com embalagem original e todos os acessórios, sem sinais de uso ou violação.</p>

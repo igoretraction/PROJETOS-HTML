@@ -46,7 +46,7 @@
     .icon-svg-text {
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       float: left;
       gap: 10px;
     }
@@ -127,7 +127,6 @@
       border-radius: 15px;
       overflow: hidden;
       aspect-ratio: 1;
-      cursor: pointer;
     }
 
     .feature-item img {
@@ -158,7 +157,7 @@
     }
 
     .feature-text::before {
-      content: "";
+      content: "•";
       position: absolute;
       left: 0;
       font-size: 18px;
@@ -213,6 +212,9 @@
       flex-direction: column;
       align-items: flex-start;
       gap: 10px;
+    }
+    .img-right{
+      max-width: 470px;
     }
 
     .label-text {
@@ -318,61 +320,69 @@
     }
 
     @media (max-width: 768px) {
-        .secao-two{
+      .secao-two {
         flex-direction: column !important;
-    width: 100%;
-margin-top: 15px;
-gap: 45px;
-        }
-        .secao-tres{
-            margin-top: 40px;        }
-        
-        .section-svg-icon{
-                width: 60px;
-    height: 60px;
-        }
+        width: 100%;
+        margin-top: 15px;
+        gap: 45px;
+      }
+      .secao-tres {
+        margin-top: 40px;
+      }
+
+      .section-svg-icon {
+        width: 60px;
+        height: 60px;
+      }
       .desktop-only {
         display: none !important;
       }
-.spec-img{
+      .spec-img {
         flex-direction: column !important;
-}
+      }
       .mobile-only {
         display: block !important;
       }
-      .text-section{
-        text-align: center !important;  
+      .text-section {
+        text-align: center !important;
       }
-      .img-right{
+      .img-right {
         width: 100% !important;
       }
-      .paragrafe-new
-        {
-            text-align: left !important;
-        }
-        .measure-section-img{
-            width: 100%;
-            height: auto;
-        }
-        .text-right{
-            text-align: left;
-        }
+      .paragrafe-new {
+        text-align: left !important;
+      }
+      .measure-section-img {
+        width: 100%;
+        height: auto;
+      }
+      .text-right {
+        text-align: left;
+      }
     }
 
     @media (max-width: 767px) {
-    .contain-icons { display: block; } /* o Swiper cuida do layout no mobile */
-    .section-icon { width: auto; align-items: center;}
-    .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
+      .contain-icons {
+        display: block;
+      } /* o Swiper cuida do layout no mobile */
+      .section-icon {
+        width: auto;
+        align-items: center;
+      }
+      .swiper-horizontal > .swiper-pagination-bullets,
+      .swiper-pagination-bullets.swiper-pagination-horizontal,
+      .swiper-pagination-custom,
+      .swiper-pagination-fraction {
         display: none !important;
+      }
     }
-  }
-  .icone{
-    margin-left: 10px;
-  }
+    .icone {
+      margin-left: 10px;
+    }
   </style>
   <body>
     <div class="icons-pagination mobile-only">
-<div class="section-icon">
+      <div class="section-icon">
         <div class="icone">
           <div class="section-svg-icon">
             <svg
@@ -425,7 +435,8 @@ gap: 45px;
             </svg>
           </div>
         </div>
-        <div class="paragrafe">Produto entregue montado</div>
+        <div class="paragrafe">Acompanham parafusos 
+e buchas para fixação</div>
       </div>
       <div class="section-icon">
         <div class="icone">
@@ -477,7 +488,7 @@ gap: 45px;
             </svg>
           </div>
         </div>
-        <div class="paragrafe">Produto entregue montado</div>
+        <div class="paragrafe">Feito em MDF</div>
       </div>
       <div class="section-icon">
         <div class="icone">
@@ -521,10 +532,10 @@ gap: 45px;
             </svg>
           </div>
         </div>
-        <div class="paragrafe">Produto entregue montado</div>
+        <div class="paragrafe">Fácil montagem</div>
       </div>
     </div>
-<div class="contain-icons" id="icons-container">
+    <div class="contain-icons" id="icons-container">
       <div class="section-icon">
         <div class="icone">
           <div class="section-svg-icon">
@@ -578,7 +589,8 @@ gap: 45px;
             </svg>
           </div>
         </div>
-        <div class="paragrafe">Produto entregue montado</div>
+        <div class="paragrafe">Acompanham parafusos <br>
+e buchas para fixação</div>
       </div>
       <div class="section-icon">
         <div class="icone">
@@ -630,7 +642,7 @@ gap: 45px;
             </svg>
           </div>
         </div>
-        <div class="paragrafe">Produto entregue montado</div>
+        <div class="paragrafe">Feito em MDF</div>
       </div>
       <div class="section-icon">
         <div class="icone">
@@ -674,7 +686,7 @@ gap: 45px;
             </svg>
           </div>
         </div>
-        <div class="paragrafe">Produto entregue montado</div>
+        <div class="paragrafe">Fácil montagem</div>
       </div>
     </div>
     <div class="secao-two">
@@ -684,7 +696,7 @@ gap: 45px;
           <strong>gabinete Tereza Cristina</strong> possui cantos
           arredondados, frente ripada com
           <strong>revestimento em PVC e iluminação em LED</strong> , unindo
-          modernidade e funcionalidade. <br />
+          modernidade e funcionalidade. <br /> 
           <br />
           Suas gavetas espaçosas oferecem organização eficiente, enquanto o
           puxador perfil em alumínio garante um acabamento elegante.
@@ -694,36 +706,36 @@ gap: 45px;
             <div class="img-icon">
               <img
                 class="img-icon-img"
-                src="https://modii.org/wp-content/uploads/2020/12/random.png"
+                src="https://lh3.google.com/u/0/d/1QjP2hYeNCd3J367EUwOCTSXwSALW2Z0i=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt=""
               />
             </div>
             <div class="text-right">
-              <p><strong>Envio rápido e seguro para todo o Brasil</strong></p>
+              <p><strong>Duas portas espelhadas com cantos arredondados</strong></p>
             </div>
           </div>
           <div class="icon-img-text">
             <div class="img-icon">
               <img
                 class="img-icon-img"
-                src="https://modii.org/wp-content/uploads/2020/12/random.png"
+                src="https://lh3.google.com/u/0/d/1DNyp6t4LlGVS0GeR_Nk8gUxfn-llhtH6=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt=""
               />
             </div>
             <div class="text-right">
-              <p><strong>Envio rápido e seguro para todo o Brasil</strong></p>
+              <p><strong>Prateleiras internas para melhor organização</strong></p>
             </div>
           </div>
           <div class="icon-img-text">
             <div class="img-icon">
               <img
                 class="img-icon-img"
-                src="https://modii.org/wp-content/uploads/2020/12/random.png"
+                src="https://lh3.google.com/u/0/d/1ivGqKGHguavg3F5ZK7IUqdsqcszUEuzu=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt=""
               />
             </div>
             <div class="text-right">
-              <p><strong>Envio rápido e seguro para todo o Brasil</strong></p>
+              <p><strong>Estrutura resistente com acabamento refinado.</strong></p>
             </div>
           </div>
         </div>
@@ -731,12 +743,12 @@ gap: 45px;
       <div class="image-right">
         <img
           class="img-right"
-          src="https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=s1280-w1280-h800"
+          src="https://lh3.google.com/u/0/d/1CvRLor0c4I0-Lbjail2Z84RR2FPfc4BZ=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch "
           alt=""
         />
       </div>
     </div>
-  
+
     <div class="background-section">
       <div class="highlights-section">
         <div
@@ -751,7 +763,7 @@ gap: 45px;
           <div class="features-grid desktop-only">
             <div class="feature-item">
               <img
-                src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                src="https://lh3.google.com/u/0/d/1Eew_n2fbLF0GzWWR0yaAt4brzyjvvd6Y=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt="Led imbutido"
               />
               <div class="feature-overlay">
@@ -761,19 +773,19 @@ gap: 45px;
 
             <div class="feature-item">
               <img
-                src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                src="https://lh3.google.com/u/0/d/1o3iJ4opj4SQb5XkyuaYepxqtzravOaXV=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt="Cantos arredondados"
               />
               <div class="feature-overlay">
                 <span class="feature-text">
-                  Cantos arredondados e frente ripada
+                  Design contemporâneo
                 </span>
               </div>
             </div>
 
             <div class="feature-item">
               <img
-                src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                src="https://lh3.google.com/u/0/d/1t3IEuT4GZJ1jopnmfwHQ7lmWLipYh91U=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt="Espelheira"
               />
               <div class="feature-overlay">
@@ -785,7 +797,7 @@ gap: 45px;
 
             <div class="feature-item">
               <img
-                src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                src="https://lh3.google.com/u/0/d/14gsdDhfTTedqFBjvJvCjZGr0xk3gCltd=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt="Design moderno"
               />
               <div class="feature-overlay">
@@ -795,7 +807,7 @@ gap: 45px;
 
             <div class="feature-item">
               <img
-                src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                src="https://lh3.google.com/u/0/d/1lw6iwy5DgO6dzuUskxj2K9CRAeiF3Nql=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt="Portas com fechamento"
               />
               <div class="feature-overlay">
@@ -805,32 +817,32 @@ gap: 45px;
 
             <div class="feature-item">
               <img
-                src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                src="https://lh3.google.com/u/0/d/1o3iJ4opj4SQb5XkyuaYepxqtzravOaXV=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt="Puxador perfil"
               />
               <div class="feature-overlay">
-                <span class="feature-text">Puxador perfil em alumínio</span>
+                <span class="feature-text">Organização facilitada</span>
               </div>
             </div>
 
             <div class="feature-item">
               <img
-                src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                src="https://lh3.google.com/u/0/d/1NYhf_X108Z8nHUYVx1AX4UfftG5vx4Fz=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt="Cuba em mármore"
               />
               <div class="feature-overlay">
-                <span class="feature-text">Cuba em mármore sintético</span>
+                <span class="feature-text">Acabamento refinado</span>
               </div>
             </div>
 
             <div class="feature-item">
               <img
-                src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                src="https://lh3.google.com/u/0/d/1ct1dAr6Ln9TwZC9zlldYl6AeJhtTDI3G=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                 alt="Duas gavetas"
               />
               <div class="feature-overlay">
                 <span class="feature-text">
-                  Duas gavetas com abertura total e deslize suave
+                  Praticidade na entrega
                 </span>
               </div>
             </div>
@@ -842,7 +854,7 @@ gap: 45px;
               <div class="swiper-slide">
                 <div class="feature-item">
                   <img
-                    src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                    src="https://lh3.google.com/u/0/d/1Eew_n2fbLF0GzWWR0yaAt4brzyjvvd6Y=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                     alt="Led imbutido"
                   />
                   <div class="feature-overlay">
@@ -854,12 +866,12 @@ gap: 45px;
               <div class="swiper-slide">
                 <div class="feature-item">
                   <img
-                    src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                    src="https://lh3.google.com/u/0/d/1o3iJ4opj4SQb5XkyuaYepxqtzravOaXV=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                     alt="Cantos arredondados"
                   />
                   <div class="feature-overlay">
                     <span class="feature-text">
-                      Cantos arredondados e frente ripada
+                      Organização facilitada
                     </span>
                   </div>
                 </div>
@@ -868,12 +880,12 @@ gap: 45px;
               <div class="swiper-slide">
                 <div class="feature-item">
                   <img
-                    src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                    src="https://lh3.google.com/u/0/d/1t3IEuT4GZJ1jopnmfwHQ7lmWLipYh91U=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                     alt="Espelheira"
                   />
                   <div class="feature-overlay">
                     <span class="feature-text">
-                      Espelheira com duas portas espelhadas
+                      Praticidade na entrega
                     </span>
                   </div>
                 </div>
@@ -882,7 +894,7 @@ gap: 45px;
               <div class="swiper-slide">
                 <div class="feature-item">
                   <img
-                    src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                    src="https://lh3.google.com/u/0/d/14gsdDhfTTedqFBjvJvCjZGr0xk3gCltd=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                     alt="Design moderno"
                   />
                   <div class="feature-overlay">
@@ -896,7 +908,7 @@ gap: 45px;
               <div class="swiper-slide">
                 <div class="feature-item">
                   <img
-                    src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                    src="https://lh3.google.com/u/0/d/1lw6iwy5DgO6dzuUskxj2K9CRAeiF3Nql=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                     alt="Portas com fechamento"
                   />
                   <div class="feature-overlay">
@@ -910,11 +922,11 @@ gap: 45px;
               <div class="swiper-slide">
                 <div class="feature-item">
                   <img
-                    src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                    src="https://lh3.google.com/u/0/d/1NYhf_X108Z8nHUYVx1AX4UfftG5vx4Fz=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                     alt="Puxador perfil"
                   />
                   <div class="feature-overlay">
-                    <span class="feature-text">Puxador perfil em alumínio</span>
+                    <span class="feature-text">Iluminação embutida em LED</span>
                   </div>
                 </div>
               </div>
@@ -922,11 +934,11 @@ gap: 45px;
               <div class="swiper-slide">
                 <div class="feature-item">
                   <img
-                    src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                    src="https://lh3.google.com/u/0/d/1ct1dAr6Ln9TwZC9zlldYl6AeJhtTDI3G=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                     alt="Cuba em mármore"
                   />
                   <div class="feature-overlay">
-                    <span class="feature-text">Cuba em mármore sintético</span>
+                    <span class="feature-text">Organização facilitada</span>
                   </div>
                 </div>
               </div>
@@ -934,7 +946,7 @@ gap: 45px;
               <div class="swiper-slide">
                 <div class="feature-item">
                   <img
-                    src="https://thumbs.dreamstime.com/b/smooth-pebbles-beach-natural-stones-seashore-grey-brown-neutral-colors-cobbles-closeup-random-shapes-round-oval-coastal-scene-385459675.jpg"
+                    src="https://lh3.google.com/u/0/d/14gsdDhfTTedqFBjvJvCjZGr0xk3gCltd=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
                     alt="Duas gavetas"
                   />
                   <div class="feature-overlay">
@@ -951,7 +963,7 @@ gap: 45px;
         </div>
       </div>
     </div>
-  <div class="secao-tres">
+    <div class="secao-tres">
       <div>
         <h2 class="title-section">Medidas do Produto</h2>
       </div>
@@ -959,21 +971,21 @@ gap: 45px;
         <div class="measure-section">
           <img
             class="measure-section-img"
-            src="https://images.squarespace-cdn.com/content/v1/6150da9bc04b0a138b3c0600/1634528500503-V7KPRTKGCRB73IY6IKB9/Stone-Circle.jpg"
+            src="https://lh3.google.com/u/0/d/1LepkMLkUF_5IOPhqiOrN94-7oZLlUE7p=w1435-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
             alt=""
           />
         </div>
         <div class="measure-section">
           <img
             class="measure-section-img"
-            src="https://images.squarespace-cdn.com/content/v1/6150da9bc04b0a138b3c0600/1634528500503-V7KPRTKGCRB73IY6IKB9/Stone-Circle.jpg"
+            src="https://lh3.google.com/u/0/d/1Taw4ESkEUIZC6RBLpU7Io5VZ0nX2J9DO=w1920-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
             alt=""
           />
         </div>
         <div class="measure-section">
           <img
             class="measure-section-img"
-            src="https://images.squarespace-cdn.com/content/v1/6150da9bc04b0a138b3c0600/1634528500503-V7KPRTKGCRB73IY6IKB9/Stone-Circle.jpg"
+            src="https://lh3.google.com/u/0/d/1fsDK049u4Bj_zZIQ1ADu3fv74z4QS-gR=w1920-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
             alt=""
           />
         </div>
@@ -1085,66 +1097,66 @@ gap: 45px;
     });
   });
 
+  (function () {
+    const mq = window.matchMedia("(max-width: 767px)");
+    const container = document.getElementById("icons-container");
+    let swiper = null;
+    let original = null;
 
-(function () {
-  const mq = window.matchMedia('(max-width: 767px)');
-  const container = document.getElementById('icons-container');
-  let swiper = null;
-  let original = null; 
+    function toSwiper() {
+      if (swiper || !container) return;
 
-  function toSwiper() {
-    if (swiper || !container) return;
+      if (!original) original = container.cloneNode(true);
 
-    if (!original) original = container.cloneNode(true);
+      container.classList.add("swiper");
+      const wrapper = document.createElement("div");
+      wrapper.className = "swiper-wrapper";
 
-    container.classList.add('swiper');
-    const wrapper = document.createElement('div');
-    wrapper.className = 'swiper-wrapper';
+      [...container.children].forEach((child) => {
+        const slide = document.createElement("div");
+        slide.className = "swiper-slide";
+        slide.appendChild(child);
+        wrapper.appendChild(slide);
+      });
 
-    [...container.children].forEach((child) => {
-      const slide = document.createElement('div');
-      slide.className = 'swiper-slide';
-      slide.appendChild(child);
-      wrapper.appendChild(slide);
-    });
+      container.appendChild(wrapper);
 
-    container.appendChild(wrapper);
+      const paginationEl = document.querySelector(".icons-pagination");
 
-    const paginationEl = document.querySelector('.icons-pagination');
+      swiper = new Swiper(container, {
+        slidesPerView: 1,
+        spaceBetween: 43,
+        centeredSlides: false,
+        loop: true,
+        pagination: paginationEl
+          ? { el: paginationEl, clickable: true }
+          : undefined,
+      });
+    }
 
-    swiper = new Swiper(container, {
-      slidesPerView: 1,
-      spaceBetween: 43,
-      centeredSlides: false,
-      loop: true,
-      pagination: paginationEl
-        ? { el: paginationEl, clickable: true }
-        : undefined,
-    });
-  }
+    function fromSwiper() {
+      if (!swiper || !container || !original) return;
+      swiper.destroy(true, true);
+      swiper = null;
 
-  function fromSwiper() {
-    if (!swiper || !container || !original) return;
-    swiper.destroy(true, true);
-    swiper = null;
+      container.replaceWith(original);
+      const restored = document.getElementById("icons-container");
+      original = restored.cloneNode(true);
+    }
 
-    container.replaceWith(original);
-    const restored = document.getElementById('icons-container');
-    original = restored.cloneNode(true); 
-  }
+    function handle() {
+      if (mq.matches) toSwiper();
+      else fromSwiper();
+    }
 
-  function handle() {
-    if (mq.matches) toSwiper();
-    else fromSwiper();
-  }
+    mq.addEventListener
+      ? mq.addEventListener("change", handle)
+      : mq.addListener(handle);
 
-  mq.addEventListener ? mq.addEventListener('change', handle) : mq.addListener(handle);
- 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', handle);
-  } else {
-    handle();
-  }
-})();
-
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", handle);
+    } else {
+      handle();
+    }
+  })();
 </script>

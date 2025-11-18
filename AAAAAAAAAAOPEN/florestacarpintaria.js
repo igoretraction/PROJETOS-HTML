@@ -11,8 +11,12 @@ document.addEventListener("DOMContentLoaded", () => {
     --radius:14px; --accent:#00B125; --shadow:0 10px 30px rgba(0,0,0,.35);
     background:var(--bg); color:var(--ink); border-radius:var(--radius);
     padding:14px; font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial;
-    display:flex; flex-direction:column; gap:12px; width:92%;
+    display:flex !important; flex-direction:column; gap:12px; width:92%;
     max-width:420px; margin:12px auto; box-sizing:border-box;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative;
+    z-index: 2 !important;
   }
 
   .blh-promos__grid{display:grid; grid-template-columns:1fr; gap:10px}
@@ -26,7 +30,6 @@ document.addEventListener("DOMContentLoaded", () => {
   .blh-highlight{color:var(--accent)}
   .blh-card__sub{margin:0 0 8px;color:var(--muted);font-size:12px}
 
-  /* "Botão" de copiar virou DIV acessível */
   .blh-copy{
     width:100%; background:var(--accent); color:#000;
     border:none; border-radius:10px; padding:12px 14px;
@@ -38,16 +41,12 @@ document.addEventListener("DOMContentLoaded", () => {
   .blh-copy:active{transform:scale(.98)}
   .blh-copy[aria-disabled="true"]{opacity:.75;pointer-events:none}
 
-  /* Timer (sem borda) */
   .blh-timer{text-align:center;border-radius:12px}
   .blh-timer__label{color:var(--muted);font-size:12px;margin-bottom:4px}
   .blh-timer__count{font-size:18px;font-weight:800;color:var(--accent)}
 
   .blh-note{font-size:11px;color:var(--muted);margin:0}
   .blh-note--strong{color:var(--ink);margin-top:6px;text-transform:uppercase;font-weight:800}
-
-  /* Só mobile: esconde no desktop (opcional) */
-  @media(min-width:769px){ .blh-promos{ display:none !important } }
   `;
   document.head.appendChild(style);
 
@@ -87,14 +86,22 @@ document.addEventListener("DOMContentLoaded", () => {
   </section>`;
 
   // =============== Inserção (DEPOIS de .product-price-container) ===============
-  const target = document.querySelector(".product-price-container");
+  const target = document.querySelector(".texto-banner");
   let sectionEl;
   if (target) {
     target.insertAdjacentHTML("afterend", html);
     sectionEl = target.nextElementSibling;
+    console.log("[BF FLORESTA] inserido após .texto-banner:", !!sectionEl);
   } else {
-    document.body.insertAdjacentHTML("beforeend", html);
+    document.body.insertAdjacentHTML("afterend", html);
     sectionEl = document.body.lastElementChild;
+    console.log("[BF FLORESTA] inserido no body:", !!sectionEl);
+  }
+
+  // debug: mostrar estilo computado (útil no mobile DevTools)
+  if (sectionEl) {
+    const cs = window.getComputedStyle(sectionEl);
+    console.log("[BF FLORESTA] computed display:", cs.display, "visibility:", cs.visibility, "opacity:", cs.opacity, "height:", cs.height);
   }
 
   // =============== Timer robusto ===============
