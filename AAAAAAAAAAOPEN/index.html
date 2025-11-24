@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grupo VIP - Corebral</title>
+    <!-- Added Momo Trust Display font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Updated to Momo Trust Display (using Outfit as fallback) with font-weight 500 */
+            font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-weight: 500;
+            /* Changed to lighter background for more white tone */
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .content {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .content-left {
+            flex: 1;
+            z-index: 10;
+        }
+
+        .logo {
+            margin-bottom: 3rem;
+            opacity: 0;
+        }
+
+        .logo h2 {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #FFC700;
+            letter-spacing: 0.1em;
+        }
+
+        .hero-content {
+            opacity: 0;
+        }
+
+        .headline {
+            font-size: 3rem;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: #ffffff;
+        }
+
+        .headline-highlight {
+            color: #FFC700;
+        }
+
+        .benefits {
+            list-style: none;
+            margin-bottom: 2.5rem;
+        }
+
+        .benefits li {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+            opacity: 0;
+        }
+
+        .check-icon {
+            width: 24px;
+            height: 24px;
+            color: #FFC700;
+            flex-shrink: 0;
+        }
+
+        .cta-button {
+            background: #FFC700;
+            color: #000000;
+            font-size: 1.125rem;
+            font-weight: 700;
+            padding: 1.25rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0;
+        }
+
+        .cta-button:hover {
+            background: #ffdd00;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 199, 0, 0.3);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .arrow-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .cta-button:hover .arrow-icon {
+            transform: translateX(5px);
+        }
+
+        .content-right {
+            flex: 1;
+            position: relative;
+            height: 600px;
+            opacity: 0;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Simplified WhatsApp icon styling - removed excessive animations */
+        .whatsapp-icon {
+            width: 200px;
+            height: 200px;
+            filter: drop-shadow(0 10px 20px rgba(255, 199, 0, 0.2));
+            z-index: 1;
+        }
+
+        /* Updated glass card styling for better UI/UX with more white/light tone */
+        .glass-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 199, 0, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(255, 199, 0, 0.15);
+        }
+
+        .glass-card-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: #FFC700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .glass-card-text {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            line-height: 1.5;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .card-1 {
+            top: 5%;
+            left: -15%;
+            width: 250px;
+        }
+
+        .card-2 {
+            top: 35%;
+            right: -20%;
+            width: 280px;
+        }
+
+        .card-3 {
+            bottom: 10%;
+            left: -10%;
+            width: 260px;
+        }
+
+        .card-4 {
+            bottom: 5%;
+            right: -15%;
+            width: 240px;
+        }
+
+        @media (max-width: 968px) {
+            .content {
+                flex-direction: column;
+                gap: 3rem;
+            }
+
+            .content-right {
+                height: 500px;
+            }
+
+            .whatsapp-icon {
+                width: 150px;
+                height: 150px;
+            }
+
+            .glass-card {
+                padding: 1rem 1.5rem;
+            }
+
+            .card-1, .card-2, .card-3, .card-4 {
+                width: 200px;
+            }
+
+            .card-1 {
+                left: -10%;
+            }
+
+            .card-2 {
+                right: -10%;
+            }
+
+            .card-3 {
+                left: -5%;
+            }
+
+            .card-4 {
+                right: -5%;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .headline {
+                font-size: 2rem;
+            }
+
+            .benefits li {
+                font-size: 1rem;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+                padding: 1rem 2rem;
+            }
+
+            .content-right {
+                height: 400px;
+            }
+
+            .whatsapp-icon {
+                width: 120px;
+                height: 120px;
+            }
+
+            .glass-card {
+                padding: 0.75rem 1rem;
+            }
+
+            .glass-card-title {
+                font-size: 1rem;
+            }
+
+            .glass-card-text {
+                font-size: 0.75rem;
+            }
+
+            .card-1, .card-2, .card-3, .card-4 {
+                width: 160px;
+            }
+
+            .card-icon {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <div class="content-left">
+                <div class="logo">
+                    <h2>COREBRAL</h2>
+                </div>
+                
+                <div class="hero-content">
+                    <h1 class="headline">
+                        Faça parte do <span class="headline-highlight">grupo VIP</span> da Corebral!
+                    </h1>
+                    
+                    <ul class="benefits">
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Ofertas exclusivas com descontos especiais</span>
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Novidades e lançamentos em primeira mão</span>
+                        </li>
+                        <li>
+                            <svg class="check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                            <span>Conteúdo exclusivo e dicas de especialistas</span>
+                        </li>
+                    </ul>
+
+                    <button class="cta-button" id="ctaButton">
+                        Quero entrar no grupo VIP
+                        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="content-right">
+                <div class="image-container">
+                    <svg id="Layer_1" class="whatsapp-icon" enable-background="new 0 0 1000 1000" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg" width="200" height="200" version="1.1">
+                        <g width="100%" height="100%" transform="matrix(1,0,0,1,0,0)">
+                            <g>
+                                <path d="m500 1000c-276.1 0-500-223.9-500-500 0-276.1 223.9-500 500-500 276.1 0 500 223.9 500 500 0 276.1-223.9 500-500 500z" fill="#ffc700" fill-opacity="1"/>
+                                <g>
+                                    <g id="WA_Logo">
+                                        <g>
+                                            <path clip-rule="evenodd" d="m733.9 267.2c-62-62.1-144.6-96.3-232.5-96.4-181.1 0-328.6 147.4-328.6 328.6 0 57.9 15.1 114.5 43.9 164.3l-46.6 170.3 174.2-45.7c48 26.2 102 40 157 40h.1c181.1 0 328.5-147.4 328.6-328.6.1-87.8-34-170.4-96.1-232.5zm-232.4 505.6h-.1c-49 0-97.1-13.2-139-38.1l-10-5.9-103.4 27.1 27.6-100.8-6.5-10.3c-27.3-43.5-41.8-93.7-41.8-145.4.1-150.6 122.6-273.1 273.3-273.1 73 0 141.5 28.5 193.1 80.1s80 120.3 79.9 193.2c0 150.7-122.6 273.2-273.1 273.2zm149.8-204.6c-8.2-4.1-48.6-24-56.1-26.7s-13-4.1-18.5 4.1-21.2 26.7-26 32.2-9.6 6.2-17.8 2.1-34.7-12.8-66-40.8c-24.4-21.8-40.9-48.7-45.7-56.9s-.5-12.7 3.6-16.8c3.7-3.7 8.2-9.6 12.3-14.4s5.5-8.2 8.2-13.7 1.4-10.3-.7-14.4-18.5-44.5-25.3-61c-6.7-16-13.4-13.8-18.5-14.1-4.8-.2-10.3-.3-15.7-.3-5.5 0-14.4 2.1-21.9 10.3s-28.7 28.1-28.7 68.5 29.4 79.5 33.5 84.9c4.1 5.5 57.9 88.4 140.3 124 19.6 8.5 34.9 13.5 46.8 17.3 19.7 6.3 37.6 5.4 51.7 3.3 15.8-2.4 48.6-19.9 55.4-39 6.8-19.2 6.8-35.6 4.8-39s-7.5-5.4-15.7-9.6z" fill="#000000" fill-rule="evenodd" fill-opacity="1"/>
+                                        </g>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    
+                    <div class="glass-card card-1">
+                        <div class="glass-card-title">
+                            <span class="card-icon">🎁</span>
+                            Descontos Exclusivos
+                        </div>
+                        <div class="glass-card-text">
+                            Ofertas especiais só para membros VIP
+                        </div>
+                    </div>
+
+                    <div class="glass-card card-2">
+                        <div class="glass-card-title">
+                            <span class="card-icon">⚡</span>
+                            Lançamentos Antecipados
+                        </div>
+                        <div class="glass-card-text">
+                            Seja o primeiro a saber das novidades
+                        </div>
+                    </div>
+
+                    <div class="glass-card card-3">
+                        <div class="glass-card-title">
+                            <span class="card-icon">💡</span>
+                            Conteúdo Exclusivo
+                        </div>
+                        <div class="glass-card-text">
+                            Dicas e tutoriais de especialistas
+                        </div>
+                    </div>
+
+                    <div class="glass-card card-4">
+                        <div class="glass-card-title">
+                            <span class="card-icon">🎯</span>
+                            Suporte Prioritário
+                        </div>
+                        <div class="glass-card-text">
+                            Atendimento direto e personalizado
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        gsap.to('.logo', {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: 'power2.out'
+        });
+
+        gsap.to('.hero-content', {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: 0.1,
+            ease: 'power2.out'
+        });
+
+        gsap.to('.benefits li', {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            stagger: 0.1,
+            delay: 0.3,
+            ease: 'power2.out'
+        });
+
+        gsap.to('.cta-button', {
+            opacity: 1,
+            scale: 1,
+            duration: 0.5,
+            delay: 0.6,
+            ease: 'power2.out'
+        });
+
+        gsap.to('.content-right', {
+            opacity: 1,
+            x: 0,
+            duration: 0.6,
+            delay: 0.2,
+            ease: 'power2.out'
+        });
+
+
+        gsap.to('.card-1', {
+            y: -15,
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            delay: 0.8
+        });
+
+        gsap.to('.card-2', {
+            y: -18,
+            duration: 3.5,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            delay: 1
+        });
+
+        gsap.to('.card-3', {
+            y: -12,
+            duration: 2.8,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            delay: 1.2
+        });
+
+        gsap.to('.card-4', {
+            y: -16,
+            duration: 3.2,
+            repeat: -1,
+            yoyo: true,
+            ease: 'sine.inOut',
+            delay: 1.4
+        });
+
+        // Button interaction
+        const ctaButton = document.getElementById('ctaButton');
+        
+        ctaButton.addEventListener('mouseenter', () => {
+            gsap.to(ctaButton, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        ctaButton.addEventListener('mouseleave', () => {
+            gsap.to(ctaButton, {
+                scale: 1,
+                duration: 0.3,
+                ease: 'power2.out'
+            });
+        });
+
+        ctaButton.addEventListener('click', () => {
+            window.open('https://chat.whatsapp.com/seu-link-aqui', '_blank');
+        });
+    </script>
+</body>
+</html>
