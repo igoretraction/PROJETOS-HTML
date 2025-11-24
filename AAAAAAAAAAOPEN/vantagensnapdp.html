@@ -1,0 +1,210 @@
+<!-- SWIPER CSS (se já tiver no tema, pode remover essa linha) -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper@9/swiper-bundle.min.css"
+/>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+  .item-tag {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #efefef;
+    border-radius: 20px;
+    padding: 18px !important;
+    max-width: 185px;
+    width: 100%;
+    max-height: 90px;
+    text-align: center;
+    gap: 5px;
+  }
+
+  .svg-icon {
+    width: auto;
+    text-align: center;
+    height: 31px !important;
+  }
+
+  .texto-descricao-tag {
+    font-family: "Momo Trust Display", sans-serif;
+    font-weight: 500;
+    color: #000;
+    font-size: 13px;
+  }
+  .swiper-horizontal>.swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal, .swiper-pagination-custom, .swiper-pagination-fraction{
+  display: none;}
+
+  /* ===== DESKTOP ===== */
+  .container-tag-desktop {
+    background: none;
+    border-radius: 5px;
+    padding: 20px 20px;
+    width: 100%;
+    display: flex;
+    margin: auto;
+    max-width: 800px;
+    gap: 10px;
+    margin-left: 95px;
+    margin-bottom: 80px;
+  }
+
+  /* Esconde swiper no desktop */
+  .container-tag-swiper {
+    display: none;
+  }
+
+  /* ===== MOBILE ===== */
+  @media (max-width: 780px) {
+    .container-tag-desktop {
+      display: none;
+    }
+
+    .container-tag-swiper {
+      display: block;
+      padding: 0 16px;
+      margin: 25px auto 40px;
+      max-width: 340px;
+    }
+
+    .swiper-wrapper {
+      align-items: stretch;
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+    }
+  }
+</style>
+
+<!-- DESKTOP -->
+<div class="container-tag-desktop">
+  <div class="item-tag">
+    <img
+      class="svg-icon"
+      src="https://images.tcdn.com.br/files/1235339/themes/45/img/credit-card_3211504.png"
+      alt=""
+    />
+    <div style="display: flex; flex-direction: column; font-size: 10px;">
+      <p class="texto-descricao-tag">6X Sem Juros no Cartão*</p>
+      <p style="font-weight: 600;"></p>
+    </div>
+  </div>
+  <div class="item-tag">
+    <img
+      class="svg-icon"
+      src="https://images.tcdn.com.br/files/1235339/themes/45/img/voucher_7554475.png"
+      alt=""
+    />
+    <div style="display: flex; flex-direction: column; font-size: 10px;">
+      <p class="texto-descricao-tag">Cupom 10% OFF</p>
+      <p style="font-weight: 600;">BLACK2025</p>
+    </div>
+  </div>
+  <div class="item-tag">
+    <img
+      class="svg-icon"
+      src="https://images.tcdn.com.br/files/1235339/themes/45/img/delivery_7788338.png"
+      alt=""
+    />
+    <div style="display: flex; flex-direction: column; font-size: 10px;">
+      <p class="texto-descricao-tag">Frete Grátis</p>
+      <p style="font-weight: 600;">Para Sul e Sudeste*</p>
+    </div>
+  </div>
+  <div class="item-tag">
+    <img
+      class="svg-icon"
+      src="https://images.tcdn.com.br/files/1235339/themes/45/img/tag_10035930.png"
+      alt=""
+    />
+    <div style="display: flex; flex-direction: column; font-size: 10px;">
+      <p class="texto-descricao-tag">3% de Desconto</p>
+      <p style="font-weight: 600;">PIX</p>
+    </div>
+  </div>
+</div>
+
+<!-- MOBILE: SWIPER -->
+<div class="container-tag-swiper">
+  <div class="swiper myTagSwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <div class="item-tag">
+          <img
+            class="svg-icon"
+            src="https://images.tcdn.com.br/files/1235339/themes/45/img/credit-card_3211504.png"
+            alt=""
+          />
+          <div style="display: flex; flex-direction: column; font-size: 10px;">
+            <p class="texto-descricao-tag">6X Sem Juros no Cartão*</p>
+            <p style="font-weight: 600;"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="item-tag">
+          <img
+            class="svg-icon"
+            src="https://images.tcdn.com.br/files/1235339/themes/45/img/voucher_7554475.png"
+            alt=""
+          />
+          <div style="display: flex; flex-direction: column; font-size: 10px;">
+            <p class="texto-descricao-tag">Cupom 10% OFF</p>
+            <p style="font-weight: 600;">BLACK2025</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="item-tag">
+          <img
+            class="svg-icon"
+            src="https://images.tcdn.com.br/files/1235339/themes/45/img/delivery_7788338.png"
+            alt=""
+          />
+          <div style="display: flex; flex-direction: column; font-size: 10px;">
+            <p class="texto-descricao-tag">Frete Grátis</p>
+            <p style="font-weight: 600;">Para Sul e Sudeste*</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="swiper-slide">
+        <div class="item-tag">
+          <img
+            class="svg-icon"
+            src="https://images.tcdn.com.br/files/1235339/themes/45/img/tag_10035930.png"
+            alt=""
+          />
+          <div style="display: flex; flex-direction: column; font-size: 10px;">
+            <p class="texto-descricao-tag">3% de Desconto</p>
+            <p style="font-weight: 600;">PIX</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- paginação (bolinhas) -->
+    <div class="swiper-pagination"></div>
+  </div>
+</div>
+
+<!-- SWIPER JS (se já tiver no tema, pode remover essa linha) -->
+<script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+
+<script>
+  var swiper = new Swiper(".myTagSwiper", {
+    slidesPerView: 1,
+    spaceBetween: 12,
+    loop: true,
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+  });
+</script>

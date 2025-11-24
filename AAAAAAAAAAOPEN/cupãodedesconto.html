@@ -1,0 +1,210 @@
+<div class="cupons-container">
+    <div class="cupons-header">
+        <p>Cupons Disponíveis:</p>
+    </div>
+
+    <div class="timer-personalizado">
+        <p>Oferta termina em:</p>
+        <div id="timer">00d 00h 00m 00s</div>
+    </div>
+
+    <div class="cupons-list" id="cupons-list">
+        <div class="cupom-item" data-cupom="BLACK50" onclick="copiarCupom(this)">
+            <div class="cupom-valor">
+                <p>Cupom BLACK50</p>
+            </div>
+            <div class="cupom-detalhes">
+                <p>R$50 de Desconto em Compras acima de R$1200</p>
+            </div>
+        </div>
+
+        <div class="cupom-item" data-cupom="BLACK100" onclick="copiarCupom(this)">
+            <div class="cupom-valor">
+                <p>Cupom BLACK100</p>
+            </div>
+            <div class="cupom-detalhes">
+                <p>R$100 de Desconto em Compras Acima de R$2000</p>
+            </div>
+        </div>
+
+        <div class="cupom-item" data-cupom="BLACK150" onclick="copiarCupom(this)">
+            <div class="cupom-valor">
+                <p>Cupom BLACK150</p>
+            </div>
+            <div class="cupom-detalhes">
+                <p>R$150 de Desconto em compras acima de R$3000</p>
+            </div>
+        </div>
+    </div>
+
+    <p style="font-size: 12px; font-style: italic;">Clique no cupom para ver mais</p>
+</div>
+
+<script>
+    // TIMER
+    function startCountdown(targetDate) {
+        function updateTimer() {
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            
+            if (timeLeft <= 0) {
+                document.getElementById("timer").innerHTML = "Tempo esgotado!";
+                clearInterval(interval);
+                return;
+            }
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));  
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById("timer").innerHTML = 
+                `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+        
+        updateTimer();
+        const interval = setInterval(updateTimer, 1000);
+    }
+
+    const targetDate = new Date(2025, 10, 30, 23, 59, 59).getTime();
+    startCountdown(targetDate);
+
+    // COPIAR CUPOM
+    function copiarCupom(element) {
+        const codigo = element.getAttribute('data-cupom'); // ex: BLACK50
+        const textoCupom = element.querySelector('.cupom-valor p');
+        const textoOriginal = textoCupom.textContent;
+
+        function aposCopiar() {
+            textoCupom.textContent = 'Copiado!';
+            // opcional: volta pro texto original depois de 2s
+            setTimeout(() => {
+                textoCupom.textContent = textoOriginal;
+            }, 2000);
+        }
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(codigo).then(aposCopiar).catch(aposCopiar);
+        } else {
+            // Fallback para navegadores mais antigos
+            const tempInput = document.createElement('input');
+            tempInput.value = codigo;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            aposCopiar();
+        }
+    }
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap');
+
+    .cupons-container{
+        background-color: black;
+        font-family: "Momo Trust Display", sans-serif;
+    }
+
+    .timer-personalizado{
+        font-family: "Momo Trust Display", sans-serif;
+        display:flex;
+        text-align:center;
+        align-items:center;
+        width:100%;
+        justify-content: center;
+        gap:5px;
+    }
+
+    .timer-personalizado #timer{
+        font-weight:bold;
+        color: #3A6453;
+        font-family: "Momo Trust Display", sans-serif;
+    }
+
+    .cupons-container {
+        font-family: "Momo Trust Display", sans-serif;
+        margin-top: 20px;
+        width: 70%;
+        border-radius: 20px;
+        border: 2px dashed #3A6453;
+        text-align: center;
+    }
+
+    .cupons-header p {
+        font-family: "Momo Trust Display", sans-serif;
+        font-size: 18px;
+        color: white;
+        font-weight: 500;
+    }
+
+    .timer-personalizado p{
+        font-family: "Momo Trust Display", sans-serif;
+        color: white;
+    }
+
+    .cupons-list {
+        font-family: "Momo Trust Display", sans-serif;
+        z-index: 99;
+        display: flex;
+        gap: 15px;
+        justify-content: center;
+        position: sticky;
+    }
+
+    .cupom-item {
+        font-family: "Momo Trust Display", sans-serif;
+        position: relative;
+        text-align: center;
+        padding: 5px;
+        border-radius: 6px;
+        background-color: #3A6453;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
+
+    .cupom-item:hover {
+        transform: scale(1.02);
+    }
+
+    .cupom-valor p {
+        font-family: "Momo Trust Display", sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        color: #fff;
+    }
+
+    .cupom-detalhes {
+        font-family: "Momo Trust Display", sans-serif;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 200px;
+        background-color: #eee;
+        border-radius: 0 0 6px 6px;
+        display: none;
+        font-size: 0.9rem;
+        color: #555;
+        gap: 10px;
+    }
+
+    .cupom-item:hover .cupom-detalhes {
+        font-family: "Momo Trust Display", sans-serif;
+        display: flex;
+    }
+
+    @media (max-width: 768px) {
+        .cupom-detalhes {
+            display: none;
+        }
+        .cupom-item:active .cupom-detalhes {
+            display: block;
+        }
+        .cupom-item:hover .cupom-detalhes {
+            display: block;
+        }
+        .cupons-container {
+            width: 100%;
+        }
+    }
+</style>

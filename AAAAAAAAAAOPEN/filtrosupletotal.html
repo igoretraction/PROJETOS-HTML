@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Momo+Trust+Display&display=swap");
+
+    /* WRAPPER DOS FILTROS */
+    #filtros-tamanho-cor-wrapper {
+      font-family: "Momo Trust Display", sans-serif;
+
+      max-width: 1200px;
+      margin: 10px auto 24px;
+      font-family: Arial, sans-serif;
+    }
+
+    /* TÍTULO */
+    .titulo-filtros {
+      font-family: "Momo Trust Display", sans-serif;
+
+      font-weight: 500;
+      font-size: 14px;
+      color: #000;
+      margin: 0 15px 0;
+    }
+
+    /* LINHA DE BOTÕES – ESTILO "OBJETIVO" */
+    .btns-estacoes.tamanhos {
+      font-family: "Momo Trust Display", sans-serif;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    /* CADA BOTÃO */
+    .btns-estacoes.tamanhos .btn-estacao a {
+      font-family: "Momo Trust Display", sans-serif;
+
+      display: inline-block;
+      padding: 4px 12px;
+      background: #004b6f; /* azul do botão */
+      color: #fff;
+      font-size: 11px;
+      font-weight: 500;
+      text-transform: uppercase;
+      border-radius: 3px;
+      border: 1px solid #003754;
+      text-decoration: none;
+      white-space: nowrap;
+      line-height: 1.4;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    /* HOVER */
+    .btns-estacoes.tamanhos .btn-estacao a:hover {
+      font-family: "Momo Trust Display", sans-serif;
+
+      background: #00618f;
+      transform: translateY(-1px);
+    }
+
+    /* RESPONSIVO (só quebra linha quando precisa) */
+    @media (max-width: 600px) {
+      .btns-estacoes.tamanhos {
+        justify-content: flex-start;
+      }
+    }
+  </style>
+  <body>
+    <div class="btns-estacoes tamanhos">
+      <h3
+        class="titulo-filtros"
+        style="display: block; color: #000; font-size: 18px"
+      >
+        Qual sua necessidade?
+      </h3>
+      <div class="btn-estacao">
+        <a href="https://www.supletotal.com.br/saude-do-coracao">
+          <span class="tx">Saúde do Coração</span>
+        </a>
+      </div>
+      <div class="btn-estacao">
+        <a href="https://www.supletotal.com.br/saude-do-cognitiva">
+          <span class="tx">Saúde Cognitiva</span>
+        </a>
+      </div>
+      <div class="btn-estacao">
+        <a href="https://www.supletotal.com.br/imunidade">
+          <span class="tx">Imunidade</span>
+        </a>
+      </div>
+      <div class="btn-estacao">
+        <a href="https://www.supletotal.com.br/ganho-de-massa">
+          <span class="tx">Ganho de Massa</span>
+        </a>
+      </div>
+      <div class="btn-estacao">
+        <a href="https://www.supletotal.com.br/qualidade-do-sono">
+          <span class="tx">Qualidade do Sono</span>
+        </a>
+      </div>
+      <div class="btn-estacao">
+        <a href="https://www.supletotal.com.br/mais/ossos-e-articulacoes">
+          <span class="tx">Ossos e Articulações</span>
+        </a>
+      </div>
+      <div class="btn-estacao">
+        <a href="https://www.supletotal.com.br/mais/pre-treino">
+          <span class="tx">Pré-treino</span>
+        </a>
+      </div>
+      <div class="btn-estacao">
+        <a href="https://www.supletotal.com.br/mais/saude-intestinal">
+          <span class="tx">Saúde Intestinal</span>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // <![CDATA[
+  (function () {
+    var $$ = function (sel, ctx) {
+      return Array.prototype.slice.call(
+        (ctx || document).querySelectorAll(sel)
+      );
+    };
+
+    function wrapTextSpans() {
+      $$(".btn-estacao > a").forEach(function (a) {
+        if (!a.querySelector(".tx")) {
+          var txt = a.textContent.trim();
+          a.textContent = "";
+          var span = document.createElement("span");
+          span.className = "tx";
+          span.textContent = txt;
+          a.appendChild(span);
+        }
+      });
+    }
+
+    function init() {
+      wrapTextSpans();
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
+    }
+  })();
+  // ]]>
+</script>

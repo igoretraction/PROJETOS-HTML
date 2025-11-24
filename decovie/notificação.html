@@ -1,0 +1,275 @@
+ <script>
+
+// <![CDATA[
+(function () {
+  const TARGET_SELECTOR = ".economize";
+  const DEADLINE_ISO = "2025-11-28T23:59:59";
+
+  // === UTILITÁRIOS === //
+  function once(id, injectFn) {
+    if (document.getElementById(id)) return;
+    injectFn();
+  }
+  function waitForSelector(sel, timeoutMs = 15000) {
+    return new Promise((resolve, reject) => {
+      const found = document.querySelector(sel);
+      if (found) return resolve(found);
+      const obs = new MutationObserver(() => {
+        const el = document.querySelector(sel);
+        if (el) { obs.disconnect(); resolve(el); }
+      });
+      obs.observe(document.documentElement, { childList: true, subtree: true });
+      setTimeout(() => {
+        obs.disconnect();
+        const late = document.querySelector(sel);
+        late ? resolve(late) : reject(new Error("Elemento não encontrado: " + sel));
+      }, timeoutMs);
+    });
+  }
+
+  // === FONTES E ESTILOS === //
+  once("faixa-font-inter", () => {
+    const link = document.createElement("link");
+    link.id = "faixa-font-inter";
+    link.rel = "stylesheet";
+    link.href = "https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap";
+    document.head.appendChild(link);
+  });
+
+  once("faixa-style", () => {
+    const style = document.createElement("style");
+    style.id = "faixa-style";
+    style.textContent = `
+.faixa-wrap { display:flex; width:56%; }
+.faixa-oferta {
+float: left;
+  background:transparent; color:#3A6453; border-radius:12px;
+  padding:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  font-weight:600; width:max-content;
+  box-shadow:0 2px 8px rgba(0,0,0,.04); display:flex;  align-items:center;
+   position:relative;
+}
+.linha-superior { display:flex; align-items:center; gap:10px; flex-wrap:wrap; justify-content:center; }
+.faixa-oferta .ico {
+  display:inline-flex; align-items:center; justify-content:center;
+  width:22px; height:22px; border-radius:50%;
+  background:#f5f7fb; color:#4b5563; border:1px solid #eef1f6;
+}
+.txt-pq { font-size:13px; font-weight:600; color:#000; }
+.timer { display:flex; align-items:center; gap:4px; }
+.digito {
+    border: 1px solid #3A6453;
+  background:#f6f7f9; color:#111827; border:1px solid #eceff3;
+  border-radius:8px; padding:6px 6px;
+  min-width:32px; text-align:center; font-weight:700;
+}
+.digito .val { font-size:14px; }
+.label { display:block; font-size:10px; font-weight:600; opacity:.7; margin-top:2px; }
+.sep { font-weight:700; opacity:.5; margin:0 1px; }
+
+.btn-faixa {
+  width: 100%;
+  padding:10px 14px; border:1px solid #3A6453;
+  color:#3A6453; border-radius:10px;
+  background:white; font-size:14px; font-weight:600; cursor:pointer;
+  transition:all .3s ease;
+}
+.btn-faixa:hover { background:#3A6453; color:#fff; }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.45);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 9999; opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.modal-overlay.show { opacity: 1; pointer-events: auto; }
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  max-width: 400px;
+  width: 90%;
+  padding: 20px 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  position: relative;
+  animation: slideDown .3s ease;
+  font-family: Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:#3A6453;
+}
+@keyframes slideDown { from{transform:translateY(-15px);opacity:0;} to{transform:translateY(0);opacity:1;} }
+
+.close-modal {
+  position: absolute;
+  top: 8px; right: 12px;
+  background: none; border: none;
+  font-size: 20px; font-weight: bold;
+  color: #3A6453; cursor: pointer;
+}
+
+.modal-timer {
+  display:flex; align-items:center; justify-content:center;
+  gap:4px; margin-bottom: 12px;
+}
+.modal-timer .digito { padding:6px 6px; }
+
+.cupom-info {
+  background-color: #f8f8f8;
+  border-left: 4px solid #3A6453;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 6px;
+}
+.cupom-info p { margin: 0; font-size: 14px; color: #333; }
+.cupom-codigo {
+  display:inline-block;
+  margin-top:4px;
+  background:#3A6453;
+  color:#fff;
+  padding:4px 10px;
+  border-radius:6px;
+  font-weight:600;
+  font-size:13px;
+  cursor:pointer;
+}
+.cupom-codigo.copied { background:#4CAF50; }
+
+.frete-info {
+  background:#f8f8f8;
+  border-left:4px solid #3A6453;
+  padding:8px 10px;
+  border-radius:6px;
+  font-size:13px;
+  color:#333;
+}
+.h-regras { text-align:center; margin:10px 0 5px; font-size:15px; color:#3A6453; }
+
+@media (max-width:520px){
+  .faixa-oferta { width:100%; }
+  .linha-superior { flex-direction:column; gap:6px; }
+  .faixa-wrap{
+  width: 100%;
+}
+}
+`;
+    document.head.appendChild(style);
+  });
+
+  // === TEMPLATE HTML === //
+ const BANNER_HTML = `
+<div class="faixa-wrap">
+  <div class="faixa-oferta js-countdown" data-deadline="${DEADLINE_ISO}">
+    <div class="linha-superior">
+      <div class="timer js-timer"></div>
+    </div>
+    <button class="btn-faixa" id="abrir-modal">Cupons e Fretes Disponíveis</button>
+  </div>
+</div>
+
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-cupons">
+  <div class="modal-content">
+    <button class="close-modal" aria-label="Fechar">×</button>
+    <div class="modal-timer js-timer-modal"></div>
+    <p><strong>Cupons:</strong></p>
+    <div class="cupom-info"><p>BLACK50 — Compras acima de R$ 1.200</p><div class="cupom-codigo" data-code="BLACK50">Copiar código</div></div>
+    <div class="cupom-info"><p>BLACK100 — Compras acima de R$ 2.000</p><div class="cupom-codigo" data-code="BLACK100">Copiar código</div></div>
+    <div class="cupom-info"><p>BLACK150 — Compras acima de R$ 3.000</p><div class="cupom-codigo" data-code="BLACK150">Copiar código</div></div>
+    <h3 class="h-regras">Regras de Frete Promocional:</h3>
+    <div class="frete-info"><strong>Frete:</strong> Fixo R$ 79,97 em compras acima de R$ 1.500 (Sul e SP*)</div>
+  </div>
+</div>`;
+
+  // === FUNÇÃO DE TIMER === //
+  function startCountdown(deadline, targets) {
+    const DAY_MS = 86400000, HOUR_MS = 3600000, MIN_MS = 60000;
+    const pad2 = n => String(n).padStart(2, "0");
+    function renderTimer(el, days, hrs, min, sec) {
+      el.innerHTML = `
+        <div style="border: 1px solid #3A6453;" class="digito dias"><span class="val">${pad2(days)}</span><span class="label">dias</span></div>
+        <span class="sep">:</span>
+        <div style="border: 1px solid #3A6453;" class="digito"><span class="val">${pad2(hrs)}</span><span class="label">hrs</span></div>
+        <span class="sep">:</span>
+        <div style="border: 1px solid #3A6453;" class="digito"><span class="val">${pad2(min)}</span><span class="label">min</span></div>
+        <span class="sep">:</span>
+        <div style="border: 1px solid #3A6453;" class="digito"><span class="val">${pad2(sec)}</span><span class="label">seg</span></div>`;
+    }
+
+    function update() {
+      let dist = deadline - Date.now();
+      if (dist <= 0) {
+        targets.forEach(t => renderTimer(t, 0, 0, 0, 0));
+        clearInterval(interval);
+        return;
+      }
+      const days = Math.floor(dist / DAY_MS); dist %= DAY_MS;
+      const hrs = Math.floor(dist / HOUR_MS); dist %= HOUR_MS;
+      const min = Math.floor(dist / MIN_MS); dist %= MIN_MS;
+      const sec = Math.floor(dist / 1000);
+      targets.forEach(t => renderTimer(t, days, hrs, min, sec));
+    }
+
+    update();
+    const interval = setInterval(update, 1000);
+  }
+
+  // === INJETAR E EVENTOS === //
+  function injectBannerBefore(targetEl) {
+    if (document.querySelector(".faixa-oferta.js-countdown")) return;
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = BANNER_HTML.trim();
+    const faixa = wrapper.firstElementChild;
+    const modal = wrapper.lastElementChild;
+    targetEl.parentNode.insertBefore(faixa, targetEl);
+    document.body.appendChild(modal);
+
+    const btn = faixa.querySelector("#abrir-modal");
+    const overlay = modal;
+    const closeBtn = modal.querySelector(".close-modal");
+
+    const timerFaixa = faixa.querySelector(".js-timer");
+    const timerModal = modal.querySelector(".js-timer-modal");
+    const deadline = new Date(DEADLINE_ISO).getTime();
+
+    startCountdown(deadline, [timerFaixa, timerModal]);
+
+    function openModal() { overlay.classList.add("show"); }
+    function closeModal() { overlay.classList.remove("show"); }
+
+    btn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    overlay.addEventListener("click", e => { if (e.target === overlay) closeModal(); });
+
+    // Copiar códigos
+    modal.querySelectorAll(".cupom-codigo").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const code = btn.getAttribute("data-code");
+        navigator.clipboard.writeText(code).then(() => {
+          btn.textContent = "Copiado!";
+          btn.classList.add("copied");
+          setTimeout(() => {
+            btn.textContent = "Copiar código";
+            btn.classList.remove("copied");
+          }, 2000);
+        });
+      });
+    });
+
+    // Mostrar modal automaticamente por 4s ao carregar
+    openModal();
+    setTimeout(closeModal, 4000);
+  }
+
+  waitForSelector(TARGET_SELECTOR)
+    .then(injectBannerBefore)
+    .catch(() => {
+      const alt = document.querySelector(".economize");
+      if (alt) injectBannerBefore(alt);
+    });
+})();
+// ]]>
+
+</script>
