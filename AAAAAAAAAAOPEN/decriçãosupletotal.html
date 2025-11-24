@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Descrição Supletotal</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
+      .description-container {
+        font-family: "Manrope", sans-serif;
+
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        align-items: center;
+        gap: 20px;
+      }
+      .description-section {
+        font-family: "Manrope", sans-serif;
+
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        max-width: 1240px;
+        margin: 0 auto;
+      }
+      .description-container-reverse {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        align-items: center;
+        gap: 20px;
+      }
+      .image-description img {
+        max-width: 500px;
+      }
+      .description-image img {
+        max-width: 500px;
+      }
+      .titles-description {
+        font-weight: bold !important;
+        color:#222;
+      }
+       .faq-lva-wrap {
+         font-family: "Manrope", sans-serif;
+    --bg: #fff;
+    --bg-2: #fff;
+    --border: #e3e3e3;
+    --text: #222;
+    --muted: #6b6b6b;
+    --radius: 16px;
+    --shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+    --shadow-hover: 0 10px 28px rgba(0, 0, 0, 0.1);
+    --t: 0.22s cubic-bezier(0.2, 0.6, 0.2, 1);
+    margin: 24px 0 40px;
+  }
+  .faq-lva {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 8px 0;
+  }
+  
+  .faq-lva__title {
+    font-size: clamp(22px, 3.3vw, 38px);
+    line-height: 1.15;
+    text-align: center;
+    color: var(--text);
+    margin: 0 0 18px;
+  }
+
+  .faq-lva__toggleList {
+     font-family: "Manrope", sans-serif;
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 auto 14px;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .faixa-contador{
+    display: none !important;
+  }
+  .variacao-label{
+    display: none !important;
+  }
+
+  .faq-item {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+    margin: 12px 0;
+    overflow: hidden;
+    will-change: transform;
+  }
+  .faq-item:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+    border-color: #ddd;
+  }
+
+  .faq-q {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 16px 18px;
+    background: #fff;
+    border: 0;
+    text-align: left;
+    font-size: clamp(15px, 2.2vw, 17px);
+    color: var(--text);
+    cursor: pointer;
+  }
+  .faq-q:focus-visible {
+    outline: 2px solid #cfcfcf;
+    outline-offset: 2px;
+  }
+
+  .faq-q__icon {
+    margin-left: auto;
+    flex: 0 0 auto;
+    width: 26px;
+    height: 26px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    font-size: 18px;
+    line-height: 1;
+    color: var(--muted);
+    font-weight: 700;
+    transition: background var(--t);
+    user-select: none;
+  }
+  .faq-item[open] .faq-q__icon {
+    background: white;
+  }
+
+  .faq-a {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height var(--t), padding var(--t);
+    padding: 0 18px;
+    background: #fff;
+  }
+  .faq-item[open] .faq-a {
+    padding: 14px 18px 18px;
+  }
+  .faq-a p,
+  .faq-a ul,
+  .faq-a li {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 6px 0;
+  }
+  .faq-a ul {
+    padding-left: 18px;
+  }
+
+  @media (max-width: 768px) {
+    .faq-lva {
+      padding: 0 14px;
+    }
+    .faq-lva__toggleList {
+      max-width: 100%;
+      margin: 0 0 14px;
+    }
+  }
+
+  /* ========================= */
+  /* FAQ MOBILE (ACCORDION)    */
+  /* ========================= */
+  :root{ --cor-destaque:#d2755e; }
+
+  .rb-header{ display:flex; align-items:center; gap:12px; margin:0 0 8px; }
+  .title-ctn{ flex:1; text-align:center; }
+  .title-ctn h2{ font-weight:normal; color:#000; display:inline-block; margin:0; }
+  .title-detail h2::after{ content:""; display:block; width:30px; height:2px; background:var(--cor-destaque); margin:9px auto 0; }
+  #risty-benefits .rb-item{ border-bottom:1px solid #eee; margin:8px 0; }
+  #risty-benefits .rb-item summary{
+    display:flex; align-items:center; padding:12px 0; cursor:pointer; color:#000; font-weight:500;
+    pointer-events:auto; user-select:auto;
+  }
+  #risty-benefits .rb-item summary::-webkit-details-marker{ display:none; }
+  #risty-benefits .rb-item summary::before{ content:"+"; width:20px; text-align:center; font-weight:700; margin-right:10px; }
+  #risty-benefits .rb-item[open] summary::before{ content:"–"; }
+  #risty-benefits .rb-item p{ margin:0 0 12px 30px; }
+
+  #risty-benefits > summary{ display:none !important; }
+  #risty-benefits::before, #risty-benefits::after{ content:none !important; }
+  .title-ctn {
+    margin-top: 0;
+  }
+        
+  @media (max-width:800px){
+    h2.bg-title:last-of-type {
+      border-bottom: 1px solid var(--color-gray-100);
+    }
+    span{
+      font-weight: bold;
+      font-size: 13px;
+    }
+    .title-detail{ display:none; }
+  }
+
+  .rb-toggle{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 41px;
+    float: right;
+    font-weight: bold;
+  }
+  .rb-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background: var(--color-white);
+    height: 41px;
+    line-height: 40px;
+    padding: 0 12px;
+    margin: 0;
+  }
+  .title-ctn{
+    flex:1; 
+    text-align:left; 
+    max-width: 1240px; 
+    width: 100%;
+  }
+  .title-ctn h2{
+    font-size: .8125em;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-black);
+  }
+  .title-ctn h2::after{ display:none; }
+  .rb-toggle{
+    all:unset;
+    font-size:27px;
+    cursor:pointer;
+    line-height:1;
+    margin-right: 2px;
+    color: black;
+  }
+  .container{
+    max-width: 1240px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    border-bottom: 1px solid var(--color-gray-100);
+  }
+  #risty-wrap{
+    margin-left: 0;
+    border-bottom: 1px solid var(--color-gray-100);
+  }
+
+  @media (max-width:800px){
+    .faq-lva-wrap{ display:none !important; }  
+  }
+  @media (min-width:801px){
+    #risty-wrap{ display:none !important; }     
+  }
+    </style>
+  </head>
+  <section class="description-section">
+    <div class="description-container">
+      <div class="text-description">
+        <h1 class="titles-description">Descrição Supletotal</h1>
+        <p>
+          Este documento fornece uma descrição detalhada do conceito de
+          "supletotal". O termo "supletotal" refere-se a uma categoria
+          específica dentro de um sistema maior, caracterizada por suas
+          propriedades únicas e funcionalidades distintas.
+        </p>
+        <p>
+          O supletotal é frequentemente utilizado em contextos onde a distinção
+          entre diferentes níveis ou categorias é crucial para a compreensão do
+          sistema como um todo. Ele pode ser aplicado em diversas áreas,
+          incluindo matemática, ciência da computação e teoria dos conjuntos.
+        </p>
+        <p>
+          Uma das principais características do supletotal é sua capacidade de
+          abranger elementos que não se encaixam perfeitamente nas categorias
+          tradicionais, oferecendo uma solução flexível para classificação e
+          organização de dados.
+        </p>
+      </div>
+      <div class="image-description">
+        <img
+          src="https://images.tcdn.com.br/img/img_prod/1235339/omegafor_plus_omega_3_rico_dha_epa_240_caps_vitafor_365_1_84169fb58e19c82972bf9914b5db329c.png"
+          alt="Diagrama ilustrando o conceito de supletotal"
+        />
+      </div>
+    </div>
+    <!-- SEÇÃO 2 -->
+    <div class="description-container-reverse">
+      <div class="description-image">
+        <img
+          src="https://images.tcdn.com.br/img/img_prod/1235339/omegafor_plus_omega_3_rico_dha_epa_240_caps_vitafor_365_2_294fc1ca343b9ece2ef8c793e4dcfd82.png"
+          alt="Imagem ilustrando as aplicações do supletotal"
+        />
+      </div>
+      <div class="description-text">
+        <h1 class="titles-description">Aplicações do Supletotal</h1>
+        <p>
+          O conceito de supletotal encontra aplicações em várias disciplinas. Na
+          matemática, ele pode ser usado para definir conjuntos que incluem
+          elementos adicionais além dos conjuntos tradicionais. Na ciência da
+          computação, o supletotal pode ajudar na criação de algoritmos que
+          lidam com dados heterogêneos.
+        </p>
+        <p>
+          Em teoria dos conjuntos, o supletotal pode ser utilizado para explorar
+          relações entre diferentes conjuntos e suas interseções, proporcionando
+          uma visão mais ampla das estruturas envolvidas.
+        </p>
+        <p>
+          A flexibilidade do supletotal também o torna útil em áreas como
+          estatística e análise de dados, onde a categorização precisa é
+          essencial para a interpretação correta dos resultados.
+        </p>
+      </div>
+    </div>
+    <!-- SEÇÃO 3 -->
+    <div class="description-container">
+      <div class="text-description">
+        <h1 class="titles-description">Descrição Supletotal</h1>
+        <p>
+          Este documento fornece uma descrição detalhada do conceito de
+          "supletotal". O termo "supletotal" refere-se a uma categoria
+          específica dentro de um sistema maior, caracterizada por suas
+          propriedades únicas e funcionalidades distintas.
+        </p>
+        <p>
+          O supletotal é frequentemente utilizado em contextos onde a distinção
+          entre diferentes níveis ou categorias é crucial para a compreensão do
+          sistema como um todo. Ele pode ser aplicado em diversas áreas,
+          incluindo matemática, ciência da computação e teoria dos conjuntos.
+        </p>
+        <p>
+          Uma das principais características do supletotal é sua capacidade de
+          abranger elementos que não se encaixam perfeitamente nas categorias
+          tradicionais, oferecendo uma solução flexível para classificação e
+          organização de dados.
+        </p>
+      </div>
+      <div class="image-description">
+        <img
+          src="https://images.tcdn.com.br/img/img_prod/1235339/omegafor_plus_240_caps_vitafor_omega_3_rico_dha_epa_365_3_9f5a4f07b94e80b39fc1202208e1bf47.png"
+          alt="Diagrama ilustrando o conceito de supletotal"
+        />
+      </div>
+    </div>
+  </section>
+  
+<!-- DESKTOP FAQ (gerado via JS) -->
+<div class="faq-lva-wrap" id="faq-lva-root"></div>
+
+<!-- MOBILE FAQ -->
+<div class="container">
+  <div id="risty-wrap">
+    <div class="rb-header">
+      <div class="title-ctn">
+        <h2 style="margin-top: 20px;"><span>Dúvidas Frequentes</span></h2>
+      </div>
+      <button type="button" class="rb-toggle" aria-controls="risty-benefits" aria-expanded="true">+</button>
+    </div>
+
+    <details id="risty-benefits" open>
+      <summary hidden aria-hidden="true"></summary>
+
+      <details class="rb-item">
+        <summary>Como é feita a instalação? Pode ser utilizado em gesso ou laje?</summary>
+        <p>De fácil instalação e prática, essa luminária de teto vai pronta para o uso, você pode instalar tanto no gesso quanto na laje, material leve e resistente. </p>
+      </details>
+
+      <details class="rb-item">
+        <summary>Vocês enviam para todo o Brasil?</summary>
+        <p>Sim, enviamos para todo o Brasil.</p>
+      </details>
+
+      <details class="rb-item">
+        <summary>Se o LED queimar, é possível fazer a manutenção?</summary>
+        <p>Da criação à costura, da embalagem ao envio: tudo é feito por nós...</p>
+      </details>
+
+      <details class="rb-item">
+        <summary>Somos reais, como você</summary>
+        <p>A resposta é sim, possuímos garantia em todas as nossas peças, em caso de queima do LED ou da fonte, é possível facilmente fazer a troca apenas destes componentes, sem comprometer toda a estrutura da peça.</p>
+      </details>
+
+      <details class="rb-item">
+        <summary>A pintura é resistente? Descasca?</summary>
+        <p>Nossa pintura é feita com uma tinta especial importada italiana, feita a mão peça por peça em nossa fábrica, ela é a prova de ferrugens, corrosão ou até mesmo maresia, podendo ser utilizada em ambientes residênciais, industriais, litoral ou interior.</p>
+      </details>
+    </details>
+  </div>
+</div>
+
+</html>
+
+<script>
+/* ========================= */
+/* SCRIPT DESKTOP (FAQ BLOCOS) */
+/* ========================= */
+(function() {
+  const data = [
+    ["Como é feita a instalação? Pode ser utilizado em gesso ou laje?", "De fácil instalação e prática, essa luminária de teto vai pronta para o uso, você pode instalar tanto no gesso quanto na laje, material leve e resistente. "],
+    ["Se o LED queimar, é possível fazer a manutenção?", "A resposta é sim, possuímos garantia em todas as nossas peças, em caso de queima do LED ou da fonte, é possível facilmente fazer a troca apenas destes componentes, sem comprometer toda a estrutura da peça."],
+    ["A pintura é resistente? Descasca?", "Nossa pintura é feita com uma tinta especial importada italiana, feita a mão peça por peça em nossa fábrica, ela é a prova de ferrugens, corrosão ou até mesmo maresia, podendo ser utilizada em ambientes residênciais, industriais, litoral ou interior."],
+  ];
+
+  const root = document.getElementById('faq-lva-root');
+  const section = document.createElement('section');
+  section.className = 'faq-lva';
+  section.setAttribute('role', 'region');
+  section.setAttribute('aria-labelledby', 'faq-lva-title');
+
+  const title = document.createElement('h2');
+  title.className = 'faq-lva__title';
+  title.id = 'faq-lva-title';
+  title.textContent = 'Principais perguntas dos clientes';
+
+  const toggleListBtn = document.createElement('button');
+  toggleListBtn.className = 'faq-lva__toggleList';
+  toggleListBtn.type = 'button';
+  toggleListBtn.textContent = 'Fechar todas as perguntas';
+  toggleListBtn.setAttribute('data-state', 'open');
+  toggleListBtn.setAttribute('aria-pressed', 'false');
+
+  const listBox = document.createElement('div');
+  listBox.className = 'faq-list';
+
+  const frag = document.createDocumentFragment();
+  data.forEach((pair, i) => {
+    const [q, a] = pair;
+    const item = document.createElement('article');
+    item.className = 'faq-item';
+    const btn = document.createElement('button');
+    btn.className = 'faq-q';
+    btn.type = 'button';
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', `faq-panel-${i}`);
+    btn.innerHTML = `<span>${q}</span><span class="faq-q__icon" aria-hidden="true">+</span>`;
+    const panel = document.createElement('div');
+    panel.className = 'faq-a';
+    panel.id = `faq-panel-${i}`;
+    panel.setAttribute('role', 'region');
+    panel.innerHTML = a.replace(/\n/g, '<br>');
+    btn.addEventListener('click', () => toggleItem(item, panel, btn));
+    item.append(btn, panel);
+    frag.appendChild(item);
+  });
+  listBox.appendChild(frag);
+
+  section.append(title, toggleListBtn, listBox);
+  root.appendChild(section);
+
+  let inserted = false;
+
+  function placeFAQ() {
+    const elemento = document.querySelector('.faq-lva-wrap');
+    const alvo = document.querySelector('.acompanha-produto');
+    if (elemento && alvo && !inserted) {
+      const nextSibling = alvo.nextElementSibling;
+      if (nextSibling !== elemento) {
+        alvo.insertAdjacentElement('beforebegin', elemento);
+        inserted = true;
+      }
+    }
+  }
+
+  placeFAQ();
+
+  if (!inserted) {
+    const obs = new MutationObserver(() => {
+      placeFAQ();
+      if (inserted) {
+        obs.disconnect();
+      }
+    });
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  function toggleItem(item, panel, btn) {
+    const isOpen = item.hasAttribute('open');
+
+    if (!isOpen) {
+      item.setAttribute('open', '');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.querySelector('.faq-q__icon').textContent = '−';
+
+      panel.style.transition = 'none';
+      panel.style.maxHeight = '0px';
+      panel.offsetHeight;
+
+      panel.style.transition = 'max-height var(--t), padding var(--t)';
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      panel.style.paddingTop = '14px';
+      panel.style.paddingBottom = '18px';
+
+      panel.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName !== 'max-height') return;
+        panel.style.transition = 'none';
+        panel.style.maxHeight = 'none';
+        panel.removeEventListener('transitionend', onEnd);
+      });
+    } else {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.querySelector('.faq-q__icon').textContent = '+';
+
+      panel.style.transition = 'none';
+      panel.style.maxHeight = panel.scrollHeight + 'px';
+      panel.offsetHeight;
+
+      panel.style.transition = 'max-height var(--t), padding var(--t)';
+      panel.style.maxHeight = '0px';
+      panel.style.paddingTop = '0px';
+      panel.style.paddingBottom = '0px';
+
+      panel.addEventListener('transitionend', function onClose(e) {
+        if (e.propertyName !== 'max-height') return;
+        item.removeAttribute('open');
+        panel.removeEventListener('transitionend', onClose);
+      });
+    }
+  }
+
+  toggleListBtn.addEventListener('click', () => {
+    const isOpen = toggleListBtn.getAttribute('data-state') === 'open';
+    if (isOpen) {
+      document.querySelectorAll('.faq-item').forEach(it => {
+        if (it.hasAttribute('open')) {
+          const btn = it.querySelector('.faq-q');
+          const panel = it.querySelector('.faq-a');
+          it.removeAttribute('open');
+          btn.setAttribute('aria-expanded', 'false');
+          panel.style.maxHeight = '0px';
+          btn.querySelector('.faq-q__icon').textContent = '+';
+        }
+      });
+      listBox.style.display = 'none';
+      toggleListBtn.setAttribute('data-state', 'closed');
+      toggleListBtn.setAttribute('aria-pressed', 'true');
+      toggleListBtn.textContent = 'Abrir todas as perguntas';
+    } else {
+      listBox.style.display = '';
+      toggleListBtn.setAttribute('data-state', 'open');
+      toggleListBtn.setAttribute('aria-pressed', 'false');
+      toggleListBtn.textContent = 'Fechar todas as perguntas';
+    }
+  });
+
+  window.addEventListener('resize', () => {
+    document.querySelectorAll('.faq-item[open] .faq-a').forEach(p => {
+      p.style.maxHeight = p.scrollHeight + 'px';
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const BP = 800;
+  const wrap = document.getElementById('risty-wrap');
+  const root = document.getElementById('risty-benefits');
+  const btn  = wrap.querySelector('.rb-toggle');
+
+  function insertAfter(ref, node){ ref.parentNode.insertBefore(node, ref.nextSibling); }
+
+  function place(){
+    const isDesktop = window.innerWidth >= BP;
+    const mobileTarget  = document.querySelector('.accordion.descricao-produto');
+    const desktopTarget = document.querySelector('.produto-acordeon') || document.querySelector('.product-accordion');
+
+    if (isDesktop && desktopTarget) {
+    } else if (mobileTarget) {
+      if (mobileTarget.nextSibling !== wrap) insertAfter(mobileTarget, wrap);
+    }
+  }
+
+  function syncBtn(){
+    const open = root.open;
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.textContent = open ? '–' : '+';
+    if (!open) root.querySelectorAll('.rb-item[open]').forEach(d => d.open = false);
+  }
+
+  btn.addEventListener('click', () => { root.open = !root.open; syncBtn(); });
+
+  document.addEventListener('click', function(e){
+    const sum = e.target.closest('#risty-benefits .rb-item summary');
+    if (!sum) return;
+    const det = sum.parentNode;          
+    const wasOpen = det.open;
+    setTimeout(() => { if (det.open === wasOpen) det.open = !wasOpen; }, 0);
+  }, { passive:true });
+
+  if (document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', () => { place(); syncBtn(); });
+  } else { place(); syncBtn(); }
+
+  let t; window.addEventListener('resize', () => { clearTimeout(t); t = setTimeout(place,120); }, { passive:true });
+})();
+</script>
