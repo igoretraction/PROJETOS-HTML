@@ -19,7 +19,7 @@
     body {
       margin: 0;
       font-family: "Jost", sans-serif;
-      background: #f5f5f5;
+      background: #ffffff;
       color: #111;
     }
 
@@ -121,10 +121,112 @@
     .audio-hero .hero-pagination .swiper-pagination-bullet-active {
       background: #fff;
     }
+    .audio-slide {
+  position: relative;
+}
+
+.audio-slide-image {
+  width: 100%;
+  display: block;
+}
+
+.audio-slide-text {
+  position: absolute;
+  left: 40px;
+  bottom: 40px;
+  max-width: 520px;
+  padding: 0px 24px;
+  border-radius: 16px;
+  background: transparent;
+  color: #ffffff;
+}
+
+.audio-slide-text h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.audio-slide-text p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .audio-slide-text {
+    left: 16px;
+    right: 16px;
+    bottom: 20px;
+    max-width: none;
+    padding: 14px 16px;
+  }
+
+  .audio-slide-text h2 {
+    font-size: 18px;
+  }
+
+  .audio-slide-text p {
+    font-size: 13px;
+  }
+}
+
+
+    /* CONECTIVIDADE (3ª imagem) */
+    .connectivity-section {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 32px 32px 24px;
+      margin-bottom: 40px;
+      display: grid;
+      grid-template-columns: 1.1fr 1.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .connectivity-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .connectivity-text p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+      margin: 0;
+    }
+
+    .connectivity-image-wrapper {
+      display: flex;
+      justify-content: center;
+    }
+
+    .connectivity-image {
+      width: 100%;  
+      max-width: 800px;
+      display: block;
+      border-radius: 16px;
+    }
+
+    @media (max-width: 900px) {
+      .connectivity-section {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding: 24px 20px 20px;
+      }
+
+      .connectivity-image-wrapper {
+        justify-content: center;
+      }
+    }
 
     /* FEATURES (ícones em swiper) */
     .features-section {
-      background: #f5f5f5;
+      background: #ffffff;
       padding: 32px 0 40px;
       margin-bottom: 40px;
     }
@@ -158,10 +260,9 @@
       margin-bottom: 8px;
     }
 
-    .feature-icon-circle img {
-      max-width: 36px;
-      max-height: 36px;
-      display: block;
+    .feature-icon-svg {
+      width: 32px;
+      height: 32px;
     }
 
     .feature-title {
@@ -176,18 +277,158 @@
       color: #555;
       max-width: 210px;
     }
+    .featureSwiper {
+  padding: 10px 40px; /* espaço lateral para as setas */
+  position: relative;
+}
+
+.feature-prev,
+.feature-next {
+  color: #000;
+  width: 32px;
+  height: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.feature-prev::after,
+.feature-next::after {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.feature-prev {
+  left: 0;
+}
+
+.feature-next {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .featureSwiper {
+    padding: 10px 28px;
+  }
+}
+
 
     /* COMPARISON SECTION (banner + tabela) */
-    .comparison-section {
-      margin-bottom: 50px;
-    }
+   /* COMPARISON SECTION (banner + tabela) */
+.comparison-section {
+  margin-bottom: 50px;
+}
 
-    .comparison-banner-image {
-      width: 100%;
-      display: block;
-      border-radius: 20px;
-      margin-bottom: 24px;
-    }
+/* wrapper da imagem + textos por cima */
+.comparison-banner-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.comparison-banner-image {
+  width: 100%;
+  display: block;
+}
+
+/* overlay com título e bullets */
+.comparison-overlay {
+  position: absolute;
+  inset: 0;
+  padding: 16px 40px 32px;
+  pointer-events: none; /* só visual */
+}
+
+.comparison-main-title {
+  text-align: center;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  margin: 4px 0 0;
+}
+
+/* grupos laterais */
+.comparison-badges {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  pointer-events: auto;
+}
+
+.comparison-badges-left {
+  left: 100px;
+  top: 95px;    
+}
+
+.comparison-badges-right {
+  right: 100px;
+  top: 115px;   
+}
+
+.comparison-badge {
+  display: flex;
+  align-items: flex-start;
+  border-radius: 14px;
+  padding: 10px 14px;
+  color: #ffffff;
+}
+
+.comparison-icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  margin-right: 10px;
+}
+
+.comparison-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.comparison-badge-text {
+  display: flex;
+  flex-direction: column;
+  font-size: 21px;
+  line-height: 1.4;
+}
+
+.comparison-badge-text strong {
+  font-weight: 700;
+}
+
+/* responsivo */
+@media (max-width: 900px) {
+  .comparison-overlay {
+    padding: 14px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .comparison-main-title {
+    font-size: 18px;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  .comparison-badges {
+    position: static;
+    gap: 10px;
+  }
+
+  .comparison-badges-right {
+    margin-top: 6px;
+  }
+
+  .comparison-badge {
+    padding: 8px 10px;
+  }
+
+  .comparison-badge-text {
+    font-size: 13px;
+  }
+}
+
 
     .comparison-card {
       background: #ffffff;
@@ -196,18 +437,23 @@
       overflow: hidden;
     }
 
+    /* Produtos alinhados em cima de cada coluna */
     .comparison-products {
-      display: flex;
-    text-align: center;
-    padding: 24px 121px 14px;
-    gap: 16px;
-    justify-content: end;
-    gap: 142px;
+      display: grid;
+      grid-template-columns: 28% 1fr 1fr 1fr; /* 1ª coluna rótulos + 3 produtos */
+      align-items: flex-end;
+      text-align: center;
+      padding: 24px 16px 14px;
     }
 
     .comparison-product {
       position: relative;
       max-width: 150px;
+      margin: 0 auto;
+    }
+
+    .comparison-product--empty {
+      visibility: hidden;  /* Apenas para reservar o espaço da 1ª coluna */
     }
 
     .comparison-product img {
@@ -245,6 +491,7 @@
       width: 100%;
       border-collapse: collapse;
       font-size: 13px;
+      table-layout: fixed;
     }
 
     .comparison-table th,
@@ -289,7 +536,12 @@
 
     @media (max-width: 900px) {
       .comparison-products {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 24px;
+      }
+
+      .comparison-product--empty {
+        display: none;
       }
 
       .comparison-table {
@@ -365,7 +617,6 @@
       border-radius: 16px;
       border: 1px solid #f0f0f0;
       padding: 20px 24px 18px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
       max-width: 100%;
       margin: 0 auto;
     }
@@ -469,91 +720,175 @@
       </div>
     </div>
 
-    <!-- AUDIO SLIDER (fundo azul) -->
-    <div class="audio-slider-section">
-      <div class="audio-hero">
-        <div class="swiper heroSwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img
-                src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-                alt="Som imersivo de alta fidelidade"
-              />
-            </div>
-            <div class="swiper-slide">
-              <img
-                src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-                alt="Break X1 em apresentações"
-              />
-            </div>
-            <div class="swiper-slide">
-              <img
-                src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-                alt="Break X1 em festas"
-              />
+   <!-- AUDIO SLIDER (fundo azul) -->
+<div class="audio-slider-section">
+  <div class="audio-hero">
+    <div class="swiper heroSwiper">
+      <div class="swiper-wrapper">
+        <!-- SLIDE 1 -->
+        <div class="swiper-slide">
+          <div class="audio-slide">
+            <img
+              class="audio-slide-image"
+              src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
+              alt="Som imersivo de alta fidelidade"
+            />
+            <div class="audio-slide-text">
+              <h2>SOM IMERSIVO DE ALTA FIDELIDADE</h2>
+              <p>
+                O Break X1 oferece áudio cristalino e graves profundos com woofer de 6,5" 
+                e dois tweeters de 2,6". Ideal para karaokê, apresentações públicas e festas.
+              </p>
             </div>
           </div>
+        </div>
 
-          <div class="swiper-pagination hero-pagination"></div>
-          <div class="swiper-button-prev hero-prev"></div>
-          <div class="swiper-button-next hero-next"></div>
+        <!-- SLIDE 2 -->
+        <div class="swiper-slide">
+          <div class="audio-slide">
+            <img
+              class="audio-slide-image"
+              src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
+              alt="Break X1 em apresentações"
+            />
+            <div class="audio-slide-text">
+              <h2>PERFEITO PARA APRESENTAÇÕES E EVENTOS</h2>
+              <p>
+                Com potência de 800W de pico e SPL máximo de 107 dB, o Break X1 
+                garante que sua voz e sua música sejam ouvidas com clareza em qualquer ambiente.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- SLIDE 3 -->
+        <div class="swiper-slide">
+          <div class="audio-slide">
+            <img
+              class="audio-slide-image"
+              src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
+              alt="Break X1 em festas"
+            />
+            <div class="audio-slide-text">
+              <h2>CLIMA DE FESTA EM QUALQUER LUGAR</h2>
+              <p>
+                Combine som potente, iluminação envolvente e tela gigante 
+                para transformar reuniões em casa, bares ou churrascos em verdadeiros shows.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <!-- FEATURES ICONS (SWIPER) -->
+      <div class="swiper-pagination hero-pagination"></div>
+      <div class="swiper-button-prev hero-prev"></div>
+      <div class="swiper-button-next hero-next"></div>
+    </div>
+  </div>
+</div>
+
+
+    <!-- CONECTIVIDADE (3ª imagem) -->
+    <section class="connectivity-section">
+      <div class="connectivity-text">
+        <h2 class="connectivity-title">Conectividade versátil</h2>
+        <p>
+          Conecte-se via USB, entrada/saída AUX, HDMI e Bluetooth 5.4.
+          O Break X1 também suporta Wi-Fi 802.11ac (2.4G/5G) e TWS
+          (True Wireless Stereo) para configurar múltiplos alto-falantes
+          sem fio, ampliando a cobertura sonora.
+        </p>
+      </div>
+      <div class="connectivity-image-wrapper">
+        <img
+          class="connectivity-image"
+          src="https://lh3.google.com/u/0/d/1HzFJHJnAA1bYSPO9gFwkwhlqX2PTX1KZ=w1920-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
+          alt="Conexões traseiras do Break X1"
+        />
+      </div>
+    </section>
+
+    <!-- FEATURES ICONS (SWIPER – 1ª imagem) -->
     <div class="features-section">
-      <div class="features-inner">
-        <div class="swiper featureSwiper">
-          <div class="swiper-wrapper">
-            <!-- Feature 1 -->
-            <div class="swiper-slide">
-              <div class="feature-icon-circle">
-                <img src="/mnt/data/index.html-icon-screen.png" alt="Tela LCD" />
-              </div>
-              <div class="feature-title">Tela LCD-IPS de 13,3"</div>
-              <div class="feature-subtitle">
-                Resolução Full HD (1080p) para mostrar letras e vídeos com clareza.
-              </div>
-            </div>
+  <div class="features-inner">
+    <div class="swiper featureSwiper">
+      <div class="swiper-wrapper">
+        <!-- Feature 1 -->
+        <div class="swiper-slide">
+          <div class="feature-icon-circle">
+            <!-- Ícone SVG random: tela -->
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="12" rx="2" ry="2" fill="none" stroke="#111" stroke-width="1.5"/>
+              <line x1="8" y1="20" x2="16" y2="20" stroke="#111" stroke-width="1.5" />
+              <line x1="12" y1="16" x2="12" y2="20" stroke="#111" stroke-width="1.5" />
+            </svg>
+          </div>
+          <div class="feature-title">Tela LCD-IPS de 13,3"</div>
+          <div class="feature-subtitle">
+            Resolução Full HD (1080p) para mostrar letras e vídeos com clareza.
+          </div>
+        </div>
 
-            <!-- Feature 2 -->
-            <div class="swiper-slide">
-              <div class="feature-icon-circle">
-                <img src="" alt="Wi-Fi" />
-              </div>
-              <div class="feature-title">Wi-Fi 802.11ac</div>
-              <div class="feature-subtitle">
-                Conexão 2.4G/5G estável para acessar músicas online.
-              </div>
-            </div>
+        <!-- Feature 2 -->
+        <div class="swiper-slide">
+          <div class="feature-icon-circle">
+            <!-- Ícone SVG random: Wi-Fi -->
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 9a10 10 0 0 1 16 0" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M7 12a6.5 6.5 0 0 1 10 0" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M10 15a3 3 0 0 1 4 0" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="12" cy="18" r="1.4" fill="#111"/>
+            </svg>
+          </div>
+          <div class="feature-title">Wi-Fi 802.11ac</div>
+          <div class="feature-subtitle">
+            Conexão 2.4G/5G estável para acessar músicas online.
+          </div>
+        </div>
 
-            <!-- Feature 3 -->
-            <div class="swiper-slide">
-              <div class="feature-icon-circle">
-                <img src="" alt="Bateria" />
-              </div>
-              <div class="feature-title">4800mAh</div>
-              <div class="feature-subtitle">
-                Bateria recarregável para horas de diversão sem tomada.
-              </div>
-            </div>
+        <!-- Feature 3 -->
+        <div class="swiper-slide">
+          <div class="feature-icon-circle">
+            <!-- Ícone SVG random: bateria -->
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="7" width="16" height="10" rx="2" ry="2" fill="none" stroke="#111" stroke-width="1.5"/>
+              <rect x="5" y="9" width="6" height="6" fill="#111"/>
+              <rect x="19" y="10" width="2" height="4" rx="0.8" fill="#111"/>
+            </svg>
+          </div>
+          <div class="feature-title">4800mAh</div>
+          <div class="feature-subtitle">
+            Bateria recarregável para horas de diversão sem tomada.
+          </div>
+        </div>
 
-            <!-- Feature 4 -->
-            <div class="swiper-slide">
-              <div class="feature-icon-circle">
-                <img src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch" alt="Som potente" />
-              </div>
-              <div class="feature-title">Som potente</div>
-              <div class="feature-subtitle">
-                Woofer de 6,5" e dois tweeters de 2,6" com graves encorpados.
-              </div>
-            </div>
+        <!-- Feature 4 -->
+        <div class="swiper-slide">
+          <div class="feature-icon-circle">
+            <!-- Ícone SVG random: som potente -->
+            <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="4" y="5" width="10" height="14" rx="2" ry="2" fill="none" stroke="#111" stroke-width="1.5"/>
+              <circle cx="9" cy="12" r="3" fill="none" stroke="#111" stroke-width="1.5"/>
+              <circle cx="9" cy="12" r="1.4" fill="#111"/>
+              <path d="M16 9c1.2 1.2 1.2 4.8 0 6" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M18 7c1.8 1.8 1.8 8.2 0 10" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="feature-title">Som potente</div>
+          <div class="feature-subtitle">
+            Woofer de 6,5" e dois tweeters de 2,6" com graves encorpados.
           </div>
         </div>
       </div>
+
+      <!-- SETAS DO SWIPER -->
+      <div class="swiper-button-prev feature-prev"></div>
+      <div class="swiper-button-next feature-next"></div>
     </div>
-     <!-- REVIEWS (Swiper igual imagem 4) -->
+  </div>
+</div>
+
+    <!-- REVIEWS (Swiper igual imagem 4) -->
     <div class="reviews-section">
       <div class="reviews-header">
         <h2>Marca Renomada Internacionalmente</h2>
@@ -588,7 +923,7 @@
               </div>
             </div>
 
-            <!-- (Opcional) Review 2 -->
+            <!-- Review 2 -->
             <div class="swiper-slide">
               <div class="review-card">
                 <div class="review-stars">★★★★★</div>
@@ -616,16 +951,113 @@
     </div>
 
     <!-- COMPARISON (banner + tabela) -->
-    <div class="comparison-section">
-      <!-- Se quiser só usar uma imagem pronta do banner, troque o src abaixo -->
-      <img
-        class="comparison-banner-image"
-        src="https://lh3.google.com/u/0/d/1DBNAtPaSeuH_l3qfwE7QQozYKLl-_qLD=w1920-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-        alt="Preço alto, qualidade alta - Break X1"
-      />
+    <!-- COMPARISON (banner + tabela) -->
+<div class="comparison-section">
+  <div class="comparison-banner-wrapper">
+    <img
+      class="comparison-banner-image"
+      src="https://lh3.google.com/u/0/d/1DBNAtPaSeuH_l3qfwE7QQozYKLl-_qLD=w1920-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
+      alt="Preço alto, qualidade alta - Break X1"
+    />
+
+    <div class="comparison-overlay">
+      <h2 class="comparison-main-title">Preço alto, Qualidade alta</h2>
+
+      <!-- LADO ESQUERDO -->
+      <div class="comparison-badges comparison-badges-left">
+        <!-- Box 1 -->
+        <div class="comparison-badge">
+          <span class="comparison-icon">
+            <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_99_20)">
+                <path d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z" fill="#14AE5C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_99_20">
+                  <rect width="59" height="59" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <div class="comparison-badge-text">
+            <strong>Construção Robusta:</strong>
+            <span>Dura Anos, não meses</span>
+          </div>
+        </div>
+
+        <!-- Box 2 -->
+        <div class="comparison-badge">
+          <span class="comparison-icon">
+            <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_99_20)">
+                <path d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z" fill="#14AE5C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_99_20">
+                  <rect width="59" height="59" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <div class="comparison-badge-text">
+            <strong>Bateria do microfone de</strong>
+            <span>longa duração (10+ Horas)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- LADO DIREITO -->
+      <div class="comparison-badges comparison-badges-right">
+        <!-- Box 3 -->
+        <div class="comparison-badge">
+          <span class="comparison-icon">
+            <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_99_20)">
+                <path d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z" fill="#14AE5C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_99_20">
+                  <rect width="59" height="59" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <div class="comparison-badge-text">
+            <strong>Carregamento:</strong>
+            <span>Rápido e desempenho Fluido</span>
+          </div>
+        </div>
+
+        <!-- Box 4 -->
+        <div class="comparison-badge">
+          <span class="comparison-icon">
+            <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_99_20)">
+                <path d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z" fill="#14AE5C"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_99_20">
+                  <rect width="59" height="59" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          <div class="comparison-badge-text">
+            <strong>Conexão Estável</strong>
+            <span>e Sem Interrupções</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
 
       <div class="comparison-card">
         <div class="comparison-products">
+          <!-- Coluna vazia para alinhar com a coluna de rótulos da tabela -->
+          <div class="comparison-product comparison-product--empty" aria-hidden="true"></div>
+
           <div class="comparison-product">
             <img src="https://joog.com.br/_next/image?url=https%3A%2F%2Fcdn.thepes.com.br%2Ff3b1c4a7-815c-4cac-81e5-a074efdcd363%2Ffile-upload%2FSITE_PRODUCT%2F%2Fb2ea1c17-b50f-4303-90de-7ef00368729e.webp&w=1920&q=75" alt="Joog Shell S1" />
             <div class="comparison-product-title">Joog Shell S1</div>
@@ -726,8 +1158,6 @@
         </p>
       </div>
     </div>
-
-   
   </section>
 
   <!-- Swiper JS -->
@@ -748,19 +1178,24 @@
     });
 
     // Features (ícones)
-    const featureSwiper = new Swiper(".featureSwiper", {
-      loop: false,
-      slidesPerView: 1,
-      spaceBetween: 20,
-      breakpoints: {
-        640: {
-          slidesPerView: 2,
-        },
-        1024: {
-          slidesPerView: 4,
-        },
-      },
-    });
+const featureSwiper = new Swiper(".featureSwiper", {
+  loop: false,
+  slidesPerView: 1,
+  spaceBetween: 20,
+  navigation: {
+    nextEl: ".feature-next",
+    prevEl: ".feature-prev",
+  },
+  breakpoints: {
+    640: {
+      slidesPerView: 2,
+    },
+    1024: {
+      slidesPerView: 3, // 3 por vez no desktop
+    },
+  },
+});
+
 
     // Reviews
     const reviewSwiper = new Swiper(".reviewSwiper", {
