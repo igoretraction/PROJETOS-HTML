@@ -1,1211 +1,2019 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Break X1</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Break X1</title>
 
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper@9/swiper-bundle.min.css"
+    />
 
-  <!-- Swiper CSS -->
-  <link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css"/>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Signika+Negative:wght@300..700&display=swap");
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      font-family: "Jost", sans-serif;
-      background: #ffffff;
-      color: #111;
-    }
-
-    .page-wrapper {
-      max-width: 1240px;
-      margin: 40px auto 80px;
-      padding: 0 16px;
-    }
-
-    /* HERO (imagem grande do topo) */
-    .hero-section {
-      margin-bottom: 40px;
-    }
-
-    .hero-main-image {
-      width: 100%;
-      border-radius: 20px;
-      display: block;
-    }
-
-    /* INTRO (texto + imagem) */
-    .intro-section {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 40px;
-      align-items: center;
-      margin-bottom: 60px;
-    }
-
-    .intro-text h1 {
-      font-size: 40px;
-      margin-bottom: 16px;
-      color: #001440;
-    }
-
-    .intro-text p {
-      font-size: 18px;
-      line-height: 1.5;
-      color: #444;
-    }
-
-    .intro-image-wrapper {
-      display: flex;
-      justify-content: flex-end;
-    }
-
-    .intro-image {
-      width: 100%;
-      max-width: 680px;
-      display: block;
-      border-radius: 16px;
-    }
-
-    @media (max-width: 900px) {
-      .intro-section {
-        grid-template-columns: 1fr;
-        text-align: center;
+      * {
+        box-sizing: border-box;
       }
 
-      .intro-image-wrapper {
-        justify-content: center;
+      body {
+        margin: 0;
+        font-family: "Signika Negative", sans-serif !important;
+        background: #ffffff;
+        color: #111;
+      }
+
+      .page-wrapper {
+        max-width: 1240px;
+        margin: 40px auto 80px;
+        padding: 0 16px;
+      }
+
+      /* HERO (imagem grande do topo) */
+      .hero-section {
+        margin-bottom: 40px;
+        position: relative; /* novo */
+        overflow: hidden;
+        border-radius: 10px; /* opcional, pra garantir */
+      }
+
+      .hero-main-image {
+        width: 100%;
+        border-radius: 20px;
+        display: block;
+      }
+
+      /* Bloco de texto sobre a imagem */
+      .hero-overlay {
+        position: absolute;
+        left: 40px;
+        bottom: 40px;
+        color: #fff;
+        z-index: 2;
+        max-width: 340px;
+      }
+
+      .hero-tag {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0 0 4px;
+      }
+
+      .hero-title {
+        font-size: 32px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      /* Responsivo */
+      @media (max-width: 768px) {
+        .hero-overlay {
+          left: 16px;
+          bottom: 20px;
+          max-width: 260px;
+        }
+
+        .hero-title {
+          font-size: 24px;
+        }
+
+        .hero-tag {
+          font-size: 14px;
+        }
+      }
+      /* Seções que só aparecem quando entram na tela */
+      .reveal-section {
+        opacity: 0;
+        transform: translateY(30px);
+        visibility: hidden;
+      }
+
+      .hero-main-image {
+        width: 100%;
+        border-radius: 20px;
+        display: block;
+      }
+
+      /* INTRO (texto + imagem) */
+      .intro-section {
+        display: grid;
+        grid-template-columns: 1fr 1.2fr;
+        gap: 40px;
+        align-items: center;
+        margin-bottom: 60px;
       }
 
       .intro-text h1 {
-        font-size: 32px;
+        font-size: 40px;
+        margin-bottom: 16px;
+        color: #001440;
+        border-bottom: 5px solid #001440;
+        width: 34%;
       }
-    }
 
-    /* AUDIO SLIDER (fundo azul com imagem imersiva) */
-    .audio-slider-section {
-      margin-bottom: 40px;
-    }
+      .intro-text p {
+        font-size: 18px;
+        line-height: 1.5;
+        color: #444;
+      }
 
-    .audio-hero {
-      background-color: #001440;
-      border-radius: 20px;
-      padding: 24px 24px 32px;
-    }
+      .intro-image-wrapper {
+        display: flex;
+        justify-content: flex-end;
+      }
 
-    .audio-hero .swiper {
-      border-radius: 12px;
-      overflow: hidden;
-    }
+      .intro-image {
+        width: 100%;
+        max-width: 680px;
+        display: block;
+        border-radius: 16px;
+        margin-bottom: 15px;
+      }
 
-    .audio-hero img {
-      width: 100%;
-      display: block;
-    }
+      @media (max-width: 900px) {
+        .intro-section {
+          grid-template-columns: 1fr;
+          text-align: center;
+        }
 
-    .audio-hero .hero-prev,
-    .audio-hero .hero-next {
-      color: #fff;
-    }
+        .intro-image-wrapper {
+          justify-content: center;
+        }
 
-    .audio-hero .hero-pagination .swiper-pagination-bullet {
-      background: rgba(255, 255, 255, 0.6);
-    }
+        .intro-text h1 {
+          font-size: 32px;
+          text-align: center;
+          align-items: center;
+          display: flex;
+          justify-content: center;
+          width: 70%;
+          margin: auto;
+        }
+      }
 
-    .audio-hero .hero-pagination .swiper-pagination-bullet-active {
-      background: #fff;
-    }
-    .audio-slide {
-  position: relative;
-}
+      /* AUDIO SLIDER (fundo azul com imagem imersiva) */
+      .audio-slider-section {
+        margin-bottom: 40px;
+      }
 
-.audio-slide-image {
-  width: 100%;
-  display: block;
-}
+      .audio-hero {
+        background-color: #001440;
+        border-radius: 20px;
+        padding: 24px 24px 32px;
+      }
 
-.audio-slide-text {
-  position: absolute;
-  left: 40px;
-  bottom: 40px;
-  max-width: 520px;
-  padding: 0px 24px;
-  border-radius: 16px;
-  background: transparent;
-  color: #ffffff;
-}
+      .audio-hero .swiper {
+        border-radius: 12px;
+        overflow: hidden;
+      }
 
-.audio-slide-text h2 {
-  margin: 0 0 8px;
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
+      .audio-hero img {
+        width: 100%;
+        display: block;
+      }
 
-.audio-slide-text p {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.5;
-}
+      .audio-hero .hero-prev,
+      .audio-hero .hero-next {
+        color: #fff;
+      }
 
-/* Responsivo */
-@media (max-width: 768px) {
-  .audio-slide-text {
-    left: 16px;
-    right: 16px;
-    bottom: 20px;
-    max-width: none;
-    padding: 14px 16px;
-  }
+      .audio-hero .hero-pagination .swiper-pagination-bullet {
+        background: rgba(255, 255, 255, 0.6);
+      }
 
-  .audio-slide-text h2 {
-    font-size: 18px;
-  }
+      .audio-hero .hero-pagination .swiper-pagination-bullet-active {
+        background: #fff;
+      }
 
-  .audio-slide-text p {
-    font-size: 13px;
-  }
-}
+      .audio-slide {
+        position: relative;
+      }
 
+      .audio-slide-image {
+        width: 100%;
+        display: block;
+      }
 
-    /* CONECTIVIDADE (3ª imagem) */
-    .connectivity-section {
-      background: #ffffff;
-      border-radius: 20px;
-      padding: 32px 32px 24px;
-      margin-bottom: 40px;
-      display: grid;
-      grid-template-columns: 1.1fr 1.8fr;
-      gap: 32px;
-      align-items: center;
-    }
+      .audio-slide-text {
+        position: absolute;
+        left: 40px;
+        bottom: 40px;
+        max-width: 520px;
+        padding: 0px 24px;
+        border-radius: 16px;
+        background: transparent;
+        color: #ffffff;
+      }
 
-    .connectivity-title {
-      font-size: 24px;
-      font-weight: 700;
-      margin-bottom: 10px;
-      color: #111;
-    }
+      .audio-slide-text h2 {
+        margin: 0 0 8px;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
 
-    .connectivity-text p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #333;
-      margin: 0;
-    }
+      .audio-slide-text p {
+        margin: 0;
+        font-size: 14px;
+        line-height: 1.5;
+      }
 
-    .connectivity-image-wrapper {
-      display: flex;
-      justify-content: center;
-    }
+      /* Responsivo */
+      @media (max-width: 768px) {
+        .audio-slide-text {
+          left: 16px;
+          right: 16px;
+          bottom: 20px;
+          max-width: none;
+          padding: 14px 16px;
+        }
 
-    .connectivity-image {
-      width: 100%;  
-      max-width: 800px;
-      display: block;
-      border-radius: 16px;
-    }
+        .audio-slide-text h2 {
+          font-size: 18px;
+        }
 
-    @media (max-width: 900px) {
+        .audio-slide-text p {
+          font-size: 13px;
+        }
+      }
+
+      /* CONECTIVIDADE (3ª imagem) */
       .connectivity-section {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 24px 20px 20px;
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 32px 32px 24px;
+        margin-bottom: 40px;
+        display: grid;
+        grid-template-columns: 1.1fr 1.8fr;
+        gap: 32px;
+        align-items: center;
+      }
+
+      .connectivity-title {
+        font-size: 24px;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: #111;
+      }
+
+      .connectivity-text p {
+        font-size: 15px;
+        line-height: 1.6;
+        color: #333;
+        margin: 0;
       }
 
       .connectivity-image-wrapper {
+        display: flex;
         justify-content: center;
       }
-    }
 
-    /* FEATURES (ícones em swiper) */
-    .features-section {
-      background: #ffffff;
-      padding: 32px 0 40px;
-      margin-bottom: 40px;
-    }
+      .connectivity-image {
+        width: 100%;
+        max-width: 800px;
+        display: block;
+        border-radius: 16px;
+      }
 
-    .features-inner {
-      max-width: 1240px;
-      margin: 0 auto;
-    }
+      @media (max-width: 900px) {
+        .connectivity-section {
+          grid-template-columns: 1fr;
+          text-align: center;
+          padding: 24px 20px 20px;
+        }
 
-    .featureSwiper {
-      padding: 10px 0;
-    }
+        .connectivity-image-wrapper {
+          justify-content: center;
+        }
+      }
 
-    .featureSwiper .swiper-slide {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 10px;
-    }
+      /* FEATURES (ícones em swiper) */
+      .features-section {
+        background: #ffffff;
+        padding: 32px 0 40px;
+        margin-bottom: 40px;
+      }
 
-    .feature-icon-circle {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      border: 2px solid #e0e0e0;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 8px;
-    }
+      .features-inner {
+        max-width: 1240px;
+        margin: 0 auto;
+      }
 
-    .feature-icon-svg {
-      width: 32px;
-      height: 32px;
-    }
+      .featureSwiper {
+        padding: 10px 0;
+      }
 
-    .feature-title {
-      font-size: 15px;
-      font-weight: 600;
-      color: #151515;
-    }
+      .featureSwiper .swiper-slide {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+      }
 
-    .feature-subtitle {
-      font-size: 13px;
-      line-height: 1.4;
-      color: #555;
-      max-width: 210px;
-    }
-    .featureSwiper {
-  padding: 10px 40px; /* espaço lateral para as setas */
-  position: relative;
-}
+      .feature-icon-circle {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        border: 2px solid #e0e0e0;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 8px;
+      }
 
-.feature-prev,
-.feature-next {
-  color: #000;
-  width: 32px;
-  height: 32px;
-  top: 50%;
-  transform: translateY(-50%);
-}
+      .feature-icon-svg {
+        width: 32px;
+        height: 32px;
+      }
 
-.feature-prev::after,
-.feature-next::after {
-  font-size: 18px;
-  font-weight: 700;
-}
+      .feature-title {
+        font-size: 15px;
+        font-weight: 600;
+        color: #151515;
+      }
 
-.feature-prev {
-  left: 0;
-}
+      .feature-subtitle {
+        font-size: 13px;
+        line-height: 1.4;
+        color: #555;
+        max-width: 210px;
+      }
 
-.feature-next {
-  right: 0;
-}
+      .featureSwiper {
+        padding: 10px 40px; /* espaço lateral para as setas */
+        position: relative;
+      }
 
-@media (max-width: 768px) {
-  .featureSwiper {
-    padding: 10px 28px;
-  }
-}
+      .feature-prev,
+      .feature-next {
+        color: #000;
+        width: 32px;
+        height: 32px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
 
+      .feature-prev::after,
+      .feature-next::after {
+        font-size: 18px;
+        font-weight: 700;
+      }
 
-    /* COMPARISON SECTION (banner + tabela) */
-   /* COMPARISON SECTION (banner + tabela) */
-.comparison-section {
-  margin-bottom: 50px;
-}
+      .feature-prev {
+        left: 0;
+      }
 
-/* wrapper da imagem + textos por cima */
-.comparison-banner-wrapper {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  margin-bottom: 24px;
-}
+      .feature-next {
+        right: 0;
+      }
 
-.comparison-banner-image {
-  width: 100%;
-  display: block;
-}
+      @media (max-width: 768px) {
+        .featureSwiper {
+          padding: 10px 28px;
+        }
+      }
 
-/* overlay com título e bullets */
-.comparison-overlay {
-  position: absolute;
-  inset: 0;
-  padding: 16px 40px 32px;
-  pointer-events: none; /* só visual */
-}
+      /* COMPARISON SECTION (banner + tabela) */
+      .comparison-section {
+        margin-bottom: 50px;
+      }
 
-.comparison-main-title {
-  text-align: center;
-  color: #ffffff;
-  font-size: 24px;
-  font-weight: 700;
-  margin: 4px 0 0;
-}
+      /* wrapper da imagem + textos por cima */
+      .comparison-banner-wrapper {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 24px;
+      }
 
-/* grupos laterais */
-.comparison-badges {
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-  pointer-events: auto;
-}
+      .comparison-banner-image {
+        width: 100%;
+        display: block;
+      }
 
-.comparison-badges-left {
-  left: 100px;
-  top: 95px;    
-}
+      /* overlay com título e bullets */
+      .comparison-overlay {
+        position: absolute;
+        inset: 0;
+        padding: 16px 40px 32px;
+        pointer-events: none; /* só visual */
+      }
 
-.comparison-badges-right {
-  right: 100px;
-  top: 115px;   
-}
+      .comparison-main-title {
+        text-align: center;
+        color: #ffffff;
+        font-size: 24px;
+        font-weight: 700;
+        margin: 4px 0 0;
+      }
 
-.comparison-badge {
-  display: flex;
-  align-items: flex-start;
-  border-radius: 14px;
-  padding: 10px 14px;
-  color: #ffffff;
-}
+      /* grupos laterais */
+      .comparison-badges {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        pointer-events: auto;
+      }
 
-.comparison-icon {
-  flex-shrink: 0;
-  display: inline-flex;
-  margin-right: 10px;
-}
+      .comparison-badges-left {
+        left: 100px;
+        top: 95px;
+      }
 
-.comparison-icon svg {
-  width: 28px;
-  height: 28px;
-}
+      .comparison-badges-right {
+        right: 100px;
+        top: 115px;
+      }
 
-.comparison-badge-text {
-  display: flex;
-  flex-direction: column;
-  font-size: 21px;
-  line-height: 1.4;
-}
+      .comparison-badge {
+        display: flex;
+        align-items: flex-start;
+        border-radius: 14px;
+        padding: 10px 14px;
+        color: #ffffff;
+      }
 
-.comparison-badge-text strong {
-  font-weight: 700;
-}
+      .comparison-icon {
+        flex-shrink: 0;
+        display: inline-flex;
+        margin-right: 10px;
+      }
 
-/* responsivo */
-@media (max-width: 900px) {
-  .comparison-overlay {
-    padding: 14px 16px 18px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
+      .comparison-icon svg {
+        width: 28px;
+        height: 28px;
+      }
 
-  .comparison-main-title {
-    font-size: 18px;
-    text-align: left;
-    margin-bottom: 10px;
-  }
+      .comparison-badge-text {
+        display: flex;
+        flex-direction: column;
+        font-size: 21px;
+        line-height: 1.4;
+      }
 
-  .comparison-badges {
-    position: static;
-    gap: 10px;
-  }
+      .comparison-badge-text strong {
+        font-weight: 700;
+      }
 
-  .comparison-badges-right {
-    margin-top: 6px;
-  }
+      /* responsivo */
+      @media (max-width: 900px) {
+        .comparison-overlay {
+          padding: 14px 16px 18px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+        }
 
-  .comparison-badge {
-    padding: 8px 10px;
-  }
+        .comparison-main-title {
+          font-size: 26px;
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: center;
+          text-align: center;
+          width: 100%;
+        }
 
-  .comparison-badge-text {
-    font-size: 13px;
-  }
-}
+        .comparison-badges {
+          position: static;
+          gap: 10px;
+          margin-top: 145px;
+        }
 
+        .comparison-badges-right {
+          margin-top: 6px;
+        }
 
-    .comparison-card {
-      background: #ffffff;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-      overflow: hidden;
-    }
+        .comparison-badge {
+          padding: 8px 10px;
+        }
 
-    /* Produtos alinhados em cima de cada coluna */
-    .comparison-products {
-      display: grid;
-      grid-template-columns: 28% 1fr 1fr 1fr; /* 1ª coluna rótulos + 3 produtos */
-      align-items: flex-end;
-      text-align: center;
-      padding: 24px 16px 14px;
-    }
+        .comparison-badge-text {
+          font-size: 13px;
+        }
+      }
 
-    .comparison-product {
-      position: relative;
-      max-width: 150px;
-      margin: 0 auto;
-    }
+      .comparison-card {
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+        overflow: hidden;
+      }
 
-    .comparison-product--empty {
-      visibility: hidden;  /* Apenas para reservar o espaço da 1ª coluna */
-    }
-
-    .comparison-product img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0 auto 8px;
-    }
-
-    .product-badge {
-      position: absolute;
-      top: -10px;
-      right: 10px;
-      background: #000;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 600;
-      padding: 4px 8px;
-      border-radius: 999px;
-      text-transform: uppercase;
-    }
-
-    .comparison-product-title {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
-
-    .comparison-product-subtitle {
-      font-size: 12px;
-      color: #777;
-    }
-
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      table-layout: fixed;
-    }
-
-    .comparison-table th,
-    .comparison-table td {
-      padding: 10px 16px;
-      text-align: center;
-      border-bottom: 1px solid #f0f0f0;
-    }
-
-    .comparison-table th:first-child,
-    .comparison-table td:first-child {
-      text-align: left;
-      color: #666;
-      font-weight: 500;
-      width: 28%;
-    }
-
-    .comparison-group-row td {
-      background: #fafafa;
-      font-weight: 600;
-      color: #888;
-      text-transform: uppercase;
-      font-size: 11px;
-      padding-top: 12px;
-      padding-bottom: 8px;
-    }
-
-    .highlight-text {
-      color: #0a9b37;
-      font-weight: 700;
-    }
-
-    .price-row td {
-      padding-top: 14px;
-      padding-bottom: 14px;
-      font-weight: 600;
-    }
-
-    .price-row td:last-child {
-      font-weight: 700;
-    }
-
-    @media (max-width: 900px) {
+      /* Produtos alinhados em cima de cada coluna */
       .comparison-products {
-        grid-template-columns: 1fr 1fr;
-        row-gap: 24px;
+        display: grid;
+        grid-template-columns: 28% 1fr 1fr 1fr; /* 1ª coluna rótulos + 3 produtos */
+        align-items: flex-end;
+        text-align: center;
+        padding: 24px 16px 14px;
+      }
+
+      .comparison-product {
+        position: relative;
+        max-width: 150px;
+        margin: 0 auto;
       }
 
       .comparison-product--empty {
-        display: none;
+        visibility: hidden; /* Apenas para reservar o espaço da 1ª coluna */
+      }
+
+      .comparison-product img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 0 auto 8px;
+      }
+
+      .product-badge {
+        position: absolute;
+        top: -10px;
+        right: 10px;
+        background: #000;
+        color: #fff;
+        font-size: 10px;
+        font-weight: 600;
+        padding: 4px 8px;
+        border-radius: 999px;
+        text-transform: uppercase;
+        z-index: 99;
+      }
+
+      .comparison-product-title {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .comparison-product-subtitle {
+        font-size: 12px;
+        color: #777;
       }
 
       .comparison-table {
-        font-size: 12px;
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        table-layout: fixed;
       }
 
       .comparison-table th,
       .comparison-table td {
-        padding: 8px 10px;
+        padding: 10px 16px;
+        text-align: center;
+        border-bottom: 1px solid #f0f0f0;
       }
-    }
 
-    /* SPECS SECTION */
-    .specs-section {
-      margin-bottom: 60px;
-    }
+      .comparison-table th:first-child,
+      .comparison-table td:first-child {
+        text-align: left;
+        color: #666;
+        font-weight: 500;
+        width: 28%;
+      }
 
-    .specs-section h2 {
-      font-size: 22px;
-      margin-bottom: 12px;
-      font-weight: 700;
-    }
+      .comparison-group-row td {
+        background: #fafafa;
+        font-weight: 600;
+        color: #888;
+        text-transform: uppercase;
+        font-size: 11px;
+        padding-top: 12px;
+        padding-bottom: 8px;
+      }
 
-    .specs-list {
-      font-size: 14px;
-      line-height: 1.7;
-      color: #333;
-      max-width: 900px;
-    }
+      .highlight-text {
+        color: #0a9b37;
+        font-weight: 700;
+      }
 
-    .specs-list p {
-      margin: 2px 0;
-    }
+      .price-row td {
+        padding-top: 14px;
+        padding-bottom: 14px;
+        font-weight: 600;
+      }
 
-    .specs-highlight {
-      margin-top: 16px;
-      font-weight: 500;
-    }
+      .price-row td:last-child {
+        font-weight: 700;
+      }
 
-    /* REVIEWS SECTION */
-    .reviews-section {
-      margin-bottom: 40px;
-    }
+      @media (max-width: 900px) {
+        .comparison-products {
+          display: flex;
+          float: inline-end;
+          gap: 7px;
+        }
+        .comparison-product img {
+          max-width: 80px;
+        }
 
-    .reviews-header {
-      text-align: center;
-      margin-bottom: 16px;
-    }
+        .comparison-product--empty {
+          display: none;
+        }
 
-    .reviews-header h2 {
-      font-size: 22px;
-      font-weight: 600;
-      margin: 0;
-    }
+        .comparison-table {
+          font-size: 12px;
+        }
 
-    .reviews-header p {
-      margin: 4px 0 0;
-      font-size: 14px;
-      color: #333;
-    }
+        .comparison-table th,
+        .comparison-table td {
+          padding: 8px 10px;
+        }
+      }
 
-    .reviews-slider {
-      position: relative;
-      margin-top: 12px;
-    }
+      /* HOVER + BALANÇO SUAVE NO 3º COMPARISON-PRODUCT (MELHOR ESCOLHA) */
+      .comparison-product--best {
+        cursor: pointer;
+      }
 
-    .reviewSwiper {
-      padding: 0 40px;
-    }
+      .comparison-product--best img {
+        transition: transform 0.2s ease;
+      }
 
-    .review-card {
-      background: #ffffff;
-      border-radius: 16px;
-      border: 1px solid #f0f0f0;
-      padding: 20px 24px 18px;
-      max-width: 100%;
-      margin: 0 auto;
-    }
+      @keyframes speaker-wiggle {
+        0% {
+          transform: translateY(0) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-2px) rotate(-1.5deg);
+        }
+        50% {
+          transform: translateY(1px) rotate(1.5deg);
+        }
+        75% {
+          transform: translateY(-1px) rotate(-0.75deg);
+        }
+        100% {
+          transform: translateY(0) rotate(0deg);
+        }
+      }
 
-    .review-stars {
-      color: #f6b400;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
+      .comparison-product--best:hover img {
+        animation: speaker-wiggle 0.5s ease-in-out;
+      }
 
-    .review-author {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 2px;
-    }
+      /* SPECS SECTION */
+      .specs-section {
+        margin-bottom: 60px;
+      }
 
-    .review-flag {
-      font-size: 11px;
-      color: #777;
-      margin-bottom: 10px;
-    }
+      .specs-section h2 {
+        font-size: 22px;
+        margin-bottom: 12px;
+        font-weight: 700;
+      }
 
-    .review-title {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
+      .specs-list {
+        font-size: 14px;
+        line-height: 1.7;
+        color: #333;
+        max-width: 900px;
+      }
 
-    .review-text {
-      font-size: 13px;
-      line-height: 1.6;
-      color: #444;
-    }
+      .specs-list p {
+        margin: 2px 0;
+      }
 
-    .review-prev,
-    .review-next {
-      color: #000;
-      width: 32px;
-      height: 32px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+      .specs-highlight {
+        margin-top: 16px;
+        font-weight: 500;
+      }
 
-    .review-prev::after,
-    .review-next::after {
-      font-size: 18px;
-      font-weight: 700;
-    }
+      /* REVIEWS SECTION */
+      .reviews-section {
+        margin-bottom: 40px;
+      }
 
-    .review-prev {
-      left: 0;
-    }
+      .reviews-header {
+        text-align: center;
+        margin-bottom: 16px;
+      }
 
-    .review-next {
-      right: 0;
-    }
+      .reviews-header h2 {
+        font-size: 22px;
+        font-weight: 600;
+        margin: 0;
+      }
 
-    @media (max-width: 768px) {
-      .audio-hero {
-        padding: 16px;
+      .reviews-header p {
+        margin: 4px 0 0;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .reviews-slider {
+        position: relative;
+        margin-top: 12px;
       }
 
       .reviewSwiper {
-        padding: 0 28px;
+        padding: 0 40px;
       }
 
       .review-card {
-        padding: 18px 18px 16px;
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid #f0f0f0;
+        padding: 20px 24px 18px;
+        max-width: 100%;
+        margin: 0 auto;
       }
-    }
-  </style>
-</head>
-<body>
-  <section class="page-wrapper">
-    <!-- HERO TOP -->
-    <div class="hero-section">
-      <img
-        class="hero-main-image"
-        src="https://lh3.google.com/u/0/d/1tNoWz501w76CBHQkTf04-PfuPlJ1n-Av=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-        alt="Break X1 - festa com amigos"
-      />
-    </div>
 
-    <!-- INTRO -->
-    <div class="intro-section">
-      <div class="intro-text">
-        <h1>BREAK X1</h1>
-        <p>
-          Transforme qualquer lugar em um show! Com tela de 13,1", 2 microfones
-          sem fio e som potente de 800W, o Break X1 é perfeito para animar festas,
-          encontros e momentos inesquecíveis com quem você ama!
-        </p>
+      .review-stars {
+        color: #f6b400;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+
+      .review-author {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      .review-flag {
+        font-size: 11px;
+        color: #777;
+        margin-bottom: 10px;
+      }
+
+      .review-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+
+      .review-text {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #444;
+      }
+
+      .review-prev,
+      .review-next {
+        color: #000;
+        width: 32px;
+        height: 32px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .review-prev::after,
+      .review-next::after {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .review-prev {
+        left: 0;
+      }
+
+      .review-next {
+        right: 0;
+      }
+
+      @media (max-width: 768px) {
+        .audio-hero {
+          padding: 16px;
+        }
+
+        .reviewSwiper {
+          padding: 0 28px;
+        }
+
+        .review-card {
+          padding: 18px 18px 40px; /* espaço pro botão Ver mais */
+          position: relative;
+        }
+
+        /* ALTURA MÁXIMA 283PX + "..." + VER MAIS */
+        .review-card.has-more.is-collapsed {
+          max-height: 283px !important;
+          overflow: hidden;
+        }
+
+        .review-card.has-more.is-collapsed::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0px;
+          height: 60px;
+          background: linear-gradient(to top, #ffffff, rgba(255, 255, 255, 0));
+          pointer-events: none;
+        }
+
+        .review-toggle-btn {
+          position: absolute;
+          left: 50%;
+          bottom: 10px;
+          transform: translateX(-50%);
+          border: none;
+          border-radius: 999px;
+          padding: 6px 14px;
+          font-size: 12px;
+          font-weight: 600;
+          background: #001440;
+          color: #fff;
+          cursor: pointer;
+          z-index: 9;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="page-wrapper">
+      <!-- HERO TOP -->
+      <div class="hero-section">
+        <picture>
+          <!-- MOBILE -->
+          <source
+            srcset="
+              https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/unnamed_hfzxxs.jpg
+            "
+            media="(max-width: 768px)"
+          />
+          <!-- DESKTOP -->
+          <source
+            srcset="
+              https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Gemini_Generated_Image_eguxh3eguxh3egux_1_endipl.png
+            "
+            media="(min-width: 769px)"
+          />
+          <!-- Fallback -->
+          <img
+            class="hero-main-image"
+            style="opacity: 1 !important"
+            src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Gemini_Generated_Image_eguxh3eguxh3egux_1_endipl.png"
+            alt="Break X1 - festa com amigos"
+          />
+        </picture>
+
+        <div class="hero-overlay">
+          <p class="hero-tag">Speaker de Karaokê</p>
+          <h1 class="hero-title">BREAK X1</h1>
+        </div>
       </div>
 
-      <div class="intro-image-wrapper">
-        <img
-          class="intro-image"
-          src="https://lh3.google.com/u/0/d/1uev1UZOcO7UjkFBsx9lvZpYv0v6PRqH8=w1920-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-          alt="Break X1 em um bar de karaokê"
-        />
-      </div>
-    </div>
-
-   <!-- AUDIO SLIDER (fundo azul) -->
-<div class="audio-slider-section">
-  <div class="audio-hero">
-    <div class="swiper heroSwiper">
-      <div class="swiper-wrapper">
-        <!-- SLIDE 1 -->
-        <div class="swiper-slide">
-          <div class="audio-slide">
-            <img
-              class="audio-slide-image"
-              src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-              alt="Som imersivo de alta fidelidade"
+      <!-- INTRO -->
+      <div class="intro-section">
+        <div class="intro-text">
+          <h1>BREAK X1</h1>
+          <p>
+            Transforme qualquer lugar em um show! Com tela de 13,1", 2
+            microfones sem fio e som potente de 800W, o Break X1 é perfeito para
+            animar festas, encontros e momentos inesquecíveis com quem você ama!
+          </p>
+        </div>
+        <div class="intro-image-wrapper">
+          <picture>
+            <!-- MOBILE -->
+            <source
+              srcset="
+                https://res.cloudinary.com/dwxzloaok/image/upload/v1764097368/unnamed_1_ysaela.jpg
+              "
+              media="(max-width: 768px)"
             />
-            <div class="audio-slide-text">
-              <h2>SOM IMERSIVO DE ALTA FIDELIDADE</h2>
-              <p>
-                O Break X1 oferece áudio cristalino e graves profundos com woofer de 6,5" 
-                e dois tweeters de 2,6". Ideal para karaokê, apresentações públicas e festas.
-              </p>
+            <!-- DESKTOP -->
+            <source
+              srcset="
+                https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Rectangle_12_ymcegr.png
+              "
+              media="(min-width: 769px)"
+            />
+            <!-- Fallback -->
+            <img
+              class="intro-image"
+              src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Rectangle_12_ymcegr.png"
+              alt="Break X1 em um bar de karaokê"
+            />
+          </picture>
+        </div>
+      </div>
+
+      <!-- AUDIO SLIDER (fundo azul) -->
+      <div class="audio-slider-section">
+        <div class="audio-hero reveal-section">
+          <div class="swiper heroSwiper">
+            <div class="swiper-wrapper">
+              <!-- SLIDE 1 -->
+              <div class="swiper-slide">
+                <div class="audio-slide">
+                  <picture>
+                    <!-- MOBILE -->
+                    <source
+                      srcset="
+                        https://res.cloudinary.com/dwxzloaok/image/upload/v1764097368/unnamed_2_ip3mnt.jpg
+                      "
+                      media="(max-width: 768px)"
+                    />
+                    <!-- DESKTOP -->
+                    <source
+                      srcset="
+                        https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Rectangle_15_lelukc.png
+                      "
+                      media="(min-width: 769px)"
+                    />
+                    <!-- Fallback -->
+                    <img
+                      class="audio-slide-image"
+                      src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Rectangle_15_lelukc.png"
+                      alt="Som imersivo de alta fidelidade"
+                    />
+                  </picture>
+                  <div class="audio-slide-text">
+                    <h2>SOM IMERSIVO DE ALTA FIDELIDADE</h2>
+                    <p>
+                      O Break X1 oferece áudio cristalino e graves profundos com
+                      woofer de 6,5" e dois tweeters de 2,6". Ideal para
+                      karaokê, apresentações públicas e festas.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SLIDE 2 -->
+              <div class="swiper-slide">
+                <div class="audio-slide">
+                  <picture>
+                    <!-- MOBILE -->
+                    <source
+                      srcset="
+                        https://res.cloudinary.com/dwxzloaok/image/upload/v1764097368/unnamed_2_ip3mnt.jpg
+                      "
+                      media="(max-width: 768px)"
+                    />
+                    <!-- DESKTOP -->
+                    <source
+                      srcset="
+                        https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Rectangle_15_lelukc.png
+                      "
+                      media="(min-width: 769px)"
+                    />
+                    <!-- Fallback -->
+                    <img
+                      class="audio-slide-image"
+                      src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Rectangle_15_lelukc.png"
+                      alt="Som imersivo de alta fidelidade"
+                    />
+                  </picture>
+                  <div class="audio-slide-text">
+                    <h2>PERFEITO PARA APRESENTAÇÕES E EVENTOS</h2>
+                    <p>
+                      Com potência de 800W de pico e SPL máximo de 107 dB, o
+                      Break X1 garante que sua voz e sua música sejam ouvidas
+                      com clareza em qualquer ambiente.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- SLIDE 3 -->
+              <div class="swiper-slide">
+                <div class="audio-slide">
+                  <picture>
+                    <!-- MOBILE -->
+                    <source
+                      srcset="
+                        https://res.cloudinary.com/dwxzloaok/image/upload/v1764097368/unnamed_2_ip3mnt.jpg
+                      "
+                      media="(max-width: 768px)"
+                    />
+                    <!-- DESKTOP -->
+                    <source
+                      srcset="
+                        https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Rectangle_15_lelukc.png
+                      "
+                      media="(min-width: 769px)"
+                    />
+                    <!-- Fallback -->
+                    <img
+                      class="audio-slide-image"
+                      src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/Rectangle_15_lelukc.png"
+                      alt="Som imersivo de alta fidelidade"
+                    />
+                  </picture>
+                  <div class="audio-slide-text">
+                    <h2>CLIMA DE FESTA EM QUALQUER LUGAR</h2>
+                    <p>
+                      Combine som potente, iluminação envolvente e tela gigante
+                      para transformar reuniões em casa, bares ou churrascos em
+                      verdadeiros shows.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-pagination hero-pagination"></div>
+            <div class="swiper-button-prev hero-prev"></div>
+            <div class="swiper-button-next hero-next"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONECTIVIDADE (3ª imagem) -->
+      <section class="connectivity-section reveal-section">
+        <div class="connectivity-text">
+          <h2 class="connectivity-title">Conectividade versátil</h2>
+          <p>
+            Conecte-se via USB, entrada/saída AUX, HDMI e Bluetooth 5.4. O Break
+            X1 também suporta Wi-Fi 802.11ac (2.4G/5G) e TWS (True Wireless
+            Stereo) para configurar múltiplos alto-falantes sem fio, ampliando a
+            cobertura sonora.
+          </p>
+        </div>
+        <div class="connectivity-image-wrapper">
+          <picture>
+            <!-- MOBILE -->
+            <source
+              srcset="
+                https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/unnamed_4_zzltew.jpg
+              "
+              media="(max-width: 768px)"
+            />
+            <!-- DESKTOP -->
+            <source
+              srcset="
+                https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/image_2_tvc1uh.png
+              "
+              media="(min-width: 769px)"
+            />
+            <!-- Fallback -->
+            <img
+              class="connectivity-image"
+              src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/image_2_tvc1uh.png"
+              alt="Conexões traseiras do Break X1"
+            />
+          </picture>
+        </div>
+      </section>
+
+      <!-- FEATURES ICONS (SWIPER – 1ª imagem) -->
+      <div class="features-section reveal-section">
+        <h2 style="text-align: center">Deixe sua festa completa</h2>
+        <div class="features-inner">
+          <div class="swiper featureSwiper">
+            <div class="swiper-wrapper">
+              <!-- Feature 1 -->
+              <div class="swiper-slide">
+                <div class="feature-icon-circle">
+                  <!-- Ícone SVG random: tela -->
+                  <svg
+                    class="feature-icon-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="3"
+                      y="4"
+                      width="18"
+                      height="12"
+                      rx="2"
+                      ry="2"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                    />
+                    <line
+                      x1="8"
+                      y1="20"
+                      x2="16"
+                      y2="20"
+                      stroke="#111"
+                      stroke-width="1.5"
+                    />
+                    <line
+                      x1="12"
+                      y1="16"
+                      x2="12"
+                      y2="20"
+                      stroke="#111"
+                      stroke-width="1.5"
+                    />
+                  </svg>
+                </div>
+                <div class="feature-title">Tela LCD-IPS de 13,3"</div>
+                <div class="feature-subtitle">
+                  Resolução Full HD (1080p) para mostrar letras e vídeos com
+                  clareza.
+                </div>
+              </div>
+
+              <!-- Feature 2 -->
+              <div class="swiper-slide">
+                <div class="feature-icon-circle">
+                  <!-- Ícone SVG random: Wi-Fi -->
+                  <svg
+                    class="feature-icon-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4 9a10 10 0 0 1 16 0"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M7 12a6.5 6.5 0 0 1 10 0"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M10 15a3 3 0 0 1 4 0"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="12" cy="18" r="1.4" fill="#111" />
+                  </svg>
+                </div>
+                <div class="feature-title">Wi-Fi 802.11ac</div>
+                <div class="feature-subtitle">
+                  Conexão 2.4G/5G estável para acessar músicas online.
+                </div>
+              </div>
+
+              <!-- Feature 3 -->
+              <div class="swiper-slide">
+                <div class="feature-icon-circle">
+                  <!-- Ícone SVG random: bateria -->
+                  <svg
+                    class="feature-icon-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="3"
+                      y="7"
+                      width="16"
+                      height="10"
+                      rx="2"
+                      ry="2"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                    />
+                    <rect x="5" y="9" width="6" height="6" fill="#111" />
+                    <rect
+                      x="19"
+                      y="10"
+                      width="2"
+                      height="4"
+                      rx="0.8"
+                      fill="#111"
+                    />
+                  </svg>
+                </div>
+                <div class="feature-title">4800mAh</div>
+                <div class="feature-subtitle">
+                  Bateria recarregável para horas de diversão sem tomada.
+                </div>
+              </div>
+
+              <!-- Feature 4 -->
+              <div class="swiper-slide">
+                <div class="feature-icon-circle">
+                  <!-- Ícone SVG random: som potente -->
+                  <svg
+                    class="feature-icon-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="4"
+                      y="5"
+                      width="10"
+                      height="14"
+                      rx="2"
+                      ry="2"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                    />
+                    <circle
+                      cx="9"
+                      cy="12"
+                      r="3"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                    />
+                    <circle cx="9" cy="12" r="1.4" fill="#111" />
+                    <path
+                      d="M16 9c1.2 1.2 1.2 4.8 0 6"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M18 7c1.8 1.8 1.8 8.2 0 10"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+                <div class="feature-title">Som potente</div>
+                <div class="feature-subtitle">
+                  Woofer de 6,5" e dois tweeters de 2,6" com graves encorpados.
+                </div>
+              </div>
+            </div>
+
+            <!-- SETAS DO SWIPER -->
+            <div class="swiper-button-prev feature-prev"></div>
+            <div class="swiper-button-next feature-next"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REVIEWS (Swiper igual imagem 4) -->
+      <div class="reviews-section reveal-section">
+        <div class="reviews-header">
+          <h2>Marca Renomada Internacionalmente</h2>
+          <p>Top vendas no mercado do EUA 🇺🇸</p>
+        </div>
+
+        <div class="reviews-slider">
+          <div class="swiper reviewSwiper">
+            <div class="swiper-wrapper">
+              <!-- Review 1 -->
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="review-stars">★★★★★</div>
+                  <div class="review-author">Cesar</div>
+                  <div class="review-flag">
+                    (Avaliação traduzida do inglês🇺🇸)
+                  </div>
+
+                  <div class="review-title">
+                    A melhor máquina de karaokê de todos os tempos!
+                  </div>
+
+                  <div class="review-text">
+                    Faço karaokê há anos e tenho um bar de café. Este produto é
+                    a máxima diversão em uma caixa! Eu tinha pouca esperança e
+                    expectativas depois de experimentar tantos outros produtos.
+                    Este me surpreendeu e superou todas as minhas expectativas.
+                    A qualidade do alto-falante, as opções de dublagem, a
+                    qualidade dos microfones, a seleção de músicas
+                    pré-carregadas, a variedade de maneiras de conectar a
+                    música, a facilidade dos botões, o tamanho, a sensação e a
+                    qualidade da tela, a abordagem intuitiva de como distribuir
+                    tudo e a alegria que proporciona quando realmente
+                    funciona!!!! Vocês acertaram em cheio!
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="review-stars">★★★★★</div>
+                  <div class="review-author">Eric Freistat</div>
+                  <div class="review-flag">
+                    (Avaliação traduzida do inglês🇺🇸)
+                  </div>
+
+                  <div class="review-title">Ótima máquina</div>
+
+                  <div class="review-text">
+                    A qualidade do som é realmente boa. Conectou-se facilmente
+                    ao meu Wi-Fi. Ter dois microfones sem fio é ótimo. E poder
+                    armazená-los e carregá-los dentro do aparelho é muito
+                    prático. O design foi muito bem pensado. Não é muito pesado,
+                    então é bem portátil. Estar conectado diretamente ao sistema
+                    de som do carro facilitou muito a escolha da maioria das
+                    músicas de karaokê que queremos cantar.
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="review-stars">★★★★★</div>
+                  <div class="review-author">Kyle</div>
+                  <div class="review-flag">
+                    (Avaliação traduzida do inglês🇺🇸)
+                  </div>
+
+                  <div class="review-title">Caixa de som muito boa</div>
+
+                  <div class="review-text">
+                    O som é ótimo, e o fato de caber em um pedestal de PA/caixa
+                    de som padrão é muito bom. Os microfones recarregáveis ​​são
+                    excelentes e têm um som ótimo. É ótimo não ter que ficar
+                    trocando as pilhas o tempo todo.
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="review-stars">★★★★★</div>
+                  <div class="review-author">Daya B.</div>
+                  <div class="review-flag">
+                    (Avaliação traduzida do inglês🇺🇸)
+                  </div>
+
+                  <div class="review-title">
+                    A melhor máquina de karaokê que já comprei.
+                  </div>
+
+                  <div class="review-text">
+                    O aparelho é compacto e fácil de usar. Adorei os controles
+                    dos microfones. A qualidade da voz é excelente. Ótimo
+                    custo-benefício. Versátil. A bateria dura bastante e o
+                    sistema de iluminação complementa festas e comemorações.
+                  </div>
+                </div>
+              </div>
+
+              <!-- Review 2 -->
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="review-stars">★★★★★</div>
+                  <div class="review-author">Garota da Flórida</div>
+                  <div class="review-flag">
+                    (Avaliação traduzida do inglês🇺🇸)
+                  </div>
+
+                  <div class="review-title">
+                    Pequeno no pacote, mas grande no impacto!
+                  </div>
+
+                  <div class="review-text">
+                    Minha família simplesmente adora esta máquina de karaokê. É
+                    extremamente prática e portátil para usar em qualquer lugar.
+                    A tela LCD é mais do que grande o suficiente e também exibe
+                    as letras das músicas na sua televisão ou em outros
+                    dispositivos. O som… incrível. Mesmo que você não queira
+                    cantar karaokê, pode usá-la como um aparelho de som portátil
+                    em pequenas reuniões familiares para ouvir música. Não tenho
+                    nenhuma reclamação! Produto fantástico!
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="review-stars">★★★★★</div>
+                  <div class="review-author">Huaqing</div>
+                  <div class="review-flag">
+                    (Avaliação traduzida do inglês🇺🇸)
+                  </div>
+
+                  <div class="review-title">Que divertido!</div>
+
+                  <div class="review-text">
+                    Desembalar esta máquina de karaokê foi uma ótima experiência
+                    — tudo estava bem embalado e fácil de montar. Conseguimos
+                    ligá-la em poucos minutos e começamos a cantar
+                    imediatamente! O som é impressionante. Os efeitos de
+                    iluminação criam uma atmosfera de festa super divertida. Foi
+                    um sucesso instantâneo na família. Mal podemos esperar para
+                    levá-la a todos os nossos encontros futuros.
+                    Definitivamente, uma ótima compra para quem ama karaokê.
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="review-card">
+                  <div class="review-stars">★★★★★</div>
+                  <div class="review-author">Cordeiro Ward</div>
+                  <div class="review-flag">
+                    (Avaliação traduzida do inglês🇺🇸)
+                  </div>
+
+                  <div class="review-title">
+                    Possui um som maravilhoso e funciona perfeitamente.
+                  </div>
+
+                  <div class="review-text">
+                    Eu realmente gosto desta máquina de karaokê com dois
+                    microfones recarregáveis, um tablet de 10 polegadas e acesso
+                    ao YouTube e à porta USB para encontrar várias fontes para
+                    cantar. É pequena e compacta, mas tem um som potente.
+                    Encontrei alguns problemas e precisei descobrir como usar as
+                    diferentes partes da máquina, mas com um pouco de esforço
+                    consegui. No início, ela não estava carregada e tive
+                    dificuldade para ligá-la. A princípio, pensei que estivesse
+                    com defeito. Mas depois de carregá-la por várias horas, o
+                    monitor ligou e eu consegui cantar várias vezes. Ainda há
+                    muito o que aprender sobre esta máquina de karaokê. Ela tem
+                    muitas possibilidades. Eu a recomendo.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Navegação -->
+            <div class="swiper-button-prev review-prev"></div>
+            <div class="swiper-button-next review-next"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- COMPARISON (banner + tabela) -->
+      <div class="comparison-section reveal-section">
+        <div class="comparison-banner-wrapper">
+          <picture>
+            <!-- MOBILE -->
+            <source
+              srcset="
+                https://res.cloudinary.com/dwxzloaok/image/upload/v1764097369/unnamed_3_nwgbts.jpg
+              "
+              media="(max-width: 768px)"
+            />
+            <!-- DESKTOP -->
+            <source
+              srcset="
+                https://res.cloudinary.com/dwxzloaok/image/upload/v1764097370/Gemini_Generated_Image_ouneyuouneyuoune_1_mbimkv.png
+              "
+              media="(min-width: 769px)"
+            />
+            <!-- Fallback -->
+            <img
+              class="comparison-banner-image"
+              src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764097370/Gemini_Generated_Image_ouneyuouneyuoune_1_mbimkv.png"
+              alt="Preço alto, qualidade alta - Break X1"
+            />
+          </picture>
+
+          <div class="comparison-overlay">
+            <h2 class="comparison-main-title">Preço alto, Qualidade alta</h2>
+
+            <!-- LADO ESQUERDO -->
+            <div class="comparison-badges comparison-badges-left">
+              <!-- Box 1 -->
+              <div class="comparison-badge">
+                <span class="comparison-icon">
+                  <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_99_20)">
+                      <path
+                        d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z"
+                        fill="#14AE5C"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_99_20">
+                        <rect width="59" height="59" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="comparison-badge-text">
+                  <strong>Construção Robusta:</strong>
+                  <span>Dura Anos, não meses</span>
+                </div>
+              </div>
+
+              <!-- Box 2 -->
+              <div class="comparison-badge">
+                <span class="comparison-icon">
+                  <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_99_20)">
+                      <path
+                        d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z"
+                        fill="#14AE5C"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_99_20">
+                        <rect width="59" height="59" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="comparison-badge-text">
+                  <strong>Bateria do microfone de</strong>
+                  <span>longa duração (10+ Horas)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- LADO DIREITO -->
+            <div class="comparison-badges comparison-badges-right">
+              <!-- Box 3 -->
+              <div class="comparison-badge">
+                <span class="comparison-icon">
+                  <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_99_20)">
+                      <path
+                        d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z"
+                        fill="#14AE5C"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_99_20">
+                        <rect width="59" height="59" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="comparison-badge-text">
+                  <strong>Carregamento:</strong>
+                  <span>Rápido e desempenho Fluido</span>
+                </div>
+              </div>
+
+              <!-- Box 4 -->
+              <div class="comparison-badge">
+                <span class="comparison-icon">
+                  <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_99_20)">
+                      <path
+                        d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z"
+                        fill="#14AE5C"
+                      />
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_99_20">
+                        <rect width="59" height="59" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg>
+                </span>
+                <div class="comparison-badge-text">
+                  <strong>Conexão Estável</strong>
+                  <span>e Sem Interrupções</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- SLIDE 2 -->
-        <div class="swiper-slide">
-          <div class="audio-slide">
-            <img
-              class="audio-slide-image"
-              src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-              alt="Break X1 em apresentações"
-            />
-            <div class="audio-slide-text">
-              <h2>PERFEITO PARA APRESENTAÇÕES E EVENTOS</h2>
-              <p>
-                Com potência de 800W de pico e SPL máximo de 107 dB, o Break X1 
-                garante que sua voz e sua música sejam ouvidas com clareza em qualquer ambiente.
-              </p>
-            </div>
-          </div>
-        </div>
+        <div class="comparison-card">
+          <div class="comparison-products">
+            <!-- Coluna vazia para alinhar com a coluna de rótulos da tabela -->
+            <div
+              class="comparison-product comparison-product--empty"
+              aria-hidden="true"
+            ></div>
 
-        <!-- SLIDE 3 -->
-        <div class="swiper-slide">
-          <div class="audio-slide">
-            <img
-              class="audio-slide-image"
-              src="https://lh3.google.com/u/0/d/1_HMWVvxdofXjEIYfl9HYlAXpJuORRyOY=w1669-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-              alt="Break X1 em festas"
-            />
-            <div class="audio-slide-text">
-              <h2>CLIMA DE FESTA EM QUALQUER LUGAR</h2>
-              <p>
-                Combine som potente, iluminação envolvente e tela gigante 
-                para transformar reuniões em casa, bares ou churrascos em verdadeiros shows.
-              </p>
+            <div class="comparison-product">
+              <img
+                src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764100058/image1_gqcjdv.png"
+                alt="Joog Shell S1"
+              />
+              <div class="comparison-product-title">Joog Shell S1</div>
+              <div class="comparison-product-subtitle">Entrada</div>
+            </div>
+
+            <div class="comparison-product">
+              <img
+                src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764100057/image_gl3cyf.png"
+                alt="Joog Break X2"
+              />
+              <div class="comparison-product-title">Joog Break X2</div>
+              <div class="comparison-product-subtitle">Intermediário</div>
+            </div>
+
+            <div class="comparison-product comparison-product--best">
+              <span class="product-badge">Melhor escolha</span>
+              <img
+                src="https://res.cloudinary.com/dwxzloaok/image/upload/v1764100057/image_gl3cyf.png"
+                alt="Joog Break X1"
+              />
+              <div class="comparison-product-title">Joog Break X1</div>
+              <div class="comparison-product-subtitle">Profissional</div>
             </div>
           </div>
+
+          <table class="comparison-table">
+            <tbody>
+              <!-- Grupo: Performance de áudio -->
+              <tr class="comparison-group-row">
+                <td colspan="4">Performance de áudio</td>
+              </tr>
+              <tr>
+                <td>Potência de Pico</td>
+                <td>180W</td>
+                <td>600W</td>
+                <td class="highlight-text">800W</td>
+              </tr>
+              <tr>
+                <td>Pressão Sonora (SPL)</td>
+                <td>104 dB</td>
+                <td>106 dB</td>
+                <td class="highlight-text">107 dB (Max)</td>
+              </tr>
+              <tr>
+                <td>Graves (Frequência)</td>
+                <td>50 Hz</td>
+                <td>48 Hz</td>
+                <td class="highlight-text">45 Hz (Deep Bass)</td>
+              </tr>
+
+              <!-- Grupo: Tela e visual -->
+              <tr class="comparison-group-row">
+                <td colspan="4">Tela e visual</td>
+              </tr>
+              <tr>
+                <td>Tamanho da Tela</td>
+                <td>10.1"</td>
+                <td>10.1"</td>
+                <td class="highlight-text">13.3" (Gigante)</td>
+              </tr>
+              <tr>
+                <td>Resolução</td>
+                <td>HD (800p)</td>
+                <td>HD (800p)</td>
+                <td class="highlight-text">Full HD (1080p)</td>
+              </tr>
+
+              <!-- Grupo: Investimento -->
+              <tr class="comparison-group-row">
+                <td colspan="4">Investimento</td>
+              </tr>
+              <tr class="price-row">
+                <td>Preço à Vista</td>
+                <td>R$ 2.699</td>
+                <td>R$ 3.999</td>
+                <td class="highlight-text">R$ 5.899</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
-      <div class="swiper-pagination hero-pagination"></div>
-      <div class="swiper-button-prev hero-prev"></div>
-      <div class="swiper-button-next hero-next"></div>
-    </div>
-  </div>
-</div>
+      <!-- SPECS (Especificações técnicas) -->
+      <div class="specs-section reveal-section">
+        <h2>Especificações técnicas:</h2>
+        <div class="specs-list">
+          <p>Potência: 800W pico (RMS 600W).</p>
+          <p>
+            Tela: 13,3" LCD IPS touch screen, resolução 1080p, rotação ±180°.
+          </p>
+          <p>Microfones: 2 sem fio, alcance até 10 m, bateria até 10 h.</p>
+          <p>
+            Bateria interna: 4800mAh, até 6 h de reprodução com tela ligada.
+          </p>
+          <p>
+            Conectividade: Bluetooth 5.4, Wi-Fi 802.11ac, USB, AUX In/Out, HDMI.
+          </p>
+          <p>Frequência: 45 Hz – 20 kHz.</p>
+          <p>SPL máximo: 107 dB.</p>
+          <p>Dimensões aproximadas: 360 x 575 x 325 mm.</p>
+          <p>Sistema operacional: Android 13.</p>
+          <p>Tipo de plugue: Tipo A (2 pinos).</p>
+          <p>Marca: Joog by Ikaro.</p>
 
-
-    <!-- CONECTIVIDADE (3ª imagem) -->
-    <section class="connectivity-section">
-      <div class="connectivity-text">
-        <h2 class="connectivity-title">Conectividade versátil</h2>
-        <p>
-          Conecte-se via USB, entrada/saída AUX, HDMI e Bluetooth 5.4.
-          O Break X1 também suporta Wi-Fi 802.11ac (2.4G/5G) e TWS
-          (True Wireless Stereo) para configurar múltiplos alto-falantes
-          sem fio, ampliando a cobertura sonora.
-        </p>
-      </div>
-      <div class="connectivity-image-wrapper">
-        <img
-          class="connectivity-image"
-          src="https://lh3.google.com/u/0/d/1HzFJHJnAA1bYSPO9gFwkwhlqX2PTX1KZ=w1920-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-          alt="Conexões traseiras do Break X1"
-        />
+          <p class="specs-highlight">
+            O Joog by Ikaro Break X1 é a solução completa para quem quer
+            transformar qualquer evento em uma festa inesquecível, com som
+            potente, visual vibrante e controle total na palma da mão.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- FEATURES ICONS (SWIPER – 1ª imagem) -->
-    <div class="features-section">
-  <div class="features-inner">
-    <div class="swiper featureSwiper">
-      <div class="swiper-wrapper">
-        <!-- Feature 1 -->
-        <div class="swiper-slide">
-          <div class="feature-icon-circle">
-            <!-- Ícone SVG random: tela -->
-            <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="4" width="18" height="12" rx="2" ry="2" fill="none" stroke="#111" stroke-width="1.5"/>
-              <line x1="8" y1="20" x2="16" y2="20" stroke="#111" stroke-width="1.5" />
-              <line x1="12" y1="16" x2="12" y2="20" stroke="#111" stroke-width="1.5" />
-            </svg>
-          </div>
-          <div class="feature-title">Tela LCD-IPS de 13,3"</div>
-          <div class="feature-subtitle">
-            Resolução Full HD (1080p) para mostrar letras e vídeos com clareza.
-          </div>
-        </div>
+    <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
 
-        <!-- Feature 2 -->
-        <div class="swiper-slide">
-          <div class="feature-icon-circle">
-            <!-- Ícone SVG random: Wi-Fi -->
-            <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4 9a10 10 0 0 1 16 0" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M7 12a6.5 6.5 0 0 1 10 0" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M10 15a3 3 0 0 1 4 0" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
-              <circle cx="12" cy="18" r="1.4" fill="#111"/>
-            </svg>
-          </div>
-          <div class="feature-title">Wi-Fi 802.11ac</div>
-          <div class="feature-subtitle">
-            Conexão 2.4G/5G estável para acessar músicas online.
-          </div>
-        </div>
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-        <!-- Feature 3 -->
-        <div class="swiper-slide">
-          <div class="feature-icon-circle">
-            <!-- Ícone SVG random: bateria -->
-            <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="3" y="7" width="16" height="10" rx="2" ry="2" fill="none" stroke="#111" stroke-width="1.5"/>
-              <rect x="5" y="9" width="6" height="6" fill="#111"/>
-              <rect x="19" y="10" width="2" height="4" rx="0.8" fill="#111"/>
-            </svg>
-          </div>
-          <div class="feature-title">4800mAh</div>
-          <div class="feature-subtitle">
-            Bateria recarregável para horas de diversão sem tomada.
-          </div>
-        </div>
+    <script>
+      // Swipers
+      const heroSwiper = new Swiper(".heroSwiper", {
+        slidesPerView: 1,
+        loop: true,
+        pagination: {
+          el: ".hero-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".hero-next",
+          prevEl: ".hero-prev",
+        },
+      });
 
-        <!-- Feature 4 -->
-        <div class="swiper-slide">
-          <div class="feature-icon-circle">
-            <!-- Ícone SVG random: som potente -->
-            <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-              <rect x="4" y="5" width="10" height="14" rx="2" ry="2" fill="none" stroke="#111" stroke-width="1.5"/>
-              <circle cx="9" cy="12" r="3" fill="none" stroke="#111" stroke-width="1.5"/>
-              <circle cx="9" cy="12" r="1.4" fill="#111"/>
-              <path d="M16 9c1.2 1.2 1.2 4.8 0 6" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M18 7c1.8 1.8 1.8 8.2 0 10" fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="feature-title">Som potente</div>
-          <div class="feature-subtitle">
-            Woofer de 6,5" e dois tweeters de 2,6" com graves encorpados.
-          </div>
-        </div>
-      </div>
+      const featureSwiper = new Swiper(".featureSwiper", {
+        loop: false,
+        slidesPerView: 1,
+        spaceBetween: 20,
+        navigation: {
+          nextEl: ".feature-next",
+          prevEl: ".feature-prev",
+        },
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        },
+      });
 
-      <!-- SETAS DO SWIPER -->
-      <div class="swiper-button-prev feature-prev"></div>
-      <div class="swiper-button-next feature-next"></div>
-    </div>
-  </div>
-</div>
+      const reviewSwiper = new Swiper(".reviewSwiper", {
+        slidesPerView: 1,
+        loop: true,
+        navigation: {
+          nextEl: ".review-next",
+          prevEl: ".review-prev",
+        },
+      });
+      // GSAP ANIMAÇÕES
+      gsap.registerPlugin(ScrollTrigger);
 
-    <!-- REVIEWS (Swiper igual imagem 4) -->
-    <div class="reviews-section">
-      <div class="reviews-header">
-        <h2>Marca Renomada Internacionalmente</h2>
-        <p>Top vendas no mercado do EUA 🇺🇸</p>
-      </div>
+      // Hero principal ao carregar
+      gsap.from(".hero-main-image", {
+        opacity: 1,
+        y: 40,
+        duration: 1,
+        ease: "power2.out",
+      });
 
-      <div class="reviews-slider">
-        <div class="swiper reviewSwiper">
-          <div class="swiper-wrapper">
-            <!-- Review 1 -->
-            <div class="swiper-slide">
-              <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <div class="review-author">Cesar</div>
-                <div class="review-flag">(Avaliação traduzida do inglês🇺🇸)</div>
+      gsap.from(".hero-overlay", {
+        opacity: 1,
+        y: 20,
+        duration: 0.9,
+        ease: "power2.out",
+        delay: 0.2,
+      });
 
-                <div class="review-title">
-                  A melhor máquina de karaokê de todos os tempos!
-                </div>
+      // Reveala todas as seções marcadas com .reveal-section
+      gsap.utils.toArray(".reveal-section").forEach((section) => {
+        gsap.to(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 80%", // quando 20% da tela encostar na seção
+            toggleActions: "play none none reverse",
+          },
+          opacity: 1,
+          y: 0,
+          visibility: "visible",
+          duration: 0.9,
+          ease: "power2.out",
+        });
+      });
 
-                <div class="review-text">
-                  Faço karaokê há anos e tenho um bar de café. Este produto é a máxima
-                  diversão em uma caixa! Eu tinha pouca esperança e expectativas depois de
-                  experimentar tantos outros produtos. Este me surpreendeu e superou todas as
-                  minhas expectativas. A qualidade do alto-falante, as opções de dublagem, a
-                  qualidade dos microfones, a seleção de músicas pré-carregadas, a variedade
-                  de maneiras de conectar a música, a facilidade dos botões, o tamanho, a
-                  sensação e a qualidade da tela, a abordagem intuitiva de como distribuir
-                  tudo e a alegria que proporciona quando realmente funciona!!!! Vocês
-                  acertaram em cheio!
-                </div>
-              </div>
-            </div>
+      // "VER MAIS" NOS CARDS DO SWIPER (MOBILE, ALTURA MÁX 283PX)
+      function initMobileReviewCards() {
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const cards = document.querySelectorAll(".review-card");
 
-            <!-- Review 2 -->
-            <div class="swiper-slide">
-              <div class="review-card">
-                <div class="review-stars">★★★★★</div>
-                <div class="review-author">Mariana</div>
-                <div class="review-flag">(Avaliação traduzida do inglês🇺🇸)</div>
+        cards.forEach((card) => {
+          const existingBtn = card.querySelector(".review-toggle-btn");
+          card.classList.remove("has-more", "is-collapsed");
+          card.style.maxHeight = "none";
 
-                <div class="review-title">
-                  Diversão garantida para família e amigos
-                </div>
+          if (existingBtn) {
+            existingBtn.remove();
+          }
 
-                <div class="review-text">
-                  Comprei o Break X1 para reuniões em casa e agora ele é a estrela das
-                  festas. O som é muito forte e limpo, os microfones funcionam super bem e
-                  a tela facilita demais para escolher as músicas. Recomendo demais!
-                </div>
-              </div>
-            </div>
-          </div>
+          if (!isMobile) return;
 
-          <!-- Navegação -->
-          <div class="swiper-button-prev review-prev"></div>
-          <div class="swiper-button-next review-next"></div>
-        </div>
-      </div>
-    </div>
+          // mede altura natural
+          const fullHeight = card.scrollHeight;
 
-    <!-- COMPARISON (banner + tabela) -->
-    <!-- COMPARISON (banner + tabela) -->
-<div class="comparison-section">
-  <div class="comparison-banner-wrapper">
-    <img
-      class="comparison-banner-image"
-      src="https://lh3.google.com/u/0/d/1DBNAtPaSeuH_l3qfwE7QQozYKLl-_qLD=w1920-h919-iv1?auditContext=thumbnail&auditContext=prefetch"
-      alt="Preço alto, qualidade alta - Break X1"
-    />
+          if (fullHeight > 283) {
+            card.classList.add("has-more", "is-collapsed");
 
-    <div class="comparison-overlay">
-      <h2 class="comparison-main-title">Preço alto, Qualidade alta</h2>
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.className = "review-toggle-btn";
+            btn.textContent = "Ver mais";
 
-      <!-- LADO ESQUERDO -->
-      <div class="comparison-badges comparison-badges-left">
-        <!-- Box 1 -->
-        <div class="comparison-badge">
-          <span class="comparison-icon">
-            <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_99_20)">
-                <path d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z" fill="#14AE5C"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_99_20">
-                  <rect width="59" height="59" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-          </span>
-          <div class="comparison-badge-text">
-            <strong>Construção Robusta:</strong>
-            <span>Dura Anos, não meses</span>
-          </div>
-        </div>
+            btn.addEventListener("click", function () {
+              const collapsed = card.classList.toggle("is-collapsed");
+              btn.textContent = collapsed ? "Ver mais" : "Ver menos";
+            });
 
-        <!-- Box 2 -->
-        <div class="comparison-badge">
-          <span class="comparison-icon">
-            <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_99_20)">
-                <path d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z" fill="#14AE5C"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_99_20">
-                  <rect width="59" height="59" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-          </span>
-          <div class="comparison-badge-text">
-            <strong>Bateria do microfone de</strong>
-            <span>longa duração (10+ Horas)</span>
-          </div>
-        </div>
-      </div>
+            card.appendChild(btn);
+          }
+        });
+      }
 
-      <!-- LADO DIREITO -->
-      <div class="comparison-badges comparison-badges-right">
-        <!-- Box 3 -->
-        <div class="comparison-badge">
-          <span class="comparison-icon">
-            <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_99_20)">
-                <path d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z" fill="#14AE5C"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_99_20">
-                  <rect width="59" height="59" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-          </span>
-          <div class="comparison-badge-text">
-            <strong>Carregamento:</strong>
-            <span>Rápido e desempenho Fluido</span>
-          </div>
-        </div>
+      window.addEventListener("load", initMobileReviewCards);
 
-        <!-- Box 4 -->
-        <div class="comparison-badge">
-          <span class="comparison-icon">
-            <svg viewBox="0 0 59 59" xmlns="http://www.w3.org/2000/svg">
-              <g clip-path="url(#clip0_99_20)">
-                <path d="M29.5 0C13.2077 0 0 13.2077 0 29.5C0 45.7932 13.2077 59 29.5 59C45.7932 59 59 45.7932 59 29.5C59 13.2077 45.7932 0 29.5 0ZM29.5 55.3706C15.2672 55.3706 3.6875 43.7328 3.6875 29.4999C3.6875 15.2671 15.2672 3.68738 29.5 3.68738C43.7328 3.68738 55.3125 15.2671 55.3125 29.4999C55.3125 43.7327 43.7328 55.3706 29.5 55.3706ZM41.2733 18.7058L23.965 36.1227L16.1706 28.3283C15.4506 27.6083 14.2835 27.6083 13.5626 28.3283C12.8426 29.0483 12.8426 30.2154 13.5626 30.9354L22.6882 40.0619C23.4082 40.781 24.5753 40.781 25.2962 40.0619C25.3792 39.979 25.4502 39.8885 25.5147 39.7946L43.8822 21.3137C44.6012 20.5937 44.6012 19.4266 43.8822 18.7058C43.1613 17.9858 41.9942 17.9858 41.2733 18.7058Z" fill="#14AE5C"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_99_20">
-                  <rect width="59" height="59" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-          </span>
-          <div class="comparison-badge-text">
-            <strong>Conexão Estável</strong>
-            <span>e Sem Interrupções</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+      let reviewResizeTimeout;
+      window.addEventListener("resize", function () {
+        clearTimeout(reviewResizeTimeout);
+        reviewResizeTimeout = setTimeout(initMobileReviewCards, 200);
+      });
 
+      // GSAP ANIMAÇÕES
+      gsap.registerPlugin(ScrollTrigger);
 
+      // Hero principal ao carregar
+      gsap.from(".hero-main-image", {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: "power2.out",
+      });
 
-      <div class="comparison-card">
-        <div class="comparison-products">
-          <!-- Coluna vazia para alinhar com a coluna de rótulos da tabela -->
-          <div class="comparison-product comparison-product--empty" aria-hidden="true"></div>
+      // Intro: texto e imagem
+      gsap.from(".intro-text", {
+        scrollTrigger: {
+          trigger: ".intro-section",
+          start: "top 80%",
+        },
+        opacity: 0,
+        x: -40,
+        duration: 0.9,
+        ease: "power2.out",
+      });
 
-          <div class="comparison-product">
-            <img src="https://joog.com.br/_next/image?url=https%3A%2F%2Fcdn.thepes.com.br%2Ff3b1c4a7-815c-4cac-81e5-a074efdcd363%2Ffile-upload%2FSITE_PRODUCT%2F%2Fb2ea1c17-b50f-4303-90de-7ef00368729e.webp&w=1920&q=75" alt="Joog Shell S1" />
-            <div class="comparison-product-title">Joog Shell S1</div>
-            <div class="comparison-product-subtitle">Entrada</div>
-          </div>
+      gsap.from(".intro-image", {
+        scrollTrigger: {
+          trigger: ".intro-section",
+          start: "top 80%",
+        },
+        opacity: 0,
+        x: 40,
+        duration: 0.9,
+        ease: "power2.out",
+        delay: 0.1,
+      });
 
-          <div class="comparison-product">
-            <img src="https://joog.com.br/_next/image?url=https%3A%2F%2Fcdn.thepes.com.br%2Ff3b1c4a7-815c-4cac-81e5-a074efdcd363%2Ffile-upload%2FSITE_PRODUCT%2F%2F64b11336-cbd1-40f9-a103-a1c672b37c19.jpeg&w=1920&q=75" alt="Joog Break X2" />
-            <div class="comparison-product-title">Joog Break X2</div>
-            <div class="comparison-product-subtitle">Intermediário</div>
-          </div>
+      // Slides de áudio (imagem + texto)
+      gsap.utils.toArray(".audio-slide").forEach((slide) => {
+        gsap.from(slide.querySelector(".audio-slide-image"), {
+          scrollTrigger: {
+            trigger: slide,
+            start: "top 80%",
+          },
+          opacity: 0,
+          scale: 0.97,
+          duration: 0.8,
+          ease: "power2.out",
+        });
 
-          <div class="comparison-product">
-            <span class="product-badge">Melhor escolha</span>
-            <img src="https://joog.com.br/_next/image?url=https%3A%2F%2Fcdn.thepes.com.br%2Ff3b1c4a7-815c-4cac-81e5-a074efdcd363%2Ffile-upload%2FSITE_PRODUCT%2F%2F64b11336-cbd1-40f9-a103-a1c672b37c19.jpeg&w=1920&q=75" alt="Joog Break X1" />
-            <div class="comparison-product-title">Joog Break X1</div>
-            <div class="comparison-product-subtitle">Profissional</div>
-          </div>
-        </div>
+        gsap.from(slide.querySelector(".audio-slide-text"), {
+          scrollTrigger: {
+            trigger: slide,
+            start: "top 80%",
+          },
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          ease: "power2.out",
+          delay: 0.05,
+        });
+      });
 
-        <table class="comparison-table">
-          <tbody>
-            <!-- Grupo: Performance de áudio -->
-            <tr class="comparison-group-row">
-              <td colspan="4">Performance de áudio</td>
-            </tr>
-            <tr>
-              <td>Potência de Pico</td>
-              <td>180W</td>
-              <td>600W</td>
-              <td class="highlight-text">800W</td>
-            </tr>
-            <tr>
-              <td>Pressão Sonora (SPL)</td>
-              <td>104 dB</td>
-              <td>106 dB</td>
-              <td class="highlight-text">107 dB (Max)</td>
-            </tr>
-            <tr>
-              <td>Graves (Frequência)</td>
-              <td>50 Hz</td>
-              <td>48 Hz</td>
-              <td class="highlight-text">45 Hz (Deep Bass)</td>
-            </tr>
+      // Conectividade (texto + imagem)
+      gsap.from(".connectivity-text", {
+        scrollTrigger: {
+          trigger: ".connectivity-section",
+          start: "top 80%",
+        },
+        opacity: 0,
+        x: -40,
+        duration: 0.9,
+        ease: "power2.out",
+      });
 
-            <!-- Grupo: Tela e visual -->
-            <tr class="comparison-group-row">
-              <td colspan="4">Tela e visual</td>
-            </tr>
-            <tr>
-              <td>Tamanho da Tela</td>
-              <td>10.1"</td>
-              <td>10.1"</td>
-              <td class="highlight-text">13.3" (Gigante)</td>
-            </tr>
-            <tr>
-              <td>Resolução</td>
-              <td>HD (800p)</td>
-              <td>HD (800p)</td>
-              <td class="highlight-text">Full HD (1080p)</td>
-            </tr>
+      gsap.from(".connectivity-image", {
+        scrollTrigger: {
+          trigger: ".connectivity-section",
+          start: "top 80%",
+        },
+        opacity: 0,
+        x: 40,
+        duration: 0.9,
+        ease: "power2.out",
+        delay: 0.1,
+      });
 
-            <!-- Grupo: Investimento -->
-            <tr class="comparison-group-row">
-              <td colspan="4">Investimento</td>
-            </tr>
-            <tr class="price-row">
-              <td>Preço à Vista</td>
-              <td>R$ 2.699</td>
-              <td>R$ 3.999</td>
-              <td class="highlight-text">R$ 5.899</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+      // Ícones de features
+      gsap.utils.toArray(".featureSwiper .swiper-slide").forEach((card, i) => {
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: ".features-section",
+            start: "top 85%",
+          },
+          opacity: 0,
+          y: 30,
+          duration: 0.7,
+          ease: "power2.out",
+          delay: i * 0.05,
+        });
+      });
 
-    <!-- SPECS (Especificações técnicas) -->
-    <div class="specs-section">
-      <h2>Especificações técnicas:</h2>
-      <div class="specs-list">
-        <p>Potência: 800W pico (RMS 600W).</p>
-        <p>Tela: 13,3" LCD IPS touch screen, resolução 1080p, rotação ±180°.</p>
-        <p>Microfones: 2 sem fio, alcance até 10 m, bateria até 10 h.</p>
-        <p>Bateria interna: 4800mAh, até 6 h de reprodução com tela ligada.</p>
-        <p>Conectividade: Bluetooth 5.4, Wi-Fi 802.11ac, USB, AUX In/Out, HDMI.</p>
-        <p>Frequência: 45 Hz – 20 kHz.</p>
-        <p>SPL máximo: 107 dB.</p>
-        <p>Dimensões aproximadas: 360 x 575 x 325 mm.</p>
-        <p>Sistema operacional: Android 13.</p>
-        <p>Tipo de plugue: Tipo A (2 pinos).</p>
-        <p>Marca: Joog by Ikaro.</p>
+      // Reviews (cartões entrando)
+      gsap.utils.toArray(".review-card").forEach((card) => {
+        gsap.from(card, {
+          scrollTrigger: {
+            trigger: card,
+            start: "top 85%",
+          },
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          ease: "power2.out",
+        });
+      });
 
-        <p class="specs-highlight">
-          O Joog by Ikaro Break X1 é a solução completa para quem quer transformar qualquer
-          evento em uma festa inesquecível, com som potente, visual vibrante e controle total
-          na palma da mão.
-        </p>
-      </div>
-    </div>
-  </section>
+      // Banner de comparação
+      gsap.from(".comparison-banner-wrapper", {
+        scrollTrigger: {
+          trigger: ".comparison-section",
+          start: "top 80%",
+        },
+        opacity: 0,
+        y: 40,
+        duration: 0.9,
+        ease: "power2.out",
+      });
 
-  <!-- Swiper JS -->
-  <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
-  <script>
-    // Hero (fundo azul)
-    const heroSwiper = new Swiper(".heroSwiper", {
-      slidesPerView: 1,
-      loop: true,
-      pagination: {
-        el: ".hero-pagination",
-        clickable: true,
-      },
-      navigation: {
-        nextEl: ".hero-next",
-        prevEl: ".hero-prev",
-      },
-    });
+      // Badges de comparação surgindo
+      gsap.from(
+        ".comparison-badges-left .comparison-badge, .comparison-badges-right .comparison-badge",
+        {
+          scrollTrigger: {
+            trigger: ".comparison-section",
+            start: "top 80%",
+          },
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          ease: "power2.out",
+          stagger: 0.1,
+        }
+      );
 
-    // Features (ícones)
-const featureSwiper = new Swiper(".featureSwiper", {
-  loop: false,
-  slidesPerView: 1,
-  spaceBetween: 20,
-  navigation: {
-    nextEl: ".feature-next",
-    prevEl: ".feature-prev",
-  },
-  breakpoints: {
-    640: {
-      slidesPerView: 2,
-    },
-    1024: {
-      slidesPerView: 3, // 3 por vez no desktop
-    },
-  },
-});
+      // Produtos da comparação surgindo
+      gsap.from(".comparison-products .comparison-product", {
+        scrollTrigger: {
+          trigger: ".comparison-card",
+          start: "top 85%",
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.7,
+        ease: "power2.out",
+        stagger: 0.1,
+      });
 
+      // Card + tabela de comparação
+      gsap.from(".comparison-card", {
+        scrollTrigger: {
+          trigger: ".comparison-card",
+          start: "top 80%",
+        },
+        opacity: 0,
+        y: 40,
+        duration: 0.9,
+        ease: "power2.out",
+        delay: 0.1,
+      });
 
-    // Reviews
-    const reviewSwiper = new Swiper(".reviewSwiper", {
-      slidesPerView: 1,
-      loop: true,
-      navigation: {
-        nextEl: ".review-next",
-        prevEl: ".review-prev",
-      },
-    });
-  </script>
-</body>
+      // Entrada com leve "mexida" para o produto Melhor Escolha
+      gsap.fromTo(
+        ".comparison-product img",
+        { y: 15, scale: 0.95, opacity: 0 },
+        {
+          y: 0,
+          scale: 1,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".comparison-card",
+            start: "top 80%",
+          },
+        }
+      );
+
+      // Especificações (título + texto)
+      gsap.from(".specs-section h2", {
+        scrollTrigger: {
+          trigger: ".specs-section",
+          start: "top 85%",
+        },
+        opacity: 0,
+        y: 20,
+        duration: 0.7,
+        ease: "power2.out",
+      });
+
+      gsap.from(".specs-list", {
+        scrollTrigger: {
+          trigger: ".specs-section",
+          start: "top 85%",
+        },
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        ease: "power2.out",
+        delay: 0.1,
+      });
+    </script>
+  </body>
 </html>
