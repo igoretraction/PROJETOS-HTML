@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    teste de IP: Se você estiver na região Sul do Brasil, vai aparecer um modal.
+<script>
+  (function () {
+    var TOKEN = 'c76ed05b25688e'; 
+
+    function isRegiaoSul(region, country) {
+      if (country !== 'BR') return false;
+      if (!region) return false;
+
+      var regioesSul = ['Rio Grande do Sul', 'Santa Catarina', 'Paraná'];
+      return regioesSul.indexOf(region) !== -1;
+    }
+
+    function criarEstilosModal() {
+      if (document.getElementById('modal-regiao-sul-style')) return;
+
+      var style = document.createElement('style');
+      style.id = 'modal-regiao-sul-style';
+      style.textContent = `
+        .modal-regiao-sul-backdrop {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,.55);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 999999;
+        }
+        .modal-regiao-sul {
+          background: #fff;
+          border-radius: 10px;
+          padding: 24px 20px;
+          max-width: 320px;
+          width: 90%;
+          box-shadow: 0 10px 30px rgba(0,0,0,.2);
+          font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          text-align: center;
+        }
+        .modal-regiao-sul h2 {
+          margin: 0 0 8px;
+          font-size: 20px;
+        }
+        .modal-regiao-sul p {
+          margin: 0 0 16px;
+          font-size: 14px;
+        }
+        .modal-regiao-sul button {
+          border: none;
+          border-radius: 6px;
+          padding: 8px 16px;
+          cursor: pointer;
+          font-weight: 600;
+          font-size: 14px;
+          background: #111;
+          color: #fff;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    function mostrarModal(estado) {
+      criarEstilosModal();
+
+      var backdrop = document.createElement('div');
+      backdrop.className = 'modal-regiao-sul-backdrop';
+
+      var modal = document.createElement('div');
+      modal.className = 'modal-regiao-sul';
+
+      var titulo = document.createElement('h2');
+      titulo.textContent = 'Olá, região Sul!';
+
+      var texto = document.createElement('p');
+      texto.textContent = 'Detectamos que você está acessando do estado de ' + estado + '.';
+
+      var botao = document.createElement('button');
+      botao.textContent = 'OK, entendi';
+      botao.addEventListener('click', function () {
+        document.body.removeChild(backdrop);
+      });
+
+      modal.appendChild(titulo);
+      modal.appendChild(texto);
+      modal.appendChild(botao);
+      backdrop.appendChild(modal);
+      document.body.appendChild(backdrop);
+    }
+
+    function init() {
+      fetch('https://ipinfo.io/json?token=' + TOKEN)
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error('Erro na resposta da API: ' + response.status);
+          }
+          return response.json();
+        })
+        .then(function (data) {
+          // Logs para testar
+        //   console.log('Resposta completa da IPinfo:', data);
+        //   console.log('Seu IP:', data.ip);
+        //   console.log('Cidade:', data.city);
+          console.log('Estado (region):', data.region);
+          console.log('País:', data.country);
+        //   console.log('Org/Provedor:', data.org);
+
+          if (isRegiaoSul(data.region, data.country)) {
+            mostrarModal(data.region);
+          }
+        })
+        .catch(function (error) {
+          console.error('Erro ao buscar dados do IPinfo:', error);
+        });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
+
+
+</body>
+</html>
