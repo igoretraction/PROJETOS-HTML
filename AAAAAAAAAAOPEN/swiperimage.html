@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Duplo Swiper</title>
+
+  <!-- Swiper CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+    body {
+      font-family: "Noto Sans", sans-serif;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+
+    .double-swiper {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .swiper-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .product-swiper {
+      width: 100%;
+      position: relative;
+    }
+
+    .swiper-slide {
+      height: auto;
+    }
+
+    .product-card {
+      position: relative;
+      background: #fff;
+      border-radius: 12px;
+      overflow: visible;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+      border-radius: 12px;
+    }
+    
+
+    .card-content {
+      padding: 16px 16px 40px;
+    }
+
+    .card-content h3 {
+      font-size: 1rem;
+      margin: 0 0 6px;
+    }
+
+    .card-content p {
+      font-size: 0.875rem;
+      color: #555;
+      margin: 0 0 10px;
+    }
+
+    /* Toast em cima do card */
+    .product-toast {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, -120%);
+      background: #111;
+      color: #fff;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 5;
+    }
+
+    .product-card:hover .product-toast {
+      opacity: 1;
+      transform: translate(-50%, -160%);
+    }
+
+    /* Botão “Ver o produto” pegando todo o bottom do card */
+    .floating-btn {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      transform: translateY(100%);
+      padding: 12px 18px;
+      border-radius: 0 0 12px 12px;
+      border: none;
+      background: #008f00;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      z-index: 4;
+    }
+
+    .floating-btn::after {
+      content: "→";
+      font-size: 0.9rem;
+    }
+
+    .product-card:hover .floating-btn {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* NAVIGAÇÃO – setas */
+    .product-swiper {
+      --swiper-navigation-color: #008f00;
+      --swiper-navigation-size: 20px;
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 999px;
+      width: 32px;
+      height: 32px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+      font-size: 14px;
+      font-weight: 700;
+      color: #008f00;
+    }
+
+    /* .swiper-button-prev {
+      left: -16px;
+    }
+
+    .swiper-button-next {
+      right: -16px;
+    } */
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .card-content p {
+        display: none;
+      }
+
+      .product-card img {
+        height: 150px;
+      }
+
+      .swiper-button-prev {
+        left: 0;
+      }
+
+      .swiper-button-next {
+        right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="double-swiper">
+    <div>
+      <div class="swiper-title" style="text-align: center;"><h1>Produtos Mais Vendidos</h1></div>
+      <div class="swiper product-swiper swiper-left">
+        <div class="swiper-wrapper"><!-- preenchido via JS --></div>
+        <!-- setas do primeiro swiper -->
+        <div class="swiper-button-prev swiper-button-prev-left"></div>
+        <div class="swiper-button-next swiper-button-next-left"></div>
+      </div>
+    </div>
+
+    <div>
+      <!-- <div class="swiper-title">Carrossel indo para a direita</div> -->
+      <div class="swiper product-swiper swiper-right">
+        <div class="swiper-wrapper"><!-- preenchido via JS --></div>
+        <!-- setas do segundo swiper -->
+        <div class="swiper-button-prev swiper-button-prev-right"></div>
+        <div class="swiper-button-next swiper-button-next-right"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    const products = [
+      {
+        title: "Gabinete Alice 1 metro Suspenso - Fabribam",
+        desc: "Gabinete para Banheiro Alice com Laterais Curvas e Estrutura Ripada de 1 metro.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5500/whatsapp-image-2025-11-26-at-10-51-16-1.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/gabinete-alice-suspenso-1-metro-fabribam",
+      },
+      {
+        title: "Conjunto Milena 60 Suspenso Espelheira - Fabribam",
+        desc: "O Gabinete Milena está em destaque na linha Fabribam.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5498/whatsapp-image-2025-11-26-at-10-51-15.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/conjunto-para-banheiro-milena-com-espelheira-60-cm-fabribam",
+      },
+      {
+        title: "Gabinete Apollo 90 com Pés - Fabribam",
+        desc: "Transformar o banheiro em um local mais bonito fica muito mais fácil.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5501/whatsapp-image-2025-11-26-at-10-51-14-3.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/balcao-armario-para-banheiro-apollo-90-com-pes-fabribam-gabinetes",
+      },
+      {
+        title: "Gabinete Cecília 60 Suspenso - Fabribam",
+        desc: "O Gabinete Cecília se destaca pelo seu design moderno.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5499/whatsapp-image-2025-11-26-at-10-51-22-3.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/balcao-armario-para-banheiro-ripado-cecilia-suspenso-60cm-fabribam-gabinetes",
+      },
+      {
+        title: "Gabinete Cecília 60 Suspenso - Fabribam",
+        desc: "O Gabinete Cecília se destaca pelo seu design moderno e funcional.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5495/whatsapp-image-2025-11-26-at-10-51-16.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/balcao-armario-para-banheiro-ripado-cecilia-suspenso-60cm-fabribam-gabinetes",
+      },
+      {
+        title: "Gabinete Valentina 60 Suspenso",
+        desc: "O Gabinete Valentina é um clássico. Destaca-se por seu acabamento diferenciado do Linen Grigio.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5496/whatsapp-image-2025-11-26-at-10-51-16-2.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/gabinete-para-banheiro-valentina-60cm-fabribam-gabinetes",
+      },
+      {
+        title: "Gabinete Nicole 60 Suspenso com Tampo",
+        desc: "O Gabinete Nicole está disponível na cor Catedral.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5497/whatsapp-image-2025-11-26-at-10-51-18-2.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/gabinete-para-banheiro-nicole-60cm-fabribam-gabinetes",
+      },
+      {
+        title: "Conjunto Valentina 60 Suspenso",
+        desc: "O Conjunto Valentina é um clássico.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5493/whatsapp-image-2025-11-26-at-10-51-21.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/conjunto-para-banheiro-valentina-60cm-fabribam-gabinetes",
+      },
+      {
+        title: "Gabinete Catarina 70 com Pés Tampo de Vidro",
+        desc: "O Gabinete Catarina é um ícone de sofisticação.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5494/whatsapp-image-2025-11-26-at-10-51-14-1.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/gabinete-para-banheiro-catarina-70cm-com-pes-fabribam-gabinetes",
+      },
+      {
+        title: "Gabinete Clarice 60 Suspenso com Tampo",
+        desc: "O Gabinete Clarice se destaca com sua frente fresada.",
+        img: "https://magazord-public.s3.amazonaws.com/meumoveldebanheiro/img/2025/11/produto/5492/whatsapp-image-2025-11-26-at-10-51-17-2.jpeg",
+        link: "https://www.meumoveldebanheiro.com.br/gabinete-para-banheiro-clarice-60-cm-com-tampo-fabribam",
+      }
+    ];
+
+    // Função para embaralhar (imagens randômicas)
+    function shuffle(array) {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    // Monta slides dentro de um Swiper
+    function createSlides(swiperElementSelector, productList) {
+      const swiperEl = document.querySelector(swiperElementSelector);
+      const wrapper = swiperEl.querySelector(".swiper-wrapper");
+
+      productList.forEach((prod) => {
+        const slide = document.createElement("div");
+        slide.className = "swiper-slide";
+
+        slide.innerHTML = `
+          <article class="product-card">
+            <img src="${prod.img}" alt="${prod.title}">
+            <div class="card-content">
+              <h3>${prod.title}</h3>
+              <p>${prod.desc}</p>
+            </div>
+            <a  target="_self" href="${prod.link}" class="floating-btn">Ver o produto</a>
+          </article>
+        `;
+
+        wrapper.appendChild(slide);
+      });
+    }
+
+    // Cria slides randômicos para cada carrossel
+    createSlides(".swiper-left", shuffle(products));
+    createSlides(".swiper-right", shuffle(products));
+
+    // Inicializa Swipers
+    const swiperLeft = new Swiper(".swiper-left", {
+      slidesPerView: 3,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false
+      },
+      navigation: {
+        nextEl: ".swiper-button-next-left",
+        prevEl: ".swiper-button-prev-left"
+      },
+      breakpoints: {
+        0: { slidesPerView: 1.2 },
+        640: { slidesPerView: 3 },
+        1024: { slidesPerView: 4 }
+      }
+    });
+
+    const swiperRight = new Swiper(".swiper-right", {
+      slidesPerView: 3,
+      spaceBetween: 24,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+        reverseDirection: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next-right",
+        prevEl: ".swiper-button-prev-right"
+      },
+      breakpoints: {
+        0: { slidesPerView: 1.2 },
+        640: { slidesPerView: 3 },
+        1024: { slidesPerView: 4 }
+      }
+    });
+  </script>
+</body>
+</html>
