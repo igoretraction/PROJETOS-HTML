@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+:root{
+  --color-primary: #000000;
+  --color-secondary: #005AA9;
+  --color-text: #111827;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --color-bg: #ffffff;
+  --color-bg-light: #f9fafb;
+
+  --fz-xs: clamp(.72rem, 1.6vw, .85rem);
+  --fz-sm: clamp(.78rem, 1.4vw, .9rem);
+  --fz-md: clamp(.9rem, 1.6vw, 1rem);
+  --fz-lg: clamp(1.05rem, 2.2vw, 1.2rem);
+  --fz-xl: clamp(1.4rem, 3.5vw, 2rem);
+  --fz-xxl: clamp(1.8rem, 6vw, 2.5rem);
+}
+
+/* CARD PRINCIPAL (estilo da imagem) */
+.bf-card-v2{
+  margin-top: 10px;
+  background: var(--color-bg);
+  border-radius: 16px;
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+  padding: 18px 20px 20px;
+  max-width: 460px;
+  width: 100%;
+  font-family: "Poppins", sans-serif !important;
+  color: var(--color-text);
+}
+
+/* Título BLACK FRIDAY MICAR */
+.bf-card-header h3{
+  margin: 0 0 10px;
+  text-align: center;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: var(--fz-lg);
+}
+
+/* Barra de progresso */
+.bf-progress{
+  margin-bottom: 14px;
+}
+.bf-progress-label{
+  font-size: var(--fz-sm);
+  color: var(--color-muted);
+  margin-bottom: 6px;
+  text-align: left;
+}
+.bf-progress-label span{
+  font-weight: 700;
+  color: #005AA9;
+}
+.bf-progress-bar{
+  width: 100%;
+  height: 10px;
+  background: #f3f4f6;
+  border-radius: 999px;
+  overflow: hidden;
+}
+.bf-progress-fill{
+  height: 100%;
+  background: #005AA9;
+  border-radius: 999px;
+  width: 0%;
+}
+
+/* Linha principal: preço e cupom */
+.bf-card-main-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 31px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  flex-wrap: nowrap;
+}
+
+/* Bloco preço */
+.bf-price-left{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.bf-price-icon{
+  width: 30px;
+  height: 37px;
+  border-radius: 6px;
+  border-left: 1px solid #005AA9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bf-price-icon svg path{
+  stroke: #005AA9;
+}
+.bf-price-label{
+  font-size: var(--fz-xs);
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.bf-price-value{
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+/* Bloco cupom */
+.bf-coupon-area{
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  gap:10px;
+  text-align: center;
+}
+.bf-coupon-label{
+  font-size: 10px;
+  color: var(--color-muted);
+}
+.bf-coupon-box{
+  border-radius: 10px;
+  border: 1px dashed #000000;
+  background: #ffffff;
+  padding: 6px 14px;
+  font-weight: 800;
+  font-size: var(--fz-md);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+}
+.bf-coupon-box:hover{
+  background: #005AA9;
+  border: 1px dashed #005AA9;
+  color: white;
+}
+
+/* Economia */
+.bf-saving-text{
+  text-align: center;
+  font-size: var(--fz-sm);
+  color: var(--color-secondary);
+  margin-top: 4px;
+  margin-bottom: 10px;
+}
+.bf-saving-text span{
+  font-weight: 700;
+}
+
+/* Divisor */
+.bf-divider{
+  height: 1px;
+  background: #e5e7eb;
+  margin: 8px 0 10px;
+}
+
+/* Timer dentro do card */
+.timer-section{
+  text-align: center;
+}
+.timer-title{
+  font-size: var(--fz-sm);
+  color: var(--color-muted);
+  margin-bottom: 10px;
+}
+.timer-boxes{
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.timer-box{
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #005AA9;
+  min-width: 62px;
+  height: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.timer-box .value{
+  font-size: 1rem;
+  line-height: 1;
+}
+.timer-box .label{
+  font-size: .7rem;
+  text-transform: lowercase;
+  color: var(--color-muted);
+}
+
+/* Toast (mensagem ao copiar o cupom) */
+.toast-container{
+  font-family: "Poppins", sans-serif;
+  position:fixed;
+  top:40px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  z-index:10000;
+  pointer-events:none;
+  padding:0 12px;
+}
+.toast{
+  pointer-events:auto;
+  background:#111827;
+  color:#fff;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:var(--fz-sm);
+  box-shadow:0 6px 20px rgba(0,0,0,.2);
+  opacity:0;
+  transform:translateY(-10px);
+  animation: toast-in .25s ease forwards;
+}
+@keyframes toast-in{
+  to{ opacity:1; transform:translateY(0); }
+}
+@keyframes toast-out{
+  to{ opacity:0; transform:translateY(-10px); }
+}
+
+/* Responsivo */
+@media (max-width: 480px){
+  .bf-coupon-label br{
+    display: none;
+  }
+  .bf-card-v2{ padding: 14px; margin-top: 10px; }
+  .bf-card-main-row{ flex-direction: row;justify-content: center; align-items: stretch; text-align: left; }
+  .bf-coupon-area{ align-items: center;gap: 5px; text-align: center;flex-direction: column; }
+}
+
+/* Acessibilidade: foco visível */
+.bf-coupon-box:focus{
+  outline: 2px solid #111827;
+  outline-offset: 2px;
+}
+</style>
+</head>
+
+<!-- ajuste data-bf-start para o dia/horário do INÍCIO da campanha -->
+<body data-bf-deadline="30/11/2025 23:59" data-bf-start="27/11/2025 00:00">
+
+<script>
+// ===== Debug =====
+window.__BF_DEBUG = true;
+const BFLOG = (...a)=>{ if(window.__BF_DEBUG) console.log('[BF]',...a); };
+const BFDBG = (...a)=>{ if(window.__BF_DEBUG) console.debug('[BF]',...a); };
+
+// ===== Config =====
+const PRICE_RULES = {
+  percentOnP1: 10,
+  percentRounding: 'NEAREST',
+  useThousandthForPercent: true,
+  finalRounding: 'HALF_DOWN',
+};
+const PROGRESS_START_PCT = 49; 
+
+const COUPON_CODE   = 'NATAL10';
+const CARD_TITLE    = 'BLACK FRIDAY MERCOTOYS';
+
+if (typeof Intl === 'undefined' || !Intl.NumberFormat) {
+  var Intl = { NumberFormat: function(){ return { format: n => 'R$ ' + (n||0).toFixed(2).replace('.', ',') } } };
+}
+
+function fmtBRLFromCents(c){
+  try{
+    return new Intl.NumberFormat('pt-BR',{style:'currency',currency:'BRL'}).format((c|0)/100);
+  }catch(e){
+    return 'R$ '+((c|0)/100).toFixed(2).replace('.',',');
+  }
+}
+
+/* ===== Parse para centavos ===== */
+function parsePriceToCents(t){
+  const raw = String(t||'');
+  const s = raw
+    .replace(/[^\d,.\-]/g,'')
+    .replace(/\.(?=\d{3}(?:\D|$))/g,'')
+    .replace(',', '.');
+  const n = parseFloat(s);
+  if (!isFinite(n)){ BFDBG('parsePriceToCents: inválido', {raw,s}); return 0; }
+  const cents = Math.max(0, Math.floor(n*100+1e-6));
+  return cents;
+}
+
+/* ===== mils helpers (mantidos se quiser reusar depois) ===== */
+function centsToMils(c){ return (c|0)*10; }
+function milsToCents(m, mode='NEAREST'){
+  const M = (m|0);
+  let result;
+  if (mode==='TRUNC') result = Math.max(0, Math.floor(M/10));
+  else if (mode==='UP') result = Math.max(0, Math.ceil(M/10));
+  else if (mode==='HALF_DOWN'){
+    const base = Math.floor(M/10);
+    const r = M%10;
+    result = Math.max(0, r>5 ? base+1 : base);
+  }else{
+    result = Math.max(0, Math.round(M/10));
+  }
+  return result;
+}
+function discountValue(baseCents, pct, mode, useThousandth){
+  if (!useThousandth){
+    const raw = (baseCents*pct)/100;
+    let cents;
+    if (mode==='TRUNC') cents = Math.floor(raw);
+    else if (mode==='UP') cents = Math.ceil(raw);
+    else cents = Math.round(raw);
+    return { mils: Math.round(cents*10), cents };
+  }else{
+    const rawMils = (baseCents*pct*10)/100;
+    let mils;
+    if (mode==='TRUNC') mils = Math.floor(rawMils);
+    else if (mode==='UP') mils = Math.ceil(rawMils);
+    else mils = Math.round(rawMils);
+    return { mils, cents: milsToCents(mils,'NEAREST') };
+  }
+}
+
+/* ===== Captura de preços da página ===== */
+function getPrecoDeCents(){
+  const elPrecoDe = document.querySelector('.preco-de');
+  if (elPrecoDe) return parsePriceToCents(elPrecoDe.textContent||'');
+
+  const firstPB = document.querySelector('.price-big');
+  if (firstPB){
+    const strike = firstPB.querySelector('.line-through, del, s');
+    if (strike) return parsePriceToCents(strike.textContent||'');
+    return parsePriceToCents(firstPB.textContent||'');
+  }
+  return 0;
+}
+function getFirstTwoPriceBigValuesCents(){
+  const all = Array.from(document.querySelectorAll('.price-big'));
+  const visible = all.filter(el=>el.offsetParent!==null);
+
+  let firstEl=null, secondEl=null;
+  if (visible.length>=2) [firstEl,secondEl]=[visible[0],visible[1]];
+  else if (visible.length===1 && all.length>=2){
+    firstEl = visible[0];
+    secondEl = all.find(el=>el!==firstEl) || visible[0];
+  }else if (all.length>=2){
+    [firstEl,secondEl]=[all[0],all[1]];
+  }else{
+    firstEl = all[0];
+  }
+
+  const p1 = firstEl ? parsePriceToCents(firstEl.textContent) : 0;
+  const p2 = secondEl ? parsePriceToCents(secondEl.textContent) : 0;
+  return {p1,p2};
+}
+
+/* ===== Deadline + início da campanha ===== */
+function parseDeadlineInput(str){
+  if (!str || !(str = String(str).trim())) return null;
+
+  if (/^[+]\s*\d+\s*[dhmy]$/i.test(str)){
+    const m = str.match(/^[+]\s*(\d+)\s*([dhmy])$/i);
+    const qty = parseInt(m[1],10);
+    const unit = m[2].toLowerCase();
+    let ms = Date.now();
+    const oneMin = 60*1000, oneHour = 60*oneMin, oneDay = 24*oneHour;
+    if (unit==='m') ms += qty*oneMin;
+    else if (unit==='h') ms += qty*oneHour;
+    else if (unit==='d') ms += qty*oneDay;
+    else if (unit==='y'){
+      const d = new Date();
+      d.setFullYear(d.getFullYear()+qty);
+      return d;
+    }
+    return new Date(ms);
+  }
+
+  const br = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:\s+(\d{1,2}):(\d{2}))?$/);
+  if (br){
+    const dd=parseInt(br[1],10), mm=parseInt(br[2],10)-1, yy=parseInt(br[3],10);
+    const HH=br[4]?parseInt(br[4],10):23;
+    const MM=br[5]?parseInt(br[5],10):59;
+    const d=new Date(yy,mm,dd,HH,MM,59,999);
+    if (!isNaN(d.getTime())) return d;
+  }
+  const d2 = new Date(str);
+  if (!isNaN(d2.getTime())) return d2;
+  return null;
+}
+function getConfiguredDeadlineDate(){
+  const body = document.body || document.getElementsByTagName('body')[0];
+  const fromAttr = body ? body.getAttribute('data-bf-deadline') : null;
+  const fromWin  = (typeof window!=='undefined' && window.BF_DEADLINE) ? String(window.BF_DEADLINE) : null;
+  let dt = null;
+  if (fromAttr) dt = parseDeadlineInput(fromAttr);
+  if (!dt && fromWin) dt = parseDeadlineInput(fromWin);
+  if (!dt) dt = new Date(Date.now()+10*60*1000);
+  return dt;
+}
+function getCampaignStartDate(){
+  const body = document.body || document.getElementsByTagName('body')[0];
+  const fromAttr = body ? body.getAttribute('data-bf-start') : null;
+  let dt = null;
+  if (fromAttr) dt = parseDeadlineInput(fromAttr);
+  if (!dt) dt = new Date(); // fallback: agora
+  return dt;
+}
+
+/* ===== Cálculo da barra (por hora) ===== */
+function computeProgressPercent(startDate, endDate, nowDate){
+  const now = nowDate || new Date();
+  const startMs = startDate.getTime();
+  const endMs   = endDate.getTime();
+  if (isNaN(startMs) || isNaN(endMs) || endMs <= startMs) return 100;
+
+  const totalHours   = Math.ceil((endMs - startMs) / 3600000);   // total em horas
+  const elapsedHours = Math.max(
+    0,
+    Math.min(totalHours,
+      Math.floor((now.getTime() - startMs) / 3600000)
+    )
+  );
+
+  const pct = (elapsedHours / totalHours) * 100;
+  return Math.max(0, Math.min(100, pct));
+}
+
+/* ===== Timer ===== */
+function startTimerFromDataDeadline(container){
+  if (!container) return;
+  const iso = container.getAttribute('data-deadline');
+  const end = iso ? new Date(iso).getTime() : Date.now();
+
+  const dEl = container.querySelector('[data-bf-timer="days"]');
+  const hEl = container.querySelector('[data-bf-timer="hours"]');
+  const mEl = container.querySelector('[data-bf-timer="minutes"]');
+  const sEl = container.querySelector('[data-bf-timer="seconds"]');
+  const pad2 = n=>String(n).padStart(2,'0');
+
+  function tick(){
+    const now = Date.now();
+    let diff = Math.max(0, Math.floor((end-now)/1000));
+
+    const days = Math.floor(diff/86400); diff %= 86400;
+    const hrs  = Math.floor(diff/3600);  diff %= 3600;
+    const mins = Math.floor(diff/60);
+    const secs = diff%60;
+
+    if (dEl) dEl.textContent = pad2(days);
+    if (hEl) hEl.textContent = pad2(hrs);
+    if (mEl) mEl.textContent = pad2(mins);
+    if (sEl) sEl.textContent = pad2(secs);
+
+    if (end-now<=0) clearInterval(intId);
+  }
+  tick();
+  const intId = setInterval(tick,1000);
+}
+
+/* ===== Progress bar dinâmica ===== */
+function setupDynamicProgress(card, startDate, endDate){
+  const labelEl = card.querySelector('[data-bf-progress-label]');
+  const barEl   = card.querySelector('[data-bf-progress-bar]');
+  if (!labelEl || !barEl) return;
+
+  function update(){
+    const now = new Date();
+    let pct;
+
+    if (now.getTime() <= startDate.getTime()){
+      pct = PROGRESS_START_PCT;
+
+    } else if (now.getTime() >= endDate.getTime()){
+      pct = 100;
+
+    } else {
+      const raw = computeProgressPercent(startDate, endDate, now);
+      const range = 100 - PROGRESS_START_PCT; // 51%
+      pct = PROGRESS_START_PCT + (raw / 100) * range;
+    }
+
+    const pctRounded = Math.round(pct);
+    labelEl.textContent = pctRounded + '%';
+    barEl.style.width   = pctRounded + '%';
+  }
+
+  update();
+  setInterval(update, 60 * 1000); // atualiza a cada 1 min
+}
+
+
+/* ===== Toast + clipboard ===== */
+(function ensureToastContainer(){
+  if (!document.querySelector('.toast-container')){
+    const c = document.createElement('div');
+    c.className = 'toast-container';
+    document.body.appendChild(c);
+  }
+})();
+function showToast(msg,{timeout=3500}={}){
+  const cont = document.querySelector('.toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  cont.appendChild(t);
+  t.textContent = msg;
+  const hide = ()=>{
+    t.style.animation='toast-out .25s ease forwards';
+    setTimeout(()=>t.remove(),260);
+  };
+  setTimeout(hide, timeout);
+}
+async function copyToClipboard(text){
+  try{
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  }catch(e){}
+  try{
+    const ta=document.createElement('textarea');
+    ta.value=text;
+    ta.setAttribute('readonly','');
+    ta.style.position='fixed';
+    ta.style.opacity='0';
+    ta.style.top='-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0,text.length);
+    const ok=document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  }catch(e){
+    return false;
+  }
+}
+
+/* ===== Detectar checkout (para aplicar cupom direto) ===== */
+function isCheckoutCartUrl(){
+  const href=(location.href||'').toLowerCase();
+  const path=(location.pathname||'').toLowerCase();
+  return (
+    path.includes('/checkout') || path.includes('/cart') || path.includes('/carrinho') ||
+    path.includes('/finalizar') || href.includes('step=checkout') || href.includes('cart=')
+  );
+}
+function applyCouponIfPresent(coupon,{retries=10,interval=400}={}) {
+  let attempts=0;
+  const tryApply=()=>{
+    attempts++;
+    const input=document.getElementById('cupom-desconto');
+    const btn=document.querySelector('.aplica-desconto');
+    if (input){
+      input.focus();
+      input.value=coupon;
+      input.dispatchEvent(new Event('input',{bubbles:true}));
+      input.dispatchEvent(new Event('change',{bubbles:true}));
+      if (btn){
+        btn.click();
+        showToast('Cupom aplicado no checkout.',{timeout:2500});
+        return;
+      }
+    }
+    if (attempts<retries) setTimeout(tryApply,interval);
+  };
+  tryApply();
+}
+
+/* ===== Criação do CARD (sem modal) ===== */
+/* Regra nova:
+   - Pega 10% do segundo .price-big
+   - Subtrai ESSE valor de 10% do PRIMEIRO .price-big
+   - Valor final = primeiro price-big - (10% do segundo price-big)
+*/
+function createBFCardAt(anchor){
+  if (!anchor) anchor = document.body;
+
+  // função que calcula tudo com base no DOM atual
+  function calcPricesFromDom(){
+    const deVal_c = getPrecoDeCents();
+    const {p1: p1_c, p2: p2_c} = getFirstTwoPriceBigValuesCents();
+
+    // Bases de segurança
+    const baseP1_c = p1_c || deVal_c || p2_c || 0;
+    const baseP2_c = p2_c || deVal_c || p1_c || 0;
+
+    // 10% do segundo price-big
+    const descontoSegundo_c = Math.floor(baseP2_c * 0.10);
+
+    // valor final: primeiro price-big - 10% do segundo
+    const precoFinal_c = Math.max(0, baseP1_c - descontoSegundo_c);
+
+    // economia: deVal (se existir) senão p1, senão p2 - precoFinal
+    const baseEconomia_c = deVal_c || p1_c || baseP2_c || 0;
+    const economiaMostrada_c = Math.max(0, baseEconomia_c - precoFinal_c);
+
+    BFDBG('calcPricesFromDom', {
+      deVal_c, p1_c, p2_c,
+      baseP1_c, baseP2_c,
+      descontoSegundo_c,
+      precoFinal_c,
+      economiaMostrada_c
+    });
+
+    return { precoFinal_c, economiaMostrada_c };
+  }
+
+  const { precoFinal_c, economiaMostrada_c } = calcPricesFromDom();
+
+  const deadlineDate = getConfiguredDeadlineDate();
+  const startDate    = getCampaignStartDate();
+  const deadlineISO  = deadlineDate.toISOString();
+
+  const cardHtml = `
+    <div class="bf-card-v2" data-key="bf-card-v2" data-deadline="${deadlineISO}">
+      <div class="bf-card-header">
+        <h3>${CARD_TITLE}</h3>
+      </div>
+
+      <div class="bf-progress">
+        <div class="bf-progress-label">
+          Já foram utilizados <span data-bf-progress-label>0%</span> dos Cupons Disponíveis
+        </div>
+        <div class="bf-progress-bar">
+          <div class="bf-progress-fill" data-bf-progress-bar></div>
+        </div>
+      </div>
+
+      <div class="bf-card-main-row">
+        <div class="bf-price-left">
+          <div class="bf-price-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 5v14"></path>
+              <path d="m19 12-7 7-7-7"></path>
+            </svg>
+          </div>
+          <div class="bf-price-text">
+            <div class="bf-price-label">Pague</div>
+            <div class="bf-price-value">${fmtBRLFromCents(precoFinal_c)}</div>
+          </div>
+        </div>
+
+        <div class="bf-coupon-area">
+          <div class="bf-coupon-label">Usando o <br> cupom:</div>
+          <button type="button" class="bf-coupon-box" data-coupon="${COUPON_CODE}">
+            ${COUPON_CODE}
+          </button>
+        </div>
+      </div>
+
+      <div class="bf-saving-text">
+        Você economiza <span>${fmtBRLFromCents(economiaMostrada_c)}</span>
+      </div>
+
+      <div class="bf-divider"></div>
+
+      <div class="timer-section">
+        <div class="timer-title">Oferta por Tempo Limitado</div>
+        <div class="timer-boxes">
+          <div class="timer-box">
+            <div class="value" data-bf-timer="days">00</div>
+            <div class="label">dias</div>
+          </div>
+          <div class="timer-box">
+            <div class="value" data-bf-timer="hours">00</div>
+            <div class="label">hrs</div>
+          </div>
+          <div class="timer-box">
+            <div class="value" data-bf-timer="minutes">00</div>
+            <div class="label">min</div>
+          </div>
+          <div class="timer-box">
+            <div class="value" data-bf-timer="seconds">00</div>
+            <div class="label">seg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+
+  anchor.insertAdjacentHTML('afterend', cardHtml);
+  const card = anchor.nextElementSibling;
+
+  // função para atualizar o card quando os preços mudarem no DOM
+  function updateCardValuesFromDom(){
+    const { precoFinal_c, economiaMostrada_c } = calcPricesFromDom();
+    const priceEl = card.querySelector('.bf-price-value');
+    const savingEl = card.querySelector('.bf-saving-text span');
+    if (priceEl)  priceEl.textContent  = fmtBRLFromCents(precoFinal_c);
+    if (savingEl) savingEl.textContent = fmtBRLFromCents(economiaMostrada_c);
+    BFDBG('Card BF atualizado após mudança no price-big');
+  }
+
+  // garante que está sincronizado na criação
+  updateCardValuesFromDom();
+
+  // inicia timer e barra de progresso
+  startTimerFromDataDeadline(card);
+  setupDynamicProgress(card, startDate, deadlineDate);
+
+  // clique no cupom: copia + aplica se estiver no checkout
+  const couponBtn = card.querySelector('.bf-coupon-box');
+  if (couponBtn){
+    const coupon = couponBtn.dataset.coupon || couponBtn.textContent.trim();
+    couponBtn.addEventListener('click', async()=>{
+      const copied = await copyToClipboard(coupon);
+      if (copied) showToast(`Cupom "${coupon}" copiado!`,{timeout:2400});
+      else showToast('Não consegui copiar automaticamente. Tente colar manualmente.',{timeout:3000});
+
+      if (isCheckoutCartUrl()){
+        applyCouponIfPresent(coupon);
+      }
+    });
+  }
+
+  // ===== MutationObserver para monitorar o SEGUNDO .price-big =====
+  function watchSecondPriceBig(){
+    const all = document.querySelectorAll('.price-big');
+    if (!all.length) return;
+    const second = all[1] || all[0];
+
+    if (!second) return;
+
+    const obs = new MutationObserver((mutations)=>{
+      let changed = false;
+      for (const m of mutations){
+        if (m.type === 'childList' || m.type === 'characterData' || m.type === 'subtree'){
+          changed = true;
+          break;
+        }
+      }
+      if (changed){
+        updateCardValuesFromDom();
+      }
+    });
+
+    obs.observe(second, {
+      childList: true,
+      characterData: true,
+      subtree: true
+    });
+
+    BFDBG('Observando o segundo .price-big para mudanças', second);
+  }
+
+  watchSecondPriceBig();
+}
+
+/* ===== Init com MutationObserver ===== */
+function initBFCard(){
+  let inserted = false;
+  let observer;
+
+  function tryInsert(){
+    if (inserted) return;
+    const anchor = document.querySelector('.mais-formas-pagamento') ||
+                   document.getElementById('content-price-product');
+    if (anchor){
+      inserted = true;
+      createBFCardAt(anchor);
+      if (observer) observer.disconnect();
+      console.log('[BF] Card inserido após .mais-formas-pagamento / #content-price-product');
+    }
+  }
+
+  observer = new MutationObserver(()=>{ tryInsert(); });
+  if (document.body){
+    observer.observe(document.body,{childList:true,subtree:true});
+  }
+  tryInsert();
+
+  setTimeout(()=>{
+    if (!inserted){
+      inserted = true;
+      if (observer) observer.disconnect();
+      createBFCardAt(document.body);
+      console.log('[BF] Card inserido no final da página (fallback).');
+    }
+  },8000);
+}
+
+if (document.readyState === 'loading'){
+  document.addEventListener('DOMContentLoaded', initBFCard);
+}else{
+  initBFCard();
+}
+</script>
+</body>
+</html>
