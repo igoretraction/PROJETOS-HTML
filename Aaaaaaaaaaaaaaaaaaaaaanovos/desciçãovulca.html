@@ -1,0 +1,560 @@
+<p>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // ajustando no mobile
+      if (!window.matchMedia("(max-width: 768px)").matches) return;
+
+      var el = document.querySelector(".w-md-60");
+      if (el) {
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("max-width", "100%", "important");
+      }
+
+      const tituloDescricao = Array.from(
+        document.querySelectorAll(".font-weight-bold.mb-3")
+      ).find((div) => div.textContent.trim() === "Descrição");
+      if (tituloDescricao) {
+        tituloDescricao.style.textAlign = "center";
+      }
+
+      const sections = document.querySelectorAll(
+        'section[style*="max-width: 1120px"]'
+      );
+
+      sections.forEach((section) => {
+        section.style.maxWidth = "100%";
+        section.style.padding = "20px 16px";
+
+        const wrapper = section.querySelector('div[style*="display: flex"]');
+        if (wrapper) {
+          wrapper.style.display = "flex";
+          wrapper.style.flexDirection = "column";
+          wrapper.style.alignItems = "stretch";
+          wrapper.style.flexWrap = "nowrap";
+          wrapper.style.gap = "20px";
+        }
+      });
+
+      const cards = document.querySelectorAll(
+        "article, aside, section figure, section > div > div"
+      );
+      cards.forEach((card) => {
+        card.style.width = "100%";
+        card.style.minWidth = "0";
+        card.style.boxSizing = "border-box";
+      });
+
+      const bloco2Texto = document.querySelector(
+        'div[style*="min-width: 420px"]'
+      );
+      if (bloco2Texto) {
+        bloco2Texto.style.width = "100%";
+        bloco2Texto.style.minWidth = "0";
+        bloco2Texto.style.marginTop = "20px";
+      }
+
+      const bloco3Figura = document.querySelector(
+        'figure[style*="min-width: 460px"]'
+      );
+      if (bloco3Figura) {
+        bloco3Figura.style.width = "100%";
+        bloco3Figura.style.minWidth = "0";
+      }
+
+      const bloco3Texto = document.querySelector(
+        'div[style*="min-width: 360px"]'
+      );
+      if (bloco3Texto) {
+        bloco3Texto.style.width = "100%";
+        bloco3Texto.style.minWidth = "0";
+        bloco3Texto.style.marginTop = "20px";
+      }
+
+      document.querySelectorAll("section img").forEach((img) => {
+        img.style.width = "100%";
+        img.style.height = "auto";
+        img.style.objectFit = "cover";
+      });
+    });
+    // fim do ajuste no mobile
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var el = document.querySelector(".w-md-60");
+      if (el) {
+        el.style.setProperty("width", "100%", "important");
+        el.style.setProperty("max-width", "100%", "important");
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const el = Array.from(
+        document.querySelectorAll(".font-weight-bold.mb-3")
+      ).find((div) => div.textContent.trim() === "Descrição");
+      if (el) {
+        el.style.textAlign = "center";
+      }
+    });
+  </script>
+</p>
+<!-- DESCRIÇÃO PRINCIPAL -->
+<section
+  style="
+    max-width: 1120px;
+    width: 100% !important;
+    margin-inline: auto;
+    padding: 28px 20px;
+  "
+>
+  <div
+    style="
+      display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      align-items: stretch;
+      flex-wrap: nowrap;
+    "
+  >
+    <article
+      style="
+        background: #f7f7f8;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(20, 24, 40, 0.08);
+        padding: 22px;
+        width: 100% !important;
+        min-width: 480px;
+      "
+    >
+      <h2 style="font-size: 1.6rem; font-weight: 800; margin: 0 0 8px 0">
+        Descri&ccedil;&atilde;o
+      </h2>
+      <p style="font-weight: 600; color: #6b6b72; margin: 0 0 16px 0">
+        Saia De Pregas Vulca Off White &middot; Vulca Feminino
+      </p>
+      <p style="color: #1b1b1f; margin: 0">
+        Pensada para quem vive o esporte com intensidade, a
+        <strong>Saia de Pregas Vulca Off White</strong> combina est&eacute;tica
+        esportiva moderna com a funcionalidade que o jogo exige.
+      </p>
+      <p style="color: #1b1b1f; margin: 16px 0 0 0">
+        Apresenta <strong>modelagem acinturada com pregas</strong>, que
+        valorizam a silhueta e adicionam um toque sofisticado ao visual, sempre
+        com movimento din&acirc;mico e caimento impec&aacute;vel.
+      </p>
+      <p style="color: #1b1b1f; margin: 16px 0 0 0">
+        O <strong>shorts interno estruturado</strong> oferece liberdade de
+        movimento e seguran&ccedil;a durante o jogo, permitindo deslocamentos
+        r&aacute;pidos com confian&ccedil;a.
+      </p>
+      <p style="color: #1b1b1f; margin: 16px 0 0 0">
+        Confeccionada em
+        <strong>tecido de alta durabilidade, com toque macio</strong>, ela
+        proporciona conforto, resist&ecirc;ncia e eleg&acirc;ncia ao longo de
+        toda a partida.
+      </p>
+      <p style="color: #1b1b1f; margin: 16px 0 0 0">
+        Nesta vers&atilde;o, o tom <strong>Off White</strong> traz neutralidade
+        elegante e f&aacute;cil combina&ccedil;&atilde;o com tops e
+        acess&oacute;rios da cole&ccedil;&atilde;o Vulca, funcionando tanto na
+        quadra quanto no p&oacute;s-jogo.
+      </p>
+    </article>
+    <aside
+      style="
+        background: #f7f7f8;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(20, 24, 40, 0.08);
+        padding: 22px;
+        width: 40%;
+        min-width: 320px;
+      "
+    >
+      <h3 style="margin: 0 0 8px 0; font-size: 1.1rem">
+        Informa&ccedil;&otilde;es R&aacute;pidas
+      </h3>
+      <div style="display: grid; gap: 10px; margin-top: 24px">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e9e9ee;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-weight: 600;
+          "
+        >
+          Modelagem Acinturada com Pregas
+          <small style="font-weight: bold; color: #6b6b72"
+            >silhueta valorizada</small
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e9e9ee;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-weight: 600;
+          "
+        >
+          Shorts Interno Estruturado
+          <small style="font-weight: bold; color: #6b6b72"
+            >seguran&ccedil;a nos movimentos</small
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e9e9ee;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-weight: 600;
+          "
+        >
+          Tecido Esportivo Plissado
+          <small style="font-weight: bold; color: #6b6b72"
+            >mant&eacute;m o formato das pregas</small
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e9e9ee;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-weight: 600;
+          "
+        >
+          C&oacute;s Anat&ocirc;mico
+          <small style="font-weight: bold; color: #6b6b72"
+            >conforto e firmeza</small
+          >
+        </div>
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #fff;
+            border: 1px solid #e9e9ee;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-weight: 600;
+          "
+        >
+          Mobilidade Total
+          <small style="font-weight: bold; color: #6b6b72"
+            >liberdade na quadra</small
+          >
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+<!-- BENEFÍCIOS EM ACORDEÃO -->
+<section style="max-width: 1120px; margin-inline: auto; padding: 28px 20px">
+  <div
+    style="
+      display: flex;
+      gap: 24px;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+    "
+  >
+    <figure
+      style="
+        background: #f7f7f8;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(20, 24, 40, 0.08);
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        width: 360px;
+        flex: 0 0 360px;
+      "
+    >
+      <img
+        style="display: block; width: 100%; height: auto; border-radius: 18px"
+        src="https://acdn-us.mitiendanube.com/stores/684/559/products/jm2_0386-0f0fbd82d9856f605317652316816241-640-0.webp"
+        alt="Saia de Pregas Vulca Off White em movimento na quadra, mostrando o caimento das pregas."
+      />
+    </figure>
+    <div style="width: calc(100% - 384px); min-width: 420px">
+      <details
+        style="
+          background: #fff;
+          border: 1px solid #e9e9ee;
+          border-radius: 12px;
+          padding: 14px 16px;
+        "
+        open=""
+      >
+        <summary
+          style="
+            cursor: pointer;
+            list-style: none;
+            font-weight: bold;
+            outline: none;
+          "
+        >
+          Modelagem acinturada com pregas
+        </summary>
+        <div style="color: #6b6b72; margin-top: 8px">
+          Valoriza a <strong>postura atl&eacute;tica</strong> e define a
+          cintura, mantendo um visual moderno e sofisticado, com movimento
+          din&acirc;mico e caimento impec&aacute;vel a cada ponto.
+        </div>
+      </details>
+      <details
+        style="
+          background: #fff;
+          border: 1px solid #e9e9ee;
+          border-radius: 12px;
+          padding: 14px 16px;
+          margin-top: 12px;
+        "
+      >
+        <summary
+          style="
+            cursor: pointer;
+            list-style: none;
+            font-weight: bold;
+            outline: none;
+          "
+        >
+          Shorts interno estruturado
+        </summary>
+        <div style="color: #6b6b72; margin-top: 8px">
+          Feito em <strong>poliamida de firmeza elevada</strong>, oferece
+          seguran&ccedil;a e estabilidade nos movimentos intensos, permitindo
+          deslocamentos r&aacute;pidos com confian&ccedil;a.
+        </div>
+      </details>
+      <details
+        style="
+          background: #fff;
+          border: 1px solid #e9e9ee;
+          border-radius: 12px;
+          padding: 14px 16px;
+          margin-top: 12px;
+        "
+      >
+        <summary
+          style="
+            cursor: pointer;
+            list-style: none;
+            font-weight: bold;
+            outline: none;
+          "
+        >
+          Tecido externo premium esportivo e plissado
+        </summary>
+        <div style="color: #6b6b72; margin-top: 8px">
+          <strong
+            >Resistente, macio e com excelente recupera&ccedil;&atilde;o</strong
+          >, mant&eacute;m o formato das pregas e acompanha o movimento do corpo
+          sem marcar, trazendo eleg&acirc;ncia e performance.
+        </div>
+      </details>
+      <details
+        style="
+          background: #fff;
+          border: 1px solid #e9e9ee;
+          border-radius: 12px;
+          padding: 14px 16px;
+          margin-top: 12px;
+        "
+      >
+        <summary
+          style="
+            cursor: pointer;
+            list-style: none;
+            font-weight: bold;
+            outline: none;
+          "
+        >
+          C&oacute;s anat&ocirc;mico e mobilidade total
+        </summary>
+        <div style="color: #6b6b72; margin-top: 8px">
+          O <strong>c&oacute;s anat&ocirc;mico</strong> &eacute;
+          confort&aacute;vel, firme e est&aacute;vel da primeira &agrave;
+          &uacute;ltima jogada. A amplitude da saia garante
+          <strong>liberdade real na quadra</strong>, seja no beach tennis,
+          t&ecirc;nis ou padel.
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+<!-- BLOCO 1 (imagem à esquerda, texto à direita) -->
+<section style="max-width: 1120px; margin-inline: auto; padding: 28px 20px">
+  <div
+    style="
+      display: flex;
+      gap: 28px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+    "
+  >
+    <figure
+      style="
+        background: #f7f7f8;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(20, 24, 40, 0.08);
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        width: 52%;
+        min-width: 460px;
+      "
+    >
+      <img
+        style="
+          display: block;
+          width: 100%;
+          height: 300px;
+          border-radius: 18px;
+          object-fit: cover;
+        "
+        src="https://acdn-us.mitiendanube.com/stores/684/559/products/jm2_0389-588f75b1b7bacda4a317652316812344-640-0.webp"
+        alt="Saia de Pregas Vulca Off White em vista frontal completa, mostrando cintura acinturada e pregas."
+      />
+    </figure>
+    <div style="width: 48%; min-width: 360px">
+      <h3 style="margin: 24px 0 8px 0; font-size: 1.1rem">
+        Visual esportivo sofisticado
+      </h3>
+      <p style="margin: 0; color: #6b6b72">
+        As pregas da <strong>Saia de Pregas Vulca Off White</strong> acompanham
+        o movimento sem perder o caimento, criando um visual esportivo
+        sofisticado que funciona tanto na quadra quanto no p&oacute;s-jogo. A
+        cintura marcada equilibra presen&ccedil;a e conforto em todas as
+        combina&ccedil;&otilde;es.
+      </p>
+    </div>
+  </div>
+</section>
+<!-- BLOCO 2 (texto à esquerda, imagem à direita) -->
+<section style="max-width: 1120px; margin-inline: auto; padding: 28px 20px">
+  <div
+    style="
+      display: flex;
+      gap: 28px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+    "
+  >
+    <div style="width: 48%; min-width: 360px">
+      <h3 style="margin: 0 0 8px 0; font-size: 1.1rem">
+        Conforto e firmeza em quadra
+      </h3>
+      <p style="margin: 0; color: #6b6b72">
+        O <strong>shorts interno estruturado</strong> e o
+        <strong>c&oacute;s anat&ocirc;mico</strong> trabalham juntos para manter
+        a saia no lugar, mesmo em deslocamentos intensos. Voc&ecirc; ganha
+        liberdade para correr, girar e sacar, com sensa&ccedil;&atilde;o de
+        seguran&ccedil;a do in&iacute;cio ao fim da partida.
+      </p>
+    </div>
+    <figure
+      style="
+        background: #f7f7f8;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(20, 24, 40, 0.08);
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        width: 52%;
+        min-width: 460px;
+      "
+    >
+      <img
+        style="
+          display: block;
+          width: 100%;
+          height: 300px;
+          border-radius: 18px;
+          object-fit: contain;
+          background: #fff;
+        "
+        src="https://d1a9qnv764bsoo.cloudfront.net/stores/684/559/rte/blobid2.jpg"
+        alt="Saia de Pregas Vulca Off White em close frontal, destacando o tecido plissado e o tom Off White."
+      />
+    </figure>
+  </div>
+</section>
+<!-- GALERIA FINAL (imagem à esquerda, texto à direita) -->
+<section style="max-width: 1120px; margin-inline: auto; padding: 28px 20px">
+  <div
+    style="
+      display: flex;
+      gap: 28px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+    "
+  >
+    <figure
+      style="
+        position: relative;
+        background: #f7f7f8;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(20, 24, 40, 0.08);
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        width: 52%;
+        min-width: 460px;
+      "
+    >
+      <img
+        style="
+          display: block;
+          width: 100%;
+          height: 300px;
+          border-radius: 18px;
+          object-fit: cover;
+        "
+        src="https://d1a9qnv764bsoo.cloudfront.net/stores/684/559/rte/blobid17.jpg"
+        alt="Saia de Pregas Vulca Off White em look completo na quadra, combinada com top esportivo."
+      />
+    </figure>
+    <article
+      style="
+        background: #f7f7f8;
+        border-radius: 18px;
+        box-shadow: 0 8px 24px rgba(20, 24, 40, 0.08);
+        padding: 22px;
+        width: 48%;
+        min-width: 360px;
+      "
+    >
+      <h3 style="margin: 0 0 8px 0; font-size: 1.1rem">
+        Composi&ccedil;&atilde;o e performance
+      </h3>
+      <p style="margin: 0; color: #6b6b72">
+        A <strong>Saia de Pregas Vulca Off White</strong> &eacute; feita em
+        tecido pensado para performance esportiva e uso cont&iacute;nuo:
+        <br /><br /><strong>Composi&ccedil;&atilde;o:</strong> 92% Poliamida
+        &middot; 8% Elastano. <br /><br />Uma estrutura que une durabilidade,
+        toque macio e elasticidade na medida certa para acompanhar a intensidade
+        do beach tennis, t&ecirc;nis e padel, sem abrir m&atilde;o da
+        eleg&acirc;ncia.
+      </p>
+    </article>
+  </div>
+</section>
