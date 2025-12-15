@@ -1112,28 +1112,7 @@
           margin: 0 10px;
         }
       }
-      /* Enquanto estiver carregando: mostra cursor normal e esconde o cursor custom */
-body.loading {
-  cursor: auto !important;
-}
-
-body.loading .cursor,
-body.loading .cursor-follower {
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* Quando terminar o loading: usa cursor custom */
-body:not(.loading) {
-  cursor: none;
-}
-
-body:not(.loading) .cursor,
-body:not(.loading) .cursor-follower {
-  opacity: 1;
-  visibility: visible;
-}
-
+      
     </style>
   </head>
   <body class="loading">

@@ -13,7 +13,7 @@
     />
 
     <style>
-      /* Reset & Base */
+  
       * {
         margin: 0;
         padding: 0;
@@ -611,13 +611,14 @@
         );
       }
       .racing-content {
-        position: relative;
-        z-index: 10;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+       position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
       }
       .racing-badge {
         font-size: clamp(12px, 2vw, 18px);
@@ -773,7 +774,7 @@
 
       /* Products */
       .products {
-        padding: 150px 60px;
+        padding: 0px 60px;
         background: #000;
       }
       .products-header {
@@ -1107,6 +1108,7 @@
           display: flex;
         }
         .about-container {
+            text-align: center;
           grid-template-columns: 1fr;
           height: auto;
         }
@@ -1125,6 +1127,12 @@
       }
 
       @media (max-width: 768px) {
+        .about-container{
+            text-align: center;
+        }
+        .in-view{
+            margin-top: -460px;
+        }
         .hero,
         .about,
         .products,
@@ -1141,6 +1149,7 @@
         }
         .about-images {
           grid-template-columns: 1fr;
+          grid-template-rows: auto;
         }
         .about-img-wrapper.img-1 {
           grid-column: auto;
@@ -1277,7 +1286,7 @@
       <div class="hero-content">
         <div class="hero-badge">Edição Limitada</div>
         <h1 class="hero-title">
-          <span class="title-line">PORSCHE</span>
+          <span class="title-line"><img src="https://magazord-public.s3.amazonaws.com/smegbrasil/img/2025/12/produto/3521/design-sem-nome-removebg-preview.png" alt=""></span>
           <span class="title-x">×</span>
           <span class="title-line">SMEG</span>
         </h1>
