@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrossel 3D Magazord Summit</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+      .carousel {
+        font-family: "Poppins", sans-serif;
+
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 600px;
+        transform: rotateX(-20deg) translateY(-70px);
+        transform-style: preserve-3d;
+        perspective: 800px;
+        user-select: none;
+        cursor: grab;
+        position: relative;
+        touch-action: none;
+      }
+
+      .carousel-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -100px 0 0 -100px;
+        width: 200px;
+        height: 260px;
+        transform: translate3d(0, 0, -10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 40px;
+        font-weight: bold;
+        transform-origin: 50% 50%;
+        border-radius: 18px;
+        overflow: hidden;
+        /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); */
+        background: #333;
+      }
+
+      /* Se quiser usar imagens reais, pode usar assim:
+  .carousel-image {
+    background-size: cover;
+    background-position: center;
+  }
+  */
+
+      @media (max-width: 600px) {
+        .carousel {
+          transform: rotateX(-10deg) scale(0.7) translateY(-40px);
+          height: 320px;
+        }
+        .content-carrossel {
+          flex-direction: column !important;
+        }
+        .carousel {
+          width: 100% !important;
+        }
+        .carousel-image {
+          height: 265px;
+        }
+        .content-text {
+          max-width: 100% !important;
+        }
+        .content-carrossel {
+          gap: 220px !important;
+        }
+      }
+      .img-carrossel {
+        max-width: 200px;
+      }
+      .content-carrossel {
+        font-family: "Poppins", sans-serif;
+        margin-top: 200px;
+        display: flex;
+        flex-direction: row;
+        max-height: 390px;
+        margin: auto;
+        max-width: 85%;
+        justify-content: center;
+      }
+      .content-text {
+        align-items: center;
+        max-width: 40%;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+      }
+      .title-carrossel h2 {
+        font-weight: 600;
+        padding: 10px;
+        font-size: 20px;
+      }
+      .content-p {
+        font-size: 13px;
+      }
+      .img-carrossel{
+        user-select: none;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content-carrossel">
+      <div class="content-text">
+        <div class="title-carrossel">
+          <h2>Entenda mais sobre a PCUSTOMS:</h2>
+        </div>
+        <div class="content-p">
+          Com foco em reviver o brilho original ou reinventar o estilo dos carros, a PCustoms transforma veículos antigos ou tradicionais em peças únicas, com acabamento cuidadoso e atenção aos detalhes. A oficina valoriza a identidade de cada projeto — entregando veículos com personalidade própria e qualidade profissional. Para quem busca exclusividade e restauração de alto nível, a PCustoms é referência.
+
+        </div>
+      </div>
+      <div class="carousel">
+        <!-- Troque o conteúdo 1,2,3... pelas suas imagens -->
+        <div class="carousel-image">
+          <img
+            class="img-carrossel"
+            src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14493/img-4409.jpg"
+            alt=""
+          />
+        </div>
+        <div class="carousel-image">
+          <img
+            class="img-carrossel"
+            src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14494/img-4411.jpg"
+            alt=""
+          />
+        </div>
+        <div class="carousel-image">
+          <img
+            class="img-carrossel"
+            src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14495/img-4412.jpg"
+            alt=""
+          />
+        </div>
+        <div class="carousel-image">
+          <img
+            class="img-carrossel"
+            src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14496/img-4413.jpg"
+            alt=""
+          />
+        </div>
+        <div class="carousel-image">
+          <img
+            class="img-carrossel"
+            src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14497/img-4414.jpg"
+            alt=""
+          />
+        </div>
+        <div class="carousel-image">
+          <img
+            class="img-carrossel"
+            src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14498/img-4415.jpg"
+            alt=""
+          />
+        </div>
+        <div class="carousel-image">
+          <img
+            class="img-carrossel"
+            src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14499/img-4416.jpg"
+            alt=""
+          />
+        </div>
+        <!-- <div class="carousel-image">
+          <img
+            class="img-carrossel"
+            src="https://cdn.awsli.com.br/2396/2396398/produto/1546233526df1f8a435.jpg"
+            alt=""
+          />
+        </div> -->
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const carousel = document.querySelector(".carousel");
+        const images = document.querySelectorAll(".carousel-image");
+
+        if (!carousel || !images.length) return;
+
+        const radius = 210; // mesmo valor do CodePen
+        let progress = 0;
+        let targetProgress = 0;
+
+        let isPointerDown = false;
+        let lastClientX = 0;
+
+        // --- animação contínua ---
+        function animate() {
+          // inércia: progress vai “correndo” até targetProgress
+          progress += (targetProgress - progress) * 0.08;
+
+          images.forEach((image, index) => {
+            const theta = index / images.length - progress;
+            const x = -Math.sin(theta * Math.PI * 2) * radius;
+            const z = Math.cos(theta * Math.PI * 2) * radius;
+
+            image.style.transform = `
+          translate3d(${x}px, -50%, ${z}px)
+          rotateY(${360 * -theta}deg)
+        `;
+
+            // cor só pra testar; pode remover se for usar imagens
+            const c = Math.floor((index / images.length) * 360);
+            image.style.background = `hsla(${c}, 90%, 50%, .5)`;
+          });
+
+          requestAnimationFrame(animate);
+        }
+
+        // --- scroll do mouse (wheel) ---
+        carousel.addEventListener(
+          "wheel",
+          function (e) {
+            e.preventDefault();
+            const p = e.deltaY * -0.0002;
+            targetProgress += p;
+          },
+          { passive: false }
+        );
+
+        // --- drag / pointer (mouse + touch) ---
+        carousel.addEventListener("pointerdown", function (e) {
+          isPointerDown = true;
+          lastClientX = e.clientX;
+          carousel.setPointerCapture(e.pointerId);
+          carousel.style.cursor = "grabbing";
+        });
+
+        carousel.addEventListener("pointermove", function (e) {
+          if (!isPointerDown) return;
+          const dx = e.clientX - lastClientX;
+          lastClientX = e.clientX;
+          targetProgress += dx * 0.0008;
+        });
+
+        function stopDrag() {
+          isPointerDown = false;
+          carousel.style.cursor = "grab";
+        }
+
+        carousel.addEventListener("pointerup", stopDrag);
+        carousel.addEventListener("pointercancel", stopDrag);
+        carousel.addEventListener("pointerleave", stopDrag);
+
+        // inicia loop
+        animate();
+      })();
+
+     
+    </script>
+  </body>
+</html>

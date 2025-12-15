@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparação de Lojas</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <style>
+      /* Estilos CSS */
+      body {
+        font-family: "Arial", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #ffffff;
+      }
+      .container {
+        display: flex;
+        flex-direction: row;
+        max-width: 1240px;
+        margin: auto;
+        width: 100%;
+      }
+
+      .comparison-list {
+        width: 80%;
+        border-radius: 8px;
+        background-color: #fff;
+      }
+      /* pegar o segundo .comparison-list que existe */
+        .list-header:nth-child(2) {
+            background-color: #c0deff;
+        }
+
+      .list-header {
+        display: flex;
+        background-color: #ffffff; /* Cor azul claro para "Atara" */
+        color: black;
+        padding: 15px;
+        font-size: 18px;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 8px 8px 0 0;
+        text-align: center;
+      }
+
+      .list-header .store-name {
+        font-weight: bold;
+      }
+
+      .feature-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .feature-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .feature-item:last-child {
+        border-bottom: none;
+      }
+
+      .feature-text {
+        font-weight: bold;
+        width: 100%;
+        font-size: 13px;
+      }
+
+      .store-name-column {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20%;
+      }
+
+      .green,
+      .red {
+        font-size: 22px;
+        opacity: 0;
+      }
+
+      .green {
+        color: green;
+      }
+
+      .red {
+        color: red;
+      }
+
+      /* Estilo para a loja "Atara" */
+      .comparison-list .store-atara {
+    justify-content: center;
+        background-color: #ffffff;
+      }
+
+      /* Estilo para "Outros" */
+      .comparison-list .store-others {
+        background-color: #f8f8f8;
+      }
+
+      /* Ajustes para o layout da "Atara" */
+      .store-atara {
+        font-weight: bold;
+        color: #000000;
+      }
+      .feature-text svg {
+        max-width: 30px;
+        max-height: 30px;
+        padding: 0;
+      }
+      .list-header{
+        max-height: 61px !important;
+      }
+      @media (max-width:768px) {
+        .feature-item > .feature-text{
+            font-size: 8.1px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container" style="flex-direction: row;display: flex;">
+        <div class="comparison-list">
+          <div class="list-header">
+            <span class="feature-text">Características</span>
+          </div>
+    
+          <ul class="feature-list">
+            <li class="feature-item store-atara">
+              <span class="feature-text"
+                >Atendimento Humanizado Eficiente (WhatsApp, Redes Sociais e
+                Telefone)</span
+              >
+            </li>
+            <li class="feature-item store-atara">
+              <span class="feature-text"
+                >Atendimento Humanizado Eficiente (WhatsApp, Redes Sociais e
+                Telefone)</span
+              >
+            </li>
+            <li class="feature-item store-atara">
+              <span class="feature-text"
+                >Atendimento Humanizado Eficiente (WhatsApp, Redes Sociais e
+                Telefone)</span
+              >
+            </li>
+            <li class="feature-item store-atara">
+              <span class="feature-text"
+                >Atendimento Humanizado Eficiente (WhatsApp, Redes Sociais e
+                Telefone)</span
+              >
+            </li>
+          </ul>
+        </div>
+    
+        <div class="comparison-list">
+          <div class="list-header" style="background: #deeeff;padding:6px;">
+            <span class="feature-text"><svg id="Layer_1" enable-background="new 0 0 100 100" height="512" viewBox="0 0 100 100" width="512" xmlns="http://www.w3.org/2000/svg"><g id="_x34_3.Google_Adwords"><path d="m57.193 15.502c-7.021-4.054-15.985-1.653-20.039 5.37l-25.162 43.583c-6.494 11.247 3.912 24.878 16.501 21.504 3.785-1.014 6.948-3.442 8.907-6.835l25.162-43.583c4.045-7.005 1.636-15.994-5.369-20.039z" fill="#fabc04"/><path d="m88.038 64.455-25.163-43.583c-1.959-3.393-5.123-5.821-8.907-6.835-12.593-3.375-22.991 10.262-16.501 21.504l25.163 43.583c4.053 7.019 13.015 9.425 20.039 5.37 7.004-4.045 9.413-13.034 5.369-20.039z" fill="#3c8bd9"/><path d="m38.865 67.993c-2.098-7.831-10.134-12.472-17.966-10.373-12.593 3.374-14.78 20.383-3.538 26.874 11.216 6.475 24.897-3.84 21.504-16.501z" fill="#34a852"/></g></svg></span>
+          </div>
+    
+          <ul class="feature-list" >
+           
+                <li class="feature-item store-atara" style="background: #deeeff;">
+                    <span class="store-name-column"><span class="green">✔</span></span>
+                </li>
+                <li class="feature-item store-atara" style="background: #deeeff;">
+                    <span class="store-name-column"><span class="green">✔</span></span>
+                </li>
+                <li class="feature-item store-atara" style="background: #deeeff;">
+                    <span class="store-name-column"><span class="green">✔</span></span>
+                </li>
+                <li class="feature-item store-atara" style="background: #deeeff;">
+                    <span class="store-name-column"><span class="green">✔</span></span>
+                </li>
+          </ul>
+        </div>
+         <div class="comparison-list">
+          <div class="list-header">
+            <span class="feature-text">Outros</span>
+          </div>
+    
+          <ul class="feature-list">
+           
+                <li class="feature-item store-atara">
+                    <span class="store-name-column"><span class="red">✖</span></span>
+                </li>
+                <li class="feature-item store-atara">
+                    <span class="store-name-column"><span class="red">✖</span></span>
+                </li>
+                <li class="feature-item store-atara">
+                    <span class="store-name-column"><span class="red">✖</span></span>
+                </li>
+                <li class="feature-item store-atara">
+                    <span class="store-name-column"><span class="red">✖</span></span>
+                </li>
+          </ul>
+        </div>
+    </div>
+
+    <script>
+      // Animação com GSAP
+      document.addEventListener("DOMContentLoaded", function () {
+        const features = document.querySelectorAll(".feature-text");
+        const checkmarks = document.querySelectorAll(".green");
+        const crosses = document.querySelectorAll(".red");
+
+        // Animação de digitação para os textos das características
+        features.forEach((feature, index) => {
+          gsap.fromTo(
+            feature,
+            {
+              opacity: 0,
+              x: -100,
+            },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 1,
+              delay: index * 0.5,
+            }
+          );
+        });
+
+        // Animação de digitação para os ícones de check e cross
+        checkmarks.forEach((check, index) => {
+          gsap.to(check, {
+            opacity: 1,
+            duration: 0.5,
+            delay: index * 0.5 + 1,
+            ease: "power2.inOut",
+          });
+        });
+
+        crosses.forEach((cross, index) => {
+          gsap.to(cross, {
+            opacity: 1,
+            duration: 0.5,
+            delay: index * 0.5 + 1,
+            ease: "power2.inOut",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

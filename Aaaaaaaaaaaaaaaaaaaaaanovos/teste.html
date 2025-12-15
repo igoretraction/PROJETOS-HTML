@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oferta por Tempo Limitado</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .coupon-container {
+            background: white;
+            border: 2px dashed #a7a7a7;
+            border-radius: 12px;
+            box-shadow: 0px 3px 10px 0px rgba(0, 0, 0, 0.17);
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            position: relative;
+        }
+
+        .coupon-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .header-left {
+            flex: 1;
+        }
+
+        .offer-label {
+            font-weight: bold;
+            font-size: 12px;
+            color: #222222;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .offer-text {
+            font-weight: 600;
+            font-size: 12px;
+            color: #555555;
+            line-height: 1.3;
+            margin-bottom: 5px;
+        }
+
+        .offer-terms {
+            font-weight: 600;
+            font-size: 10px;
+            color: #555555;
+            line-height: 1.3;
+        }
+
+        .vertical-divider {
+            width: 2px;
+            height: 80px;
+            background-color: #00d4aa;
+            margin: 0 20px;
+            flex-shrink: 0;
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .coupon-label {
+            font-weight: bold;
+            font-size: 12px;
+            color: #222222;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .copy-button {
+            background-color: #2592b9;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 8px 20px;
+            font-size: 11px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-transform: capitalize;
+        }
+
+        .copy-button:hover {
+            background-color: #1f7a9a;
+        }
+
+        .coupon-code {
+            font-weight: 600;
+            font-size: 11px;
+            color: #222222;
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="coupon-container">
+        <div class="coupon-header">
+            <div class="header-left">
+                <div class="offer-label">Oferta por tempo limitado!</div>
+                <div class="offer-text">Leve 3 peças ou mais por R$ 119,90</div>
+                <div class="offer-terms">*Adicione 3 itens ou mais ao carrinho</div>
+            </div>
+            
+            <div class="vertical-divider"></div>
+            
+            <div class="header-right">
+                <div class="coupon-label">Cupom:</div>
+                <button class="copy-button" onclick="copiarCupom()">Copiar Cupom</button>
+                <div class="coupon-code">PRIMEIRACOMPRA</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copiarCupom() {
+            const codigo = 'PRIMEIRACOMPRA';
+            navigator.clipboard.writeText(codigo).then(() => {
+                const botao = document.querySelector('.copy-button');
+                const textOriginal = botao.textContent;
+                botao.textContent = 'Cupom Copiado!';
+                setTimeout(() => {
+                    botao.textContent = textOriginal;
+                }, 2000);
+            }).catch(err => {
+                console.error('Erro ao copiar:', err);
+            });
+        }
+    </script>
+</body>
+</html>

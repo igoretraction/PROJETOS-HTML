@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Categorias Modernas</title>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+
+    
+
+      .categories-floating {
+        display: flex;
+        gap: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 80px;
+        perspective: 1000px;
+      }
+
+      .floating-card {
+        width: 280px;
+        height: 350px;
+        background: white;
+        border-radius: 24px;
+        padding: 30px;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+        transform-style: preserve-3d;
+        transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        opacity: 0;
+        transform: translateZ(-100px) rotateY(20deg);
+      }
+
+      .floating-card:hover {
+        transform: translateZ(20px) rotateY(0deg) translateY(-10px);
+        box-shadow: 0 30px 80px rgba(102, 126, 234, 0.3);
+      }
+
+      .floating-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #135e50;
+        color: white;
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .floating-image {
+        width: 160px;
+        height: 160px;
+        margin: 0 auto 24px;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+      }
+
+      .floating-card:hover .floating-image {
+        transform: scale(1.1);
+        box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+      }
+
+      .floating-image img {
+        width: 105%;
+        height: 102%;
+        object-fit: contain;
+        transition: transform 0.4s ease;
+        border-radius: 100px;
+      }
+
+      .floating-card:hover .floating-image img {
+        transform: scale(1.1);
+      }
+
+      .floating-title {
+        font-size: 24px;
+        font-weight: 700;
+        color: #1a202c;
+        margin-bottom: 12px;
+      }
+
+      .floating-description {
+        font-size: 14px;
+        color: #718096;
+        line-height: 1.6;
+        margin-bottom: 20px;
+      }
+
+      .floating-link {
+        padding: 10px 40px;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+        gap: 8px;
+        color: #135e50;
+        font-weight: 600;
+        font-size: 14px;
+        transition: all 0.3s ease;
+        border: 1px solid #135e50;
+        border-radius: 500px;
+      }
+
+      .floating-link:hover {
+        gap: 12px;
+        color: #217566;
+      }
+
+      @media (max-width: 768px) {
+        .section-title {
+          font-size: 32px;
+        }
+
+        .categories-grid,
+        .categories-expandable {
+          grid-template-columns: 1fr;
+        }
+
+        .floating-card {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="categories-floating">
+      <div class="floating-card">
+        <span class="floating-badge">Popular</span>
+        <div class="floating-image">
+          <img
+            src="https://corebral.cdn.magazord.com.br/img/2024/10/produto/10008/gabinete-para-ferramentas-3-gavetas-213-pecas-sata-st09512u.png"
+            alt="Organização"
+          />
+        </div>
+        <h3 class="floating-title">Organização</h3>
+        <!-- <p class="floating-description">Soluções completas para organizar suas ferramentas com eficiência</p> -->
+        <a href="https://www.corebral.com.br/busca?q=&marca=sata&categoria=11" class="floating-link">Explorar →</a>
+      </div>
+
+      <div class="floating-card">
+        <span class="floating-badge">Novo</span>
+        <div class="floating-image">
+          <img
+            src="https://corebral.cdn.magazord.com.br/img/2024/08/produto/9309/jogo-de-chave-combinada-catraca-speedy-8-19mm-6-pecas-sata-st09033g.jpg"
+            alt="Chaves"
+          />
+        </div>
+        <h3 class="floating-title">Chaves</h3>
+        <!-- <p class="floating-description">Chaves de qualidade profissional para todos os tipos de trabalho</p> -->
+        <a href="https://www.corebral.com.br/#https://www.corebral.com.br/busca?q=chave+sata" class="floating-link">Explorar →</a>
+      </div>
+
+      <div class="floating-card">
+        <span class="floating-badge">Top</span>
+        <div class="floating-image">
+          <img
+            src="https://corebral.cdn.magazord.com.br/img/2023/09/produto/6789/soquete-curto-encaixe-12-11mm-estriado-sata-st13602sc.jpg"
+            alt="Soquetes"
+          />
+        </div>
+        <h3 class="floating-title">Soquetes</h3>
+        <!-- <p class="floating-description">Soquetes de alta precisão e durabilidade para profissionais</p> -->
+        <a href="https://www.corebral.com.br/busca?q=soquete+sata" class="floating-link">Explorar →</a>
+      </div>
+    </div>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+
+      // ===== ANIMAÇÕES ESTILO 4 =====
+      gsap.to(".style4-header", {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".style4-header",
+          start: "top 80%",
+        },
+      });
+
+      gsap.to(".floating-card", {
+        opacity: 1,
+        z: 0,
+        rotateY: 0,
+        duration: 1,
+        stagger: 0.2,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".categories-floating",
+          start: "top 80%",
+        },
+      });
+
+      // ===== EFEITO 3D NO MOUSE (CARDS FLUTUANTES) =====
+      document.querySelectorAll(".floating-card").forEach((card) => {
+        card.addEventListener("mousemove", (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+
+          const rotateX = (y - centerY) / 10;
+          const rotateY = (centerX - x) / 10;
+
+          gsap.to(card, {
+            rotationX: rotateX,
+            rotationY: rotateY,
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        });
+
+        card.addEventListener("mouseleave", () => {
+          gsap.to(card, {
+            rotationX: 0,
+            rotationY: 0,
+            duration: 0.5,
+            ease: "power2.out",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Combo 2 Macaquinhos — Promo</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --card-bg: #fff;
+        --muted: #6b7280;
+        --accent: #232956;
+        --shadow: 0 6px 18px rgba(35, 41, 86, 0.06);
+        --radius: 10px;
+        --container-width: 1200px;
+      }
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        font-family: Inter, system-ui, Arial, sans-serif;
+        background: #f6f7fb;
+      }
+      .wrap {
+        display: flex;
+        justify-content: center;
+        padding: 60px 20px;
+      }
+      .promo-card {
+        background: var(--card-bg);
+        max-width: var(--container-width);
+        width: 100%;
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        padding: 28px 30px;
+        display: grid;
+        grid-template-columns: 1fr 420px 260px;
+        align-items: center;
+        gap: 28px;
+      }
+      /* Left column */
+      .promo-left {
+        padding-left: 10px;
+        text-align: center;
+      }
+      .promo-title {
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        font-size: 32px;
+        margin: 0 0 10px;
+        text-transform: uppercase;
+      }
+      .promo-sub {
+        font-size: 18px;
+        margin: 0 0 6px;
+        color: #232956;
+      }
+      .promo-price {
+        font-weight: 800;
+        color: var(--accent);
+        font-size: 32px;
+        display: inline-block;
+      }
+      .promo-each {
+        font-size: 20px;
+        color: #000;
+        margin-left: 8px;
+      }
+      .promo-original {
+        color: #52525B;
+        font-size: 14px;
+        margin-top: 14px;
+      }
+      .strike {
+        text-decoration: line-through;
+        color: #52525B;
+        margin-left: 6px;
+      }
+
+      /* Center column (steps) */
+      .promo-center {
+        padding: 0 24px;
+        border-left: 1px solid #e6e7ee;
+        border-right: 1px solid #e6e7ee;
+        text-align: left;
+      }
+      .center-title {
+        font-weight: 700;
+        color: #232956;
+        margin: 0 0 12px;
+        text-align: center;
+      }
+      .steps {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .step {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        color: #000;
+      }
+      .step .num {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+      }
+      .step p {
+        margin: 0;
+        font-size: 15px;
+        color: #000;
+      }
+
+      /* Right column */
+      .promo-right {
+        text-align: center;
+        padding-right: 10px;
+      }
+      .right-top {
+        font-weight: 700;
+        color: var(--accent);
+        font-size: 14px;
+      }
+      .right-mid {
+        color: #000;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+      .right-cta {
+        margin-top: 16px;
+        font-weight: 700;
+        color: var(--accent);
+        font-size: 13px;
+      }
+
+      @media (max-width: 980px) {
+        .promo-sub {
+          text-align: center;
+        }
+        .promo-original {
+          display: flex;
+        }
+        .promo-card {
+          grid-template-columns: 1fr;
+          gap: 14px;
+          padding: 20px;
+        }
+        .promo-center {
+          border-left: 0;
+          border-right: 0;
+          padding: 0;
+        }
+        .promo-right {
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <section class="promo-card" aria-label="Promoção Combo 2 Macaquinhos">
+        <div class="promo-left">
+          <h2 class="promo-title">Combo 2 macaquinhos</h2>
+          <div>
+            <p class="promo-sub">
+              <span style="font-weight: 700">2 Macaquinhos</span> por
+              <br>
+              <span class="promo-price">R$149</span
+              ><span class="promo-each"> cada</span>
+            </p>
+          </div>
+          <div class="promo-original">
+            Preço original <span class="strike">R$169,90</span> | Economize
+            R$41,80
+          </div>
+        </div>
+
+        <div class="promo-center" role="region" aria-label="Como comprar">
+          <h3 class="center-title">Como comprar?</h3>
+          <ul class="steps">
+            <li class="step">
+              <span class="num">1</span>
+              <p>Selecione 2 modelos de macaquinhos</p>
+            </li>
+            <li class="step">
+              <span class="num">2</span>
+              <p>Adicione as peças no carrinho</p>
+            </li>
+            <li class="step">
+              <span class="num">3</span>
+              <p>Pronto! O desconto já vai ser aplicado</p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="promo-right">
+          <div class="right-top">POR TEMPO LIMITADO</div>
+          <div class="right-mid">
+            Promoção válida apenas para produtos desta página.
+          </div>
+          <div class="right-cta">NÃO PERCA A CHANCE</div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

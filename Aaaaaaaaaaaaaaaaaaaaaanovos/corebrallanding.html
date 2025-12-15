@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banner Sata + PCustoms</title>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+      body {
+        margin: 0;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .hero {
+        width: 100%;
+        min-height: 80vh;
+        background: #135D4F
+          url("https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14334/design-sem-nome-1-1.png")
+          no-repeat right bottom;
+        background-size: contain;
+        display: flex;
+        align-items: center;
+        padding: 60px 17%;
+        box-sizing: border-box;
+        color: #ffffff;
+      }
+
+      .hero-content {
+        width: 50%;
+        max-width: 580px;
+      }
+
+      .logo-sata {
+        width: 220px;
+        margin-bottom: 20px;
+      }
+
+      .title-corebral {
+        font-size: 42px;
+        font-weight: 700;
+        margin: 0 0 12px 0;
+        line-height: 1.2;
+      }
+
+      .subtitle {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+
+      .description {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #dcdcdc;
+        margin-bottom: 30px;
+      }
+
+      .cta {
+        display: inline-block;
+        padding: 11px 28px;
+        background: #065f52;
+        color: #fff;
+        border: 1px solid white;
+        border-radius: 40px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+
+      .cta:hover {
+        opacity: 0.8;
+      }
+
+      .social {
+        margin-top: 40px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .social p {
+        margin: 0;
+        font-size: 14px;
+        opacity: 0.8;
+        font-weight: 500;
+      }
+
+      @media (max-width: 768px) {
+        .image-mobile{
+          display: block;
+          margin-bottom: -75px;
+          max-width: 310px;
+        }
+        .social {
+            display: flex;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero{
+            background: #135D4F ;
+                }
+        .social-img{
+          flex-direction: column;
+        }
+        .hero {
+          flex-direction: column;
+          text-align: center;
+          background-position: center bottom;
+        }
+        .title-corebral  {
+        flex-direction: column !important;
+      }
+
+        .hero-content {
+          width: 100%;
+        }
+
+        .logo-sata {
+          margin: 0 auto 20px auto;
+        }
+      }
+      .title-corebral {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
+      }
+      .title-corebral img {
+        max-width: 170px;
+      }
+      .title-corebral h1 {
+        margin: 0;
+      }
+      .social-img {
+  display: flex;
+  align-items: center;
+  gap: 5px;  
+  padding: 16px 0px;
+  border-radius: 0;       
+}
+
+.social-badges {
+  display: flex;
+  align-items: center;
+}
+
+.social-badges img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; 
+  object-fit: cover;
+  margin-left: -16px;      
+  background: #d9d9d9;     
+}
+
+.social-badges img:first-child {
+  margin-left: 0;
+}
+
+.social-text {
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+  white-space: nowrap;
+}
+@media (min-width: 768px){
+ .image-mobile{
+  display: none;
+ }
+}
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="title-corebral">
+          <h1 class="title-corebral">LINHA</h1>
+          <img
+            src="https://img.lojadomecanico.com.br/marcas/sata/sata-logo.png"
+            alt=""
+          />
+        </div>
+        <h1 class="title-corebral">+ PCUSTOMS OFICINA</h1>
+
+        <div class="subtitle">Favoritos da PCUSTOMS OFICINA!</div>
+
+        <p class="description">
+          A PCustoms foi criada em 1999 com o objetivo de customizar e restaurar
+          veículos. Confira agora a lista de Produtos Sata utilizados pela
+          Equipe PCustoms.
+        </p>
+
+        <button class="cta"  id="scrollButton">Conferir Agora →</button>
+
+        <div class="social">
+          <p>@pcustoms.oficina</p>
+          <!-- <p>+189mil seguidores</p> -->
+        </div>
+       <div class="social-img">
+  <div class="social-badges">
+    <img src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14323/2148289210-1.jpg" alt="Seguidor 1">
+    <img src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14324/2148733501.jpg" alt="Seguidor 2">
+    <img src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14325/210.jpg" alt="Seguidor 3">
+  </div>
+  <span class="social-text">+189mil seguidores</span>
+  <img class="image-mobile" src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/12/produto/14436/foto-pc-1-removebg-preview.png" alt="">
+</div>
+
+      </div>
+    </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script>
+ document.getElementById("scrollButton").addEventListener("click", function() {
+  const targetElement = document.getElementById("componente-id-A7wzFdx1gZ");
+  
+  if (targetElement) {
+    targetElement.scrollIntoView({
+      behavior: "smooth", 
+      block: "start" 
+    });
+  } else {
+    console.error("Elemento com id 'componente-id-A7wzFdx1gZ' não encontrado no DOM.");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const animatedTextBlocks = document.querySelectorAll(".description, .subtitle");
+
+  animatedTextBlocks.forEach((block) => {
+    const words = block.textContent.trim().split(" ");
+    block.innerHTML = words.map((w) => `<span class="word">${w}</span>`).join(" ");
+  });
+
+  const tl = gsap.timeline({ delay: 0.1 });
+
+  tl.from(".title-corebral", {
+    opacity: 0,
+    y: -30,
+    stagger: 0.15,
+    duration: 0.8,
+    ease: "power3.out",
+  });
+
+  tl.from(".title-corebral img", {
+    opacity: 0,
+    scale: 0.6,
+    duration: 0.6,
+    ease: "back.out(1.7)"
+  }, "-=0.4");
+
+  tl.from(".subtitle .word", {
+    y: 40,
+    opacity: 0,
+    stagger: 0.06,
+    duration: 0.3,
+    ease: "back.out(1.7)",
+  }, "-=0.2");
+
+  tl.from(".description .word", {
+    y: 40,
+    opacity: 0,
+    stagger: 0.05,
+    duration: 0.25,
+    ease: "back.out(1.3)",
+  }, "-=0.4");
+
+  tl.from(".cta", {
+    opacity: 1,
+    y: 20,
+    duration: 0.6,
+    ease: "power3.out"
+  }, "-=0.3");
+
+  tl.from(".social", {
+    opacity: 0,
+    y: 20,
+    duration: 0.6,
+    ease: "power3.out"
+  }, "-=0.3");
+
+  tl.from(".social-badges img", {
+    opacity: 0,
+    scale: 0,
+    stagger: 0.12,
+    duration: 0.5,
+    ease: "back.out(1.8)"
+  }, "-=0.4");
+
+  tl.from(".social-text", {
+    opacity: 0,
+    x: 15,
+    duration: 0.6,
+    ease: "power2.out"
+  }, "-=0.5");
+
+  const followerImgs = document.querySelectorAll(".social-badges img");
+
+  followerImgs.forEach((img) => {
+    img.addEventListener("mouseenter", () => {
+      gsap.to(img, {
+        scale: 1.15,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+
+    img.addEventListener("mouseleave", () => {
+      gsap.to(img, {
+        scale: 1,
+        duration: 0.3,
+        ease: "power2.out"
+      });
+    });
+  });
+
+});
+
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Porsche x Smeg | A Lenda Materializada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <style>
+      /* Reset & Base */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #000;
+        color: #fff;
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      body.loading {
+        overflow: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* Custom Cursor */
+      .cursor {
+        width: 12px;
+        height: 12px;
+        background: #C10100;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transform: translate(-50%, -50%);
+      }
+
+      .cursor-follower {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(196, 30, 58, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: all 0.1s ease;
+      }
+
+      /* New epic loader with letters coming from sides */
+      .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .loader-content {
+        text-align: center;
+        position: relative;
+      }
+
+      .loader-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 60px;
+        perspective: 1000px;
+      }
+
+      .loader-word {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .loader-letter {
+        font-size: clamp(28px, 5vw, 48px);
+        font-weight: 300;
+        letter-spacing: 8px;
+        display: inline-block;
+        opacity: 0;
+        text-transform: uppercase;
+      }
+
+      .loader-porsche .loader-letter {
+        transform: translateX(-100vw) rotateY(-90deg);
+      }
+
+      .loader-smeg .loader-letter {
+        transform: translateX(100vw) rotateY(90deg);
+      }
+
+      .loader-x {
+        color: #C10100;
+        font-size: clamp(36px, 6vw, 56px);
+        margin: 0 20px;
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+        display: inline-block;
+      }
+
+      .loader-bar-container {
+        width: 300px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: scaleX(0);
+      }
+
+      .loader-bar {
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+        position: relative;
+      }
+
+      .loader-progress {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #C10100, #ff4d6d, #C10100);
+        background-size: 200% 100%;
+        border-radius: 2px;
+        animation: shimmer 1.5s ease-in-out infinite;
+      }
+
+      @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      .loader-percentage {
+        font-size: 14px;
+        letter-spacing: 4px;
+        margin-top: 20px;
+        color: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+      }
+
+      .loader-tagline {
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 14px;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 2px;
+        opacity: 0;
+        white-space: nowrap;
+      }
+
+      /* Particles */
+      .loader-particles {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #C10100;
+        border-radius: 50%;
+        opacity: 0;
+      }
+
+      /* Reveal overlay */
+      .loader-reveal {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #C10100;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        z-index: 1;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+        opacity: 0;
+        transform: translateY(-100%);
+      }
+
+      .smeg-logo {
+        height: 30px;
+        width: auto;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+
+      .nav-link {
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        position: relative;
+        padding: 5px 0;
+        transition: color 0.3s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #C10100;
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-menu-btn {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+      }
+
+      .nav-menu-btn span {
+        width: 25px;
+        height: 2px;
+        background: #fff;
+        transition: all 0.3s ease;
+      }
+
+      /* Hero Section */
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.2);
+  opacity: 0;
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+      .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.5) 100%);
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        border: 1px solid rgba(196, 30, 58, 0.5);
+        border-radius: 30px;
+        font-size: 12px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        opacity: 0;
+        color: #C10100;
+        transform: translateY(30px);
+      }
+
+      .hero-title {
+        font-size: clamp(48px, 10vw, 60px);
+        font-weight: 200;
+        letter-spacing: 20px;
+        line-height: 1.1;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .title-line {
+        display: block;
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      .title-x {
+        color: #C10100;
+        font-size: clamp(32px, 6vw, 80px);
+        opacity: 0;
+        transform: scale(0);
+      }
+
+      .hero-subtitle {
+        font-size: clamp(14px, 2vw, 18px);
+        font-weight: 300;
+        max-width: 600px;
+        margin: 0 auto 15px;
+        line-height: 1.8;
+        opacity: 0;
+        color: rgba(255, 255, 255, 0.8);
+        transform: translateY(30px);
+      }
+
+      .hero-tagline {
+        font-size: clamp(16px, 2.5vw, 22px);
+        font-weight: 400;
+        font-style: italic;
+        color: #C10100;
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 15px 35px;
+        border: 1px solid #fff;
+        border-radius: 50px;
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all 0.4s ease;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .hero-cta svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 2;
+        transition: transform 0.3s ease;
+      }
+
+      .hero-cta:hover {
+        background: #C10100;
+        border-color: #C10100;
+      }
+
+      .hero-cta:hover svg {
+        transform: translateY(5px);
+      }
+
+      .hero-scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        opacity: 0;
+      }
+
+      .scroll-line {
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(to bottom, #C10100, transparent);
+        animation: scrollPulse 2s ease-in-out infinite;
+      }
+
+      @keyframes scrollPulse {
+        0%, 100% { transform: scaleY(1); opacity: 1; }
+        50% { transform: scaleY(0.5); opacity: 0.5; }
+      }
+
+      .hero-scroll-indicator span {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Racing Section */
+      .racing {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .racing-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .racing-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.2);
+      }
+
+      .racing-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6));
+      }
+
+      .racing-content {
+        position: relative;
+        z-index: 10;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .racing-badge {
+        font-size: clamp(12px, 2vw, 18px);
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .racing-number {
+        font-size: clamp(150px, 30vw, 400px);
+        font-weight: 700;
+        color: transparent;
+        -webkit-text-stroke: 2px rgba(196, 30, 58, 0.5);
+        opacity: 0;
+        transform: scale(0.5);
+      }
+
+      /* About Section */
+      .about {
+        padding: 0px 60px;
+        background: #000;
+        margin-top: -80px;
+      }
+
+      .about-container {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 80px;
+        max-width: 1400px;
+        margin: 0 auto;
+        height: 80vh;
+      }
+
+      .about-label {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #C10100;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateX(-30px);
+      }
+
+      .about-title {
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 300;
+        line-height: 1.2;
+        margin-bottom: 30px;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .about-description {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 50px;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .about-stats {
+        display: flex;
+        gap: 40px;
+      }
+
+      .stat {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .stat-number {
+        display: block;
+        font-size: 36px;
+        font-weight: 200;
+        color: #C10100;
+        margin-bottom: 5px;
+      }
+
+      .stat-label {
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .about-images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .about-img-wrapper {
+        overflow: hidden;
+        border-radius: 8px;
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      .about-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+
+      .about-img-wrapper:hover img {
+        transform: scale(1.1);
+      }
+
+      .about-img-wrapper.img-1 {
+        grid-column: 1 / 3;
+      }
+
+      /* Logo Section */
+      .logo-section {
+        padding: 150px 60px;
+        background: linear-gradient(to bottom, #000, #0a0a0a);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-container {
+        text-align: center;
+      }
+
+      .logo-circle {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #C10100, #ff6b6b);
+        margin: 0 auto 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        opacity: 0;
+        transform: scale(0);
+      }
+
+      .logo-inner {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-inner::before {
+        content: "";
+        width: 60px;
+        height: 60px;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="none" stroke="%2#C10100" stroke-width="2"/><path d="M50 20 L50 80 M30 40 L50 20 L70 40" fill="none" stroke="%2#C10100" stroke-width="2"/></svg>')
+          center center / contain no-repeat;
+      }
+
+      .logo-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 15px;
+        font-size: clamp(24px, 4vw, 42px);
+        font-weight: 300;
+        letter-spacing: 15px;
+      }
+
+      .logo-text span {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .logo-x {
+        color: #C10100;
+      }
+
+      /* Products Section */
+      .products {
+        padding: 150px 60px;
+        background: #000;
+      }
+
+      .products-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+
+      .products-label {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #C10100;
+        margin-bottom: 20px;
+        opacity: 0;
+      }
+
+      .products-title {
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 300;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .products-subtitle {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+
+      .product-card {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+
+      .product-image {
+        position: relative;
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 3 / 4;
+        margin-bottom: 20px;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* padding: 30px; */
+
+        transition: transform 0.6s ease;
+      }
+
+      .product-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(196, 30, 58, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      /* .product-card:hover .product-overlay {
+        opacity: 1;
+      } */
+
+      .product-card:hover .product-image img {
+        transform: scale(1.1);
+      }
+
+      .product-view {
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 12px 25px;
+        border: 1px solid #fff;
+        border-radius: 30px;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+      }
+
+      /* .product-card:hover .product-view {
+        transform: translateY(0);
+      } */
+
+      .product-category {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #C10100;
+      }
+
+      .product-name {
+        font-size: 22px;
+        font-weight: 400;
+        margin: 8px 0;
+      }
+
+      .product-description {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Gallery Section */
+      .gallery {
+        padding: 150px 60px;
+        background: #0a0a0a;
+      }
+
+      .gallery-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+
+      .gallery-label {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #C10100;
+        margin-bottom: 20px;
+        opacity: 0;
+      }
+
+      .gallery-title {
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 300;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns:  1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+        height: 80vh;
+      }
+
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        opacity: 0;
+        transform: scale(0.9);
+        max-height: 648px;
+      }
+
+      .gallery-item.large {
+        grid-row: 1 / 3;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+        max-height: 648px;
+      }
+
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+
+      .gallery-item-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        transform: translateY(100%);
+        transition: transform 0.4s ease;
+      }
+
+      .gallery-item:hover .gallery-item-overlay {
+        transform: translateY(0);
+      }
+
+      .gallery-item-overlay span {
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: 2px;
+      }
+
+      /* CTA Section */
+      .cta {
+        position: relative;
+        padding: 200px 60px;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      .cta-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #C10100 0%, #8b0000 50%, #000 100%);
+        opacity: 0.15;
+      }
+
+      .cta-content {
+        position: relative;
+        z-index: 10;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      .cta-title {
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 300;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      .cta-text {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 45px;
+        background: #C10100;
+        border: none;
+        border-radius: 50px;
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        transition: all 0.4s ease;
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      .cta-button svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 2;
+        transition: transform 0.3s ease;
+      }
+
+      .cta-button:hover {
+        background: #ff4d6d;
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px rgba(196, 30, 58, 0.3);
+      }
+
+      .cta-button:hover svg {
+        transform: translateX(5px);
+      }
+
+      /* Footer */
+      .footer {
+        background: #000;
+        padding: 80px 60px 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .footer-top {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .footer-logos {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-size: 24px;
+        font-weight: 300;
+        letter-spacing: 5px;
+        margin-bottom: 15px;
+      }
+
+      .footer-x {
+        color: #C10100;
+      }
+
+      .footer-tagline {
+        font-size: 14px;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 80px;
+      }
+
+      .footer-col h4 {
+        font-size: 14px;
+        font-weight: 500;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+      }
+
+      .footer-col a {
+        display: block;
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.5);
+        margin-bottom: 12px;
+        transition: color 0.3s ease;
+      }
+
+      .footer-col a:hover {
+        color: #C10100;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .footer-bottom p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .nav {
+          padding: 20px 30px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .nav-menu-btn {
+          display: flex;
+        }
+
+        .about-container {
+          grid-template-columns: 1fr;
+        }
+
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+          height: auto;
+        }
+
+        .gallery-item.large {
+          grid-row: auto;
+          grid-column: 1 / 3;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero,
+        .about,
+        .products,
+        .gallery,
+        .cta {
+          padding: 80px 20px;
+        }
+
+        .hero-title {
+          letter-spacing: 10px;
+        }
+
+        .about-stats {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .about-images {
+          grid-template-columns: 1fr;
+        }
+
+        .about-img-wrapper.img-1 {
+          grid-column: auto;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .gallery-item.large {
+          grid-column: auto;
+        }
+
+        .footer-links {
+          flex-direction: column;
+          gap: 30px;
+        }
+
+        .cursor,
+        .cursor-follower {
+          display: none;
+        }
+
+        .loader-letter {
+          font-size: 24px;
+          letter-spacing: 4px;
+        }
+
+        .loader-x {
+          font-size: 28px;
+          margin: 0 10px;
+        }
+      }
+      /* Enquanto estiver carregando: mostra cursor normal e esconde o cursor custom */
+body.loading {
+  cursor: auto !important;
+}
+
+body.loading .cursor,
+body.loading .cursor-follower {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Quando terminar o loading: usa cursor custom */
+body:not(.loading) {
+  cursor: none;
+}
+
+body:not(.loading) .cursor,
+body:not(.loading) .cursor-follower {
+  opacity: 1;
+  visibility: visible;
+}
+
+    </style>
+  </head>
+  <body class="loading">
+    <!-- Loader -->
+    <div class="loader">
+      <div class="loader-particles"></div>
+      <div class="loader-reveal"></div>
+      <div class="loader-content">
+        <div class="loader-logo">
+          <div class="loader-word loader-porsche">
+            <span class="loader-letter">P</span>
+            <span class="loader-letter">O</span>
+            <span class="loader-letter">R</span>
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">C</span>
+            <span class="loader-letter">H</span>
+            <span class="loader-letter">E</span>
+          </div>
+          <span class="loader-x">×</span>
+          <div class="loader-word loader-smeg">
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">M</span>
+            <span class="loader-letter">E</span>
+            <span class="loader-letter">G</span>
+          </div>
+        </div>
+        <div class="loader-bar-container">
+          <div class="loader-bar">
+            <div class="loader-progress"></div>
+          </div>
+          <div class="loader-percentage">0%</div>
+        </div>
+        <div class="loader-tagline">Os sonhos tornam-se realidade.</div>
+      </div>
+    </div>
+
+    <!-- Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-logo">
+        <svg class="smeg-logo" viewBox="0 0 120 40" fill="currentColor">
+          <circle cx="12" cy="20" r="8" />
+          <circle cx="32" cy="20" r="8" />
+          <text x="48" y="28" font-size="24" font-weight="600">smeg</text>
+        </svg>
+      </div>
+      <div class="nav-links">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">Sobre</a>
+        <a href="#products" class="nav-link">Produtos</a>
+        <a href="#gallery" class="nav-link">Galeria</a>
+        <a href="#contact" class="nav-link">Contacto</a>
+      </div>
+      <div class="nav-menu-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-bg">
+  <video
+    id="heroVideo"
+    class="hero-video"
+    autoplay
+    muted
+    loop
+    playsinline
+    preload="metadata"
+  ></video>
+</div>
+
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <div class="hero-badge">Edição Limitada</div>
+        <h1 class="hero-title">
+          <span class="title-line">PORSCHE</span>
+          <span class="title-x">×</span>
+          <span class="title-line">SMEG</span>
+        </h1>
+        <p class="hero-subtitle">
+          A união perfeita entre a tradição que inspira paixões mundialmente e
+          oferece experiências que despertam todos os sentidos.
+        </p>
+        <p class="hero-tagline">Os sonhos tornam-se realidade.</p>
+        <a href="#about" class="hero-cta">
+          <span>Descobrir</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </a>
+      </div>
+      <div class="hero-scroll-indicator">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- Racing Section -->
+    <section class="racing" id="racing">
+      <div class="racing-bg">
+        <img
+          src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/4_le_mans_porsche_917_1920x1080.png/4_le_mans_porsche_917_1920x1080.png/brx%3AwideDeskLarge"
+          alt="Porsche 917 Le Mans"
+          class="racing-img"
+        />
+      </div>
+      <div class="racing-overlay"></div>
+      <div class="racing-content">
+        <div class="racing-badge">CIRCUIT DES 24 HEURES DU MANS</div>
+        <div class="racing-number">23</div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+      <div class="about-container">
+        <div class="about-text">
+          <span class="about-label">A História</span>
+          <h2 class="about-title">A lenda materializada</h2>
+          <p class="about-description">
+            Numa celebração ousada de tradição, inovação e excelência no design,
+            a Porsche e a Smeg redefinem uma ligação entre o prestígio automóvel
+            e o estilo de vida contemporâneo, criando peças que são verdadeiros
+            ícones.
+          </p>
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-number">1963</span>
+              <span class="stat-label">Ano de fundação Smeg</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">1931</span>
+              <span class="stat-label">Ano de fundação Porsche</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">2024</span>
+              <span class="stat-label">Colaboração exclusiva</span>
+            </div>
+          </div>
+        </div>
+        <div class="about-images">
+          <div class="about-img-wrapper img-1">
+            <img
+              src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/salzburgdetails_960x690_7.png/salzburgdetails_960x690_7.png/brx%3ApostcardDeskLarge"
+              alt="Smeg Product Detail"
+            />
+          </div>
+          <!-- <div class="about-img-wrapper img-2">
+            <img
+              src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/9_lifestyle_5_legend_materialized_952x1104.png/9_lifestyle_5_legend_materialized_952x1104.png/brx%3AwideDeskLarge"
+              alt="Smeg Kitchen"
+            />
+          </div>
+          <div class="about-img-wrapper img-3">
+            <img
+              src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/10_lifestyle_6_legend_materialized_952x1104.png/10_lifestyle_6_legend_materialized_952x1104.png/brx%3AwideDeskLarge"
+              alt="Smeg Design"
+            />
+          </div> -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo Section -->
+    
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+      <div class="products-header">
+        <span class="products-label">Coleção</span>
+        <h2 class="products-title">Produtos Exclusivos</h2>
+        <p class="products-subtitle">
+          Design icónico que transcende o tempo e celebra a excelência
+        </p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/kv_salzfab_960x690.png/kv_salzfab_960x690.png"
+              alt="Kettle"
+            />
+            <div class="product-overlay">
+              <span class="product-view">Ver Detalhes</span>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">Máquina de café | 917 Salzburg</span>
+            <h3 class="product-name">KLF04</h3>
+            <p class="product-description">Elegância em cada detalhe</p>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img
+              src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/kv_salzbcc_960x690.png/kv_salzbcc_960x690.png"
+              alt="Toaster"
+            />
+            <div class="product-overlay">
+              <span class="product-view">Ver Detalhes</span>
+            </div>
+          </div>
+          <div class="product-info">
+            <span class="product-category">Torradeira</span>
+            <h3 class="product-name">TSF03</h3>
+            <p class="product-description">Performance e estilo únicos</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+      <div class="gallery-header">
+        <span class="gallery-label">Galeria</span>
+        <h2 class="gallery-title">Momentos Icónicos</h2>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item large">
+          <img
+            src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/kv_carrara_960x690.png/kv_carrara_960x690.png"
+            alt="Gallery 1"
+          />
+          <div class="gallery-item-overlay">
+            <span>Duas Lendas</span>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/kv_shade_960x690.png/kv_shade_960x690.png"
+            alt="Gallery 2"
+          />
+          <div class="gallery-item-overlay">
+            <span>Design Atemporal</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="cta-bg"></div>
+      <div class="cta-content">
+        <h2 class="cta-title">Pronto para fazer parte da lenda?</h2>
+        <p class="cta-text">
+          Descubra a coleção exclusiva Porsche x Smeg e eleve o seu estilo de vida.
+        </p>
+        <a href="#contact" class="cta-button">
+          <span>Contactar</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+      <div class="footer-bottom">
+        <p>&copy; 2025 Porsche x Smeg. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Register GSAP plugins
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Create particles
+      const particlesContainer = document.querySelector('.loader-particles');
+      for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particlesContainer.appendChild(particle);
+      }
+
+      // Custom Cursor
+      const cursor = document.querySelector('.cursor');
+      const cursorFollower = document.querySelector('.cursor-follower');
+
+      let mouseX = 0, mouseY = 0;
+      let followerX = 0, followerY = 0;
+
+      document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.1 });
+      });
+
+      function animateFollower() {
+        followerX += (mouseX - followerX) * 0.1;
+        followerY += (mouseY - followerY) * 0.1;
+        gsap.set(cursorFollower, { x: followerX, y: followerY });
+        requestAnimationFrame(animateFollower);
+      }
+      animateFollower();
+
+      // Cursor hover effects
+      const hoverElements = document.querySelectorAll('a, button, .product-card');
+      hoverElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          gsap.to(cursor, { scale: 2, duration: 0.3 });
+          gsap.to(cursorFollower, { scale: 1.5, opacity: 0.5, duration: 0.3 });
+        });
+        el.addEventListener('mouseleave', () => {
+          gsap.to(cursor, { scale: 1, duration: 0.3 });
+          gsap.to(cursorFollower, { scale: 1, opacity: 1, duration: 0.3 });
+        });
+      });
+
+      // Epic Loader Animation
+      const loaderTl = gsap.timeline();
+      const porscheLetters = document.querySelectorAll('.loader-porsche .loader-letter');
+      const smegLetters = document.querySelectorAll('.loader-smeg .loader-letter');
+      const loaderX = document.querySelector('.loader-x');
+      const particles = document.querySelectorAll('.particle');
+
+      // Animate particles
+      particles.forEach((particle, i) => {
+        gsap.to(particle, {
+          opacity: Math.random() * 0.5 + 0.2,
+          scale: Math.random() * 2 + 0.5,
+          x: (Math.random() - 0.5) * 200,
+          y: (Math.random() - 0.5) * 200,
+          duration: Math.random() * 3 + 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: Math.random() * 2
+        });
+      });
+
+      // Main loader timeline
+      loaderTl
+        // Animate PORSCHE letters from left
+        .to(porscheLetters, {
+          x: 0,
+          rotateY: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.08,
+          ease: "power4.out"
+        })
+        // Animate SMEG letters from right
+        .to(smegLetters, {
+          x: 0,
+          rotateY: 0,
+          opacity: 1,
+          duration: 1.2,
+          stagger: 0.08,
+          ease: "power4.out"
+        }, "-=1")
+        // Animate X symbol
+        .to(loaderX, {
+          scale: 1,
+          rotation: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "elastic.out(1, 0.5)"
+        }, "-=0.6")
+        // Show progress bar
+        .to('.loader-bar-container', {
+          opacity: 1,
+          scaleX: 1,
+          duration: 0.5,
+          ease: "power2.out"
+        }, "-=0.3")
+        .to('.loader-percentage', {
+          opacity: 1,
+          duration: 0.3
+        }, "-=0.2")
+        // Animate progress bar
+        .to('.loader-progress', {
+          width: '100%',
+          duration: 2,
+          ease: "power2.inOut",
+          onUpdate: function() {
+            const progress = Math.round(this.progress() * 100);
+            document.querySelector('.loader-percentage').textContent = progress + '%';
+          }
+        })
+        // Show tagline
+        .to('.loader-tagline', {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          ease: "power2.out"
+        }, "-=1")
+        // Fade out loader content
+        .to('.loader-content', {
+          opacity: 0,
+          scale: 0.9,
+          duration: 0.5
+        }, "+=0.5")
+        // Red reveal animation
+        .to('.loader-reveal', {
+          scaleY: 1,
+          duration: 0.6,
+          ease: "power4.inOut"
+        })
+        .set('.loader-reveal', {
+          transformOrigin: 'top'
+        })
+        .to('.loader-reveal', {
+          scaleY: 0,
+          duration: 0.6,
+          ease: "power4.inOut"
+        })
+        // Hide loader
+        .to('.loader', {
+          opacity: 0,
+          duration: 0.3,
+          onComplete: () => {
+            document.querySelector('.loader').style.display = 'none';
+            document.body.classList.remove('loading');
+            initPageAnimations();
+          }
+        });
+
+      // Page Animations
+      function initPageAnimations() {
+        // Nav entrance
+        gsap.to('.nav', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out"
+        });
+
+        // Hero animations
+        const heroTl = gsap.timeline();
+
+        heroTl
+          .to('.hero-bg', {
+            scale: 1,
+            opacity: 1,
+            duration: 1.5,
+            ease: "power2.out"
+          })
+          .to('.hero-badge', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out"
+          }, "-=0.8")
+          .to('.title-line', {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out"
+          }, "-=0.5")
+          .to('.title-x', {
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "elastic.out(1, 0.5)"
+          }, "-=0.6")
+          .to('.hero-subtitle', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out"
+          }, "-=0.4")
+          .to('.hero-tagline', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out"
+          }, "-=0.5")
+          .to('.hero-cta', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out"
+          }, "-=0.5")
+          .to('.hero-scroll-indicator', {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power3.out"
+          }, "-=0.3");
+
+     gsap.to('.hero-bg', {
+  yPercent: 12,                 // ↓ diminui o “deslocamento”
+  ease: "none",
+  scrollTrigger: {
+    trigger: '.hero',
+    start: 'top top',
+    end: 'bottom top',
+    scrub: 1.2,                
+    invalidateOnRefresh: true
+  }
+});
+
+        // Racing Section
+        gsap.to('.racing-img', {
+  scale: 1,
+  ease: "none",
+  scrollTrigger: {
+    trigger: '.racing',
+    start: 'top bottom',
+    end: 'bottom top',
+    scrub: 1.5                  
+  }
+});
+
+
+        gsap.to('.racing-badge', {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          scrollTrigger: {
+            trigger: '.racing',
+            start: 'top 60%'
+          }
+        });
+
+        gsap.to('.racing-number', {
+          opacity: 1,
+          scale: 1,
+          duration: 1.5,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: '.racing',
+            start: 'top 60%'
+          }
+        });
+
+        // About Section
+        gsap.to('.about-label', {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.about',
+            start: 'top 70%'
+          }
+        });
+
+        gsap.to('.about-title', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.about',
+            start: 'top 70%'
+          }
+        });
+
+        gsap.to('.about-description', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.2,
+          scrollTrigger: {
+            trigger: '.about',
+            start: 'top 70%'
+          }
+        });
+
+        gsap.to('.stat', {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: '.about-stats',
+            start: 'top 80%'
+          }
+        });
+
+        gsap.to('.about-img-wrapper', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: '.about-images',
+            start: 'top 70%'
+          }
+        });
+
+        // Logo Section
+        gsap.to('.logo-circle', {
+          opacity: 1,
+          scale: 1,
+          duration: 1,
+          ease: "elastic.out(1, 0.5)",
+          scrollTrigger: {
+            trigger: '.logo-section',
+            start: 'top 70%'
+          }
+        });
+
+        gsap.to('.logo-circle', {
+          rotation: 360,
+          duration: 20,
+          repeat: -1,
+          ease: "none"
+        });
+
+        gsap.to('.logo-text span', {
+          opacity: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: '.logo-section',
+            start: 'top 60%'
+          }
+        });
+
+        // Products Section
+        gsap.to('.products-label', {
+          opacity: 1,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.products-header',
+            start: 'top 80%'
+          }
+        });
+
+        gsap.to('.products-title', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.products-header',
+            start: 'top 80%'
+          }
+        });
+
+        gsap.to('.products-subtitle', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.2,
+          scrollTrigger: {
+            trigger: '.products-header',
+            start: 'top 80%'
+          }
+        });
+
+        gsap.to('.product-card', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          scrollTrigger: {
+            trigger: '.products-grid',
+            start: 'top 70%'
+          }
+        });
+
+        // Gallery Section
+        gsap.to('.gallery-label', {
+          opacity: 1,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.gallery-header',
+            start: 'top 80%'
+          }
+        });
+
+        gsap.to('.gallery-title', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.gallery-header',
+            start: 'top 80%'
+          }
+        });
+
+        gsap.to('.gallery-item', {
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          scrollTrigger: {
+            trigger: '.gallery-grid',
+            start: 'top 70%'
+          }
+        });
+
+        // CTA Section
+        gsap.to('.cta-title', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          scrollTrigger: {
+            trigger: '.cta',
+            start: 'top 70%'
+          }
+        });
+
+        gsap.to('.cta-text', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.2,
+          scrollTrigger: {
+            trigger: '.cta',
+            start: 'top 70%'
+          }
+        });
+
+        gsap.to('.cta-button', {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.4,
+          scrollTrigger: {
+            trigger: '.cta',
+            start: 'top 70%'
+          }
+        });
+
+        // Magnetic effect on buttons
+        const magneticElements = document.querySelectorAll('.hero-cta, .cta-button');
+
+        magneticElements.forEach(el => {
+          el.addEventListener('mousemove', (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left - rect.width / 2;
+            const y = e.clientY - rect.top - rect.height / 2;
+
+            gsap.to(el, {
+              x: x * 0.2,
+              y: y * 0.2,
+              duration: 0.3,
+              ease: "power2.out"
+            });
+          });
+
+          el.addEventListener('mouseleave', () => {
+            gsap.to(el, {
+              x: 0,
+              y: 0,
+              duration: 0.5,
+              ease: "elastic.out(1, 0.3)"
+            });
+          });
+        });
+
+        // Floating animation for product images
+        document.querySelectorAll('.product-image img').forEach((img, i) => {
+          gsap.to(img, {
+            y: '10px',
+            duration: 2 + i * 0.2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+          });
+        });
+
+        // Nav background on scroll
+        ScrollTrigger.create({
+          start: 'top -100',
+          onUpdate: (self) => {
+            if (self.direction === 1) {
+              gsap.to('.nav', {
+                background: 'rgba(0, 0, 0, 0.95)',
+                backdropFilter: 'blur(10px)',
+                duration: 0.3
+              });
+            } else if (self.scroll() < 100) {
+              gsap.to('.nav', {
+                background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent)',
+                backdropFilter: 'none',
+                duration: 0.3
+              });
+            }
+          }
+        });
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+              gsap.to(window, {
+                duration: 1.5,
+                scrollTo: { y: target, offsetY: 0 },
+                ease: "power3.inOut"
+              });
+            }
+          });
+        });
+      }
+
+      // Refresh ScrollTrigger on resize
+      window.addEventListener('resize', () => {
+        ScrollTrigger.refresh();
+      });
+
+      const HERO_VIDEO_MOBILE =
+  "https://magazord-public.s3.amazonaws.com/smegbrasil/img/2025/12/produto/3519/porsche-x-smeg-salzburg-edition-15s-9x16-en-hr.mp4?_gl=1*1hjn9hf*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjU1NjA2NjYkbzkwJGcxJHQxNzY1NTYwNzY3JGo2MCRsMCRoMA..";
+
+const HERO_VIDEO_DESKTOP =
+  "https://res.cloudinary.com/dwxzloaok/video/upload/v1765561471/PORSCHE_x_SMEG_SALZBURG_EDITION_30s_16x9_ES_LR_wrkuff.mp4";
+
+function setHeroVideoSource() {
+  const video = document.getElementById("heroVideo");
+  if (!video) return;
+
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const desiredSrc = isMobile ? HERO_VIDEO_MOBILE : HERO_VIDEO_DESKTOP;
+
+  if (video.dataset.src === desiredSrc) return;
+
+  video.dataset.src = desiredSrc;
+  video.src = desiredSrc;
+  video.load();
+
+  // tenta dar play (alguns browsers exigem isso mesmo com autoplay)
+  const p = video.play();
+  if (p && typeof p.catch === "function") p.catch(() => {});
+}
+
+setHeroVideoSource();
+window.addEventListener("resize", setHeroVideoSource);
+window.addEventListener("orientationchange", setHeroVideoSource);
+
+    </script>
+  </body>
+</html>

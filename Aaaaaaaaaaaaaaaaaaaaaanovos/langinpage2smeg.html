@@ -1,0 +1,1785 @@
+<!DOCTYPE html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Porsche x Smeg | A Lenda Materializada</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* Reset & Base */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #000;
+        color: #fff;
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      body.loading {
+        overflow: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* ============================
+         Cursor (AJUSTE DO LOADER)
+         ============================ */
+      /* Enquanto estiver carregando: mostra cursor normal e esconde o cursor custom */
+      body.loading {
+        cursor: auto !important;
+      }
+      body.loading .cursor,
+      body.loading .cursor-follower {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      /* Depois do loading: cursor custom */
+      body:not(.loading) {
+        cursor: none;
+      }
+      body:not(.loading) .cursor,
+      body:not(.loading) .cursor-follower {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      /* Custom Cursor */
+      .cursor {
+        width: 12px;
+        height: 12px;
+        background: #c10100;
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999;
+        mix-blend-mode: difference;
+        transform: translate(-50%, -50%);
+      }
+
+      .cursor-follower {
+        width: 40px;
+        height: 40px;
+        border: 1px solid rgba(196, 30, 58, 0.5);
+        border-radius: 50%;
+        position: fixed;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: transform 0.12s ease, opacity 0.12s ease;
+      }
+
+      /* Loader */
+      .loader {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        z-index: 10000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .loader-content {
+        text-align: center;
+        position: relative;
+        z-index: 2;
+      }
+      .loader-logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin-bottom: 60px;
+        perspective: 1000px;
+      }
+
+      .loader-word {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .loader-letter {
+        font-size: clamp(28px, 5vw, 48px);
+        font-weight: 300;
+        letter-spacing: 8px;
+        display: inline-block;
+        opacity: 0;
+        text-transform: uppercase;
+        will-change: transform, opacity;
+        transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+          opacity 0.8s ease;
+      }
+
+      .loader-porsche .loader-letter {
+        transform: translateX(-100vw) rotateY(-90deg);
+      }
+      .loader-smeg .loader-letter {
+        transform: translateX(100vw) rotateY(90deg);
+      }
+
+      /* Quando entra */
+      .loader-letter.is-in {
+        transform: translateX(0) rotateY(0);
+        opacity: 1;
+      }
+
+      .loader-x {
+        color: #c10100;
+        font-size: clamp(36px, 6vw, 56px);
+        margin: 0 20px;
+        opacity: 0;
+        transform: scale(0) rotate(-180deg);
+        display: inline-block;
+        transition: transform 0.8s cubic-bezier(0.2, 1.2, 0.2, 1),
+          opacity 0.4s ease;
+      }
+      .loader-x.is-in {
+        opacity: 1;
+        transform: scale(1) rotate(0deg);
+      }
+
+      .loader-bar-container {
+        width: 300px;
+        margin: 0 auto;
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .loader-bar-container.is-in {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+
+      .loader-bar {
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 2px;
+        overflow: hidden;
+      }
+
+      .loader-progress {
+        width: 0%;
+        height: 100%;
+        background: linear-gradient(90deg, #c10100, #ff4d6d, #c10100);
+        background-size: 200% 100%;
+        border-radius: 2px;
+        animation: shimmer 1.5s ease-in-out infinite;
+      }
+      @keyframes shimmer {
+        0% {
+          background-position: 200% 0;
+        }
+        100% {
+          background-position: -200% 0;
+        }
+      }
+
+      .loader-percentage {
+        font-size: 14px;
+        letter-spacing: 4px;
+        margin-top: 20px;
+        color: rgba(255, 255, 255, 0.5);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .loader-percentage.is-in {
+        opacity: 1;
+      }
+
+      .loader-tagline {
+        position: absolute;
+        bottom: -80px;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        font-size: 14px;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.3);
+        letter-spacing: 2px;
+        opacity: 0;
+        white-space: nowrap;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+      .loader-tagline.is-in {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* Particles */
+      .loader-particles {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1;
+      }
+      .particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: #c10100;
+        border-radius: 50%;
+        opacity: 0.35;
+        will-change: transform, opacity;
+        animation: floatParticle 3.2s ease-in-out infinite alternate;
+      }
+      @keyframes floatParticle {
+        from {
+          transform: translate3d(0, 0, 0) scale(0.8);
+          opacity: 0.25;
+        }
+        to {
+          transform: translate3d(120px, -80px, 0) scale(1.4);
+          opacity: 0.55;
+        }
+      }
+
+      /* Reveal overlay */
+      .loader-reveal {
+        position: absolute;
+        inset: 0;
+        background: #c10100;
+        transform: scaleY(0);
+        transform-origin: bottom;
+        z-index: 3;
+        transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .loader-reveal.is-in {
+        transform: scaleY(1);
+      }
+      .loader-reveal.is-out {
+        transform-origin: top;
+        transform: scaleY(0);
+      }
+
+      .loader-content.is-out {
+        opacity: 0;
+        transform: scale(0.92);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+      }
+
+      .loader.is-hidden {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      /* Navigation */
+      .nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 20px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 1000;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+        opacity: 0;
+        transform: translateY(-100%);
+        transition: opacity 0.8s ease, transform 0.8s ease, background 0.3s ease;
+      }
+      body.is-ready .nav {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .nav.is-solid {
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+      }
+
+      .smeg-logo {
+        height: 30px;
+        width: auto;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+      }
+      .nav-link {
+        font-size: 14px;
+        font-weight: 300;
+        letter-spacing: 1px;
+        position: relative;
+        padding: 5px 0;
+        transition: color 0.3s ease;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 1px;
+        background: #c10100;
+        transition: width 0.3s ease;
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-menu-btn {
+        display: none;
+        flex-direction: column;
+        gap: 6px;
+        cursor: pointer;
+      }
+      .nav-menu-btn span {
+        width: 25px;
+        height: 2px;
+        background: #fff;
+        transition: all 0.3s ease;
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .hero-bg {
+        position: absolute;
+        inset: 0;
+        transform: scale(1.2);
+        opacity: 0;
+        overflow: hidden;
+        will-change: transform;
+        transition: transform 1.5s ease, opacity 1.2s ease;
+      }
+      body.is-ready .hero-bg {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.7) 0%,
+          rgba(0, 0, 0, 0.3) 50%,
+          rgba(0, 0, 0, 0.5) 100%
+        );
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 10;
+        text-align: center;
+        padding: 0 20px;
+      }
+
+      .hero-badge {
+        display: inline-block;
+        padding: 8px 20px;
+        border: 1px solid rgba(196, 30, 58, 0.5);
+        border-radius: 30px;
+        font-size: 12px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        opacity: 0;
+        color: #c10100;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        transition-delay: 0.35s;
+      }
+      body.is-ready .hero-badge {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-title {
+        font-size: clamp(48px, 10vw, 60px);
+        font-weight: 200;
+        letter-spacing: 20px;
+        line-height: 1.1;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .title-line {
+        display: block;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+      body.is-ready .title-line {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      body.is-ready .title-line:nth-child(1) {
+        transition-delay: 0.55s;
+      }
+      body.is-ready .title-line:nth-child(3) {
+        transition-delay: 0.75s;
+      }
+
+      .title-x {
+        color: #c10100;
+        font-size: clamp(32px, 6vw, 80px);
+        opacity: 0;
+        transform: scale(0);
+        transition: opacity 0.8s ease,
+          transform 0.8s cubic-bezier(0.2, 1.2, 0.2, 1);
+        transition-delay: 0.65s;
+      }
+      body.is-ready .title-x {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      .hero-subtitle {
+        font-size: clamp(14px, 2vw, 18px);
+        font-weight: 300;
+        max-width: 600px;
+        margin: 0 auto 15px;
+        line-height: 1.8;
+        opacity: 0;
+        color: rgba(255, 255, 255, 0.8);
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        transition-delay: 0.9s;
+      }
+      body.is-ready .hero-subtitle {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-tagline {
+        font-size: clamp(16px, 2.5vw, 22px);
+        font-weight: 400;
+        font-style: italic;
+        color: #c10100;
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        transition-delay: 1s;
+      }
+      body.is-ready .hero-tagline {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 15px 35px;
+        border: 1px solid #fff;
+        border-radius: 50px;
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: background 0.4s ease, border-color 0.4s ease,
+          transform 0.25s ease, opacity 0.8s ease;
+        opacity: 0;
+        transform: translateY(30px);
+        transition-delay: 1.1s;
+      }
+      body.is-ready .hero-cta {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .hero-cta svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 2;
+        transition: transform 0.3s ease;
+      }
+      .hero-cta:hover {
+        background: #c10100;
+        border-color: #c10100;
+      }
+      .hero-cta:hover svg {
+        transform: translateY(5px);
+      }
+
+      .hero-scroll-indicator {
+        position: absolute;
+        bottom: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+        transition-delay: 1.25s;
+      }
+      body.is-ready .hero-scroll-indicator {
+        opacity: 1;
+      }
+
+      .scroll-line {
+        width: 1px;
+        height: 60px;
+        background: linear-gradient(to bottom, #c10100, transparent);
+        animation: scrollPulse 2s ease-in-out infinite;
+      }
+      @keyframes scrollPulse {
+        0%,
+        100% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scaleY(0.5);
+          opacity: 0.5;
+        }
+      }
+      .hero-scroll-indicator span {
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      /* Racing */
+      .racing {
+        position: relative;
+        height: 100vh;
+        overflow: hidden;
+      }
+      .racing-bg {
+        position: absolute;
+        inset: 0;
+      }
+      .racing-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.2);
+        will-change: transform;
+      }
+      .racing-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.3),
+          rgba(0, 0, 0, 0.6)
+        );
+      }
+      .racing-content {
+        position: relative;
+        z-index: 10;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .racing-badge {
+        font-size: clamp(12px, 2vw, 18px);
+        letter-spacing: 8px;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 1s ease, transform 1s ease;
+      }
+      .racing-number {
+        font-size: clamp(150px, 30vw, 400px);
+        font-weight: 700;
+        color: transparent;
+        -webkit-text-stroke: 2px rgba(196, 30, 58, 0.5);
+        opacity: 0;
+        transform: scale(0.5);
+        transition: opacity 1.2s ease, transform 1.2s ease;
+      }
+      .racing.in-view .racing-badge {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .racing.in-view .racing-number {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      /* About */
+      .about {
+        padding: 0px 60px;
+        background: #000;
+        margin-top: -80px;
+      }
+      .about-container {
+        display: grid;
+        grid-template-columns: 1fr 1.5fr;
+        gap: 80px;
+        max-width: 1400px;
+        margin: 0 auto;
+        height: 80vh;
+      }
+      .about-label {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #c10100;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateX(-30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .about-title {
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 300;
+        line-height: 1.2;
+        margin-bottom: 30px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .about-description {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 1.8;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 50px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        transition-delay: 0.1s;
+      }
+      .about-stats {
+        display: flex;
+        gap: 40px;
+      }
+      .stat {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+      .stat-number {
+        display: block;
+        font-size: 36px;
+        font-weight: 200;
+        color: #c10100;
+        margin-bottom: 5px;
+      }
+      .stat-label {
+        font-size: 12px;
+        letter-spacing: 1px;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .about-images {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 20px;
+      }
+      .about-img-wrapper {
+        overflow: hidden;
+        border-radius: 8px;
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .about-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+      }
+      .about-img-wrapper:hover img {
+        transform: scale(1.1);
+      }
+      .about-img-wrapper.img-1 {
+        grid-column: 1 / 3;
+      }
+
+      .about.in-view .about-label {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      .about.in-view .about-title {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .about.in-view .about-description {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .about.in-view .stat {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .about.in-view .stat:nth-child(1) {
+        transition-delay: 0.15s;
+      }
+      .about.in-view .stat:nth-child(2) {
+        transition-delay: 0.25s;
+      }
+      .about.in-view .stat:nth-child(3) {
+        transition-delay: 0.35s;
+      }
+      .about.in-view .about-img-wrapper {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .about.in-view .about-img-wrapper:nth-child(1) {
+        transition-delay: 0.2s;
+      }
+
+      /* Products */
+      .products {
+        padding: 150px 60px;
+        background: #000;
+      }
+      .products-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+      .products-label {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #c10100;
+        margin-bottom: 20px;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+      .products-title {
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 300;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .products-subtitle {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.6);
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        transition-delay: 0.15s;
+      }
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+      }
+      .product-card {
+        opacity: 0;
+        transform: translateY(50px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .product-image {
+        position: relative;
+        background: linear-gradient(135deg, #1a1a1a, #0a0a0a);
+        border-radius: 12px;
+        overflow: hidden;
+        aspect-ratio: 3 / 4;
+        margin-bottom: 20px;
+      }
+      .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        animation: floatImg 2.2s ease-in-out infinite alternate;
+      }
+      @keyframes floatImg {
+        from {
+          transform: translateY(0);
+        }
+        to {
+          transform: translateY(10px);
+        }
+      }
+      .product-card:hover .product-image img {
+        transform: scale(1.1) translateY(6px);
+      }
+
+      .product-overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(196, 30, 58, 0.9);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+      .product-view {
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 12px 25px;
+        border: 1px solid #fff;
+        border-radius: 30px;
+        transform: translateY(20px);
+        transition: transform 0.3s ease;
+      }
+      .product-category {
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #c10100;
+      }
+      .product-name {
+        font-size: 22px;
+        font-weight: 400;
+        margin: 8px 0;
+      }
+      .product-description {
+        font-size: 14px;
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .products.in-view .products-label {
+        opacity: 1;
+      }
+      .products.in-view .products-title {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .products.in-view .products-subtitle {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .products.in-view .product-card {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .products.in-view .product-card:nth-child(1) {
+        transition-delay: 0.15s;
+      }
+      .products.in-view .product-card:nth-child(2) {
+        transition-delay: 0.25s;
+      }
+
+      /* Gallery */
+      .gallery {
+        padding: 150px 60px;
+        background: #0a0a0a;
+      }
+      .gallery-header {
+        text-align: center;
+        margin-bottom: 80px;
+      }
+      .gallery-label {
+        display: inline-block;
+        font-size: 12px;
+        letter-spacing: 4px;
+        text-transform: uppercase;
+        color: #c10100;
+        margin-bottom: 20px;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+      .gallery-title {
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 300;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 20px;
+        max-width: 1400px;
+        margin: 0 auto;
+        height: 80vh;
+      }
+      .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+        opacity: 0;
+        transform: scale(0.9);
+        max-height: 648px;
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .gallery-item.large {
+        grid-row: 1 / 3;
+      }
+      .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.8s ease;
+        max-height: 648px;
+      }
+      .gallery-item:hover img {
+        transform: scale(1.1);
+      }
+      .gallery-item-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 30px;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        transform: translateY(100%);
+        transition: transform 0.4s ease;
+      }
+      .gallery-item:hover .gallery-item-overlay {
+        transform: translateY(0);
+      }
+      .gallery-item-overlay span {
+        font-size: 18px;
+        font-weight: 300;
+        letter-spacing: 2px;
+      }
+
+      .gallery.in-view .gallery-label {
+        opacity: 1;
+      }
+      .gallery.in-view .gallery-title {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .gallery.in-view .gallery-item {
+        opacity: 1;
+        transform: scale(1);
+      }
+      .gallery.in-view .gallery-item:nth-child(1) {
+        transition-delay: 0.15s;
+      }
+      .gallery.in-view .gallery-item:nth-child(2) {
+        transition-delay: 0.25s;
+      }
+
+      /* CTA */
+      .cta {
+        position: relative;
+        padding: 200px 60px;
+        text-align: center;
+        overflow: hidden;
+      }
+      .cta-bg {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, #c10100 0%, #8b0000 50%, #000 100%);
+        opacity: 0.15;
+      }
+      .cta-content {
+        position: relative;
+        z-index: 10;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .cta-title {
+        font-size: clamp(28px, 4vw, 48px);
+        font-weight: 300;
+        margin-bottom: 20px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .cta-text {
+        font-size: 16px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: 40px;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+        transition-delay: 0.15s;
+      }
+      .cta-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        padding: 18px 45px;
+        background: #c10100;
+        border: none;
+        border-radius: 50px;
+        font-size: 14px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #fff;
+        transition: transform 0.25s ease, box-shadow 0.25s ease,
+          background 0.25s ease, opacity 0.8s ease;
+        opacity: 0;
+        transform: translateY(20px);
+        transition-delay: 0.3s;
+      }
+      .cta-button svg {
+        width: 20px;
+        height: 20px;
+        stroke-width: 2;
+        transition: transform 0.3s ease;
+      }
+      .cta-button:hover {
+        background: #ff4d6d;
+        transform: translateY(-3px);
+        box-shadow: 0 20px 40px rgba(196, 30, 58, 0.3);
+      }
+      .cta-button:hover svg {
+        transform: translateX(5px);
+      }
+
+      .cta.in-view .cta-title {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .cta.in-view .cta-text {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .cta.in-view .cta-button {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Footer */
+      .footer {
+        background: #000;
+        padding: 80px 60px 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .footer-bottom {
+        text-align: center;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+      }
+      .footer-bottom p {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      /* Responsive */
+      @media (max-width: 1024px) {
+        .nav {
+          padding: 20px 30px;
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-menu-btn {
+          display: flex;
+        }
+        .about-container {
+          grid-template-columns: 1fr;
+          height: auto;
+        }
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+          height: auto;
+        }
+        .gallery-item.large {
+          grid-row: auto;
+          grid-column: 1 / 3;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero,
+        .about,
+        .products,
+        .gallery,
+        .cta {
+          padding: 80px 20px;
+        }
+        .hero-title {
+          letter-spacing: 10px;
+        }
+        .about-stats {
+          flex-direction: column;
+          gap: 20px;
+        }
+        .about-images {
+          grid-template-columns: 1fr;
+        }
+        .about-img-wrapper.img-1 {
+          grid-column: auto;
+        }
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+        .gallery-item.large {
+          grid-column: auto;
+        }
+
+        /* No mobile: sem cursor custom */
+        .cursor,
+        .cursor-follower {
+          display: none;
+        }
+
+        .loader-letter {
+          font-size: 24px;
+          letter-spacing: 4px;
+        }
+        .loader-x {
+          font-size: 28px;
+          margin: 0 10px;
+        }
+      }
+      body.loading {
+        cursor: auto !important;
+      }
+
+      body.loading .cursor,
+      body.loading .cursor-follower {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      body:not(.loading) {
+        cursor: none;
+      }
+
+      body:not(.loading) .cursor,
+      body:not(.loading) .cursor-follower {
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
+  </head>
+
+  <body class="loading">
+    <!-- Loader -->
+    <div class="loader" id="loader">
+      <div class="loader-particles" id="loaderParticles"></div>
+      <div class="loader-reveal" id="loaderReveal"></div>
+
+      <div class="loader-content" id="loaderContent">
+        <div class="loader-logo">
+          <div class="loader-word loader-porsche" id="porscheWord">
+            <span class="loader-letter">P</span>
+            <span class="loader-letter">O</span>
+            <span class="loader-letter">R</span>
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">C</span>
+            <span class="loader-letter">H</span>
+            <span class="loader-letter">E</span>
+          </div>
+
+          <span class="loader-x" id="loaderX">×</span>
+
+          <div class="loader-word loader-smeg" id="smegWord">
+            <span class="loader-letter">S</span>
+            <span class="loader-letter">M</span>
+            <span class="loader-letter">E</span>
+            <span class="loader-letter">G</span>
+          </div>
+        </div>
+
+        <div class="loader-bar-container" id="loaderBarContainer">
+          <div class="loader-bar">
+            <div class="loader-progress" id="loaderProgress"></div>
+          </div>
+          <div class="loader-percentage" id="loaderPercentage">0%</div>
+        </div>
+
+        <div class="loader-tagline" id="loaderTagline">
+          Os sonhos tornam-se realidade.
+        </div>
+      </div>
+    </div>
+
+    <!-- Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- Navigation -->
+    <!-- <nav class="nav" id="nav">
+      <div class="nav-logo">
+        <svg class="smeg-logo" viewBox="0 0 120 40" fill="currentColor">
+          <circle cx="12" cy="20" r="8" />
+          <circle cx="32" cy="20" r="8" />
+          <text x="48" y="28" font-size="24" font-weight="600">smeg</text>
+        </svg>
+      </div>
+      <div class="nav-links">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#about" class="nav-link">Sobre</a>
+        <a href="#products" class="nav-link">Produtos</a>
+        <a href="#gallery" class="nav-link">Galeria</a>
+        <a href="#contact" class="nav-link">Contacto</a>
+      </div>
+      <div class="nav-menu-btn" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </div>
+    </nav> -->
+
+    <!-- Hero -->
+    <section class="hero" id="hero">
+      <div class="hero-bg" id="heroBg">
+        <video
+          id="heroVideo"
+          class="hero-video"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        ></video>
+      </div>
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <div class="hero-badge">Edição Limitada</div>
+        <h1 class="hero-title">
+          <span class="title-line">PORSCHE</span>
+          <span class="title-x">×</span>
+          <span class="title-line">SMEG</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          A união perfeita entre a tradição que inspira paixões mundialmente e
+          oferece experiências que despertam todos os sentidos.
+        </p>
+
+        <p class="hero-tagline">Os sonhos tornam-se realidade.</p>
+
+        <a href="https://www.smegbrasil.com.br/porsche" class="hero-cta">
+          <span>Descobrir</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M12 5v14M5 12l7 7 7-7" />
+          </svg>
+        </a>
+      </div>
+
+      <div class="hero-scroll-indicator">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </section>
+
+    <!-- Racing -->
+    <section class="racing" id="racing">
+      <div class="racing-bg">
+        <img
+          src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/4_le_mans_porsche_917_1920x1080.png/4_le_mans_porsche_917_1920x1080.png/brx%3AwideDeskLarge"
+          alt="Porsche 917 Le Mans"
+          class="racing-img"
+          id="racingImg"
+        />
+      </div>
+      <div class="racing-overlay"></div>
+      <div class="racing-content">
+        <div class="racing-badge">CIRCUIT DES 24 HEURES DU MANS</div>
+        <div class="racing-number">23</div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="about" id="about">
+      <div class="about-container">
+        <div class="about-text">
+          <span class="about-label">A História</span>
+          <h2 class="about-title">A lenda materializada</h2>
+          <p class="about-description">
+            Numa celebração ousada de tradição, inovação e excelência no design,
+            a Porsche e a Smeg redefinem uma ligação entre o prestígio automóvel
+            e o estilo de vida contemporâneo, criando peças que são verdadeiros
+            ícones.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat">
+              <span class="stat-number">1963</span>
+              <span class="stat-label">Ano de fundação Smeg</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">1931</span>
+              <span class="stat-label">Ano de fundação Porsche</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">2024</span>
+              <span class="stat-label">Colaboração exclusiva</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-images">
+          <div class="about-img-wrapper img-1">
+            <img
+              src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/salzburgdetails_960x690_7.png/salzburgdetails_960x690_7.png/brx%3ApostcardDeskLarge"
+              alt="Smeg Product Detail"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+      <div class="products-header">
+        <span class="products-label">Coleção</span>
+        <h2 class="products-title">Produtos Exclusivos</h2>
+        <p class="products-subtitle">
+          Design icónico que transcende o tempo e celebra a excelência
+        </p>
+      </div>
+
+      <div class="products-grid">
+        <div class="product-card">
+          <a
+            style="cursor: pointer"
+            href="https://www.smegbrasil.com.br/refrigerador-smeg-1-porta-Porsche-917-salzburg-anni-50-270l-dobradica-a-direita-220v-fab28rdp9176"
+            class="product-image"
+          >
+            <img
+              src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/kv_salzfab_960x690.png/kv_salzfab_960x690.png"
+              alt="Máquina de café"
+            />
+            <div class="product-overlay">
+              <span class="product-view">Ver Detalhes</span>
+            </div>
+          </a>
+          <div class="product-info">
+            <span class="product-category"
+              >Refrigerador Smeg 1 Porta, Porsche 917</span
+            >
+            <h3 class="product-name">FAB28RDP9176</h3>
+            <p class="product-description">Elegância em cada detalhe</p>
+          </div>
+        </div>
+
+        <div class="product-card">
+          <a
+            style="cursor: pointer"
+            href="https://www.smegbrasil.com.br/maquina-de-cafe-smeg-automatica-anni-50-porsche-917-salzburg-220v-bcc12917br"
+            class="product-image"
+          >
+            <img
+              src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/kv_salzbcc_960x690.png/kv_salzbcc_960x690.png"
+              alt="Torradeira"
+            />
+            <div class="product-overlay">
+              <span class="product-view">Ver Detalhes</span>
+            </div>
+          </a>
+          <div class="product-info">
+            <span class="product-category"
+              >Máquina de café Expresso Automatica</span
+            >
+            <h3 class="product-name">BCC12917BR</h3>
+            <p class="product-description">Performance e estilo únicos</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery" id="gallery">
+      <div class="gallery-header">
+        <span class="gallery-label">Galeria</span>
+        <h2 class="gallery-title">Momentos Icónicos</h2>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item large">
+          <img
+            src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/kv_carrara_960x690.png/kv_carrara_960x690.png"
+            alt="Gallery 1"
+          />
+          <div class="gallery-item-overlay">
+            <span>Duas Lendas</span>
+          </div>
+        </div>
+
+        <div class="gallery-item">
+          <img
+            src="https://www.smeg.com/binaries/content/gallery/smeg/porsche-x-smeg/kv_shade_960x690.png/kv_shade_960x690.png"
+            alt="Gallery 2"
+          />
+          <div class="gallery-item-overlay">
+            <span>Design Atemporal</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="cta-bg"></div>
+      <div class="cta-content">
+        <h2 class="cta-title">Pronto para fazer parte da lenda?</h2>
+        <p class="cta-text">
+          Descubra a coleção exclusiva Porsche x Smeg e eleve o seu estilo de
+          vida.
+        </p>
+        <a href="https://www.smegbrasil.com.br/porsche" class="cta-button">
+          <span>Ver Produtos</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- <footer class="footer" id="contact">
+      <div class="footer-bottom">
+        <p>&copy; 2025 Porsche x Smeg. Todos os direitos reservados.</p>
+      </div>
+    </footer> -->
+
+    <script>
+      /* ============================
+         Helpers
+         ============================ */
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      function clamp(min, v, max) {
+        return Math.max(min, Math.min(v, max));
+      }
+
+      /* ============================
+         Particles (CSS anim já faz o movimento)
+         ============================ */
+      (function createParticles() {
+        const container = document.getElementById("loaderParticles");
+        if (!container) return;
+
+        for (let i = 0; i < 50; i++) {
+          const p = document.createElement("div");
+          p.className = "particle";
+          p.style.left = Math.random() * 100 + "%";
+          p.style.top = Math.random() * 100 + "%";
+          p.style.animationDelay = (Math.random() * 2).toFixed(2) + "s";
+          p.style.animationDuration =
+            (2.2 + Math.random() * 2.8).toFixed(2) + "s";
+          p.style.opacity = (0.2 + Math.random() * 0.35).toFixed(2);
+          container.appendChild(p);
+        }
+      })();
+
+      /* ============================
+         Cursor custom (só aparece após sair do loading)
+         ============================ */
+      (function initCursor() {
+        const cursor = document.getElementById("cursor");
+        const follower = document.getElementById("cursorFollower");
+        if (!cursor || !follower) return;
+
+        let mouseX = 0,
+          mouseY = 0;
+        let fx = 0,
+          fy = 0;
+        let raf = null;
+
+        window.addEventListener("mousemove", (e) => {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+
+          cursor.style.left = mouseX + "px";
+          cursor.style.top = mouseY + "px";
+
+          if (!raf) {
+            raf = requestAnimationFrame(function tick() {
+              fx += (mouseX - fx) * 0.12;
+              fy += (mouseY - fy) * 0.12;
+              follower.style.left = fx + "px";
+              follower.style.top = fy + "px";
+              raf = requestAnimationFrame(tick);
+            });
+          }
+        });
+
+        const hoverEls = document.querySelectorAll("a, button, .product-card");
+        hoverEls.forEach((el) => {
+          el.addEventListener("mouseenter", () => {
+            cursor.style.transform = "translate(-50%, -50%) scale(2)";
+            follower.style.transform = "translate(-50%, -50%) scale(1.5)";
+            follower.style.opacity = "0.5";
+          });
+          el.addEventListener("mouseleave", () => {
+            cursor.style.transform = "translate(-50%, -50%) scale(1)";
+            follower.style.transform = "translate(-50%, -50%) scale(1)";
+            follower.style.opacity = "1";
+          });
+        });
+      })();
+
+      /* ============================
+         Loader (timeline em JS)
+         ============================ */
+      async function runLoader() {
+        const loader = document.getElementById("loader");
+        const loaderContent = document.getElementById("loaderContent");
+        const reveal = document.getElementById("loaderReveal");
+
+        const porscheLetters = document.querySelectorAll(
+          "#porscheWord .loader-letter"
+        );
+        const smegLetters = document.querySelectorAll(
+          "#smegWord .loader-letter"
+        );
+        const loaderX = document.getElementById("loaderX");
+
+        const barContainer = document.getElementById("loaderBarContainer");
+        const progressEl = document.getElementById("loaderProgress");
+        const percentEl = document.getElementById("loaderPercentage");
+        const tagline = document.getElementById("loaderTagline");
+
+        // Entrada das letras (stagger)
+        porscheLetters.forEach((l, i) =>
+          setTimeout(() => l.classList.add("is-in"), i * 80)
+        );
+        await sleep(520);
+
+        smegLetters.forEach((l, i) =>
+          setTimeout(() => l.classList.add("is-in"), i * 80)
+        );
+        await sleep(520);
+
+        // X
+        loaderX.classList.add("is-in");
+        await sleep(420);
+
+        // Bar + percent
+        barContainer.classList.add("is-in");
+        percentEl.classList.add("is-in");
+        await sleep(200);
+
+        // Progress 0 -> 100 (2s)
+        const duration = 2000;
+        const start = performance.now();
+
+        await new Promise((resolve) => {
+          function step(now) {
+            const t = clamp(0, (now - start) / duration, 1);
+            const value = Math.round(t * 100);
+            progressEl.style.width = value + "%";
+            percentEl.textContent = value + "%";
+            if (t < 1) requestAnimationFrame(step);
+            else resolve();
+          }
+          requestAnimationFrame(step);
+        });
+
+        // Tagline
+        tagline.classList.add("is-in");
+        await sleep(700);
+
+        // Fade out content
+        loaderContent.classList.add("is-out");
+        await sleep(520);
+
+        // Red reveal in/out
+        reveal.classList.add("is-in");
+        await sleep(600);
+        reveal.classList.add("is-out");
+        await sleep(600);
+
+        // Hide loader and start page animations
+        loader.classList.add("is-hidden");
+        await sleep(300);
+
+        loader.style.display = "none";
+        document.body.classList.remove("loading");
+        document.body.classList.add("is-ready");
+
+        initObservers();
+      }
+
+      /* ============================
+         IntersectionObserver (scroll reveals)
+         ============================ */
+      function initObservers() {
+        const targets = [
+          document.getElementById("racing"),
+          document.getElementById("about"),
+          document.getElementById("products"),
+          document.getElementById("gallery"),
+          document.querySelector(".cta"),
+        ].filter(Boolean);
+
+        if (!("IntersectionObserver" in window)) {
+          targets.forEach((el) => el.classList.add("in-view"));
+          return;
+        }
+
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) entry.target.classList.add("in-view");
+            });
+          },
+          { threshold: 0.25 }
+        );
+
+        targets.forEach((el) => io.observe(el));
+      }
+
+      /* ============================
+         Smooth scroll (sem GSAP)
+         ============================ */
+      (function initSmoothScroll() {
+        document.querySelectorAll('a[href^="#"]').forEach((a) => {
+          a.addEventListener("click", (e) => {
+            const href = a.getAttribute("href");
+            const target = document.querySelector(href);
+            if (!target) return;
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        });
+      })();
+
+      /* ============================
+         Nav solid background on scroll
+         ============================ */
+      (function initNavScroll() {
+        const nav = document.getElementById("nav");
+        if (!nav) return;
+
+        let ticking = false;
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(() => {
+            if (window.scrollY > 100) nav.classList.add("is-solid");
+            else nav.classList.remove("is-solid");
+            ticking = false;
+          });
+        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll();
+      })();
+
+      /* ============================
+         Parallax (hero) + Racing scale (scroll)
+         ============================ */
+      (function initParallax() {
+        const hero = document.getElementById("hero");
+        const heroBg = document.getElementById("heroBg");
+        const racing = document.getElementById("racing");
+        const racingImg = document.getElementById("racingImg");
+
+        if (!heroBg && !racingImg) return;
+
+        let ticking = false;
+
+        function update() {
+          ticking = false;
+
+          const vh = window.innerHeight;
+
+          // Hero parallax: yPercent ~ 12
+          if (hero && heroBg) {
+            const r = hero.getBoundingClientRect();
+            const progress = clamp(0, (0 - r.top) / r.height, 1);
+            const y = progress * 12; // percent
+            heroBg.style.transform = `translate3d(0, ${y}%, 0) scale(1)`;
+          }
+
+          // Racing image scale: 1.2 -> 1
+          if (racing && racingImg) {
+            const rr = racing.getBoundingClientRect();
+            const p = clamp(0, (vh - rr.top) / (vh + rr.height), 1);
+            const scale = 1.2 - p * 0.2;
+            racingImg.style.transform = `scale(${scale.toFixed(3)})`;
+          }
+        }
+
+        function onScroll() {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+
+        window.addEventListener("scroll", onScroll, { passive: true });
+        window.addEventListener("resize", onScroll);
+        onScroll();
+      })();
+
+      /* ============================
+         Hero video source (igual você tinha)
+         ============================ */
+      const HERO_VIDEO_MOBILE =
+        "https://magazord-public.s3.amazonaws.com/smegbrasil/img/2025/12/produto/3519/porsche-x-smeg-salzburg-edition-15s-9x16-en-hr.mp4?_gl=1*1hjn9hf*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjU1NjA2NjYkbzkwJGcxJHQxNzY1NTYwNzY3JGo2MCRsMCRoMA..";
+
+      const HERO_VIDEO_DESKTOP =
+        "https://res.cloudinary.com/dwxzloaok/video/upload/v1765561471/PORSCHE_x_SMEG_SALZBURG_EDITION_30s_16x9_ES_LR_wrkuff.mp4";
+
+      function setHeroVideoSource() {
+        const video = document.getElementById("heroVideo");
+        if (!video) return;
+
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        const desiredSrc = isMobile ? HERO_VIDEO_MOBILE : HERO_VIDEO_DESKTOP;
+
+        if (video.dataset.src === desiredSrc) return;
+
+        video.dataset.src = desiredSrc;
+        video.src = desiredSrc;
+        video.load();
+
+        const p = video.play();
+        if (p && typeof p.catch === "function") p.catch(() => {});
+      }
+
+      setHeroVideoSource();
+      window.addEventListener("resize", setHeroVideoSource);
+      window.addEventListener("orientationchange", setHeroVideoSource);
+
+      /* ============================
+         Start loader
+         ============================ */
+      runLoader();
+    </script>
+  </body>
+</html>
