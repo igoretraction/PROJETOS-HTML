@@ -1,0 +1,128 @@
+<style type="text/css">
+  .texto-banner .item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+  }
+  .texto-banner p {
+    text-align: left;
+    color: #000;
+    font-size: 15px;
+    line-height: 15px;
+  }
+
+  .tarja .container {
+    padding: 15px 25px;
+  }
+
+  .texto-banner .item {
+    transition: transform 0.5s;
+    -moz-transition: transform 0.5s;
+    -webkit-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
+  }
+  .texto-banner img {
+    width: 35px;
+  }
+  .texto-banner .item:hover {
+    transform: scale(0.97);
+    -moz-transform: scale(0.97);
+    -webkit-transform: scale(0.97);
+    -o-transform: scale(0.97);
+  }
+
+
+ 
+
+  @media (max-width: 800px) {
+    .tarja .container {
+      border-radius: 0;
+    }
+
+    .tarja .container {
+      padding: 0;
+    }
+    .texto-banner img {
+      margin-right: 10px;
+      width: 30px;
+    }
+    .texto-banner p {
+      font-size: 12px;
+    }
+  }
+</style>
+<div class="container">
+  <div class="texto-banner">
+    <div class="item">
+      <img
+        alt=""
+        src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/11/banner/13874/1-1.png"
+      />
+      <p><strong> Parcelamento</strong> <br />Em até 10x sem Juros no Cartão</p>
+    </div>
+
+    <div class="item">
+      <img
+        alt=""
+        src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/11/banner/13871/2.png"
+      />
+      <p>
+        <strong> Qualidade</strong>
+        <br /><span style="font-size: 15px"
+          >a mais de <strong>45 anos</strong> no mercado</span
+        >
+      </p>
+    </div>
+
+    <div class="item">
+      <img
+        alt=""
+        src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/11/banner/13872/3.png"
+      />
+      <p>
+        <strong>Segurança</strong><br />
+        site 100% seguro
+      </p>
+    </div>
+    <div class="item">
+      <img
+        alt=""
+        src="https://magazord-public.s3.amazonaws.com/corebral/img/2025/11/banner/13873/4.png"
+      />
+      <p>
+        <strong> Desconto</strong><br />
+        de 5% no pix
+      </p>
+    </div>
+    <div class="item">
+      <img
+        alt=""
+        src="https://magazord-public.s3.amazonaws.com/corebral/img/2026/01/produto/14641/delivery-truck.png"
+      />
+      <p>
+        <strong> Frete Grátis</strong><br />
+        Em compras acima de R$599,90 para Sul e Sudeste
+      </p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  (function () {
+    "use strict";
+
+    $(".texto-banner").owlCarousel({
+      singleItem: false,
+      itemsCustom: [
+        [0, 1],
+        [800, 4],
+      ],
+      navigation: false,
+      pagination: false,
+      autoPlay: 3000,
+      stopOnHover: true,
+      loop: true,
+    });
+  })();
+</script>

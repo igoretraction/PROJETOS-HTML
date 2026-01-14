@@ -1,0 +1,1566 @@
+<p></p>
+<meta content="width=device-width, initial-scale=1.0" /><!-- Swiper CSS -->
+<p></p>
+<style><!--
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+      @media (min-width: 800px) {
+        .about-section {
+          overflow: hidden;
+        }
+      }
+      @media (max-width: 768px) {
+        #rd-scope .spec-item ul li {
+          text-align: left;
+        }
+      }
+
+/* FAZ COM QUE A IMAGEM FIQUE ABAIXO DO TEXTO - SOMENTE MOBILE */
+      @media (max-width: 768px) {
+  .sophistication-content {
+    display: flex;
+    flex-direction: column-reverse !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-section {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+  }
+}
+
+/* FAZ COM QUE TENHA ESPAÇAMENTO ENTRE O TEXTO E IMAGEM - SOMENTE MOBILE */
+@media (max-width: 768px) {
+  .gif-placeholder  {
+    margin-top: 30px;          /* adiciona o espaço desejado */
+    border-radius: 15px;       /* mantém o arredondado igual ao original */
+    overflow: hidden;          /* mantém a imagem dentro da borda */
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-section  {
+    margin-top: 30px;          /* adiciona o espaço desejado */
+    border-radius: 15px;       /* mantém o arredondado igual ao original */
+    overflow: hidden;          /* mantém a imagem dentro da borda */
+  }
+}
+
+@media (max-width: 768px) {
+  .wardrobe-image  {
+    margin-top: 30px;          /* adiciona o espaço desejado */
+    border-radius: 15px;       /* mantém o arredondado igual ao original */
+    overflow: hidden;          /* mantém a imagem dentro da borda */
+  }
+}
+
+
+      /* ===== Escopo ===== */
+      #rd-scope .svg-icon {
+        width: 60px;
+        height: 60px;
+      }
+      #rd-scope .rn-container {
+        font-family: "Instrument Sans", sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 70px;
+      }
+
+      #rd-scope .product-description {
+        font-family: "Instrument Sans", sans-serif;
+        padding: 0px 0;
+        text-align: center;
+      }
+      #rd-scope .product-description h1 {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 2.5rem;
+        color: #333;
+      }
+
+      #rd-scope .features-grid {
+        font-family: "Instrument Sans", sans-serif;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+      #rd-scope .feature-item {
+        font-family: "Instrument Sans", sans-serif;
+        text-align: center;
+        flex: 1;
+        min-width: 200px;
+      }
+      #rd-scope .feature-circle {
+        font-family: "Instrument Sans", sans-serif;
+        border: 1px solid #102F18;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: #fafafa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        font-weight: 700;
+        color: #555;
+      }
+      #rd-scope .feature-text {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      #rd-scope .product-details {
+        font-family: "Instrument Sans", sans-serif;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        margin-top: 30px;
+      }
+      #rd-scope .gif-placeholder {
+        font-family: "Instrument Sans", sans-serif;
+        border-radius: 15px;
+        max-height: 580px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      #rd-scope .gif-placeholder img {
+        border-radius: 15px;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 580px !important;
+        object-fit: cover;
+        display: block;
+      }
+      #rd-scope .product-info h2 {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: left;
+      }
+      #rd-scope .product-info p {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #555;
+        text-align: left;
+      }
+
+      #rd-scope .product-features {
+      font-family: "Instrument Sans", sans-serif;
+      background: #fafafa;
+      max-width: 1310px;
+      border-radius: 20px;
+      margin: 50px auto;
+      }
+      #rd-scope .features-grid-2 {
+        font-family: "Instrument Sans", sans-serif;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-top: 40px;
+      }
+      #rd-scope .feature-card {
+        font-family: "Instrument Sans", sans-serif;
+        text-align: center;
+        margin: 0 auto;
+      }
+      #rd-scope .feature-gif {
+        background: #f0f0f0;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        width: 100%;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 0;
+        max-width: 480px;
+      }
+      #rd-scope .feature-gif img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      #rd-scope .feature-description {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.5;
+      }
+
+      /* ===== Swiper base (escopo) ===== */
+      #rd-scope .swiper {
+        width: 1240px;
+        max-width: 100vw;
+        margin: 0 auto;
+        padding: 20px 0;
+        overflow: hidden;
+      }
+      #rd-scope .swiper-wrapper {
+        align-items: stretch;
+      }
+      #rd-scope .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: transparent;
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 410px;
+        height: auto;
+      }
+      /* features desktop: slides menores */
+      #rd-scope .features-swiper-1 .swiper-slide {
+        width: 320px;
+      }
+      #rd-scope .features-swiper-1 .feature-card {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      #rd-scope .product-specs {
+        padding: 0px 0;
+      }
+      #rd-scope .specs-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      #rd-scope .wardrobe-image {
+        text-align: center;
+      }
+      #rd-scope .wardrobe-placeholder {
+        border-radius: 15px;
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      #rd-scope .wardrobe-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 15px;
+      }
+      #rd-scope .specs-info {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+      #rd-scope .specs-section h3 {
+        font-size: 1.8rem !important;
+        margin-bottom: 5px;
+        color: #333;
+      }
+      #rd-scope .spec-item ul li {
+       border-bottom: 1px solid rgb(233 233 233);
+        padding: 20px 0;
+        color: #555;
+        place-items: center;
+        list-style: none;
+        
+      }
+      #rd-scope .spec-item ul{
+        width: 100%;
+        padding: 0 10px 0;
+}
+      #rd-scope .spec-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        padding: 10px 0;
+      }
+
+      #rd-scope .sophistication-section {
+        padding: 70px 0 60px 0;
+        background: #fafafa;
+        max-width: 1310px;
+        margin: auto;
+        border-radius: 20px;
+      }
+
+      /* RETIRA O PADDING DO MOBILE CITADO ACIMA DEVIDO MUITO ESPAÇO */
+      @media (max-width: 768px) {
+      #rd-scope .sophistication-section {
+    padding: 10px 0 60px 0; /* ajuste como quiser */
+  }
+}
+
+      #rd-scope .sophistication-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      #rd-scope .sophistication-text h2 {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        color: #333;
+      }
+      #rd-scope .sophistication-text p {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 20px;
+      }
+      <!-- #rd-scope .origin-tag {
+        background: #fff;
+        padding: 8px 16px;
+        border-radius: 20px;
+        display: inline-block;
+        font-size: 0.9rem;
+        color: #666; 
+      }
+
+      #rd-scope .layout-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        margin-top: 0px;
+      }
+      #rd-scope .layout-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        margin-top: 40px;
+        color: #333;
+      }
+      #rd-scope .layout-text p {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #555;
+      }
+
+      #rd-scope .packaging-section {
+        padding: 60px 0;
+      }
+      #rd-scope .packaging-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      #rd-scope .packaging-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      #rd-scope .packaging-text h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: #333;
+      }
+      #rd-scope .packaging-text p {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #555;
+      }
+
+      #rd-scope .about-section {
+        padding: 60px 0;
+        background: #fff;
+        text-align: center;
+      }
+      #rd-scope .about-section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+      }
+      #rd-scope .about-section p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #555;
+        max-width: 800px;
+        margin: 0 auto 40px;
+      }
+
+      #rd-scope .testimonials-carousel {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        flex-direction: column;
+      }
+      #rd-scope .features-carousels-desktop {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 40px;
+        align-items: center;
+      }
+
+      /* Controles */
+      #rd-scope .features-nav,
+      #rd-scope .testimonials-nav {
+        color: #666;
+        background: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-top: -20px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+      #rd-scope .features-nav:after,
+      #rd-scope .testimonials-nav:after {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      #rd-scope .swiper-pagination-bullet {
+        background: #ccc;
+        opacity: 0.5;
+      }
+      #rd-scope .swiper-pagination-bullet-active {
+        background: #666;
+        opacity: 1;
+      }
+      #rd-scope .swiper-button-next,
+      #rd-scope .swiper-button-prev,
+      #rd-scope .features-nav,
+      #rd-scope .testimonials-nav {
+        top: 50% !important;
+        transform: translateY(-50%);
+      }
+      #rd-scope .features-swiper-1,
+      #rd-scope .testimonials-swiper-1 {
+        position: relative;
+      }
+      #rd-scope .testimonials-carousel {
+        width: 1240px;
+        max-width: 100vw;
+        margin: 0 auto 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #rd-scope .swiper-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media (max-width: 1300px) {
+        #rd-scope .testimonials-carousel,
+        #rd-scope .swiper {
+          width: 100vw;
+          max-width: 100vw;
+        }
+      }
+
+      /* ======== MOBILE FIX ======== */
+      @media (max-width: 1024px) {
+        #rd-scope .swiper,
+        #rd-scope .testimonials-carousel {
+          margin: 0 auto !important;
+        }
+        #rd-scope .swiper-wrapper {
+          margin: 0 !important;
+        }
+        #rd-scope .swiper-slide {
+          width: 100% !important;
+          height: auto !important;
+        }
+        #rd-scope .features-swiper-1 .swiper-slide {
+          width: 100% !important;
+        }
+        /* esconder setas no mobile */
+        #rd-scope .features-nav,
+        #rd-scope .testimonials-nav {
+          display: none !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #rd-scope .features-carousels-desktop {
+          display:flex;
+        }
+        #rd-scope .features-carousels-mobile {
+          display: block !important;
+        }
+        #rd-scope .product-details,
+        #rd-scope .specs-container,
+        #rd-scope .sophistication-content,
+        #rd-scope .layout-section,
+        #rd-scope .packaging-content {
+          text-align: center;
+          grid-template-columns: 1fr;
+          gap: 0px;
+        }
+        #rd-scope .product-details,
+        #rd-scope .specs-container,
+        #rd-scope .sophistication-content,
+        #rd-scope .layout-section {
+          display: flex;
+          flex-direction: column;
+        }
+        #rd-scope .product-details .gif-placeholder {
+          order: 1;
+        }
+        #rd-scope .product-details .product-info {
+          order: 2;
+        }
+        #rd-scope .specs-container .wardrobe-image {
+          order: 1;
+        }
+        #rd-scope .specs-container .specs-info {
+          order: 2;
+        }
+        #rd-scope .layout-section .gif-placeholder {
+          order: 1;
+        }
+        #rd-scope .layout-section .layout-text {
+          order: 2;
+        }
+        #rd-scope .features-grid {
+          flex-direction: column;
+          align-items: center;
+          display: none;
+        }
+        #rd-scope .features-grid-2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        #rd-scope .product-description h1 {
+          font-size: 2rem;
+        }
+        #rd-scope .rn-container {
+          place-items: center;
+          padding: 0 15px;
+          margin-bottom: -30px;
+        }
+        #rd-scope .gif-placeholder {
+          border-radius: 15px;
+          max-width: 580px !important;
+          min-height: 260px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        #rd-scope .features-swiper-1 {
+          display: block;
+        }
+        #rd-scope .features-grid-2 {
+          display: none;
+        }
+        #rd-scope .product-info h2,
+        #rd-scope .product-info p {
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #rd-scope .features-grid-2 {
+          grid-template-columns: 1fr;
+        }
+        #rd-scope .product-description h1 {
+          font-size: 1.8rem;
+        }
+      }
+      @media (min-width: 780px) {
+        #rd-scope .features-carousels-mobile {
+          display: none !important;
+        }
+      }
+      .dimensions-container {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .dimension-arrow {
+        position: absolute;
+      }
+      .dimension-arrow.height {
+        left: 20px;
+        height: 100%;
+        width: 50px;
+      }
+      .dimension-arrow.width {
+        top: 20px;
+        width: 80%;
+        height: 50px;
+      }
+      .dimension-arrow.depth {
+        right: 20px;
+        top: 50%;
+        transform: rotate(-45deg);
+        width: 60%;
+        height: 50px;
+      }
+      .dimension-arrow text {
+        font-family: "Instrument Sans", sans-serif;
+        font-weight: bold;
+      }
+      .svg-icon-novo path {
+        fill: #102F18;
+      }
+      .img-selos {
+        max-width: 320px !important;
+      }
+
+      /* Certificações: desktop x mobile */
+      .certifications-mobile {
+        display: none;
+      }
+
+      .certifications-desktop {
+        display: flex;
+      }
+
+      @media (max-width: 768px) {
+        .certifications-desktop {
+          display: none !important;
+        }
+
+        .certifications-mobile {
+          display: block;
+          width: 100%;
+          margin-top: 20px;
+        }
+
+        .certifications-mobile .feature-gif {
+          max-width: 320px;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #layout-certificate{
+          flex-direction: column-reverse !important;
+        }
+}
+
+#rd-scope .sophistication-text p{
+  margin: 10px;
+  margin-bottom: 10px;
+}
+#rd-scope .layout-text p{
+  margin: 10px;
+}
+--></style>
+<div>
+<div><!-- ======= Descrição / header ======= -->
+<section class="product-description">
+<div class="rn-container"><!-- CALCULADORA DE MUDAS - MOBILE E DESKTOP -->
+<div class="calculator-section">
+<h2 class="calculator-title">Calculadora de Mudas</h2>
+<div class="calculator-wrapper">
+<div class="calculator-input-aSrea"><label class="input-label" for="area-input">&Aacute;rea (m&sup2;)</label>
+<div class="input-wrapper"><input id="area-input" class="calculator-input" maxlength="9" type="text" placeholder="0" /> <span class="input-unit">m&sup2;</span></div>
+</div>
+<div id="result-box" class="result-box">
+<div class="result-content">
+<div id="result-value" class="result-value">0</div>
+<p class="result-text">mudas</p>
+</div>
+<p class="result-info">Quantidade indicada de mudas</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+<style><!--
+.calculator-section {
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 1.5rem 2rem;
+  background: #fafafa;
+  border-radius: 12px;
+  box-sizing: border-box;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+.calculator-title {
+  font-size: 1.8rem !important;
+  color: #333333 !important;
+  font-weight: 700 !important;
+  margin-bottom: 1.5rem !important;
+  text-align: center !important;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+.calculator-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.calculator-input-area {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.input-label {
+  display: block;
+  font-size: 0.95rem !important;
+  color: #333 !important;
+  font-weight: 600 !important;
+  margin-bottom: 0.5rem !important;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.calculator-input {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 1rem 3rem 1rem 1rem !important;
+  font-size: 1.3rem !important;
+  border: 2px solid #e0e0e0 !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  font-weight: 600 !important;
+  box-sizing: border-box !important;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+.calculator-input:focus {
+  outline: none !important;
+  border-color: #00a441 !important;
+  box-shadow: 0 0 0 3px rgba(0, 164, 65, 0.1) !important;
+}
+
+.input-unit {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem !important;
+  color: #666 !important;
+  font-weight: 600 !important;
+  pointer-events: none;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+.result-box {
+  background: #00a441 !important;
+  padding: 1.5rem 2rem !important;
+  border-radius: 8px !important;
+  text-align: center !important;
+  opacity: 0;
+  transition: all 0.3s ease !important;
+  box-sizing: border-box !important;
+}
+
+.result-box.show {
+  opacity: 1 !important;
+}
+
+.result-content {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.6rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.result-value {
+  font-size: 2.5rem !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+.result-text {
+  font-size: 1rem !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  margin: 0 !important;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+.result-info {
+  font-size: 0.8rem !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  margin: 0 !important;
+  opacity: 0.9 !important;
+  font-family: "Instrument Sans", sans-serif !important;
+}
+
+@media (max-width: 767px) {
+  .calculator-section {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .calculator-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .calculator-wrapper {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .calculator-input {
+    padding: 1rem 2.5rem 1rem 1rem !important;
+    font-size: 1.2rem !important;
+  }
+
+  .result-value {
+    font-size: 2rem !important;
+  }
+
+  .result-box {
+    padding: 1rem 1.2rem !important;
+  }
+}
+
+/* MOBILE – aumenta a distância das bolinhas (paginação) */
+@media (max-width: 768px) {
+  .features-pagination-1 {
+    margin-top: 35px !important;   /* ajuste o valor que quiser */
+    position: relative !important;
+    bottom: auto !important;
+  }
+}
+
+/* REMOVE TODAS AS SETAS DE TODOS OS CARROSSEIS DO SITE */
+#rd-scope .swiper-button-next,
+#rd-scope .swiper-button-prev,
+#rd-scope .features-nav,
+#rd-scope .testimonials-nav {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* REMOVE as bolinhas APENAS do carrossel 03 TÓPICOS no DESKTOP */
+@media (min-width: 769px) {
+  #rd-scope .product-features .features-pagination-1 {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* MOBILE – garantir que bolinhas e flechas apareçam */
+@media (max-width: 768px) {
+  .features-pagination-1,
+  .features-next-1,
+  .features-prev-1 {
+    display: block !important;
+  }
+}
+--></style>
+<div id="rd-scope">
+<section class="product-description">
+<div class="rn-container">
+<script>// <![CDATA[
+const areaInput = document.getElementById('area-input');
+const resultBox = document.getElementById('result-box');
+const resultValue = document.getElementById('result-value');
+
+areaInput.addEventListener('input', function(e) {
+  this.value = this.value.replace(/[^0-9]/g, '');
+
+  if (this.value.length > 9) {
+    this.value = this.value.slice(0, 9);
+  }
+
+  const area = parseFloat(this.value) || 0;
+  const mudas = Math.ceil(area);
+
+  resultValue.textContent = mudas.toLocaleString('pt-BR');
+
+  if (area > 0) {
+    resultBox.classList.add('show');
+  } else {
+    resultBox.classList.remove('show');
+  }
+});
+
+areaInput.addEventListener('paste', function(e) {
+  e.preventDefault();
+  const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+  const numericOnly = pastedText.replace(/[^0-9]/g, '').slice(0, 9);
+  this.value = numericOnly;
+  this.dispatchEvent(new Event('input'));
+});
+// ]]></script>
+<!-- INICIO DA DESCRIÇÃO - PRIMEIRO BLOCO -->
+<div class="product-details">
+<div class="gif-placeholder"><img style="border-radius: 15px !important; max-width: 580px !important; max-height: 380px !important;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3255/descricao-emma-01-agrojardim.png" alt="Imagem Muda de Alta Qualidade" /></div>
+<div class="product-info">
+<h2>Muda de Alta Qualidade</h2>
+<p>A Muda de Grama de Pastagem Dona Emma da AgroJardim &eacute; cultivada com a melhor qualidade gen&eacute;tica, garantindo um r&aacute;pido enraizamento, resist&ecirc;ncia e excelente adapta&ccedil;&atilde;o a diferentes regi&otilde;es do Brasil. A grama Dona Emma &eacute; a escolha ideal para voc&ecirc; que busca aumentar a produ&ccedil;&atilde;o do seu rebanho, reduzir gastos com manuten&ccedil;&otilde;es e simplificar o manejo. Com a AgroJardim, voc&ecirc; investe em uma muda de grama confi&aacute;vel, de crescimento r&aacute;pido e uniforme, ideal para o seu pasto.</p>
+</div>
+</div>
+<!-- FIM DA DESCRIÇÃO - PRIMEIRO BLOCO --></div>
+</section>
+<!-- ======================= 03 TÓPICOS (DESKTOP) - SEGUNDO BLOCO ======================= -->
+<section class="product-features">
+<div class="rn-container">
+<div class="features-carousels-desktop">
+<div class="testimonials-carousel">
+<div class="swiper features-swiper-1">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3261/descricao-emma-07-agrojardim.png" alt="Imagem da Muda de Grama Dona Emma 01" /></div>
+<div class="feature-description">Grama de alta palatabilidade para gados, ovinos e caprinos.</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3258/descricao-emma-04-agrojardim.png" alt="Imagem da Muda de Grama Dona Emma 02" /></div>
+<div class="feature-description">Crescimento em &aacute;reas de sombra ou sol constante.</div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3263/descricao-emma-09-agrojardim.png" alt="Imagem da Muda de Grama Dona Emma 03" /></div>
+<div class="feature-description">Resistente ao pisoteio e ao pastejo frequente de animais.</div>
+</div>
+</div>
+</div>
+<!-- FLECHAS DESKTOP -->
+<div class="testimonials-nav swiper-button-next features-next-1"></div>
+<div class="testimonials-nav swiper-button-prev features-prev-1"></div>
+<!-- PAGINAÇÃO DESKTOP -->
+<div class="swiper-pagination features-pagination-1"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================= ESPECIFICAÇÕES TÉCNICAS ======================= -->
+<section class="product-specs">
+<div class="rn-container">
+<div class="specs-container">
+<div class="specs-info">
+<div class="specs-section">
+<h3>Especifica&ccedil;&otilde;es T&eacute;cnicas</h3>
+<div class="spec-item">
+<ul>
+<li style="font-size: 1rem !important;"><strong>Nome Cient&iacute;fico:</strong> Axonopus catharinensis</li>
+<li style="font-size: 1rem !important;"><strong>Tamanho da muda:</strong> 10 a 30cm</li>
+<li style="font-size: 1rem !important;"><strong>Quantidade por m&sup2;:</strong> 1 muda por m&sup2;</li>
+<li style="font-size: 1rem !important;"><strong>Grama ideal para:</strong> Pastagem</li>
+<li style="font-size: 1rem !important;"><strong>Suporta o frio e a geada?</strong> Sim</li>
+<li style="font-size: 1rem !important;"><strong>Forma de envio:</strong> Rolete com Hidrogel</li>
+<li style="font-size: 1rem !important;"><strong>Espa&ccedil;amento ideal entre mudas:</strong> 30cm</li>
+<li style="font-size: 1rem !important;"><strong>Aguenta quantos dias em transporte?</strong> At&eacute; 15 dias</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="wardrobe-image">
+<div class="wardrobe-placeholder"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3249/muda-de-grama-dona-emma-real-03.png" alt="Imagem Real da Muda de Grama Dona Emma" /></div>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================= BLOCO COM FUNDO CINZA ======================= -->
+<section class="sophistication-section">
+<div class="rn-container"><!-- Resistência, Qualidade e Manejo -->
+<div class="sophistication-content">
+<div class="gif-placeholder"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3259/descricao-emma-05-agrojardim.png" alt="Imagem Resist&ecirc;ncia, Qualidade e Manejo" /></div>
+<div class="sophistication-text">
+<h2>Resist&ecirc;ncia, Qualidade e Manejo</h2>
+<p>A Grama Dona Emma se destaca por sua alta resist&ecirc;ncia ao frio e &agrave;s geadas, mesmo ap&oacute;s temperaturas baixas, ela permanece verde e recupera-se rapidamente, mantendo pastagens de qualidade mesmo nos meses frios. Al&eacute;m disso, sua estrutura firme,garante forragem de excelente qualidade e alta aceita&ccedil;&atilde;o pelos animais, sendo ideal para quem busca pastagens consistentes e nutritivas durante todo o ano.</p>
+<p>Os animais s&oacute; devem entrar quando a pastagem atingir entre 30 e 40 cm de altura, garantindo bom volume e qualidade nutricional. A sa&iacute;da deve ocorrer quando restarem aproximadamente 15 cm, preservando o vigor da planta e assegurando uma rebrota r&aacute;pida e saud&aacute;vel.</p>
+</div>
+</div>
+<!-- Ideal Para Alimentação Animal -->
+<div class="layout-section">
+<div class="layout-text">
+<h2>Ideal para Alimenta&ccedil;&atilde;o Animal</h2>
+<p>A Grama Dona Emma &eacute; ideal para bovinos, ovinos, caprinos, su&iacute;nos e aves, oferecendo uma pastagem nutritiva, resistente e de alta aceita&ccedil;&atilde;o pelo rebanho. Em an&aacute;lises preliminares realizadas em laborat&oacute;rio em Lages/SC, ela apresentou cerca de 24% de prote&iacute;na bruta e aproximadamente 74% de digestibilidade, n&uacute;meros que mostram o quanto essa grama pode fornecer alimento de alta qualidade e excelente aproveitamento pelo animal.</p>
+</div>
+<div class="gif-placeholder"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3208/1.png" alt="Imagem Ideal Para Alimenta&ccedil;&atilde;o Animal" /></div>
+</div>
+<!-- Embalagem e Transporte - PADRÃO PARA TODOS OS PRODUTOS -->
+<div class="sophistication-content" style="margin-top: 0px;">
+<div class="wardrobe-image">
+<div class="wardrobe-placeholder"><img style="max-height: 580px;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3226/caixa-agrojardim-descricao.png" alt="Imagem Embalagem e Transporte" /></div>
+</div>
+<div class="sophistication-text">
+<h2>Embalagem e Transporte</h2>
+<p>Aqui na AgroJardim trabalhamos diariamente para lhe garantir a melhor experi&ecirc;ncia na hora de comprar suas mudas online. Utilizamos caixas personalizadas sob medida com furos para que suas mudas consigam respirar durante todo o trajeto. Al&eacute;m disso, adicionamos um gel especial desenvolvido para reter &aacute;gua e liberar gradualmente, mantendo a umidade ideal at&eacute; a chegada no seu endere&ccedil;o. O mesmo gel possui macronutrientes cruciais, como pot&aacute;ssio e nitrog&ecirc;nio, promovendo a nutri&ccedil;&atilde;o da muda durante o seu transporte.</p>
+<p>E, para garantir uma entrega r&aacute;pida e segura, trabalhamos com transportadoras especializadas no transporte de mudas, com rastreamento completo, assegurando que suas mudas cheguem em perfeitas condi&ccedil;&otilde;es.</p>
+</div>
+</div>
+<!-- Certificações e Segurança - PADRÃO PARA TODOS OS PRODUTOS -->
+<div id="layout-certificate" class="layout-section" style="display: flex; flex-direction: column;">
+<div class="layout-text" style="text-align: center;">
+<h2>Certifica&ccedil;&otilde;es e Seguran&ccedil;a</h2>
+<p>Na AgroJardim, o cuidado nasce antes de qualquer muda. Trabalhamos com estufas teladas e cobertas, seguindo todas as normas do MAPA e da CIDASC para garantir um ambiente seguro e controlado. Com isso, nossas mudas chegam at&eacute; voc&ecirc; livres de Cancro C&iacute;trico e Greening.</p>
+<p>Todas as mudas possuem a documenta&ccedil;&atilde;o completa, com Renasem, Termo de Conformidade e CFO, para que voc&ecirc; tenha total seguran&ccedil;a, rastreabilidade e confian&ccedil;a na qualidade do que est&aacute; recebendo.</p>
+</div>
+<!-- Desktop: imagens lado a lado -->
+<div class="gif-placeholder certifications-desktop" style="max-height: 200px; flex-direction: row; gap: 25px;"><img class="img-selos" style="max-height: 250px!important;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3219/dsvia-selo-descricao.png" alt="Selo DSVIA" /> <img class="img-selos" style="max-height: 250px!important;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3217/renasem-selo-descricao.png" alt="Carimbo RENASEM" /> <img class="img-selos" style="max-height: 250px!important;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3218/cidasc-selo-descricao.png" alt="Selo CIDASC" /> <img class="img-selos" style="max-height: 20px;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3216/mapa-selo-descricao.png" alt=" Selo MAPA" /></div>
+<!-- Mobile: swiper -->
+<div class="certifications-mobile">
+<div class="swiper certifications-swiper-mob">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img class="img-selos" style="max-height: 300px;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3219/dsvia-selo-descricao.png" alt="Selo DSVIA" /></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img class="img-selos" style="max-height: 300px;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3217/renasem-selo-descricao.png" alt="Carimbo RENASEM" /></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img class="img-selos" style="max-height: 300px;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3218/cidasc-selo-descricao.png" alt="Selo CIDASC" /></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img class="img-selos" style="max-height: 300px;" src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3216/mapa-selo-descricao.png" alt="Selo MAPA" /></div>
+</div>
+</div>
+</div>
+<div class="swiper-pagination certifications-pagination-mob"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AQUI VOCE VAI COLOCAR SOBRE A EMPRESA  --> <!-- ======================= DEPOIMENTOS ======================= -->
+<div class="testimonials-carousel">
+<div class="sophistication-text" style="text-align: center; margin-left: -10px;">
+<h2>Somos um Site Seguro?</h2>
+<p>A AgroJardim atua h&aacute; mais de 14 anos no mercado de mudas frut&iacute;feras e plantas ornamentais, com sede em S&atilde;o Jo&atilde;o do Oeste, Santa Catarina. Nessa trajet&oacute;ria, j&aacute; entregamos mais de 100 mil mudas por todo o Brasil com a melhor qualidade do mercado. Se voc&ecirc; busca qualidade e confian&ccedil;a, voc&ecirc; est&aacute; no lugar certo!</p>
+</div>
+<!-- Carrossel de selos: agora com classes de TESTIMONIALS -->
+<div class="testimonials-carousel">
+<div class="swiper features-swiper features-swiper-1">
+<div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3222/viveiro-agrojardim-descricao-01.png" alt="Imagem Estrutura Viveiro da AgroJardim" /></div>
+<div class="feature-description"><!-- Somos o E-commerce Revelação Magazord Awards 2025  --></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3229/descricoes.png" alt="Imagem Premio Ecommerce Revela&ccedil;&atilde;o Magazord 2025" /></div>
+<div class="feature-description"><!-- Envio seguro com gel nutritivo e embalagem ventilada que
+                    protege a muda durante o transporte. --></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3223/viveiro-agrojardim-descricao-02.png" alt="Imagem da Estrutura Viveiro da AgroJardim" /></div>
+<div class="feature-description"><!--Frutos de casca fina e aroma marcante — perfeitos para sucos
+                    e receitas. --></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3224/viveiro-agrojardim-descricao-03.png" alt="Imagem Plantas Viveiro da AgroJardim" /></div>
+<div class="feature-description"><!-- Envio seguro com gel nutritivo e embalagem ventilada que
+                    protege a muda durante o transporte. --></div>
+</div>
+</div>
+<div class="swiper-slide">
+<div class="feature-card">
+<div class="feature-gif"><img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3225/viveiro-agrojardim-descricao-04.png" alt="Imagem Hortali&ccedil;as Viveiro da AgroJardim" /></div>
+<div class="feature-description"><!--  Frutos de casca fina e aroma marcante — perfeitos para sucos
+                    e receitas. --></div>
+</div>
+</div>
+</div>
+<div class="testimonials-nav swiper-button-next features-next-1"></div>
+<div class="testimonials-nav swiper-button-prev features-prev-1"></div>
+<div class="swiper-pagination features-pagination-1"></div>
+</div>
+<!-- Controles e paginação do testimonials -->
+<div class="testimonials-nav swiper-button-next testimonials-next-1"></div>
+<div class="testimonials-nav swiper-button-prev testimonials-prev-1"></div>
+<div class="swiper-pagination testimonials-pagination-1"></div>
+</div>
+</div>
+</div>
+<style><!--
+.faq-agro-section {
+  max-width: 1310px;  
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.faq-agro-header h2 {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 1.8rem !important;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.faq-agro-list {
+  max-width: 1310px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-agro-item {
+  background: #fafafa;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-agro-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 1rem !important;
+  font-weight: bold;
+  color: #333333;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.faq-agro-question:hover {
+  background: #f1f1f1;
+}
+
+.faq-agro-question.active {
+  background: #f1f1f1;
+}
+
+.faq-agro-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #666;
+  font-size: 1.4rem;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  margin-left: 16px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.faq-agro-question.active .faq-agro-icon {
+  transform: rotate(45deg);
+  background: #999;
+  color: #fff;
+}
+
+.faq-agro-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+  background: #fafafa;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.8;
+  text-align: left;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq-agro-answer.active {
+  padding: 20px 24px 24px 24px;
+  background-color: #fafafa;
+}
+
+.faq-agro-answer p {
+  margin: 0;
+  margin-top: 0px !important;
+  align-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .faq-agro-header h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .faq-agro-question {
+    padding: 16px 20px;
+    font-size: 1rem !important;
+  }
+
+  .faq-agro-answer {
+    font-size: 1rem !important;
+  }
+
+  .faq-agro-answer.active {
+    padding: 16px 20px 20px 20px;
+  }
+}
+.faq-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.faq-link:hover {
+  color: #764ba2;
+  border-bottom-color: #667eea;
+}
+
+.manual-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3e2d5 100%);
+    border-left: 5px solid #00a441;
+    border-radius: 10px;
+    gap: 20px;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+.manual-card:hover {
+    transform: translateX(5px);
+}
+
+.manual-card-content {
+    flex: 1;
+}
+
+.manual-card-title {
+    font-weight: 700;
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+.manual-card-text {
+    color: #555;
+    font-size: 0.95rem;
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+.manual-card-btn {
+    padding: 12px 24px;
+    background-color: #00a441;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.manual-card-btn:hover {
+    background-color: #026b2c;
+    transform: scale(1.08);
+}
+
+@media (max-width: 768px) {
+    .manual-card {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .manual-card-title {
+        font-size: 1rem;
+    }
+
+    .manual-card-text {
+        font-size: 0.9rem;
+    }
+
+    .manual-card-btn {
+        width:auto;
+        justify-content: center;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+}
+--></style>
+<div class="faq-agro-section">
+<div class="faq-agro-header">
+<h2>Perguntas Frequentes</h2>
+</div>
+<div class="faq-agro-list">
+<div class="faq-agro-item"><button class="faq-agro-question" type="button"> As minhas mudas possuem garantia? <span class="faq-agro-icon">+</span> </button>
+<div class="faq-agro-answer">
+<p>Caso sua muda chegue com qualquer problema, basta entrar em contato com a nossa equipe em at&eacute; 7 dias que lhe ajudaremos a resolver! <a class="faq-link" href="https://www.agrojardim.com.br/politica-de-trocas-e-devolucoes" target="_blank">(entenda)</a></p>
+</div>
+</div>
+<div class="faq-agro-item"><button class="faq-agro-question" type="button"> As minhas mudas ir&atilde;o aguentar o transporte? <span class="faq-agro-icon">+</span> </button>
+<div class="faq-agro-answer">
+<p>Sim! Aqui na AgroJardim preparamos cada pedido com expertise. Utilizamos caixas personalizadas sob medida com furos e gel para hidrata&ccedil;&atilde;o das mudas, fazendo com que aguentem mais de 30 dias em caixas durante o transporte!</p>
+</div>
+</div>
+<div class="faq-agro-item"><button class="faq-agro-question" type="button"> As minhas mudas podem ser plantadas em vasos? <span class="faq-agro-icon">+</span> </button>
+<div class="faq-agro-answer">
+<p>Sim! Todas as mudas da AgroJardim podem ser plantadas em vasos! Recomendamos que utilize vasos com no m&iacute;nimo 25 litros, com boa drenagem e em local com sol pleno!</p>
+</div>
+</div>
+<div class="faq-agro-item"><button class="faq-agro-question" type="button"> Preciso de mudas em maior quantidade, o que fazer? <span class="faq-agro-icon">+</span> </button>
+<div class="faq-agro-answer">
+<p>Se voc&ecirc; precisa de uma cota&ccedil;&atilde;o maior, entre em contato com nossa equipe pelo WhatsApp para receber uma cota&ccedil;&atilde;o personalizada!</p>
+</div>
+</div>
+<div class="faq-agro-item"><button class="faq-agro-question" type="button"> Aonde &eacute; enviado o link de rastreio ap&oacute;s a compra? <span class="faq-agro-icon">+</span> </button>
+<div class="faq-agro-answer">
+<p>Ap&oacute;s o envio, voc&ecirc; recebe o link de rastreio por WhatsApp e Email para acompanhar o seu pedido at&eacute; a entrega!</p>
+</div>
+</div>
+<div class="faq-agro-item"><button class="faq-agro-question" type="button"> Voc&ecirc;s d&atilde;o orienta&ccedil;&otilde;es sobre como cuidar das mudas ap&oacute;s o recebimento? <span class="faq-agro-icon">+</span> </button>
+<div class="faq-agro-answer">
+<p>Sim! A AgroJardim possui uma equipe de especialistas a disposi&ccedil;&atilde;o para lhe ajudar, basta entrar em contato no WhatsApp ou abrir o Manual de Cultivo dispon&iacute;vel abaixo!</p>
+</div>
+</div>
+<div class="faq-answer">
+<div class="manual-card">
+<div class="manual-card-content">
+<div class="manual-card-title">Aprenda a Cuidar de Suas Mudas</div>
+<div class="manual-card-text">Guia completo com dicas da AgroJardim!</div>
+</div>
+<a class="manual-card-btn" href="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/02/produto/2389/manual-de-cultivo-de-mudas-frutiferas-e-plantas-da-agrojardim.pdf" target="_blank"> Acessar Agora </a></div>
+</div>
+<script>// <![CDATA[
+(function() {
+  'use strict';
+
+  const buttons = document.querySelectorAll('.faq-agro-question');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const isOpen = this.classList.contains('active');
+
+      buttons.forEach(b => {
+        b.classList.remove('active');
+        const a = b.nextElementSibling;
+        if (a) {
+          a.classList.remove('active');
+          a.style.maxHeight = null;
+        }
+      });
+
+      if (!isOpen) {
+        this.classList.add('active');
+        if (answer) {
+          answer.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 30 + 'px';
+        }
+      }
+    });
+  });
+
+  window.addEventListener('resize', function() {
+    document.querySelectorAll('.faq-agro-answer.active').forEach(ans => {
+      ans.style.maxHeight = ans.scrollHeight + 30 + 'px';
+    });
+  });
+
+})();
+// ]]></script>
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>// <![CDATA[
+// Depoimentos (carrossel de selo/segurança)
+      new Swiper("#rd-scope .testimonials-swiper-1", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        centeredSlides: true,
+        centeredSlidesBounds: true,
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        navigation: {
+          nextEl: "#rd-scope .testimonials-next-1",
+          prevEl: "#rd-scope .testimonials-prev-1",
+        },
+        pagination: {
+          el: "#rd-scope .testimonials-pagination-1",
+          clickable: true,
+        },
+        speed: 600,
+        loopAdditionalSlides: 1,
+        effect: "slide",
+      });
+
+      // Features (DESKTOP)
+      new Swiper("#rd-scope .features-swiper-1", {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+          nextEl: "#rd-scope .features-next-1",
+          prevEl: "#rd-scope .features-prev-1",
+        },
+        pagination: { el: "#rd-scope .features-pagination-1", clickable: true },
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        speed: 600,
+        breakpoints: { 0: { slidesPerView: 1 }, 769: { slidesPerView: 3 } },
+      });
+
+      new Swiper("#rd-scope .features-swiper-3", {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+          nextEl: "#rd-scope .features-next-3",
+          prevEl: "#rd-scope .features-prev-3",
+        },
+        pagination: { el: "#rd-scope .features-pagination-3", clickable: true },
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        speed: 600,
+        breakpoints: { 0: { slidesPerView: 1 }, 769: { slidesPerView: 3 } },
+      });
+
+      // Features (MOBILE)
+      new Swiper("#rd-scope .features-swiper-mob-1", {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        centeredSlides: true,
+        centeredSlidesBounds: true,
+        pagination: {
+          el: "#rd-scope .features-pagination-mob-1",
+          clickable: true,
+        },
+        speed: 500,
+      });
+
+      new Swiper("#rd-scope .features-swiper-mob-2", {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        centeredSlides: true,
+        centeredSlidesBounds: true,
+        pagination: {
+          el: "#rd-scope .features-pagination-mob-2",
+          clickable: true,
+        },
+        speed: 500,
+      });
+
+     // Smooth scroll + animações
+document.querySelectorAll('#rd-scope a[href^="#"]').forEach((a) => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute("href"));
+    if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px",
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+}, observerOptions);
+
+// MUDANÇA AQUI: agora pega todos os elementos
+document.querySelectorAll("#rd-scope > *").forEach((section) => {
+  section.style.opacity = "0";
+  section.style.transform = "translateY(30px)";
+  section.style.transition = "opacity .6s ease, transform .6s ease";
+  observer.observe(section);
+});
+
+
+    //    inicio do scroll com popup 
+    function scrollToTopAndNotify() {
+    // rola suavemente até o topo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // cria o elemento da notificação
+    const notification = document.createElement('div');
+    notification.textContent = 'Finalize a compra para garantir seu brinde 🎁';
+    notification.style.position = 'fixed';
+    notification.style.top = '80px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.background = '#102F18';
+    notification.style.color = '#fff';
+    notification.style.padding = '12px 20px';
+    notification.style.borderRadius = '8px';
+    notification.style.fontFamily = '"Instrument Sans", sans-serif';
+    notification.style.fontSize = '0.95rem';
+    notification.style.zIndex = '9999';
+    notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+    notification.style.transition = 'opacity .4s ease';
+    notification.style.opacity = '1';
+
+    document.body.appendChild(notification);
+
+    // remove após 3 segundos
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      setTimeout(() => notification.remove(), 400);
+    }, 3000);
+  }
+  // Certificações (MOBILE apenas)
+new Swiper("#rd-scope .certifications-swiper-mob", {
+  slidesPerView: 1,
+  spaceBetween: 16,
+  loop: true,
+  centeredSlides: true,
+  centeredSlidesBounds: true,
+  pagination: {
+    el: "#rd-scope .certifications-pagination-mob",
+    clickable: true,
+  },
+  speed: 500,
+});
+// ]]></script>
+</div>
+</div>

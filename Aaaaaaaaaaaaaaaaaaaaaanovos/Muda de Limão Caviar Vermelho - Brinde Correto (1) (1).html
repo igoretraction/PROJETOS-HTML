@@ -1,0 +1,1902 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Muda de Limão Caviar Vermelho</title>
+
+    
+    <!-- Swiper CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+      @media (min-width: 800px) {
+        .about-section {
+          overflow: hidden;
+        }
+      }
+      @media (max-width: 768px) {
+        #rd-scope .spec-item ul li {
+          text-align: left;
+        }
+      }
+
+       /* MOBILE — Centralizar completamente a seção "Somos um Site Seguro?" */
+@media (max-width: 768px) {
+
+  /* Corrige a largura do container para não ultrapassar a tela */
+  #rd-scope .testimonials-carousel {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
+
+  /* Centraliza o texto (título + parágrafo) */
+  #rd-scope .sophistication-text {
+    text-align: center !important;
+    padding: 0 !important;  /* remove padding duplicado */
+    margin: 0 auto !important;
+  }
+
+  #rd-scope .sophistication-text h2,
+  #rd-scope .sophistication-text p {
+    text-align: center !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Centraliza o carrossel de imagens */
+  #rd-scope .testimonials-carousel .swiper {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  #rd-scope .testimonials-carousel .swiper-slide {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  #rd-scope .testimonials-carousel .feature-gif {
+    margin: 0 auto !important;
+    display: block;
+  }
+}
+
+/* MOBILE — aumenta o espaçamento do título "Muda de Alta Qualidade" */
+@media (max-width: 768px) {
+  #rd-scope .product-info h2 {
+    margin-top: 20px !important;
+    margin-bottom: 20px !important;
+    text-align: center !important; /* mantém alinhamento bonito no mobile */
+  }
+}
+
+/* CENTRALIZAÇÃO DOS SELOS NO MOBILE */
+@media (max-width: 768px) {
+
+  /* garante que o container centralize tudo */
+  .certifications-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100% !important;
+  }
+
+  /* centraliza o swiper completo */
+  #rd-scope .certifications-swiper-mob {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+
+  /* centraliza os slides */
+  #rd-scope .certifications-swiper-mob .swiper-slide {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* impede que imagens alongadas ocupem largura exagerada */
+  #rd-scope .certifications-swiper-mob .feature-gif {
+    margin: 0 auto !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* garante que a imagem não estique */
+  #rd-scope .certifications-swiper-mob img {
+    margin: 0 auto !important;
+    display: block;
+  }
+}
+
+.faq-agro-section {
+  max-width: 1310px;  
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.faq-agro-header h2 {
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 1.8rem !important;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.faq-agro-list {
+  max-width: 1310px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.faq-agro-item {
+  background: #fafafa;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-agro-question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 1rem !important;
+  font-weight: bold;
+  color: #333333;
+  line-height: 1.4;
+  transition: all 0.3s ease;
+}
+
+.faq-agro-question:hover {
+  background: #f1f1f1;
+}
+
+.faq-agro-question.active {
+  background: #f1f1f1;
+}
+
+.faq-agro-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #666;
+  font-size: 1.4rem;
+  font-weight: 300;
+  transition: all 0.3s ease;
+  margin-left: 16px;
+  flex-shrink: 0;
+}
+
+.faq-agro-question.active .faq-agro-icon {
+  transform: rotate(45deg);
+  background: #999;
+  color: #fff;
+}
+
+.faq-agro-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+  background: #fafafa;
+  font-family: "Instrument Sans", sans-serif;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.8;
+  text-align: left;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+}
+
+.faq-agro-answer.active {
+  padding: 20px 24px 20px 24px;
+  background-color: #fafafa;
+}
+
+.faq-agro-answer p {
+  margin: 0;
+  margin-top: 0px !important;
+  align-content: center;
+  align-items: center;
+      display: flex;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+  .faq-agro-header h2 {
+    font-size: 1.8rem !important;
+  }
+
+  .faq-agro-question {
+    padding: 16px 20px;
+    font-size: 1rem !important;
+  }
+
+  .faq-agro-answer {
+    font-size: 1rem !important;
+  }
+
+  .faq-agro-answer.active {
+    padding: 16px 20px 20px 20px;
+  }
+}
+.faq-link {
+  color: #667eea;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid transparent;
+}
+
+.faq-link:hover {
+  color: #764ba2;
+  border-bottom-color: #667eea;
+}
+
+/* CARD PREMIUM FULL-WIDTH NO DESKTOP */
+.premium-gift-section {
+    position: relative;
+    max-width: 1310px;             
+    padding: 36px 38px;
+    border-radius: 18px;
+    background: #f4fbf7;
+    border: 1.5px solid #00a44122;
+    font-family: "Instrument Sans", sans-serif;
+    margin: 40px 0;
+    transition: 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* Hover premium */
+.premium-gift-section:hover {
+    transform: translateY(-3px);
+}
+
+/* Selo “Brinde Exclusivo” */
+.premium-gift-tag {
+    position: absolute;
+    top: -14px;
+    left: 590 px;
+    background: #00a441;
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+/* TÍTULO */
+.premium-gift-text h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.65rem !important;
+    font-weight: 850;
+    color: #00a441;
+    line-height: 1.32;
+    text-align: center;
+}
+
+/* Texto destacado */
+.premium-gift-text h2 span {
+    color: #00a441 !important;
+    font-weight: 900;
+    text-align: center;
+}
+
+/* SUBTEXTO */
+.premium-gift-text p {
+    font-size: 0.875em !important;
+    color: #555555;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+}
+
+/* Botão premium – texto centralizado corretamente */
+.premium-gift-btn {
+    background: #00a441;
+    color: #fff;
+
+    /* padding equilibrado (altura + largura) */
+    padding: 15px 100px;
+
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+
+    display: inline-flex;
+    justify-content: center;   /* centraliza horizontalmente */
+    align-items: center;       /* centraliza verticalmente */
+
+    gap: 8px;
+    width: fit-content;
+    transition: 0.25s ease;
+    text-align: center;
+}
+
+.premium-gift-btn:hover {
+    transform: scale(1.07);
+    background: #027032;
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+
+    .premium-gift-section {
+        padding: 20px 18px;
+        gap: 16px;
+    }
+
+    .premium-gift-tag {
+        top: -10px;
+        left: 47px;
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+
+    .premium-gift-text h2 {
+        font-size: 1.35rem;
+    }
+
+    .premium-gift-text p {
+        font-size: 0.875em;
+    }
+
+    .premium-gift-btn {
+        padding: 10px 0px 0px 180px;
+        font-size: 0.82rem; /* menor no mobile */
+        display: flex;
+        justify-content: center; /* centraliza o texto */
+        align-items: center;
+        width: 100%;             /* botão ocupa só o card, não o site */
+        padding: 14px 0;
+        margin: 0 auto;          /* garante centralização */
+        font-size: 1.1rem;       /* aumenta a palavra */
+        text-align: center;      /* reforço de centralização */
+    }
+}
+
+/* DESKTOP – imagem mais larga que alta, no mesmo local */
+.premium-gift-image {
+    position: absolute;
+    left: 30px;                 /* mantém no mesmo local */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;               /* <<< MAIS LARGA */
+    height: 200px;              /* <<< MAIS BAIXA */
+    overflow: hidden;           
+    border-radius: 15px;        /* como você pediu */
+    z-index: 2;
+}
+
+.premium-gift-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;          /* preenche sem distorcer */
+    border-radius: 15px;
+}
+
+.premium-gift-text {
+    margin-left: 530px;   /* 500px da imagem + 40px de respiro */
+}
+.premium-gift-btn {
+    margin-left: 656px;   /* 500px da imagem + 40px de respiro */
+}
+
+@media (max-width: 768px) {
+
+    .premium-gift-image {
+        position: relative;
+        left: 0;
+        top: 0;
+        transform: none;
+        width: 100%;          /* não estoura o card */
+        height: auto;
+        margin: 0 auto 14px auto;
+    }
+
+    .premium-gift-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 15px;
+    }
+
+    .premium-gift-text,
+    .premium-gift-btn {
+        margin-left: 0;
+        text-align: center;
+    }
+}
+
+/* CENTRALIZAR O SELO NO DESKTOP */
+.premium-gift-tag {
+    left: 50% !important;
+    transform: translateX(-50%);
+}
+
+/* SOMENTE MOBILE — corrigir texto "Somos um Site Seguro?" encostando na borda */
+@media (max-width: 768px) {
+  #rd-scope .somos-site-seguro-text {
+    padding: 0 15px !important;   /* mesmo padding do RN-CONTAINER */
+    margin-left: 0 !important;     /* remove o -10px */
+    margin-right: 0 !important;
+    text-align: center !important;
+  }
+}
+
+/* FAZ COM QUE A IMAGEM FIQUE ABAIXO DO TEXTO - SOMENTE MOBILE */
+      @media (max-width: 768px) {
+  .sophistication-content {
+    display: flex;
+    flex-direction: column-reverse !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-section {
+    display: flex !important;
+    flex-direction: column-reverse !important;
+  }
+}
+
+
+
+/* FAZ COM QUE TENHA ESPAÇAMENTO ENTRE O TEXTO E IMAGEM - SOMENTE MOBILE */
+@media (max-width: 768px) {
+  .gif-placeholder  {
+    margin-top: 30px;          /* adiciona o espaço desejado */
+    border-radius: 15px;       /* mantém o arredondado igual ao original */
+    overflow: hidden;          /* mantém a imagem dentro da borda */
+  }
+}
+
+@media (max-width: 768px) {
+  .layout-section  {
+    margin-top: 30px;          /* adiciona o espaço desejado */
+    border-radius: 15px;       /* mantém o arredondado igual ao original */
+    overflow: hidden;          /* mantém a imagem dentro da borda */
+  }
+}
+
+@media (max-width: 768px) {
+  .wardrobe-image  {
+    margin-top: 30px;          /* adiciona o espaço desejado */
+    border-radius: 15px;       /* mantém o arredondado igual ao original */
+    overflow: hidden;          /* mantém a imagem dentro da borda */
+  }
+}
+
+
+      /* ===== Escopo ===== */
+      #rd-scope .svg-icon {
+        width: 60px;
+        height: 60px;
+      }
+      #rd-scope .rn-container {
+        font-family: "Instrument Sans", sans-serif;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 70px;
+      }
+
+      #rd-scope .product-description {
+        font-family: "Instrument Sans", sans-serif;
+        padding: 0px 0;
+        text-align: center;
+      }
+      #rd-scope .product-description h1 {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 2.5rem;
+        color: #333;
+      }
+
+      #rd-scope .features-grid {
+        font-family: "Instrument Sans", sans-serif;
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        flex-wrap: wrap;
+      }
+      #rd-scope .feature-item {
+        font-family: "Instrument Sans", sans-serif;
+        text-align: center;
+        flex: 1;
+        min-width: 200px;
+      }
+      #rd-scope .feature-circle {
+        font-family: "Instrument Sans", sans-serif;
+        border: 1px solid #102F18;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: #fafafa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        font-weight: 700;
+        color: #555;
+      }
+      #rd-scope .feature-text {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      #rd-scope .product-details {
+        font-family: "Instrument Sans", sans-serif;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        margin-top: 30px;
+      }
+      #rd-scope .gif-placeholder {
+        font-family: "Instrument Sans", sans-serif;
+        border-radius: 15px;
+        max-height: 580px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      #rd-scope .gif-placeholder img {
+        border-radius: 15px;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 580px !important;
+        object-fit: cover;
+        display: block;
+
+
+      }
+      #rd-scope .product-info h2 {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #333;
+        text-align: left;
+      }
+      #rd-scope .product-info p {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #555;
+        text-align: left;
+      }
+
+      #rd-scope .product-features {
+      font-family: "Instrument Sans", sans-serif;
+      background: #fafafa;
+      max-width: 1310px;
+      border-radius: 20px;
+      margin: 50px auto;
+      }
+      #rd-scope .features-grid-2 {
+        font-family: "Instrument Sans", sans-serif;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        margin-top: 40px;
+      }
+      #rd-scope .feature-card {
+        font-family: "Instrument Sans", sans-serif;
+        text-align: center;
+        margin: 0 auto;
+      }
+      #rd-scope .feature-gif {
+        background: #f0f0f0;
+        border-radius: 15px;
+        margin-bottom: 20px;
+        font-weight: 700;
+        font-size: 1.2rem;
+        width: 100%;
+        aspect-ratio: 1/1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        padding: 0;
+        max-width: 480px;
+      }
+      #rd-scope .feature-gif img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      #rd-scope .feature-description {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 0.9rem;
+        color: #555;
+        line-height: 1.5;
+        margin-top: 15px;
+      
+      }
+
+      /* ===== Swiper base (escopo) ===== */
+      #rd-scope .swiper {
+        width: 1240px;
+        max-width: 100vw;
+        margin: 0 auto;
+        padding: 20px 0;
+        overflow: hidden;
+      }
+      #rd-scope .swiper-wrapper {
+        align-items: stretch;
+      }
+      #rd-scope .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: transparent;
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 410px;
+        height: auto;
+      }
+      /* features desktop: slides menores */
+      #rd-scope .features-swiper-1 .swiper-slide {
+        width: 320px;
+      }
+      #rd-scope .features-swiper-1 .feature-card {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      #rd-scope .product-specs {
+        padding: 0px 0;
+      }
+      #rd-scope .specs-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      #rd-scope .wardrobe-image {
+        text-align: center;
+      }
+      #rd-scope .wardrobe-placeholder {
+        border-radius: 15px;
+        min-height: 300px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+      #rd-scope .wardrobe-placeholder img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 15px;
+      }
+      #rd-scope .specs-info {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+      }
+      #rd-scope .specs-section h3 {
+        font-size: 1.8rem !important;
+        margin-bottom: 5px;
+        color: #333;
+        margin-top: 40px;
+      }
+      #rd-scope .spec-item ul li {
+       border-bottom: 1px solid rgb(233 233 233);
+        padding: 20px 0;
+        color: #555;
+        place-items: center;
+        list-style: none;
+        
+      }
+      #rd-scope .spec-item ul{
+        width: 100%;
+        padding: 0 10px 0;
+}
+      #rd-scope .spec-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+        padding: 10px 0;
+      }
+
+      #rd-scope .sophistication-section {
+        padding: 70px 0 60px 0;
+        background: #fafafa;
+        max-width: 1310px;
+        margin: auto;
+        border-radius: 20px;
+      }
+
+      /* RETIRA O PADDING DO MOBILE CITADO ACIMA DEVIDO MUITO ESPAÇO */
+      @media (max-width: 768px) {
+      #rd-scope .sophistication-section {
+    padding: 10px 0 60px 0; /* ajuste como quiser */
+  }
+}
+
+      #rd-scope .sophistication-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      #rd-scope .sophistication-text h2 {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        margin-top: 30px;
+        color: #333;
+      }
+      #rd-scope .sophistication-text p {
+        font-family: "Instrument Sans", sans-serif;
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #555;
+        margin-bottom: 20px;
+      }
+      <!-- #rd-scope .origin-tag {
+        background: #fff;
+        padding: 8px 16px;
+        border-radius: 20px;
+        display: inline-block;
+        font-size: 0.9rem;
+        color: #666; 
+      }
+
+      #rd-scope .layout-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+        margin-top: 0px;
+      }
+      #rd-scope .layout-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        margin-top: 40px;
+        color: #333;
+      }
+      #rd-scope .layout-text p {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #555;
+      }
+
+      #rd-scope .packaging-section {
+        padding: 60px 0;
+      }
+      #rd-scope .packaging-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: center;
+      }
+      #rd-scope .packaging-text h2 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      #rd-scope .packaging-text h3 {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+        color: #333;
+      }
+      #rd-scope .packaging-text p {
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #555;
+      }
+
+      #rd-scope .about-section {
+        padding: 60px 0;
+        background: #fff;
+        text-align: center;
+      }
+      #rd-scope .about-section h2 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+        color: #333;
+      }
+      #rd-scope .about-section p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #555;
+        max-width: 800px;
+        margin: 0 auto 40px;
+      }
+
+      #rd-scope .testimonials-carousel {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        flex-direction: column;
+      }
+      #rd-scope .features-carousels-desktop {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 40px;
+        align-items: center;
+      }
+
+      /* Controles */
+      #rd-scope .features-nav,
+      #rd-scope .testimonials-nav {
+        color: #666;
+        background: #fff;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-top: -20px;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+      }
+      #rd-scope .features-nav:after,
+      #rd-scope .testimonials-nav:after {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      #rd-scope .swiper-pagination-bullet {
+        background: #ccc;
+        opacity: 0.5;
+      }
+      #rd-scope .swiper-pagination-bullet-active {
+        background: #666;
+        opacity: 1;
+      }
+      #rd-scope .swiper-button-next,
+      #rd-scope .swiper-button-prev,
+      #rd-scope .features-nav,
+      #rd-scope .testimonials-nav {
+        top: 50% !important;
+        transform: translateY(-50%);
+      }
+      #rd-scope .features-swiper-1,
+      #rd-scope .testimonials-swiper-1 {
+        position: relative;
+      }
+      #rd-scope .testimonials-carousel {
+        width: 1240px;
+        max-width: 100vw;
+        margin: 0 auto 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      #rd-scope .swiper-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @media (max-width: 1300px) {
+        #rd-scope .testimonials-carousel,
+        #rd-scope .swiper {
+          width: 100vw;
+          max-width: 100vw;
+        }
+      }
+
+      /* ======== MOBILE FIX ======== */
+      @media (max-width: 1024px) {
+        #rd-scope .swiper,
+        #rd-scope .testimonials-carousel {
+          margin: 0 auto !important;
+        }
+        #rd-scope .swiper-wrapper {
+          margin: 0 !important;
+        }
+        #rd-scope .swiper-slide {
+          width: 100% !important;
+          height: auto !important;
+        }
+        #rd-scope .features-swiper-1 .swiper-slide {
+          width: 100% !important;
+        }
+        /* esconder setas no mobile */
+        #rd-scope .features-nav,
+        #rd-scope .testimonials-nav {
+          display: none !important;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #rd-scope .features-carousels-desktop {
+          display:flex;
+        }
+        #rd-scope .features-carousels-mobile {
+          display: block !important;
+        }
+        #rd-scope .product-details,
+        #rd-scope .specs-container,
+        #rd-scope .sophistication-content,
+        #rd-scope .layout-section,
+        #rd-scope .packaging-content {
+          text-align: center;
+          grid-template-columns: 1fr;
+          gap: 0px;
+        }
+        #rd-scope .product-details,
+        #rd-scope .specs-container,
+        #rd-scope .sophistication-content,
+        #rd-scope .layout-section {
+          display: flex;
+          flex-direction: column;
+        }
+        #rd-scope .product-details .gif-placeholder {
+          order: 1;
+        }
+        #rd-scope .product-details .product-info {
+          order: 2;
+        }
+        #rd-scope .specs-container .wardrobe-image {
+          order: 1;
+        }
+        #rd-scope .specs-container .specs-info {
+          order: 2;
+        }
+        #rd-scope .layout-section .gif-placeholder {
+          order: 1;
+        }
+        #rd-scope .layout-section .layout-text {
+          order: 2;
+        }
+        #rd-scope .features-grid {
+          flex-direction: column;
+          align-items: center;
+          display: none;
+        }
+        #rd-scope .features-grid-2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        #rd-scope .product-description h1 {
+          font-size: 2rem;
+        }
+        #rd-scope .rn-container {
+          place-items: center;
+          padding: 0 15px;
+          margin-bottom: -30px;
+        }
+        #rd-scope .gif-placeholder {
+          border-radius: 15px;
+          max-width: 580px !important;
+          min-height: 260px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        #rd-scope .features-swiper-1 {
+          display: block;
+        }
+        #rd-scope .features-grid-2 {
+          display: none;
+        }
+        #rd-scope .product-info h2,
+        #rd-scope .product-info p {
+          text-align: center;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #rd-scope .features-grid-2 {
+          grid-template-columns: 1fr;
+        }
+        #rd-scope .product-description h1 {
+          font-size: 1.8rem;
+        }
+      }
+      @media (min-width: 780px) {
+        #rd-scope .features-carousels-mobile {
+          display: none !important;
+        }
+      }
+      .dimensions-container {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .dimension-arrow {
+        position: absolute;
+      }
+      .dimension-arrow.height {
+        left: 20px;
+        height: 100%;
+        width: 50px;
+      }
+      .dimension-arrow.width {
+        top: 20px;
+        width: 80%;
+        height: 50px;
+      }
+      .dimension-arrow.depth {
+        right: 20px;
+        top: 50%;
+        transform: rotate(-45deg);
+        width: 60%;
+        height: 50px;
+      }
+      .dimension-arrow text {
+        font-family: "Instrument Sans", sans-serif;
+        font-weight: bold;
+      }
+      .svg-icon-novo path {
+        fill: #102F18;
+      }
+      .img-selos {
+        max-width: 320px !important;
+      }
+
+      /* Certificações: desktop x mobile */
+      .certifications-mobile {
+        display: none;
+      }
+
+      .certifications-desktop {
+        display: flex;
+      }
+
+      @media (max-width: 768px) {
+        .certifications-desktop {
+          display: none !important;
+        }
+
+        .certifications-mobile {
+          display: block;
+          width: 100%;
+          margin-top: 20px;
+        }
+
+        .certifications-mobile .feature-gif {
+          max-width: 320px;
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 768px) {
+        #layout-certificate{
+          flex-direction: column-reverse !important;
+        }
+}
+
+#rd-scope .sophistication-text p{
+  margin: 10px;
+  margin-bottom: 10px;
+}
+#rd-scope .layout-text p{
+  margin: 10px;
+}
+
+/* MOBILE – aumenta a distância das bolinhas (paginação) */
+@media (max-width: 768px) {
+  .features-pagination-1 {
+    margin-top: 35px !important;   /* ajuste o valor que quiser */
+    position: relative !important;
+    bottom: auto !important;
+  }
+}
+
+/* REMOVE TODAS AS SETAS DE TODOS OS CARROSSEIS DO SITE */
+#rd-scope .swiper-button-next,
+#rd-scope .swiper-button-prev,
+#rd-scope .features-nav,
+#rd-scope .testimonials-nav {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* REMOVE as bolinhas APENAS do carrossel 03 TÓPICOS no DESKTOP */
+@media (min-width: 769px) {
+  #rd-scope .product-features .features-pagination-1 {
+    display: none !important;
+    visibility: hidden !important;
+  }
+}
+
+/* MOBILE – garantir que bolinhas e flechas apareçam */
+@media (max-width: 768px) {
+  .features-pagination-1,
+  .features-next-1,
+  .features-prev-1 {
+    display: block !important;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+
+    <div id="rd-scope">
+      <!-- ======= Descrição / header ======= -->
+      <section class="product-description">
+        <div class="rn-container">
+
+
+<script>
+const areaInput = document.getElementById('area-input');
+const resultBox = document.getElementById('result-box');
+const resultValue = document.getElementById('result-value');
+
+areaInput.addEventListener('input', function(e) {
+  this.value = this.value.replace(/[^0-9]/g, '');
+
+  if (this.value.length > 9) {
+    this.value = this.value.slice(0, 9);
+  }
+
+  const area = parseFloat(this.value) || 0;
+  const mudas = Math.ceil(area);
+
+  resultValue.textContent = mudas.toLocaleString('pt-BR');
+
+  if (area > 0) {
+    resultBox.classList.add('show');
+  } else {
+    resultBox.classList.remove('show');
+  }
+});
+
+areaInput.addEventListener('paste', function(e) {
+  e.preventDefault();
+  const pastedText = (e.clipboardData || window.clipboardData).getData('text');
+  const numericOnly = pastedText.replace(/[^0-9]/g, '').slice(0, 9);
+  this.value = numericOnly;
+  this.dispatchEvent(new Event('input'));
+});
+</script>
+
+
+          <!-- INICIO DA DESCRIÇÃO - PRIMEIRO BLOCO -->
+          <div class="product-details">
+            <div class="gif-placeholder">
+              <img
+                style="
+                  border-radius: 15px !important;
+                  max-width: 580px !important;
+                  max-height: 380px !important;
+                "
+                src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3265/descricao-limao-caviar-vermelho-02-agrojardim.png"
+                alt="Imagem Muda de Alta Qualidade"
+              />
+            </div>
+            <div class="product-info">
+              <h2>Muda de Alta Qualidade</h2>
+              <p>
+              A Muda de Limão Caviar Vermelho Enxertada da AgroJardim é produzida com alto padrão genético e manejo especializado, garantindo crescimento acelerado, maior resistência e frutificação uniforme. Essa variedade exótica, conhecida por seu alto valor de mercado, oferece excelente retorno tanto para uso próprio quanto para produção comercial. Ao escolher a AgroJardim, você recebe uma muda enxertada de qualidade superior, com desenvolvimento muito mais rápido do que plantas formadas por sementes. É a opção ideal para quem busca produtividade, segurança no cultivo e frutos de alto valor agregado.
+
+              </p>
+            </div>
+          </div>
+          <!-- FIM DA DESCRIÇÃO - PRIMEIRO BLOCO -->
+        </div>
+      </section>
+
+      <!-- ======================= 03 TÓPICOS (DESKTOP) - SEGUNDO BLOCO ======================= -->
+<section class="product-features">
+  <div class="rn-container">
+
+    <div class="features-carousels-desktop">
+      <div class="testimonials-carousel">
+        <div class="swiper features-swiper-1">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="feature-card">
+                <div class="feature-gif">
+                  <img
+                    src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3266/descricao-limao-caviar-vermelho-03-agrojardim.png"
+                    alt="Imagem da Muda de Grama Dona Emma 01"
+                  />
+                </div>
+                <div class="feature-description">
+                  Muda enxertada de rápida produção
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="feature-card">
+                <div class="feature-gif">
+                  <img
+                    src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3271/descricao-limao-caviar-vermelho-08-agrojardim.png"
+                    alt="Imagem da Muda de Grama Dona Emma 02"
+                  />
+                </div>
+                <div class="feature-description">
+                  Valor do fruto pode chegar a R$ 800/kg
+                </div>
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="feature-card">
+                <div class="feature-gif">
+                  <img
+                    src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3269/descricao-limao-caviar-vermelho-06-agrojardim.png"
+                    alt="Imagem da Muda de Grama Dona Emma 03"
+                  />
+                </div>
+                <div class="feature-description">
+                  Variedade exótica e muito rara
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FLECHAS DESKTOP -->
+          <div class="testimonials-nav swiper-button-next features-next-1"></div>
+          <div class="testimonials-nav swiper-button-prev features-prev-1"></div>
+
+          <!-- PAGINAÇÃO DESKTOP -->
+          <div class="swiper-pagination features-pagination-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+      <!-- ======================= ESPECIFICAÇÕES TÉCNICAS ======================= -->
+      <section class="product-specs">
+        <div class="rn-container">
+          <div class="specs-container">
+            <div class="specs-info">
+              <div class="specs-section">
+                <h3>Especificações Técnicas</h3>
+                <div class="spec-item">
+                  <ul>
+                    <li style="font-size: 1rem !important">
+                       <strong>Nome Científico:</strong> Citrus australasica
+                    <li style="font-size: 1rem !important">
+                      <strong>Tamanho da Muda:</strong> 70 a 90cm
+                    <li style="font-size: 1rem !important">
+                     <strong>Época de Produção:</strong> Novembro a Março
+                    <li style="font-size: 1rem !important">
+                      <strong>Tempo para Produzir:</strong> 3-4 Anos
+                     <li style="font-size: 1rem !important">
+                       <strong>Região Ideal:</strong> Todo o Brasil
+                     <li style="font-size: 1rem !important">
+                      <strong>Propagação:</strong> Enxertia
+                      <li style="font-size: 1rem !important">
+                    <strong>Sabor:</strong> Ácido
+                    <li style="font-size: 1rem !important">
+                      <strong>Sofre com Geada?</strong> Não
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="wardrobe-image">
+              <div class="wardrobe-placeholder">
+                <img
+                  src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3270/descricao-limao-caviar-vermelho-07-agrojardim.png"
+                  alt="Imagem Real da Muda de Grama Dona Emma"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================= BLOCO COM FUNDO CINZA ======================= -->
+      <section class="sophistication-section">
+        <div class="rn-container">
+          <!-- Resistência, Qualidade e Manejo -->
+          <div class="sophistication-content">
+            <div class="gif-placeholder">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3267/descricao-limao-caviar-vermelho-04-agrojardim.png"
+                alt="Imagem Resistência, Qualidade e Manejo"
+              />
+            </div>
+            <div class="sophistication-text">
+              <h2>O Fruto em Detalhes</h2>
+              <p>O Limão Caviar Vermelho se destaca pela sua polpa formada por pequenas esferas translúcidas que explodem na boca, oferecendo um sabor cítrico intenso e altamente apreciado na gastronomia profissional. Mesmo sendo uma espécie rara, adapta-se com facilidade a diferentes regiões do Brasil, desde que receba boa luminosidade e solo bem drenado.</p> <p>   
+                Sua estrutura compacta permite o cultivo tanto em vasos como no solo, mantendo excelente desenvolvimento em ambos os casos. Para assegurar bom crescimento, recomenda-se regas regulares, adubação periódica e podas leves, garantindo uma planta vigorosa e produtiva ao longo do ano.</p>
+            </div>
+          </div>
+
+          <!-- Ideal Para Alimentação Animal -->
+          <div class="layout-section">
+            <div class="layout-text">
+              <h2>Alto Valor Comercial</h2>
+              <p>
+              O limão caviar vermelho é muito valorizado por chefs, bares e restaurantes, tornando-se uma excelente alternativa para quem deseja produzir uma fruta rara, altamente procurada e com preço premium. Seus frutos alongados apresentam casca fina em tons que variam do vermelho ao roxo, enquanto a polpa interna traz cores vibrantes e textura semelhante ao caviar. A produção ocorre principalmente entre novembro e março, período em que o mercado costuma ter maior demanda. Com manejo simples e alta aceitação comercial, essa muda proporciona ao produtor uma oportunidade real de cultivo rentável e de alta qualidade.</p>
+            </div>
+
+            
+            <div class="gif-placeholder">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3264/descricao-limao-caviar-vermelho-01-agrojardim.png"
+                alt="Imagem Ideal Para Alimentação Animal"
+              />
+              
+            </div>
+          </div>
+
+          <!-- Embalagem e Transporte - PADRÃO PARA TODOS OS PRODUTOS -->
+          <div class="sophistication-content" style="margin-top: 0px">
+            <div class="wardrobe-image">
+              <div class="wardrobe-placeholder">
+                <img
+                  src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3226/caixa-agrojardim-descricao.png"
+                  alt="Imagem Embalagem e Transporte"
+                  style="max-height: 580px;"
+                />
+              </div>
+            </div>
+            <div class="sophistication-text">
+              <h2>Embalagem e Transporte</h2>
+              <p>
+                Aqui na AgroJardim trabalhamos diariamente para lhe garantir a melhor experiência na hora de comprar suas mudas online. 
+                Utilizamos caixas personalizadas sob medida com furos para que suas mudas consigam respirar durante todo o trajeto.
+                Além disso, adicionamos um gel especial desenvolvido para reter água e liberar gradualmente, mantendo a umidade ideal até a chegada no seu endereço. O mesmo gel possui macronutrientes cruciais, como potássio e nitrogênio, promovendo a nutrição da muda durante o seu transporte.
+                <p> 
+                E, para garantir uma entrega rápida e segura, trabalhamos com transportadoras especializadas no transporte de mudas, com rastreamento completo, assegurando que suas mudas cheguem em perfeitas condições.
+
+                </p>
+              </p>
+            </div>
+          </div>
+
+          <!-- Certificações e Segurança - PADRÃO PARA TODOS OS PRODUTOS -->
+          <div class="layout-section" id="layout-certificate" style="display: flex; flex-direction: column;">
+            <div class="layout-text" style="text-align: center;">
+              <h2>Certificações e Segurança</h2>
+              <p>Na AgroJardim, o cuidado nasce antes de qualquer muda. Trabalhamos com estufas teladas e cobertas, seguindo todas as normas do MAPA e da CIDASC para garantir 
+                um ambiente seguro e controlado. Com isso, nossas mudas chegam até você livres de Cancro Cítrico e Greening.</p>
+              <p>Todas as mudas possuem a documentação completa, com Renasem, Termo de Conformidade e CFO, para que você tenha total segurança, rastreabilidade e
+               confiança na qualidade do que está recebendo.
+              </p>
+            </div>
+
+            <!-- Desktop: imagens lado a lado -->
+            <div
+              class="gif-placeholder certifications-desktop"
+              style="max-height: 200px; flex-direction: row; gap: 25px;"
+            >
+              <img
+                class="img-selos"
+                style="max-height: 250px!important;"
+                src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3219/dsvia-selo-descricao.png"
+                alt="Selo DSVIA"
+              />
+              <img
+                class="img-selos"
+                style="max-height: 250px!important"
+                src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3217/renasem-selo-descricao.png"
+                alt="Carimbo RENASEM"
+              />
+              <img
+                class="img-selos"
+                style="max-height: 250px!important;"
+                src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3218/cidasc-selo-descricao.png"
+                alt="Selo CIDASC"
+              />
+              <img
+                class="img-selos"
+                style="max-height: 20px;"
+                src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3216/mapa-selo-descricao.png"
+                alt=" Selo MAPA"
+              />
+            </div>
+
+            <!-- Mobile: swiper -->
+            <div class="certifications-mobile">
+              <div class="swiper certifications-swiper-mob">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          class="img-selos"
+                          style="max-height: 300px;"
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3219/dsvia-selo-descricao.png"
+                          alt="Selo DSVIA"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          class="img-selos"
+                          style="max-height: 300px;"
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3217/renasem-selo-descricao.png"
+                          alt="Carimbo RENASEM"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          class="img-selos"
+                          style="max-height: 300px;"
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3218/cidasc-selo-descricao.png"
+                          alt="Selo CIDASC"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          class="img-selos"
+                          style="max-height: 300px;"
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3216/mapa-selo-descricao.png"
+                          alt="Selo MAPA"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="swiper-pagination certifications-pagination-mob"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AQUI VOCÊ VAI COLOCAR INFORMAÇÕES SOBRE A EMPRESA -->
+      <!-- ======================= DEPOIMENTOS ======================= -->
+      <div class="testimonials-carousel">
+        <div
+  class="sophistication-text somos-site-seguro-text"
+  style="text-align: center;"
+>
+          <h2>Somos um Site Seguro? </h2>
+          <p>
+            A AgroJardim atua há mais de 14 anos no mercado de mudas frutíferas e plantas ornamentais, com sede em São João do Oeste, Santa Catarina.
+            Nessa trajetória, já entregamos mais de 100 mil mudas por todo o Brasil com a melhor qualidade do mercado. Se você busca qualidade e confiança, você está
+            no lugar certo!
+          </p>
+        </div>
+
+        <!-- Carrossel de selos: agora com classes de TESTIMONIALS -->
+       <div class="testimonials-carousel">
+              <div class="swiper features-swiper features-swiper-1">
+                <div class="swiper-wrapper">
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3222/viveiro-agrojardim-descricao-01.png"
+                          alt="Imagem Estrutura Viveiro da AgroJardim"
+                        />
+                      </div>
+                      <div class="feature-description">
+                        <!-- Somos um site seguro? -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3273/descricao-viveiro-agrojardim-02.png"
+                          alt="Imagem Estrutura Viveiro da AgroJardim"
+                        />
+                      </div>
+                      <div class="feature-description">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3223/viveiro-agrojardim-descricao-02.png"
+                          alt="Imagem da Estrutura Viveiro da AgroJardim"
+                        />
+                      </div>
+                      <div class="feature-description">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3275/descricao-viveiro-agrojardim-04.png"
+                          alt="Imagem da Estrutura Viveiro da AgroJardim"
+                        />
+                      </div>
+                      <div class="feature-description">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="swiper-slide">
+                    <div class="feature-card">
+                      <div class="feature-gif">
+                        <img
+                          src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2025/12/produto/3272/descricao-viveiro-agrojardim-01.png"
+                          alt="Imagem da Estrutura Viveiro da AgroJardim"
+                        />
+                      </div>
+                      <div class="feature-description">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="testimonials-nav swiper-button-next features-next-1"
+                ></div>
+                <div
+                  class="testimonials-nav swiper-button-prev features-prev-1"
+                ></div>
+                <div class="swiper-pagination features-pagination-1"></div>
+              </div>
+
+
+            <!-- Controles e paginação do testimonials -->
+            <div
+              class="testimonials-nav swiper-button-next testimonials-next-1"
+            ></div>
+            <div
+              class="testimonials-nav swiper-button-prev testimonials-prev-1"
+            ></div>
+            <div class="swiper-pagination testimonials-pagination-1"></div> 
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div class="faq-agro-section">
+  <div class="faq-agro-header">
+    <h2>Perguntas Frequentes</h2>
+  </div>
+
+  <div class="faq-agro-list"> 
+
+    <div class="faq-agro-item">
+      <button class="faq-agro-question" type="button">
+        As minhas mudas possuem garantia?
+        <span class="faq-agro-icon">+</span>
+      </button>
+      <div class="faq-agro-answer">
+        <p>Caso sua muda chegue com qualquer problema, basta entrar em contato com a nossa equipe em até 
+          7 dias que lhe ajudaremos a resolver! <a href="https://www.agrojardim.com.br/politica-de-trocas-e-devolucoes" class="faq-link" target="_blank">(entenda)</a></p>
+      </div>
+    </div>
+
+    <div class="faq-agro-item">
+      <button class="faq-agro-question" type="button">
+        As minhas mudas irão aguentar o transporte?
+        <span class="faq-agro-icon">+</span>
+      </button>
+      <div class="faq-agro-answer">
+        <p>Sim! Aqui na AgroJardim preparamos cada pedido com expertise. Utilizamos caixas personalizadas sob medida 
+          com furos e gel para hidratação das mudas, fazendo com que aguentem 
+        mais de 30 dias em caixas durante o transporte!</p>
+      </div>
+    </div>
+
+    <div class="faq-agro-item">
+      <button class="faq-agro-question" type="button">
+          As minhas mudas podem ser plantadas em vasos?
+        <span class="faq-agro-icon">+</span>
+      </button>
+      <div class="faq-agro-answer">
+        <p>Sim! Todas as mudas da AgroJardim podem ser plantadas em vasos! Recomendamos que utilize vasos com no mínimo 25 litros, com boa drenagem e em local com sol pleno!</p>
+      </div>
+    </div>
+
+    <div class="faq-agro-item">
+      <button class="faq-agro-question" type="button">
+        Preciso de mudas em maior quantidade, o que fazer?
+        <span class="faq-agro-icon">+</span>
+      </button>
+      <div class="faq-agro-answer">
+        <p>Se você precisa de uma cotação maior, entre em contato com nossa equipe pelo WhatsApp para receber uma cotação personalizada!</p>
+      </div>
+    </div>
+
+      <div class="faq-agro-item">
+      <button class="faq-agro-question" type="button">
+        Onde é enviado o link de rastreio após a compra?
+        <span class="faq-agro-icon">+</span>
+      </button>
+      <div class="faq-agro-answer">
+        <p>Após o envio, você recebe o link de rastreio por WhatsApp e e-mail para acompanhar o seu pedido até a entrega!</p>
+      </div>
+    </div>
+
+    <div class="faq-agro-item">
+      <button class="faq-agro-question" type="button">
+       Vocês dão orientações sobre como cuidar das mudas após o recebimento?
+        <span class="faq-agro-icon">+</span>
+      </button>
+      <div class="faq-agro-answer">
+        <p>Sim! A AgroJardim possui uma equipe de especialistas à disposição para ajudá-lo; basta entrar em contato pelo WhatsApp ou acessar o Manual de Cultivo disponível abaixo.</p>
+      </div>
+    </div>
+
+
+<div class="premium-gift-section">
+
+    <div class="premium-gift-tag">BRINDES ESPECIAIS</div>
+<div class="premium-gift-image">
+    <img src="https://magazord-public.s3.amazonaws.com/agrojardim/img/2026/01/produto/3281/imagens-para-descricao-agrojardim-580x580px-4.png" alt="Brinde Agrojardim">
+</div>
+    <div class="premium-gift-text">
+        <h2><span>Adubo Exclusivo</span> + <span>Manual de Cultivo Completo</span></h2>
+        <p>
+            Compre suas mudas e receba de brinde um Adubo para Plantio + Manual de Cultivo Completo totalmente grátis via WhatsApp!
+        </p>
+    </div>
+<div id="topo"></div>
+
+<a href="javascript:void(0)" class="premium-gift-btn" onclick="smoothScrollToTop()">Garantir Brinde</a>
+<script>
+function smoothScrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+</script>
+
+</div>
+<script>
+   function smoothScrollToTop(duration = 800) {
+    const start = window.pageYOffset || document.documentElement.scrollTop;
+    const startTime = performance.now();
+    const ease = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+    function step(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = ease(progress);
+
+      window.scrollTo(0, Math.round(start * (1 - eased)));
+
+      if (progress < 1) requestAnimationFrame(step);
+    }
+
+    requestAnimationFrame(step);
+  }
+
+(function() {
+  'use strict';
+
+  const buttons = document.querySelectorAll('.faq-agro-question');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      const isOpen = this.classList.contains('active');
+
+      buttons.forEach(b => {
+        b.classList.remove('active');
+        const a = b.nextElementSibling;
+        if (a) {
+          a.classList.remove('active');
+          a.style.maxHeight = null;
+        }
+      });
+
+      if (!isOpen) {
+        this.classList.add('active');
+        if (answer) {
+          answer.classList.add('active');
+          answer.style.maxHeight = answer.scrollHeight + 30 + 'px';
+        }
+      }
+    });
+  });
+
+  window.addEventListener('resize', function() {
+    document.querySelectorAll('.faq-agro-answer.active').forEach(ans => {
+      ans.style.maxHeight = ans.scrollHeight + 30 + 'px';
+    });
+  });
+
+})();
+</script>
+
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+      // Depoimentos (carrossel de selo/segurança)
+      new Swiper("#rd-scope .testimonials-swiper-1", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: true,
+        centeredSlides: true,
+        centeredSlidesBounds: true,
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        navigation: {
+          nextEl: "#rd-scope .testimonials-next-1",
+          prevEl: "#rd-scope .testimonials-prev-1",
+        },
+        pagination: {
+          el: "#rd-scope .testimonials-pagination-1",
+          clickable: true,
+        },
+        speed: 600,
+        loopAdditionalSlides: 1,
+        effect: "slide",
+      });
+
+      // Features (DESKTOP)
+      new Swiper("#rd-scope .features-swiper-1", {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+          nextEl: "#rd-scope .features-next-1",
+          prevEl: "#rd-scope .features-prev-1",
+        },
+        pagination: { el: "#rd-scope .features-pagination-1", clickable: true },
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        speed: 600,
+        breakpoints: { 0: { slidesPerView: 1 }, 769: { slidesPerView: 3 } },
+      });
+
+      new Swiper("#rd-scope .features-swiper-3", {
+        slidesPerView: 3,
+        spaceBetween: 20,
+        loop: true,
+        navigation: {
+          nextEl: "#rd-scope .features-next-3",
+          prevEl: "#rd-scope .features-prev-3",
+        },
+        pagination: { el: "#rd-scope .features-pagination-3", clickable: true },
+        autoplay: { delay: 5000, disableOnInteraction: false },
+        speed: 600,
+        breakpoints: { 0: { slidesPerView: 1 }, 769: { slidesPerView: 3 } },
+      });
+
+      document.querySelectorAll('#rd-scope .certifications-swiper-mob').forEach((container) => {
+        const paginationEl = container.querySelector('.certifications-pagination-mob') || container.querySelector('.swiper-pagination');
+
+        const swiper = new Swiper(container, {
+          slidesPerView: 1,
+          spaceBetween: 16,
+          loop: true,
+          centeredSlides: true,
+          centeredSlidesBounds: true,
+          autoplay: { delay: 5000, disableOnInteraction: false },
+          pagination: { el: paginationEl, clickable: true },
+          observer: true,
+          observeParents: true,
+          speed: 500,
+          on: {
+            init() { if (this.pagination && typeof this.pagination.update === 'function') this.pagination.update(); },
+            slideChange() { if (this.pagination && typeof this.pagination.update === 'function') this.pagination.update(); }
+          }
+        });
+      });
+
+      new Swiper("#rd-scope .features-swiper-mob-2", {
+        slidesPerView: 1,
+        spaceBetween: 16,
+        loop: true,
+        centeredSlides: true,
+        centeredSlidesBounds: true,
+        pagination: {
+          el: "#rd-scope .features-pagination-mob-2",
+          clickable: true,
+        },
+        speed: 500,
+      });
+
+     // Smooth scroll + animações
+document.querySelectorAll('#rd-scope a[href^="#"]').forEach((a) => {
+  a.addEventListener("click", (e) => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute("href"));
+    if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px",
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      entry.target.style.transform = "translateY(0)";
+    }
+  });
+}, observerOptions);
+
+// MUDANÇA AQUI: agora pega todos os elementos
+document.querySelectorAll("#rd-scope > *").forEach((section) => {
+  section.style.opacity = "0";
+  section.style.transform = "translateY(30px)";
+  section.style.transition = "opacity .6s ease, transform .6s ease";
+  observer.observe(section);
+});
+
+
+    //    inicio do scroll com popup 
+    function scrollToTopAndNotify() {
+    // rola suavemente até o topo
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // cria o elemento da notificação
+    const notification = document.createElement('div');
+    notification.textContent = 'Finalize a compra para garantir seu brinde 🎁';
+    notification.style.position = 'fixed';
+    notification.style.top = '80px';
+    notification.style.left = '50%';
+    notification.style.transform = 'translateX(-50%)';
+    notification.style.background = '#102F18';
+    notification.style.color = '#fff';
+    notification.style.padding = '12px 20px';
+    notification.style.borderRadius = '8px';
+    notification.style.fontFamily = '"Instrument Sans", sans-serif';
+    notification.style.fontSize = '0.95rem';
+    notification.style.zIndex = '9999';
+    notification.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+    notification.style.transition = 'opacity .4s ease';
+    notification.style.opacity = '1';
+
+    document.body.appendChild(notification);
+
+    // remove após 3 segundos
+    setTimeout(() => {
+      notification.style.opacity = '0';
+      setTimeout(() => notification.remove(), 400);
+    }, 3000);
+  }
+  // (Certificações inicializadas acima por container)
+
+    </script>
+  </body>
+</html>

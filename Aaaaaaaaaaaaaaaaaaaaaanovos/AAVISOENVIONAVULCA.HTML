@@ -1,0 +1,62 @@
+<script>
+(function () {
+  const TEXT = "Envio a partir do dia 14/01";
+
+  function insertAfterContainer(container) {
+
+    if (document.querySelector('[data-szb-msg="1"]')) {
+      console.log("[szb] <p> já existe, não vou inserir de novo.");
+      return true;
+    }
+
+    const p = document.createElement("p");
+    p.setAttribute("data-szb-msg", "1");
+    p.textContent = TEXT;
+
+    // estilos inline (como você pediu)
+    p.style.display = "flex";
+    p.style.textAlign = "center";
+    p.style.padding = "10px";
+    p.style.fontSize = "15px";
+    p.style.color = "black";
+    p.style.border = "1px solid black";
+    p.style.borderRadius = "100px";
+    p.style.justifyContent = "center";
+    p.style.width = "60%";
+
+    p.style.margin = "10px auto";
+
+    container.insertAdjacentElement("afterend", p);
+    console.log("[szb] <p> inserido com sucesso.");
+    return true;
+  }
+
+  function tryFindAndInsert() {
+    const container = document.querySelector("#szb-container");
+    console.log("[szb] Tentando achar #szb-container:", container);
+    if (container) return insertAfterContainer(container);
+    return false;
+  }
+
+  if (tryFindAndInsert()) return;
+
+  window.addEventListener("load", function () {
+    console.log("[szb] window.load disparou");
+    tryFindAndInsert();
+  });
+
+  const obs = new MutationObserver(function () {
+    if (tryFindAndInsert()) {
+      console.log("[szb] Encontrou e inseriu, parando observer.");
+      obs.disconnect();
+    }
+  });
+
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+
+  setTimeout(function () {
+    console.log("[szb] Timeout: parando observer após 10s.");
+    obs.disconnect();
+  }, 10000);
+})();
+</script>

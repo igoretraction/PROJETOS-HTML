@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+      :root{
+        --border:#d6d6d6;
+        --muted:#555;
+        --accent:#2592b9;
+        --bg:#fff;
+        --radius:12px;
+        --shadow:0 3px 10px rgba(0,0,0,0.17);
+      }
+    
+
+      .coupon {
+font-family: "Poppins", sans-serif;
+        width:min(530px,94%);
+        background:var(--bg);
+        border:2px dashed var(--border);
+        border-radius:var(--radius);
+        box-shadow:var(--shadow);
+        padding:22px 22px;
+        display:flex;
+        gap:20px;
+        align-items:center;
+      }
+
+      .coupon-left{
+        flex:1 1 60%;
+      }
+
+      .title{
+        font-weight:700;
+        font-size:16px;
+        margin-bottom:8px;
+      }
+
+      .desc{
+        color:var(--muted);
+        font-weight:600;
+        font-size:14px;
+        margin-bottom:6px;
+        line-height:1.25;
+      }
+
+      .terms{
+        color:var(--muted);
+        font-size:12px;
+      }
+
+      /* vertical divider */
+      .divider-wrap{
+        width:1px;
+        height:84px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+      }
+      .divider{
+        width:1px;
+        height:120px;
+        border-right:2px solid #d8d8d8;
+        opacity:0.9;
+      }
+
+      .coupon-right{
+        width:260px;
+        text-align:center;
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+      }
+
+      .coupon-label{
+        font-size:12px;
+        font-weight:700;
+        color:#222;
+        letter-spacing:0.5px;
+      }
+
+      .coupon-code{
+        /* margin-top:6px; */
+        font-weight:00;
+        color:#111;
+        background:transparent;
+        /* padding:6px 10px; */
+        border-radius:8px;
+        font-size:12px;
+      }
+
+      .copy-btn{
+        margin-top:6px;
+        background:var(--accent);
+        color:#fff;
+        border:0;
+        padding:8px 18px;
+        border-radius:18px;
+        font-size:13px;
+        cursor:pointer;
+        box-shadow:0 6px 18px rgba(37,146,185,0.18);
+        transition:transform .16s ease,opacity .16s ease;
+      }
+      .copy-btn:active{transform:translateY(1px)}
+
+      @media (max-width:640px){
+        .coupon{
+          flex-direction:column;
+          align-items:stretch;
+          width: min(530px, 87%);
+        }
+        .coupon-left{
+            text-align: center;
+        }
+        .divider-wrap{display:none}
+        .coupon-right{width:100%;flex-direction:column;justify-content:space-between;align-items:center}
+      }
+    </style>
+  </head>
+  <body>
+    <div class="coupon" role="group" aria-label="Cupom de desconto">
+      <div class="coupon-left">
+        <div class="title">Você tem um cupom disponível!</div>
+        <div class="desc">Use o cupom e garanta 10% de desconto</div>
+        <div class="terms">*válido para primeira compra</div>
+      </div>
+
+      <div class="divider-wrap" aria-hidden="true">
+        <div class="divider"></div>
+      </div>
+
+      <div class="coupon-right">
+        <div class="coupon-label">CUPOM:</div>
+        <div class="coupon-code" id="couponCode">PRIMEIRACOMPRA</div>
+        <button class="copy-btn" id="copyBtn" aria-label="Copiar cupom">Copiar Cupom</button>
+      </div>
+    </div>
+
+    <script>
+      (function(){
+        const btn = document.getElementById('copyBtn');
+        const codeEl = document.getElementById('couponCode');
+        const code = codeEl ? codeEl.textContent.trim() : '';
+
+        function showTemporaryMessage(text){
+          const original = btn.textContent;
+          btn.textContent = text;
+          btn.disabled = true;
+          setTimeout(()=>{ btn.textContent = original; btn.disabled = false }, 1800);
+        }
+
+        btn.addEventListener('click', function(){
+          if(!navigator.clipboard){
+            // fallback
+            const ta = document.createElement('textarea');
+            ta.value = code;
+            ta.style.position='fixed'; ta.style.opacity='0';
+            document.body.appendChild(ta); ta.select();
+            try{ document.execCommand('copy'); showTemporaryMessage('Copiado!') }catch(e){ showTemporaryMessage('Erro') }
+            document.body.removeChild(ta);
+            return;
+          }
+
+          navigator.clipboard.writeText(code).then(()=>{
+            showTemporaryMessage('Copiado!');
+          }).catch(()=>{
+            showTemporaryMessage('Erro');
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+
+<!-- codigo com insert after:
+ <script>
+(function () {
+  const TARGET_SELECTOR = '.info-garantia';
+  const INSERT_MODE = 'afterend'; // afterend (depois) | beforebegin (antes) | beforeend (dentro no final)
+
+  const COUPON_ID = 'ig-coupon-root';
+  const CUPOM_TEXTO = 'PRIMEIRACOMPRA';
+
+  const css = `
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+  #${COUPON_ID}{
+    font-family:"Poppins",sans-serif;
+    width:min(530px,94%);
+    background:#fff;
+    border:2px dashed #d6d6d6;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.17);
+    padding:22px;
+    display:flex;
+    gap:20px;
+    align-items:center;
+    margin: 14px 0;
+  }
+  #${COUPON_ID} .coupon-left{flex:1 1 60%}
+  #${COUPON_ID} .title{font-weight:700;font-size:16px;margin-bottom:8px}
+  #${COUPON_ID} .desc{color:#555;font-weight:600;font-size:14px;margin-bottom:6px;line-height:1.25}
+  #${COUPON_ID} .terms{color:#555;font-size:12px}
+
+  #${COUPON_ID} .divider-wrap{width:1px;height:84px;display:flex;align-items:center;justify-content:center}
+  #${COUPON_ID} .divider{width:1px;height:120px;border-right:2px solid #d8d8d8;opacity:.9}
+
+  #${COUPON_ID} .coupon-right{width:260px;text-align:center;display:flex;flex-direction:column;align-items:center}
+  #${COUPON_ID} .coupon-label{font-size:12px;font-weight:700;color:#222;letter-spacing:.5px}
+  #${COUPON_ID} .coupon-code{font-weight:600;color:#111;background:transparent;border-radius:8px;font-size:12px}
+  #${COUPON_ID} .copy-btn{
+    margin-top:6px;background:#2592b9;color:#fff;border:0;padding:8px 18px;border-radius:18px;
+    font-size:13px;cursor:pointer;box-shadow:0 6px 18px rgba(37,146,185,0.18);
+    transition:transform .16s ease,opacity .16s ease;
+  }
+  #${COUPON_ID} .copy-btn:active{transform:translateY(1px)}
+  @media (max-width:640px){
+    #${COUPON_ID}{flex-direction:column;align-items:stretch;width:min(530px,87%)}
+    #${COUPON_ID} .coupon-left{text-align:center}
+    #${COUPON_ID} .divider-wrap{display:none}
+    #${COUPON_ID} .coupon-right{width:100%;flex-direction:column;justify-content:space-between;align-items:center}
+  }
+  `;
+
+  const html = `
+  <div id="${COUPON_ID}" role="group" aria-label="Cupom de desconto">
+    <div class="coupon-left">
+      <div class="title">Você tem um cupom disponível!</div>
+      <div class="desc">Use o cupom e garanta 10% de desconto</div>
+      <div class="terms">*válido para primeira compra</div>
+    </div>
+
+    <div class="divider-wrap" aria-hidden="true"><div class="divider"></div></div>
+
+    <div class="coupon-right">
+      <div class="coupon-label">CUPOM:</div>
+      <div class="coupon-code" id="igCouponCode">${CUPOM_TEXTO}</div>
+      <button class="copy-btn" id="igCopyBtn" aria-label="Copiar cupom">Copiar Cupom</button>
+    </div>
+  </div>
+  `;
+
+  function injectStyleOnce() {
+    if (document.getElementById('ig-coupon-style')) return;
+    const style = document.createElement('style');
+    style.id = 'ig-coupon-style';
+    style.textContent = css;
+    document.head.appendChild(style);
+  }
+
+  function mountCouponAfterTarget(targetEl) {
+    if (!targetEl) return;
+    if (document.getElementById(COUPON_ID)) return; // evita duplicar
+    injectStyleOnce();
+    targetEl.insertAdjacentHTML(INSERT_MODE, html);
+  }
+
+  // Clique copiar (delegação -> funciona mesmo se inserir depois)
+  document.addEventListener('click', function (e) {
+    const btn = e.target && e.target.id === 'igCopyBtn' ? e.target : null;
+    if (!btn) return;
+
+    const codeEl = document.getElementById('igCouponCode');
+    const code = codeEl ? codeEl.textContent.trim() : '';
+    if (!code) return;
+
+    const original = btn.textContent;
+    function msg(t){
+      btn.textContent = t;
+      btn.disabled = true;
+      setTimeout(() => { btn.textContent = original; btn.disabled = false; }, 1800);
+    }
+
+    if (!navigator.clipboard) {
+      const ta = document.createElement('textarea');
+      ta.value = code;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); msg('Copiado!'); }
+      catch (err) { msg('Erro'); }
+      document.body.removeChild(ta);
+      return;
+    }
+
+    navigator.clipboard.writeText(code).then(() => msg('Copiado!')).catch(() => msg('Erro'));
+  });
+
+  // 1) tenta imediato
+  const immediateTarget = document.querySelector(TARGET_SELECTOR);
+  if (immediateTarget) {
+    mountCouponAfterTarget(immediateTarget);
+    return;
+  }
+
+  // 2) observa até aparecer
+  const mo = new MutationObserver(() => {
+    const t = document.querySelector(TARGET_SELECTOR);
+    if (t) {
+      mountCouponAfterTarget(t);
+      mo.disconnect();
+    }\
+  });
+
+  mo.observe(document.documentElement, { childList: true, subtree: true });
+})();
+</script>
+-->

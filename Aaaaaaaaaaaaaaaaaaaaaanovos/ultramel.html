@@ -1,0 +1,475 @@
+<script>
+(function () {
+  var STYLE_ID = "z-av-resumo-style";
+  var MOUNT_ID = "z-avaliacao-resumo-mount";
+
+  function qs(sel, root) { return (root || document).querySelector(sel); }
+  function qsa(sel, root) { return Array.from((root || document).querySelectorAll(sel)); }
+
+  function injectCSSOnce() {
+    if (document.getElementById(STYLE_ID)) return;
+
+    var css = `
+      .z-av-resumo{width:100%;border: 1px solid #AE50BE;border-radius:12px;background:#e969ff3b;overflow:hidden;margin-top:30px;}
+      .z-av-resumo__inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 16px;}
+      .z-av-left{display:flex;flex-direction:column;gap:6px;min-width:220px}
+      .z-av-title{font-weight:700;font-size:18px;line-height:1.1;color:#111827}
+      .z-av-line{display:flex;align-items:center;gap:10px}
+      .z-av-score{font-weight:800;font-size:34px;line-height:1;color:#111827}
+      .z-av-stars{display:inline-flex;gap:4px;font-size:22px;line-height:1}
+      .z-av-stars .z-star{color:#f5b301}
+      .z-av-sub{font-weight:600;font-size:15px;color:#111827}
+
+      .z-av-right{display:flex;align-items:center;gap:14px;margin-left:auto}
+      .z-av-thumbs{
+        display:flex;gap:10px;align-items:center;
+        justify-content:flex-end;
+        margin-left:auto;
+        max-width:520px;
+      }
+
+      .z-av-thumb{
+        width:120px;height:120px;border-radius:12px;
+        background:#e5e7eb;overflow:hidden;
+        display:inline-flex;align-items:center;justify-content:center;
+        flex:0 0 auto;text-decoration:none;
+      }
+      .z-av-thumb img{width:120px;height:120px;object-fit:cover;display:block}
+
+      .z-av-btn{white-space:nowrap;font-weight:700;font-size:14px;color:#111827;background:transparent;border:0;cursor:pointer;padding:10px 12px}
+      .z-av-btn:hover{text-decoration:underline}
+
+      @media (max-width:768px){
+      .z-av-resumo{
+      width: 95% !important;
+    border: 1px solid #AE50BE;
+    border-radius: 12px;
+    background: #e969ff3b;
+    overflow: hidden;
+    margin: auto;
+      }
+      .z-av-thumb img{
+      width: 90px !important;
+    height: 90px !important;
+      }
+      .z-avaliacao-resumo-mount{
+          max-width: 96% !important;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+      }
+        .z-av-resumo__inner{flex-direction:column;align-items:flex-start;}
+        .z-av-right{width:100%;justify-content:space-between; flex-direction: column;}
+        .z-av-thumbs{max-width:100%; justify-content:center !important;}
+        .z-av-thumb{width:81px !important;height:90px !important}
+      }
+    `;
+
+    var style = document.createElement("style");
+    style.id = STYLE_ID;
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
+  }
+
+  function ensureMountBeforeDescricao() {
+    if (document.getElementById(MOUNT_ID)) return document.getElementById(MOUNT_ID);
+
+    var target = qs(".descricao-produto");
+    if (!target || !target.parentNode) return null;
+
+    var mount = document.createElement("div");
+    mount.id = MOUNT_ID;
+    target.parentNode.insertBefore(mount, target);
+    return mount;
+  }
+
+  function getHeaderOffset() {
+    var header = qs(".ra-header") || qs("header");
+    if (!header) return 0;
+    var cs = window.getComputedStyle(header);
+    if (cs.position === "fixed" || cs.position === "sticky") {
+      return header.getBoundingClientRect().height || 0;
+    }
+    return 0;
+  }
+
+  function smoothScrollTo(el) {
+    if (!el) return;
+    var offset = getHeaderOffset() + 12;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: top, behavior: "smooth" });
+  }
+
+  function buildStars(rating) {
+    var full = Math.round(Math.max(0, Math.min(5, rating)));
+    var stars = "";
+    for (var i = 0; i < 5; i++) stars += '<span class="z-star">' + (i < full ? "★" : "☆") + "</span>";
+    return stars;
+  }
+
+  function inferRating() {
+    var el =
+      qs(".nota-geral .rating-score strong") ||
+      qs(".avaliacoes .nota-geral strong") ||
+      qs(".ra-avalia-produto .nota-geral strong") ||
+      qs(".rating-score strong");
+
+    if (el) {
+      var raw = (el.textContent || "").trim().replace(/\s+/g, " ");
+      var m = raw.match(/(\d+(?:[.,]\d+)?)/);
+      if (m && m[1]) {
+        var n = parseFloat(m[1].replace(",", "."));
+        if (!isNaN(n)) return n;
+      }
+    }
+
+    var meta = qs('meta[itemprop="ratingValue"]');
+    if (meta && meta.content) {
+      var n1 = parseFloat(meta.content);
+      if (!isNaN(n1)) return n1;
+    }
+
+    return 5;
+  }
+
+  function inferRecommendText() {
+    var el = qs("a.faca-avaliacao") || qs('a[class*="faca-avaliacao"]');
+    if (!el) return "0 Clientes reais compartilhando suas experiências";
+
+    var raw = (el.textContent || "").trim().replace(/\s+/g, " ");
+    var m = raw.match(/(\d[\d\.]*)/);
+
+    if (m && m[1]) {
+      var n = m[1];
+      var prefix = /mais\s+de/i.test(raw) ? "Mais de " : "";
+      return prefix + n + " Clientes reais compartilhando suas experiências";
+    }
+
+    return raw || "0 Clientes reais compartilhando suas experiências";
+  }
+
+  function getFirstFromSrcset(srcset) {
+    if (!srcset) return "";
+    var first = String(srcset).split(",")[0] || "";
+    return first.trim().split(/\s+/)[0] || "";
+  }
+
+  function getBgImageUrl(el) {
+    if (!el) return "";
+    var bg = (el.style && el.style.backgroundImage) ? el.style.backgroundImage : "";
+    if (!bg) {
+      var cs = window.getComputedStyle(el);
+      bg = cs && cs.backgroundImage ? cs.backgroundImage : "";
+    }
+    if (!bg || bg === "none") return "";
+    var m = bg.match(/url\((['"]?)(.*?)\1\)/i);
+    return (m && m[2]) ? m[2] : "";
+  }
+
+  function extractImgSrc(img) {
+    if (!img) return "";
+
+    var src =
+      img.getAttribute("data-src") ||
+      img.getAttribute("data-lazy") ||
+      img.getAttribute("data-original") ||
+      img.getAttribute("data-zoom") ||
+      img.getAttribute("src") ||
+      "";
+
+    if (!src) {
+      var ss = img.getAttribute("data-srcset") || img.getAttribute("srcset");
+      src = getFirstFromSrcset(ss);
+    }
+
+    if (!src) {
+      src = getBgImageUrl(img) || "";
+    }
+
+    return src;
+  }
+
+  function normalizeUrl(url) {
+    if (!url) return "";
+    return String(url).trim();
+  }
+
+  /* =========================
+     ✅ FORÇAR LAZY SEM SCROLL
+     (teleport invisível)
+  ========================== */
+  function awakenLazyByTeleport(selector) {
+    var el = qs(selector);
+    if (!el) return false;
+
+    // se já tiver algo carregado, não mexe
+    if (qs("img[src]", el) || qs("[style*='background-image']", el)) return true;
+
+    var prev = {
+      position: el.style.position,
+      top: el.style.top,
+      left: el.style.left,
+      width: el.style.width,
+      height: el.style.height,
+      opacity: el.style.opacity,
+      pointerEvents: el.style.pointerEvents,
+      zIndex: el.style.zIndex,
+      transform: el.style.transform
+    };
+
+    el.style.position = "fixed";
+    el.style.top = "0";
+    el.style.left = "0";
+    el.style.width = "1px";
+    el.style.height = "1px";
+    el.style.opacity = "0";
+    el.style.pointerEvents = "none";
+    el.style.zIndex = "-1";
+    el.style.transform = "translateZ(0)";
+
+    void el.offsetHeight;
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        el.style.position = prev.position;
+        el.style.top = prev.top;
+        el.style.left = prev.left;
+        el.style.width = prev.width;
+        el.style.height = prev.height;
+        el.style.opacity = prev.opacity;
+        el.style.pointerEvents = prev.pointerEvents;
+        el.style.zIndex = prev.zIndex;
+        el.style.transform = prev.transform;
+      });
+    });
+
+    return true;
+  }
+
+  function awakenReviewsArea() {
+    return (
+      awakenLazyByTeleport(".swiper-container-avaliacao-com-imagens-thumb") ||
+      awakenLazyByTeleport(".thumbs-anexos") ||
+      awakenLazyByTeleport(".images-gallery") ||
+      awakenLazyByTeleport(".gallery") ||
+      awakenLazyByTeleport(".container-avaliacoes") ||
+      awakenLazyByTeleport(".ra-avalia-produto") ||
+      awakenLazyByTeleport(".avaliacoes")
+    );
+  }
+
+  function getReviewThumbSources() {
+    var candidates = [
+      qs(".swiper-container-avaliacao-com-imagens-thumb"),
+      qs(".thumbs-anexos"),
+      qs(".images-gallery"),
+      qs(".ra-avalia-produto"),
+      qs(".container-avaliacoes"),
+      qs(".avaliacoes"),
+      document
+    ].filter(Boolean);
+
+    var selectors = [
+      ".thumbs-anexos img",
+      "[class*='thumbs-anexos'] img",
+      "[class*='avaliacao-com-imagens'] img",
+      ".images-gallery img",
+      ".swiper-container-avaliacao-com-imagens-thumb img",
+      "img.object-center",
+      "img[class*='object-center']"
+    ];
+
+    var items = [];
+    var seen = new Set();
+
+    function pushItem(src, href) {
+      src = normalizeUrl(src);
+      href = normalizeUrl(href || src);
+      if (!src) return;
+
+      var low = src.toLowerCase();
+      if (low.indexOf(".svg") > -1) return;
+      if (low.indexOf("star") > -1) return;
+      if (low.indexOf("sprite") > -1) return;
+
+      if (seen.has(src)) return;
+      seen.add(src);
+
+      items.push({ src: src, href: href });
+    }
+
+    function pickFromRoot(root) {
+      var els = [];
+      selectors.forEach(function (sel) {
+        els = els.concat(qsa(sel, root));
+      });
+
+      var bgCandidates = qsa(".thumbs-anexos, [class*='thumbs-anexos'], .swiper-slide", root);
+
+      els.forEach(function (img) {
+        var src = extractImgSrc(img);
+        var a = img.closest && img.closest("a");
+        var href = (a && a.getAttribute("href")) ? a.getAttribute("href") : src;
+        pushItem(src, href);
+      });
+
+      bgCandidates.forEach(function (el) {
+        if (items.length >= 8) return;
+        var bg = getBgImageUrl(el);
+        if (bg) pushItem(bg, bg);
+      });
+    }
+
+    candidates.forEach(function (root) {
+      if (items.length < 6) pickFromRoot(root);
+    });
+
+    items = items.slice(0, 4);
+
+    if (items.length > 1) {
+      items.push(items.shift());
+    }
+
+    return items;
+  }
+
+  function renderThumbs(mount, thumbs) {
+    var box = qs(".z-av-thumbs", mount);
+    if (!box) return;
+
+    if (!thumbs || !thumbs.length) {
+      box.innerHTML = "";
+      return;
+    }
+
+    var html = "";
+    thumbs.forEach(function (t) {
+      html +=
+        '<a class="z-av-thumb" href="' + (t.href || t.src || "#") + '" aria-label="Imagem da avaliação">' +
+          '<img width="120" height="120" src="' + t.src + '" alt="Imagem avaliação" loading="lazy">' +
+        "</a>";
+    });
+
+    box.innerHTML = html;
+  }
+
+  function renderResumo(mount) {
+    var containerAvaliacoes =
+      qs(".container-avaliacoes") ||
+      qs(".ra-avalia-produto") ||
+      qs(".avaliacoes");
+
+    mount.innerHTML =
+      '<div class="z-av-resumo">' +
+        '<div class="z-av-resumo__inner">' +
+          '<div class="z-av-left">' +
+            '<div class="z-av-title">Quem compra, ama e indica! Analise as avaliações</div>' +
+            '<div class="z-av-line">' +
+              '<div class="z-av-score">-</div>' +
+              '<div class="z-av-stars" aria-label="Nota do produto"></div>' +
+            '</div>' +
+            '<div class="z-av-sub">-</div>' +
+          '</div>' +
+          '<div class="z-av-right">' +
+            '<div class="z-av-thumbs"></div>' +
+            '<button class="z-av-btn" type="button">Ver avaliações &gt;</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+
+    var nudgedOnce = false;
+
+    function fill() {
+      var rating = inferRating();
+      var scoreEl = qs(".z-av-score", mount);
+      var starsEl = qs(".z-av-stars", mount);
+      if (scoreEl) scoreEl.textContent = String(rating).replace(".", ",") + "/5";
+      if (starsEl) starsEl.innerHTML = buildStars(rating);
+
+      var sub = qs(".z-av-sub", mount);
+      if (sub) sub.textContent = inferRecommendText();
+
+      // ✅ tenta acordar o lazy sem scroll (IntersectionObserver)
+      awakenReviewsArea();
+
+      var thumbs = getReviewThumbSources();
+      renderThumbs(mount, thumbs);
+
+      // ✅ fallback: se ainda não achou nenhuma thumb após alguns ciclos, faz 1 nudge rápido (uma vez só)
+      if ((!thumbs || !thumbs.length) && !nudgedOnce) {
+        nudgedOnce = true;
+        setTimeout(function () {
+          // nudge automático e volta (auto, sem "smooth")
+          if (containerAvaliacoes) {
+            var curr = window.pageYOffset;
+            var y = containerAvaliacoes.getBoundingClientRect().top + window.pageYOffset - 140;
+            window.scrollTo({ top: y, behavior: "auto" });
+            setTimeout(function () { window.scrollTo({ top: curr, behavior: "auto" }); }, 60);
+          }
+        }, 600);
+      }
+    }
+
+    fill();
+
+    (function retryAsync() {
+      var tries = 0;
+      (function tick() {
+        tries++;
+        fill();
+        if (tries < 30) setTimeout(tick, 250);
+      })();
+    })();
+
+    (function observeThumbArea() {
+      var target =
+        qs(".swiper-container-avaliacao-com-imagens-thumb") ||
+        qs(".thumbs-anexos") ||
+        qs(".images-gallery") ||
+        qs(".ra-avalia-produto") ||
+        qs(".container-avaliacoes") ||
+        qs(".avaliacoes");
+
+      if (!target) return;
+
+      var mo = new MutationObserver(function () {
+        fill();
+      });
+      mo.observe(target, { childList: true, subtree: true, attributes: true });
+    })();
+
+    var btn = qs(".z-av-btn", mount);
+    if (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        smoothScrollTo(containerAvaliacoes);
+      });
+    }
+  }
+
+  function init() {
+    injectCSSOnce();
+
+    var mount = ensureMountBeforeDescricao();
+    if (mount) {
+      renderResumo(mount);
+      return;
+    }
+
+    var obs = new MutationObserver(function () {
+      var m = ensureMountBeforeDescricao();
+      if (m) {
+        obs.disconnect();
+        renderResumo(m);
+      }
+    });
+    obs.observe(document.documentElement, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
+})();
+</script>

@@ -1,18 +1,465 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embaixador LP</title>
-</head>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-</style>
-<body>
-    
-</body>
-<script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-</script>
+      html,
+      body {
+        overflow-x: hidden;
+      }
+
+      body {
+        min-height: 200vh;
+        font-family: "Arial Black", Arial, sans-serif;
+      }
+
+      /* =========================
+       HERO (mantido)
+    ========================= */
+      .hero {
+        background-color: #ff6a00;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        padding-top: 0;
+      }
+
+      .stripe-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        will-change: transform;
+      }
+
+      .vertical-stripe {
+        width: 90px;
+        height: 540px;
+        background-color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+      }
+
+      .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 30px;
+        will-change: transform;
+      }
+
+      .images-container {
+        display: flex;
+        gap: 40px;
+        margin-top: 60px;
+        will-change: transform, opacity;
+      }
+
+      .side-image {
+        width: 150px;
+        height: 200px;
+        background-color: #000;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      .side-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      .content-section {
+        min-height: 100vh;
+        background-color: #ff6a00;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 60px 20px;
+      }
+
+      .content-box {
+        background-color: #000;
+        color: #fff;
+        padding: 60px;
+        max-width: 800px;
+        text-align: center;
+        border-radius: 10px;
+      }
+
+      .content-box h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+      }
+
+      .content-box p {
+        font-size: 18px;
+        line-height: 1.6;
+        font-weight: normal;
+      }
+
+      .qr-section {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-align: center;
+        opacity: 0;
+        will-change: opacity;
+      }
+
+      .qr-code {
+        width: 100px;
+        height: 100px;
+        background-color: #fff;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .qr-label {
+        background-color: #000;
+        color: #fff;
+        padding: 8px 16px;
+        font-size: 12px;
+        margin-top: 8px;
+        border-radius: 4px;
+      }
+
+      .qr-label span {
+        display: block;
+        font-weight: 900;
+      }
+
+      .image-faixa {
+        transform: rotate(270deg);
+        max-width: 330px;
+        margin-bottom: -70px;
+        display: block;
+      }
+
+      .logo-image-emb {
+        max-width: 200px;
+        display: block;
+      }
+
+      .image-products {
+        position: relative;
+        background: #fff;
+        padding: 70px 5% 60px;
+        overflow: hidden;
+      }
+
+      /* watermark "Blizzard" vertical à esquerda */
+      .image-products::before {
+        content: "Blizzard";
+        position: absolute;
+        left: -125px;
+        bottom: 40px;
+        transform: rotate(-90deg);
+        transform-origin: left bottom;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 150px;
+        font-weight: 900;
+        color: #000;
+        letter-spacing: -2px;
+        opacity: 0.9;
+        z-index: 1;
+        user-select: none;
+        pointer-events: none;
+      }
+
+      .image-products .wrap {
+        position: relative;
+        z-index: 2;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* topo: OX + texto */
+      .top-row {
+        display: flex;
+        gap: 40px;
+        align-items: flex-start;
+      }
+
+      .ox-mark {
+        min-width: 170px;
+      }
+
+      .ox-text {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 86px;
+        line-height: 0.9;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #ff6a00;
+      }
+
+      .ox-badge {
+        margin-top: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #ff6a00;
+        padding: 8px 10px;
+        border-radius: 2px;
+      }
+
+      .ox-badge strong {
+        font-weight: 900;
+        font-size: 18px;
+        color: #000;
+      }
+
+      .ox-badge span {
+        font-size: 12px;
+        font-weight: 700;
+        color: #000;
+        opacity: 0.95;
+      }
+
+      .text-container {
+        max-width: 650px;
+      }
+
+      .text-container span {
+        display: inline;
+        font-weight: 400;
+        font-family: Arial, sans-serif;
+        color: #333;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .text-container > span {
+        display: block;
+      }
+
+      .text-container > span:first-child {
+        font-weight: 900;
+        text-transform: uppercase;
+        font-family: Arial, sans-serif;
+        color: #111;
+        font-size: 16px;
+        line-height: 1.4;
+      }
+
+      /* linha de produtos */
+      .images-container-products {
+        margin-top: 26px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 55px;
+        position: relative;
+        z-index: 3;
+      }
+
+      .product {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+      }
+
+      .product .code {
+        font-size: 18px;
+        font-weight: 900;
+        color: #222;
+      }
+
+      .product img {
+        width: 240px;
+        max-width: 28vw;
+        height: auto;
+        display: block;
+        filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.18));
+      }
+
+      /* responsivo */
+      @media (max-width: 980px) {
+        .top-row {
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        .ox-text {
+          font-size: 72px;
+        }
+
+        .image-products::before {
+          font-size: 110px;
+          left: -90px;
+          bottom: 20px;
+          opacity: 0.75;
+        }
+
+        .image-products::after {
+          width: 55%;
+          opacity: 0.07;
+        }
+
+        .images-container-products {
+          gap: 24px;
+          flex-wrap: wrap;
+        }
+
+        .product img {
+          width: 210px;
+          max-width: 72vw;
+        }
+      }
+      body {
+        user-select: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="hero">
+      <div class="stripe-container">
+        <div class="vertical-stripe">
+          <span class="stripe-text">
+            <img
+              class="image-faixa"
+              src="https://magazord-public.s3.amazonaws.com/embaixador/img/2025/12/produto/2063/embaixador-cosmeticos-embaixador-cosmeticos-0.png"
+              alt=""
+            />
+          </span>
+        </div>
+      </div>
+
+      <div class="logo-container">
+        <img
+          class="logo-image-emb"
+          src="https://lh3.google.com/u/0/d/1cyGUuGeSrIavqKOxo0HQV0yIi6NdDnBL=w1920-h919-iv1?auditContext=prefetch"
+          alt=""
+        />
+      </div>
+    </section>
+
+    <section class="image-products">
+      <div class="image-back" style="display: flex; justify-content: center">
+        <div
+          class="content-image-pro"
+          style="
+            justify-content: center;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <img
+            src="https://lh3.google.com/u/0/d/1CdJHht5TsjrOtxFzVAyR41Akc4T9VPru=w1616-h919-iv1?auditContext=prefetch"
+            alt=""
+          />
+          <img
+            src="https://lh3.google.com/u/0/d/1xgljhG1bpychUCd4wuOnU6nQFAwF9jgE=w1616-h919-iv1?auditContext=prefetch"
+            alt=""
+          />
+        </div>
+      </div>
+    </section>
+    <section class="image-products">
+      <div class="image-back" style="display: flex; justify-content: center">
+        <div
+          class="content-image-pro"
+          style="
+            justify-content: center;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+          "
+        >
+          <img
+            src="https://lh3.google.com/u/0/d/12X4BICB6msJy5Vv6YNZfGLaYkhKMcEEa=w1616-h919-iv1?auditContext=prefetch"
+            alt=""
+          />
+        </div>
+      </div>
+    </section>
+
+    <script>
+      gsap.registerPlugin(ScrollTrigger);
+      gsap.to(".stripe-container", {
+        y: -400,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "50% top",
+          scrub: 1,
+        },
+      });
+
+      // Animação da logo subindo com delay
+      gsap.to(".logo-container", {
+        y: -350,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "60% top",
+          scrub: 1.2,
+        },
+      });
+
+      // Mantive a animação, apenas garantindo que ela aponte pra classe correta (caso use no hero)
+      // Se você NÃO usa .images-container no hero, pode remover esse bloco sem problemas.
+      gsap.to(".images-container", {
+        y: -200,
+        opacity: 0,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "10% top",
+          end: "50% top",
+          scrub: 1,
+        },
+      });
+
+      // QR code aparece após scroll (se você usar .content-section/.qr-section)
+      gsap.to(".qr-section", {
+        opacity: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: ".content-section",
+          start: "top center",
+          end: "top top",
+          scrub: 1,
+        },
+      });
+
+      // Parallax suave no conteúdo (se você usar .content-section/.content-box)
+      gsap.from(".content-box", {
+        y: 100,
+        opacity: 0,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: ".content-section",
+          start: "top 80%",
+          end: "top 30%",
+          scrub: 1,
+        },
+      });
+    </script>
+  </body>
 </html>

@@ -1,0 +1,191 @@
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,90&display=swap');
+
+.content-cupom {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin:  auto;
+            max-width: 680px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+.step {
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            background: #D9D9D9; 
+            color: black;
+            padding: 18px 34px 18px 48px; 
+            text-transform: uppercase;
+            flex: 1;
+            clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 10% 50%, 0% 0%);
+            position: relative;
+        }
+.step:first-child {
+    clip-path: polygon(90% 0%, 100% 50%, 90% 100%, 0% 100%, 0% 50%, 0% 0%);
+    padding-left: 20px;
+    background: #8C518C;
+    color: white;
+}
+
+.step:nth-child(2){
+    background: #8C518C;
+    color: white;
+}
+
+.step:last-child {
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 10% 50%, 0% 0%);
+    background: #8C518C;
+    color: white;
+}
+
+
+        .step + .step {
+            margin-left: -16px;
+        }
+
+        .step:nth-child(1){ z-index:3 }
+        .step:nth-child(2){ z-index:2 }
+        .step:nth-child(3){ z-index:1 }
+
+        .step span {
+            font-size: 12px;
+            display: block;
+        }
+
+        .step p {
+            margin: 5px 0;
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .step.active {
+            background: #D9D9D9;
+        }
+        .content-title{
+            color: #ffffff;
+        }
+        .content-title-last{
+            color: #ffffff;
+        }
+        .title-content{
+            font-family: "Poppins", sans-serif;
+            font-weight: 700;
+            margin: auto;
+            max-width: 680px;
+            margin: 0 auto;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        @media (max-width: 600px) {
+            .frete-progressivo{
+            margin-top: 0px !important;
+        }
+            .step {
+            height: 90px;
+            }
+            .title-content{
+                font-size: 12px;
+            }
+            .content-cupom {
+                font-size: 10px;
+            }
+            .step p{
+                font-size: 15px;
+            }
+            .step:nth-child(2){
+            clip-path: polygon(89% -5%, 100% 50%, 88% 101%, 0% 100%, 9% 51%, 0% 0%);
+            color: white;
+         }
+         .step:first-child{
+            padding-left: 0;
+         }
+            .step {
+                width: 100%;
+                clip-path: none;
+                padding: 12px 0;
+            }
+            .step + .step {
+                margin-left: -6px;
+            }
+            .frete-progressivo{
+                max-width: 95%;
+    margin: auto;
+            }
+            .step span{
+                font-size: 10px;
+            }
+            .step:last-child {
+            clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 10% 50%, 0% 0%);
+            /* background:#054774; */
+              background: linear-gradient(135deg, #1e7fc0 0%, #064f86 50%, #022b4a 100%);
+            color: white;
+        }
+        }
+        .frete-progressivo{
+            /* margin-top: 10px; */
+    /* width: 55%; */
+    /* justify-content: center; */
+    margin: 10px auto;
+        }
+    </style>
+    <!-- opção na tray -->
+<!-- </head>
+<body>
+<h3 class="title-content">frete progressivo para vasos</h3>
+    <div class="content-cupom">
+        <div class="step">
+            <span>compre 1 e ganhe</span>
+            <p class="content-title">50% OFF</p>
+            <span>no frete</span>
+        </div>
+
+        <div class="step">
+            <span>compre 2 e ganhe</span>
+            <p class="content-title">75% OFF</p>
+            <span>no frete</span>
+        </div>
+
+        <div class="step">
+            <span>compre 3 mais e ganhe</span>
+            <p class="content-title-last">FRETE <br> GRÁTIS</p>
+        </div>
+    </div>
+
+</body> -->
+
+<!-- opção na magazord ou uouu -->
+<script>
+  $(function () {
+    const $alvo = $(".calculo-frete").first();
+    if (!$alvo.length) return;
+
+    const html = `
+    <div class="frete-progressivo">
+      <h3 class="title-content">frete progressivo para cadeiras</h3>
+      <div class="content-cupom">
+        <div class="step">
+          <span>para sul e sudeste</span>
+          <p class="content-title">Frete fixo R$ 69.90</p>
+        </div>
+        <div class="step">
+          <span>Acima de R$ 1500</span>
+          <p class="content-title-last">FRETE <br> GRÁTIS*</p>
+        </div>
+      </div>
+    </div>
+    `;
+
+    $alvo.after(html);
+  });
+</script>
+
+</html>

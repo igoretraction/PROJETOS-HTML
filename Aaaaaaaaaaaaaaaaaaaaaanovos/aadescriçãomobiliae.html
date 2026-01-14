@@ -1,0 +1,1337 @@
+<style>
+  <!--
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rubik:wght@400;600&display=swap');
+
+        .dimensoes-container {
+            margin: 8px 0 20px 80px;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            font-family: 'Rubik', sans-serif;
+            max-width: 680px;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .dimensoes-container ::selection {
+            background-color: transparent;
+        }
+
+        .dimensoes-titulo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            margin-left: 50px;
+        }
+
+        .dimensoes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .dimensao-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all .3s ease;
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .dimensao-item:hover {
+            background: rgba(0, 0, 0, 0.03);
+            transform: scale(1.02);
+        }
+
+        .dimensao-icone {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            border-radius: 6px;
+            font-size: 22px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .dimensao-info {
+            flex: 1;
+        }
+
+        .dimensao-label {
+            font-size: 14px;
+            color: #6c757d;
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .dimensao-valor {
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .dimensao-item:nth-child(1) {
+            animation-delay: .1s
+        }
+
+        .dimensao-item:nth-child(2) {
+            animation-delay: .2s
+        }
+
+        .dimensao-item:nth-child(3) {
+            animation-delay: .3s
+        }
+
+        @media (max-width: 768px) {
+            .dimensoes-container {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .dimensoes-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .dimensoes-titulo {
+                font-size: 16px;
+                margin-left: 0;
+            }
+
+            .dimensao-valor {
+                font-size: 15px;
+            }
+        }
+
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c3e50;
+            color: #fff;
+            padding: 5px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .3s;
+            z-index: 1000;
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+  -->
+</style>
+<p>
+  <script>
+    // <![CDATA[
+    $(document).ready(function () {
+      const html = `
+<div class="dimensoes-container" role="region" aria-label="Dimensões do produto">
+    <div class="dimensoes-titulo">Dimensões</div>
+    <div class="dimensoes-grid">
+        
+        <div class="dimensao-item tooltip" data-tooltip="Medida horizontal do produto">
+            <div class="dimensao-icone" aria-hidden="true">↔</div>
+            <div class="dimensao-info">
+                <div class="dimensao-label">Largura:</div>
+                <div class="dimensao-valor">L - 95cm</div>
+            </div>
+        </div>
+
+        <div class="dimensao-item tooltip" data-tooltip="Medida vertical do produto">
+            <div class="dimensao-icone" aria-hidden="true">↕</div>
+            <div class="dimensao-info">
+                <div class="dimensao-label">Altura:</div>
+                <div class="dimensao-valor">A - 89cm</div>
+            </div>
+        </div>
+
+        <div class="dimensao-item tooltip" data-tooltip="Medida de profundidade do produto">
+            <div class="dimensao-icone" aria-hidden="true">↧</div>
+            <div class="dimensao-info">
+                <div class="dimensao-label">Profundidade:</div>
+                <div class="dimensao-valor">P - 45cm</div>
+            </div>
+        </div>
+
+    </div>
+</div>`;
+
+      $(html).insertBefore(".descricao-produto");
+    });
+    // ]]>
+  </script>
+</p>
+<p></p>
+<!-- Swiper CSS -->
+<p></p>
+<style>
+  <!--
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap');
+
+          #rd-scope .spec-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-left: none;
+            border-right: none;
+            gap: 20px;
+          }
+          #rd-scope .spec-grid ul {
+            margin: 0;
+            padding: 20px;
+          }
+          #rd-scope .spec-grid ul:first-child {
+            border-right: 1px solid #ddd;
+          }
+          #rd-scope .spec-grid li {
+            margin-bottom: 10px;
+            color: #555;
+          }
+          @media (max-width: 768px) {
+            #rd-scope .spec-grid {
+              grid-template-columns: 1fr;
+            }
+            #rd-scope .spec-grid ul:first-child {
+              border-right: none;
+            }
+          }
+          @media (min-width: 800px) {
+            .about-section {
+              overflow: hidden;
+            }
+          }
+
+          /* ===== Escopo ===== */
+          #rd-scope .svg-icon {
+            width: 60px;
+            height: 60px;
+          }
+          #rd-scope .rn-container {
+            font-family: "Instrument Sans", sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+          }
+
+          #rd-scope .product-description {
+            font-family: "Instrument Sans", sans-serif;
+            padding: 60px 0;
+            text-align: center;
+          }
+          #rd-scope .product-description h1 {
+            font-family: "Instrument Sans", sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #333;
+          }
+
+          #rd-scope .features-grid {
+            font-family: "Instrument Sans", sans-serif;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+          }
+          #rd-scope .feature-item {
+            font-family: "Instrument Sans", sans-serif;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+          }
+          #rd-scope .feature-circle {
+            font-family: "Instrument Sans", sans-serif;
+            border: 1px solid #102F18;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: 700;
+            color: #666;
+          }
+          #rd-scope .feature-text {
+            font-family: "Instrument Sans", sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+          }
+
+          #rd-scope .product-details {
+            font-family: "Instrument Sans", sans-serif;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+          }
+          #rd-scope .gif-placeholder {
+            font-family: "Instrument Sans", sans-serif;
+            border-radius: 15px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+          }
+          #rd-scope .gif-placeholder img {
+            border-radius: 15px;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            display: block;
+          }
+          #rd-scope .product-info h2 {
+            font-family: "Instrument Sans", sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+          }
+          #rd-scope .product-info p {
+            font-family: "Instrument Sans", sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+          }
+
+          #rd-scope .product-features {
+            font-family: "Instrument Sans", sans-serif;
+            padding: 60px 0;
+            background: #ffffff;
+          }
+          #rd-scope .features-grid-2 {
+            font-family: "Instrument Sans", sans-serif;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+          }
+          #rd-scope .feature-card {
+            font-family: "Instrument Sans", sans-serif;
+            text-align: center;
+            margin: 0 auto;
+          }
+          #rd-scope .feature-gif {
+            background: #f0f0f0;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0;
+            max-width: 480px;
+          }
+          #rd-scope .feature-gif img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+          }
+          #rd-scope .feature-description {
+            font-family: "Instrument Sans", sans-serif;
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+          }
+
+          /* ===== Swiper base (escopo) ===== */
+          #rd-scope .swiper {
+            width: 1240px;
+            max-width: 100vw;
+            margin: 0 auto;
+            padding: 20px 0;
+            overflow: hidden; /* evita “vazar” slide vizinho */
+          }
+          #rd-scope .swiper-wrapper {
+            align-items: stretch;
+          }
+          #rd-scope .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 410px; /* desktop default */
+            height: 410px;
+          }
+          /* features desktop: slides menores */
+          #rd-scope .features-swiper .swiper-slide {
+            width: 320px;
+          }
+          #rd-scope .features-swiper .feature-card {
+            width: 100%;
+            max-width: 320px;
+          }
+
+          #rd-scope .product-specs {
+            padding: 60px 0;
+          }
+          #rd-scope .specs-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+          }
+          #rd-scope .wardrobe-image {
+            text-align: center;
+          }
+          #rd-scope .wardrobe-placeholder {
+            border-radius: 15px;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+          }
+          #rd-scope .specs-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+          }
+          #rd-scope .specs-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #333;
+          }
+          #rd-scope .spec-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border: 1px solid #ababab;
+            padding: 0 12px;
+            border-radius: 25px;
+          }
+          #rd-scope .spec-icon {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: #666;
+          }
+          #rd-scope .spec-value {
+            margin-left: auto;
+            font-weight: 700;
+            color: #333;
+          }
+
+          #rd-scope .sophistication-section {
+            padding: 60px 0;
+            background: #fafafa;
+          }
+          #rd-scope .sophistication-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+          }
+          #rd-scope .sophistication-text h2 {
+            font-family: "Instrument Sans", sans-serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+          }
+          #rd-scope .sophistication-text p {
+            font-family: "Instrument Sans", sans-serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 20px;
+          }
+          #rd-scope .origin-tag {
+            background: #f0f0f0;
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+            color: #666;
+          }
+
+          #rd-scope .layout-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+          }
+          #rd-scope .layout-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+          }
+          #rd-scope .layout-text p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+          }
+          #rd-scope .layout-gif {
+            background: #f0f0f0;
+            border-radius: 15px;
+            padding: 40px;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+          }
+
+          #rd-scope .packaging-section {
+            padding: 60px 0;
+          }
+          #rd-scope .packaging-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+          }
+          #rd-scope .packaging-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #333;
+          }
+          #rd-scope .packaging-text h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+          }
+          #rd-scope .packaging-text p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: #555;
+          }
+
+          #rd-scope .about-section {
+            padding: 60px 0;
+            background: #fafafa;
+            text-align: center;
+          }
+          #rd-scope .about-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #333;
+          }
+          #rd-scope .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 40px;
+          }
+
+          #rd-scope .testimonials-carousel {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            flex-direction: column;
+          }
+          #rd-scope .features-carousels-desktop {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            align-items: center;
+          }
+
+          /* Controles */
+          #rd-scope .features-nav,
+          #rd-scope .testimonials-nav {
+            color: #666;
+            background: #e0e0e0;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-top: -20px;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+          }
+          #rd-scope .features-nav:after,
+          #rd-scope .testimonials-nav:after {
+            font-size: 18px;
+            font-weight: 700;
+          }
+          #rd-scope .swiper-pagination-bullet {
+            background: #ccc;
+            opacity: 0.5;
+          }
+          #rd-scope .swiper-pagination-bullet-active {
+            background: #666;
+            opacity: 1;
+          }
+          #rd-scope .swiper-button-next,
+          #rd-scope .swiper-button-prev,
+          #rd-scope .features-nav,
+          #rd-scope .testimonials-nav {
+            top: 50% !important;
+            transform: translateY(-50%);
+          }
+          #rd-scope .features-swiper,
+          #rd-scope .testimonials-swiper-1 {
+            position: relative;
+          }
+          #rd-scope .testimonials-carousel {
+            width: 1240px;
+            max-width: 100vw;
+            margin: 0 auto 30px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+          }
+          #rd-scope .swiper-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          @media (max-width: 1300px) {
+            #rd-scope .testimonials-carousel,
+            #rd-scope .swiper {
+              width: 100vw;
+              max-width: 100vw;
+            }
+          }
+
+          /* ======== MOBILE FIX ======== */
+          @media (max-width: 1024px) {
+            #rd-scope .swiper,
+            #rd-scope .testimonials-carousel {
+              margin: 0 auto !important;
+            }
+            #rd-scope .swiper-wrapper {
+              margin: 0 !important;
+            }
+            /* garantir 1 por vez e altura auto */
+            #rd-scope .swiper-slide {
+              width: 100% !important;
+              height: auto !important;
+            }
+            #rd-scope .features-swiper .swiper-slide {
+              width: 100% !important;
+            }
+            /* esconder setas no mobile */
+            #rd-scope .features-nav,
+            #rd-scope .testimonials-nav {
+              display: none !important;
+            }
+          }
+
+          @media (max-width: 768px) {
+            #rd-scope .features-carousels-desktop {
+              display: none;
+            }
+            #rd-scope .features-carousels-mobile {
+              display: block;
+            }
+            #rd-scope .product-details,
+            #rd-scope .specs-container,
+            #rd-scope .sophistication-content,
+            #rd-scope .layout-section,
+            #rd-scope .packaging-content {
+              text-align: center;
+              grid-template-columns: 1fr;
+              gap: 30px;
+            }
+            #rd-scope .product-details,
+            #rd-scope .specs-container,
+            #rd-scope .sophistication-content,
+            #rd-scope .layout-section {
+              display: flex;
+              flex-direction: column;
+            }
+            #rd-scope .product-details .gif-placeholder {
+              order: 1;
+            }
+            #rd-scope .product-details .product-info {
+              order: 2;
+            }
+            #rd-scope .specs-container .wardrobe-image {
+              order: 1;
+            }
+            #rd-scope .specs-container .specs-info {
+              order: 2;
+            }
+            #rd-scope .layout-section .gif-placeholder {
+              order: 1;
+            }
+            #rd-scope .layout-section .layout-text {
+              order: 2;
+            }
+            #rd-scope .features-grid {
+              flex-direction: column;
+              align-items: center;
+              display: none;
+            }
+            #rd-scope .features-grid-2 {
+              grid-template-columns: repeat(2, 1fr);
+            }
+            #rd-scope .product-description h1 {
+              font-size: 2rem;
+            }
+            #rd-scope .rn-container {
+              place-items: center;
+              padding: 0 15px;
+            }
+            #rd-scope .gif-placeholder {
+              border-radius: 15px;
+              max-width: 400px !important;
+              min-height: 400px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+            #rd-scope .features-swiper {
+              display: block;
+            }
+            #rd-scope .features-grid-2 {
+              display: none;
+            }
+          }
+
+          @media (max-width: 480px) {
+            #rd-scope .features-grid-2 {
+              grid-template-columns: 1fr;
+            }
+            #rd-scope .product-description h1 {
+              font-size: 1.8rem;
+            }
+          }
+          @media (min-width: 780px) {
+            #rd-scope .features-carousels-mobile {
+              display: none !important;
+            }
+          }
+
+          .dimensions-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .dimension-arrow {
+            position: absolute;
+          }
+          .dimension-arrow.height {
+            left: 20px;
+            height: 100%;
+            width: 50px;
+          }
+          .dimension-arrow.width {
+            top: 20px;
+            width: 80%;
+            height: 50px;
+          }
+          .dimension-arrow.depth {
+            right: 20px;
+            top: 50%;
+            transform: rotate(-45deg);
+            width: 60%;
+            height: 50px;
+          }
+          .dimension-arrow text {
+            font-family: "Instrument Sans", sans-serif;
+            font-weight: bold;
+          }
+          .svg-icon-novo path {
+            fill: #102F18;
+          }
+
+          #rd-scope .tech-specs {
+            padding: 50px 0;
+            background: #f7f7f7;
+          }
+          #rd-scope .tech-specs__title {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #333;
+            position: relative;
+            margin-bottom: 26px;
+          }
+          #rd-scope .tech-specs__title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #333;
+            margin: 10px auto 0;
+            border-radius: 2px;
+            opacity: 0.25;
+          }
+
+          /* grade 4 colunas (responsiva) */
+          #rd-scope .spec-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+          }
+          #rd-scope .spec-card {
+            display: grid;
+            grid-template-columns: 56px 1fr;
+            gap: 14px;
+            align-items: start;
+            background: #fff;
+            border-radius: 8px;
+            padding: 18px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+          }
+          #rd-scope .spec-card__icon {
+            width: 56px;
+            height: 56px;
+            display: grid;
+            place-items: center;
+          }
+          #rd-scope .spec-card__icon img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            display: block;
+          }
+          #rd-scope .spec-card__body h3 {
+            margin: 2px 0 6px;
+            font-weight: 800;
+            color: #0c0c0c;
+          }
+          #rd-scope .spec-card__body ul {
+            margin: 0;
+            padding-left: 0;
+            list-style: none;
+          }
+          #rd-scope .spec-card__body li {
+            color: #555;
+            line-height: 1.35;
+          }
+
+          /* breakpoints */
+          @media (max-width: 1200px) {
+            #rd-scope .spec-cards {
+              grid-template-columns: repeat(3, 1fr);
+            }
+          }
+          @media (max-width: 900px) {
+            #rd-scope .spec-cards {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+          @media (max-width: 520px) {
+            #rd-scope .spec-cards {
+              grid-template-columns: 1fr;
+            }
+          }
+</style>
+<div id="rd-scope">
+  <!-- ======= Descrição / header ======= -->
+  <section class="product-description">
+    <div class="rn-container">
+      <h1>Descri&ccedil;&atilde;o do produto</h1>
+      <div class="product-details">
+        <div class="gif-placeholder">
+          <img
+            style="
+              border-radius: 15px !important;
+              max-width: 560px;
+              max-height: 400px;
+            "
+            src="https://mobiliae.cdn.magazord.com.br/img/2025/11/produto/533/03-multiuso-mu012-prisma.jpeg"
+            alt="C&ocirc;moda 4 Gavetas Brenda Jade em ambiente decorado"
+          />
+        </div>
+        <div class="product-info">
+          <h2>Estante Multiuso Branco</h2>
+          <p>
+            A Estante Multiuso foi pensada para deixar qualquer ambiente mais
+            organizado, bonito e funcional. Com nichos amplos e bem
+            distribu&iacute;dos, ela acomoda livros, objetos decorativos, caixas
+            organizadoras e itens do dia a dia, mantendo tudo vis&iacute;vel e
+            f&aacute;cil de acessar. O formato vertical aproveita melhor o
+            espa&ccedil;o da parede e a profundidade de 30cm ajuda a encaixar a
+            estante em diferentes cantos da casa, sem &ldquo;pesar&rdquo; no
+            ambiente. Produzida em MDP com pintura UV, entrega um visual clean
+            na cor branca, que ilumina a decora&ccedil;&atilde;o e combina com
+            estilos modernos, minimalistas e contempor&acirc;neos.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Especificações Técnicas -->
+  <section class="tech-specs">
+    <div class="rn-container">
+      <h2 class="tech-specs__title">Caracter&iacute;sticas</h2>
+      <div class="spec-cards">
+        <!-- Card 1 - Organização -->
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/718/1-organizacao.png"
+              alt="&Iacute;cone de organiza&ccedil;&atilde;o"
+            />
+          </div>
+          <div class="spec-card__body">
+            <h3>Organiza&ccedil;&atilde;o</h3>
+            <ul>
+              <li>Nichos vers&aacute;teis para organizar livros</li>
+            </ul>
+          </div>
+        </article>
+        <!-- Card 2 - Formato -->
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/719/2-formato.png"
+              alt="&Iacute;cone de formato compacto"
+            />
+          </div>
+          <div class="spec-card__body">
+            <h3>Formato</h3>
+            <ul>
+              <li>Estrutura vertical e compacta</li>
+            </ul>
+          </div>
+        </article>
+        <!-- Card 3 - Gavetas -->
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/720/3-gavetas.png"
+              alt="&Iacute;cone de gavetas"
+            />
+          </div>
+          <div class="spec-card__body">
+            <h3>Nichos</h3>
+            <ul>
+              <li>
+                Divis&oacute;rias em tamanhos variados para criar
+                composi&ccedil;&otilde;es decorativas
+              </li>
+            </ul>
+          </div>
+        </article>
+        <!-- Card 4 - Estrutura -->
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/721/4-estrutura.png"
+              alt="&Iacute;cone de estrutura de m&oacute;vel"
+            />
+          </div>
+          <div class="spec-card__body">
+            <h3>Estrutura</h3>
+            <ul>
+              <li>Produzida em MDP com pintura UV</li>
+            </ul>
+          </div>
+        </article>
+        <!-- Card 5 - Acabamento -->
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/722/5-acabamento.png"
+              alt="&Iacute;cone de acabamento cuidadoso"
+            />
+          </div>
+          <div class="spec-card__body">
+            <h3>Acabamento</h3>
+            <ul>
+              <li>
+                Superf&iacute;cie lisa e pr&aacute;tica para limpeza no dia a
+                dia
+              </li>
+            </ul>
+          </div>
+        </article>
+        <!-- Card 6 - Estilo -->
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/727/6-estilo.png"
+              alt="&Iacute;cone de estilo e cor"
+            />
+          </div>
+          <div class="spec-card__body">
+            <h3>Estilo</h3>
+            <ul>
+              <li>Visual moderno com frente em Jade</li>
+            </ul>
+          </div>
+        </article>
+        <!-- Card 7 - Versatilidade -->
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/724/7-versatilidade.png"
+              alt="&Iacute;cone de versatilidade"
+            />
+          </div>
+          <div class="spec-card__body">
+            <h3>Versatilidade</h3>
+            <ul>
+              <li>
+                Perfeita para sala, home office, quarto, corredor ou cantinho de
+                leitura, funcionando como estante, livreiro e apoio decorativo
+              </li>
+            </ul>
+          </div>
+        </article>
+        <!-- Card 8 - Combinações -->
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/726/8-combinacoes.png"
+              alt="&Iacute;cone de combina&ccedil;&otilde;es de decora&ccedil;&atilde;o"
+            />
+          </div>
+          <div class="spec-card__body">
+            <h3>Combina&ccedil;&otilde;es</h3>
+            <ul>
+              <li>
+                Fica incr&iacute;vel com cestos, caixas organizadoras, plantas e
+                objetos decorativos, criando um visual organizado e acolhedor
+              </li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <!-- Benefícios -->
+  <section class="sophistication-section">
+    <div class="rn-container">
+      <div class="sophistication-content" style="margin-top: 60px">
+        <div class="wardrobe-image">
+          <div class="wardrobe-placeholder">
+            <img
+              src="https://mobiliae.cdn.magazord.com.br/img/2025/11/produto/533/03-multiuso-mu012-prisma.jpeg"
+              alt="design sem nome 22"
+              width="600"
+              height="600"
+              data-midia-id="534"
+            />
+          </div>
+        </div>
+        <div class="sophistication-text">
+          <h2>Cores dispon&iacute;veis</h2>
+          <p>
+            Dispon&iacute;vel na cor Branco, uma escolha coringa para compor
+            ambientes modernos e atemporais. O tom claro destaca livros e
+            objetos decorativos, trazendo leveza e sensa&ccedil;&atilde;o de
+            espa&ccedil;o bem aproveitado.
+          </p>
+          <ul>
+            <li>Branco</li>
+          </ul>
+          <div class="origin-tag">Fabricado no Brasil</div>
+        </div>
+      </div>
+      <!-- Sustentabilidade -->
+      <div class="layout-section">
+        <div class="layout-text">
+          <h2>Sustentabilidade</h2>
+          <p>
+            A Mobiliae valoriza a sustentabilidade em cada etapa: escolha
+            respons&aacute;vel de mat&eacute;rias-primas, processos eficientes e
+            reaproveitamento de res&iacute;duos. Buscamos reduzir
+            emiss&otilde;es, economizar &aacute;gua e energia, e promover
+            fornecedores conscientes. Assim entregamos produtos dur&aacute;veis
+            e bonitos, sempre cuidando do planeta, das pessoas e do futuro em
+            que queremos viver.
+          </p>
+        </div>
+        <div class="gif-placeholder">
+          <img
+            src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/699/02-estante-armario-multiuso-escritorio-para-livros-em-mdp-pintura-uv-com-prateleiras-57x180x30cm.jpeg"
+            alt="06 comoda com 4 gavetas em mdp com pintura uv com pes em metal 95x106x45cm"
+            width="2000"
+            height="2000"
+            data-midia-id="705"
+          />
+        </div>
+      </div>
+      <div class="layout-section">
+        <div class="gif-placeholder">
+          <img
+            src="https://mobiliae.cdn.magazord.com.br/img/2025/11/produto/533/03-multiuso-mu012-prisma.jpeg"
+            alt="Detalhes de qualidade da C&ocirc;moda Brenda Jade"
+          />
+        </div>
+        <div class="layout-text">
+          <h2>Qualidade Mobiliae</h2>
+          <p>
+           A Estante Multiuso Canárias segue o padrão de qualidade Mobiliae: projeto pensado para o uso diário, com bom aproveitamento interno e um acabamento que valoriza o visual e facilita a manutenção. É a escolha certa para quem quer organizar e decorar ao mesmo tempo, com um móvel versátil que acompanha a rotina e deixa o ambiente mais funcional e agradável.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Sobre a Empresa -->
+  <div class="testimonials-carousel">
+    <div
+      class="sophistication-text"
+      style="text-align: center; margin-left: -10px"
+    >
+      <h2>Por que escolher a Mobiliae?</h2>
+      <p>
+        A Mobiliae &eacute; refer&ecirc;ncia em m&oacute;veis de alta qualidade
+        no Brasil, oferecendo produtos desenvolvidos com design
+        contempor&acirc;neo, funcionalidade e durabilidade. Com atendimento
+        especializado e entrega confi&aacute;vel, garantimos a melhor
+        experi&ecirc;ncia de compra online, levando conforto e eleg&acirc;ncia
+        para o seu lar.
+      </p>
+    </div>
+  </div>
+  <!-- Carrossel de selos -->
+  <!-- Carrossel de selos -->
+  <div class="testimonials-carousel">
+    <div class="swiper features-swiper features-swiper-1">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/690/8.png"
+                alt="Imagem 1 do produto"
+              />
+            </div>
+            <div class="feature-description"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/688/6.png"
+                alt="Imagem 2 do produto"
+              />
+            </div>
+            <div class="feature-description"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/689/7.png"
+                alt="Imagem 3 do produto"
+              />
+            </div>
+            <div class="feature-description"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/685/3.png"
+                alt="Imagem 4 do produto"
+              />
+            </div>
+            <div class="feature-description"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/683/1.png"
+                alt="Imagem 5 do produto"
+              />
+            </div>
+            <div class="feature-description"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/684/2.png"
+                alt="Imagem 6 do produto"
+              />
+            </div>
+            <div class="feature-description"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/687/5.png"
+                alt="Imagem 7 do produto"
+              />
+            </div>
+            <div class="feature-description"></div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2025/12/produto/686/4.png"
+                alt="Imagem 8 do produto"
+              />
+            </div>
+            <div class="feature-description"></div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonials-nav swiper-button-next features-next-1"></div>
+      <div class="testimonials-nav swiper-button-prev features-prev-1"></div>
+      <div class="swiper-pagination features-pagination-1"></div>
+    </div>
+    <!-- Controles e paginação do testimonials -->
+    <div class="testimonials-nav swiper-button-next testimonials-next-1"></div>
+    <div class="testimonials-nav swiper-button-prev testimonials-prev-1"></div>
+    <div class="swiper-pagination testimonials-pagination-1"></div>
+  </div>
+</div>
+<!-- Swiper JS -->
+<p>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // <![CDATA[
+    // Depoimentos (carrossel de selo/segurança)
+    new Swiper("#rd-scope .testimonials-swiper-1", {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      centeredSlides: true,
+      centeredSlidesBounds: true,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      navigation: {
+        nextEl: "#rd-scope .testimonials-next-1",
+        prevEl: "#rd-scope .testimonials-prev-1",
+      },
+      pagination: {
+        el: "#rd-scope .testimonials-pagination-1",
+        clickable: true,
+      },
+      speed: 600,
+      loopAdditionalSlides: 1,
+      effect: "slide",
+    });
+
+    // Features (DESKTOP)
+    new Swiper("#rd-scope .features-swiper-1", {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      loop: true,
+      navigation: {
+        nextEl: "#rd-scope .features-next-1",
+        prevEl: "#rd-scope .features-prev-1",
+      },
+      pagination: { el: "#rd-scope .features-pagination-1", clickable: true },
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      speed: 600,
+      breakpoints: { 0: { slidesPerView: 1 }, 769: { slidesPerView: 3 } },
+    });
+
+    new Swiper("#rd-scope .features-swiper-3", {
+      slidesPerView: 3,
+      spaceBetween: 20,
+      loop: true,
+      navigation: {
+        nextEl: "#rd-scope .features-next-3",
+        prevEl: "#rd-scope .features-prev-3",
+      },
+      pagination: { el: "#rd-scope .features-pagination-3", clickable: true },
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      speed: 600,
+      breakpoints: { 0: { slidesPerView: 1 }, 769: { slidesPerView: 3 } },
+    });
+
+    // Features (MOBILE)
+    new Swiper("#rd-scope .features-swiper-mob-1", {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      loop: true,
+      centeredSlides: true,
+      centeredSlidesBounds: true,
+      pagination: {
+        el: "#rd-scope .features-pagination-mob-1",
+        clickable: true,
+      },
+      speed: 500,
+    });
+
+    new Swiper("#rd-scope .features-swiper-mob-2", {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      loop: true,
+      centeredSlides: true,
+      centeredSlidesBounds: true,
+      pagination: {
+        el: "#rd-scope .features-pagination-mob-2",
+        clickable: true,
+      },
+      speed: 500,
+    });
+
+    // Smooth scroll + animações
+    document.querySelectorAll('#rd-scope a[href^="#"]').forEach((a) => {
+      a.addEventListener("click", (e) => {
+        e.preventDefault();
+        const t = document.querySelector(a.getAttribute("href"));
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px",
+    };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll("#rd-scope section").forEach((section) => {
+      section.style.opacity = "0";
+      section.style.transform = "translateY(30px)";
+      section.style.transition = "opacity .6s ease, transform .6s ease";
+      observer.observe(section);
+    });
+    // ]]>
+  </script>
+</p>

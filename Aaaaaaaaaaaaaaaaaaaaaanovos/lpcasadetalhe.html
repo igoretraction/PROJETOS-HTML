@@ -1,0 +1,424 @@
+<meta charset="utf-8" /><meta
+  name="viewport"
+  content="width=device-width, initial-scale=1"
+/>
+<title></title>
+<style type="text/css">
+  :root {
+    --bg: #ffffff;
+    --text: #000000;
+    --muted: rgba(0, 0, 0, 0.7);
+    --border: rgba(0, 0, 0, 0.12);
+    --border2: rgba(0, 0, 0, 0.18);
+    --max: 1100px;
+
+    --ph1: rgba(0, 0, 0, 0.14);
+    --ph2: rgba(0, 0, 0, 0.22);
+    --ph3: rgba(0, 0, 0, 0.08);
+  }
+
+  * {
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
+    background: var(--bg) !important;
+    color: var(--text) !important;
+    line-height: 1.5 !important;
+  }
+
+  .CASADETALHE-container {
+    width: min(var(--max), 92%) !important;
+    margin: 0 auto !important;
+  }
+
+  /* HERO 100% */
+  .CASADETALHE-hero {
+    min-height: 92vh !important;
+    display: flex !important;
+    align-items: center !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #fff !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+  .CASADETALHE-hero .CASADETALHE-wrap {
+    display: grid !important;
+    grid-template-columns: 1.1fr 0.9fr !important;
+    gap: 40px !important;
+    align-items: center !important;
+    padding: 72px 0 !important;
+  }
+  .CASADETALHE-hero h1 {
+    font-size: clamp(2rem, 3.4vw, 3.2rem) !important;
+    letter-spacing: -0.02em !important;
+    margin-bottom: 14px !important;
+  }
+  .CASADETALHE-hero p {
+    color: var(--muted) !important;
+    font-size: 1.05rem !important;
+    max-width: 56ch !important;
+    margin-bottom: 22px !important;
+  }
+
+  .CASADETALHE-cta-row {
+    display: flex !important;
+    gap: 12px !important;
+    flex-wrap: wrap !important;
+    margin-top: 8px !important;
+  }
+  .CASADETALHE-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 12px 18px !important;
+    border-radius: 12px !important;
+    border: 1px solid var(--border2) !important;
+    text-decoration: none !important;
+    color: var(--text) !important;
+    font-weight: 600 !important;
+    transition: 0.2s ease !important;
+    background: #fff !important;
+  }
+  .CASADETALHE-btn:hover {
+    transform: translateY(-1px) !important;
+  }
+  .CASADETALHE-btn.CASADETALHE-primary {
+    background: #000 !important;
+    color: #fff !important;
+    border-color: #000 !important;
+  }
+
+  /* Placeholder (bloco cinza/preto) */
+  .CASADETALHE-placeholder {
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(135deg, var(--ph1), var(--ph2)) !important;
+    position: relative !important;
+    overflow: hidden !important;
+  }
+  .CASADETALHE-placeholder::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    transform: translateX(-60%) !important;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.45),
+      transparent
+    ) !important;
+    animation: shimmer 1.6s infinite !important;
+  }
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-60%);
+    }
+    100% {
+      transform: translateX(60%);
+    }
+  }
+
+  .CASADETALHE-hero-media {
+    border: 1px solid var(--border2) !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    aspect-ratio: 4 / 3 !important;
+  }
+
+  /* SEÇÕES */
+  section {
+    padding: 72px 0 !important;
+    border-bottom: 1px solid var(--border) !important;
+  }
+
+  .CASADETALHE-split {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 44px !important;
+    align-items: center !important;
+  }
+  .CASADETALHE-split.CASADETALHE-reverse .CASADETALHE-text {
+    order: 2 !important;
+  }
+  .CASADETALHE-split.CASADETALHE-reverse .CASADETALHE-media {
+    order: 1 !important;
+  }
+
+  .CASADETALHE-kicker {
+    display: inline-block !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+    color: rgba(0, 0, 0, 0.65) !important;
+    margin-bottom: 10px !important;
+  }
+  h2 {
+    font-size: clamp(1.6rem, 2.4vw, 2.2rem) !important;
+    margin-bottom: 12px !important;
+    letter-spacing: -0.02em !important;
+  }
+  .CASADETALHE-text p {
+    color: var(--muted) !important;
+    margin-bottom: 16px !important;
+    max-width: 60ch !important;
+  }
+
+  .CASADETALHE-bullets {
+    display: grid !important;
+    gap: 10px !important;
+    margin-top: 14px !important;
+  }
+  .CASADETALHE-bullet {
+    display: flex !important;
+    gap: 10px !important;
+    align-items: flex-start !important;
+    padding: 12px 14px !important;
+    background: rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 14px !important;
+  }
+  .CASADETALHE-dot {
+    width: 10px !important;
+    height: 10px !important;
+    border-radius: 50% !important;
+    background: #000 !important;
+    margin-top: 6px !important;
+    flex: 0 0 auto !important;
+  }
+
+  .CASADETALHE-media {
+    border: 1px solid var(--border2) !important;
+    border-radius: 18px !important;
+    overflow: hidden !important;
+    aspect-ratio: 16 / 11 !important;
+    background: #fff !important;
+  }
+
+  /* Footer */
+  footer {
+    padding: 26px 0 40px !important;
+    color: rgba(0, 0, 0, 0.75) !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* Responsivo */
+  @media (max-width: 860px) {
+    .CASADETALHE-hero .CASADETALHE-wrap {
+      grid-template-columns: 1fr !important;
+      padding: 56px 0 !important;
+    }
+    .CASADETALHE-split {
+      grid-template-columns: 1fr !important;
+    }
+    .CASADETALHE-split.CASADETALHE-reverse .CASADETALHE-text {
+      order: 1 !important;
+    }
+    .CASADETALHE-split.CASADETALHE-reverse .CASADETALHE-media {
+      order: 2 !important;
+    }
+    section {
+      padding: 56px 0 !important;
+    }
+    .CASADETALHE-hero {
+      min-height: auto !important;
+    }
+  }
+</style>
+<!-- 1) HERO / BANNER 100% -->
+<header class="CASADETALHE-hero">
+  <div class="CASADETALHE-container">
+    <div class="wrap">
+      <div class="CASADETALHE-hero-text">
+        <span class="kicker">Sua proposta de valor aqui</span>
+        <h1>Banner principal 100% com foco total no que voc&ecirc; vende</h1>
+
+        <p>
+          Um texto curto e direto explicando o que voc&ecirc; entrega, para quem
+          &eacute; e qual o benef&iacute;cio principal. Use 1&ndash;2 frases
+          objetivas.
+        </p>
+
+        <div class="CASADETALHE-cta-row">
+          <a class="CASADETALHE-btn CASADETALHE-primary" href="#sec-2">Quero saber mais</a>
+          <a class="CASADETALHE-btn" href="#sec-4">Ver depoimentos</a>
+        </div>
+      </div>
+      <div aria-label="Imagem do banner" class="CASADETALHE-hero-media">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCO3yjY8wsCoHbtzRFdYLPLKK8TKxBioAllA&s"
+          alt="Banner principal"
+          style="width:100%; height:100%; object-fit:cover; display:block;"
+        />
+      </div>
+    </div>
+  </div>
+</header>
+<!-- 2) Texto esquerda / Imagem direita -->
+
+<section id="sec-2">
+
+  <div class="CASADETALHE-container">
+    <div class="CASADETALHE-split">
+      <div class="text">
+        <span class="kicker">Se&ccedil;&atilde;o 2</span>
+
+        <h2>
+          Explique o problema e a solu&ccedil;&atilde;o (texto &agrave;
+          esquerda)
+        </h2>
+
+        <p>
+          Aqui voc&ecirc; descreve a dor do p&uacute;blico e como seu
+          produto/servi&ccedil;o resolve isso. Foco em clareza e resultado.
+        </p>
+
+        <div class="CASADETALHE-bullets">
+          <div class="bullet">
+            <div>
+              <strong>Benef&iacute;cio 1</strong><br />
+              Uma frase r&aacute;pida explicando.
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div>
+              <strong>Benef&iacute;cio 2</strong><br />
+              Uma frase r&aacute;pida explicando.
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div>
+              <strong>Benef&iacute;cio 3</strong><br />
+              Uma frase r&aacute;pida explicando.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div aria-label="Imagem da seção 2" class="CASADETALHE-media">
+        <img
+          src="https://media.gettyimages.com/id/968350196/pt/foto/fortune-cookies-with-cartoon-eyes.jpg?s=612x612&w=gi&k=20&c=IJN3dPe74iqD_MyrVM_XT8V6H15AOfQ-m2py_yV86xs="
+          alt="Imagem seção 2"
+          style="width:100%; height:100%; object-fit:cover; display:block;"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 3) Imagem esquerda / Texto direita -->
+
+<section>
+  <div class="CASADETALHE-container">
+    <div class="CASADETALHE-split CASADETALHE-reverse">
+      <div class="CASADETALHE-text">
+        <span class="kicker">Se&ccedil;&atilde;o 3</span>
+
+        <h2>Mostre como funciona (texto &agrave; direita)</h2>
+
+        <p>
+          Use um passo a passo simples: como a pessoa come&ccedil;a, o que
+          acontece no meio e qual resultado ela obt&eacute;m.
+        </p>
+
+        <div class="CASADETALHE-bullets">
+          <div class="CASADETALHE-bullet">
+            <div>
+              <strong>Passo 1</strong><br />
+              Cadastro / contato / in&iacute;cio.
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div>
+              <strong>Passo 2</strong><br />
+              Processo / execu&ccedil;&atilde;o / entrega.
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div>
+              <strong>Passo 3</strong><br />
+              Resultado / acompanhamento.
+            </div>
+          </div>
+        </div>
+
+        <div class="cta-row" style="margin-top: 18px">
+          <a class="btn primary" href="#sec-4">Ver depoimentos</a>
+          <a class="btn" href="#contato">Falar agora</a>
+        </div>
+      </div>
+
+      <div aria-label="Imagem da seção 3" class="CASADETALHE-media">
+        <img
+          src="https://www.shutterstock.com/image-photo/handsome-indonesian-southeast-asian-man-260nw-2476654675.jpg"
+          alt="Imagem seção 3"
+          style="width:100%; height:100%; object-fit:cover; display:block;"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 4) Texto esquerda / Imagem direita (Depoimentos) -->
+
+<section id="sec-4" style="border-bottom: 0">
+  <div class="CASADETALHE-container">
+      <div class="CASADETALHE-split">
+      <div class="CASADETALHE-text">
+        <span class="kicker">Se&ccedil;&atilde;o 4</span>
+
+        <h2>Depoimentos (texto &agrave; esquerda)</h2>
+
+        <p>
+          Coloque aqui 2&ndash;4 depoimentos curtos. Se quiser, eu adapto para
+          cards em grid.
+        </p>
+
+        <div class="CASADETALHE-bullets">
+          <div class="CASADETALHE-bullet">
+            <div>
+              <strong>&ldquo;Resultado muito bom!&rdquo;</strong><br />
+              Cliente A &bull; Cidade/UF
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div>
+              <strong>&ldquo;Atendimento r&aacute;pido e claro.&rdquo;</strong
+              ><br />
+              Cliente B &bull; Cidade/UF
+            </div>
+          </div>
+
+          <div class="bullet">
+            <div>
+              <strong>&ldquo;Recomendo demais.&rdquo;</strong><br />
+              Cliente C &bull; Cidade/UF
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div aria-label="Imagem da seção 4 (placeholder)" class="CASADETALHE-media">
+        <img src="https://lh3.googleusercontent.com/hwau7OVWx96XaME5KpRuJ0I_MscrerK6SbRH1UwYHYaxIDQQtn7RZK02LDSfBzCreidFgDsJeXyqDct6EZiH6vsV=s1280-w1280-h800" alt="">
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Contato simples -->
+
+<footer id="contato">
+  <div class="CASADETALHE-container">
+    <p>
+      <strong>Contato:</strong> (11) 99999-9999 &bull; contato@seudominio.com
+    </p>
+
+    <p style="margin-top: 8px">
+      &copy; Sua Marca &mdash; Todos os direitos reservados.
+    </p>
+  </div>
+</footer>

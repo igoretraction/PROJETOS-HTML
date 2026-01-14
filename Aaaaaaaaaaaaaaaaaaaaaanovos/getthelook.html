@@ -1,0 +1,510 @@
+<style>
+  .fs-product-card .fs-product-image {
+    height: 450px;
+  }
+
+  .fs-grid .fs-product-card:nth-child(1) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(2) .fs-product-image {
+    height: 610px;
+  }
+  .fs-grid .fs-product-card:nth-child(3) .fs-product-image {
+    height: 490px;
+  }
+  .fs-grid .fs-product-card:nth-child(4) .fs-product-image {
+    height: 400px;
+  }
+  .fs-grid .fs-product-card:nth-child(5) .fs-product-image {
+    height: 440px;
+  }
+  .fs-grid .fs-product-card:nth-child(6) .fs-product-image {
+    height: 650px;
+  }
+  .fs-grid .fs-product-card:nth-child(7) .fs-product-image {
+    height: 420px;
+  }
+  .fs-grid .fs-product-card:nth-child(8) .fs-product-image {
+    height: 670px;
+  }
+  .fs-grid .fs-product-card:nth-child(9) .fs-product-image {
+    height: 570px;
+  }
+  .fs-grid .fs-product-card:nth-child(10) .fs-product-image {
+    height: 385px;
+  }
+
+  .fs-grid .fs-product-card:nth-child(3) .fs-product-image img {
+    object-position: center 20%;
+  }
+  .fs-grid .fs-product-card:nth-child(7) .fs-product-image img {
+    object-position: center 30%;
+  }
+
+  @media (max-width: 1200px) {
+    .fs-grid .fs-product-card .fs-product-image {
+      height: 420px;
+    }
+     .fs-product-card:nth-child(1) {
+    margin-top: 0 !important;
+  }
+   .fs-product-card:nth-child(2) {
+    margin-top: 0 !important;
+  }
+   .fs-product-card:nth-child(3) {
+    margin-top: 0 !important;
+  }
+  
+      .fs-product-card:nth-child(4) {
+    margin-top: 0 !important;
+  }
+   .fs-product-card:nth-child(5) {
+    margin-top: 0 !important;
+  }
+  .fs-product-card:nth-child(6) {
+    margin-top: 0 !important;
+  }
+  .fs-product-card:nth-child(7) {
+    margin-top: 0 !important;
+  }
+   .fs-product-card:nth-child(8) {
+    margin-top: 0 !important;
+  }
+   .fs-product-card:nth-child(9) {
+    margin-top: 0 !important;
+  }
+  .fs-product-card:nth-child(10) {
+    margin-top: 0 !important;
+  }
+
+  /* novos tamanhos  */
+  
+  .fs-grid .fs-product-card:nth-child(1) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(2) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(3) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(4) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(5) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(6) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(7) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(8) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(9) .fs-product-image {
+    height: 450px;
+  }
+  .fs-grid .fs-product-card:nth-child(10) .fs-product-image {
+    height: 450px;
+  }
+  }
+
+  .fs-product-card:nth-child(4) {
+    margin-top: -160px;
+  }
+  .fs-product-card:nth-child(6) {
+    margin-top: -120px;
+  }
+  .fs-product-card:nth-child(7) {
+    margin-top: -300px;
+  }
+   .fs-product-card:nth-child(8) {
+    margin-top: -100px;
+  }
+  .fs-product-card:nth-child(10) {
+    margin-top: -430px;
+  }
+
+
+
+  .fs-hero {
+    font-family: "Cormorant Garamond", "Georgia", serif;
+    background: linear-gradient(to bottom, #e8eef5 0%, #f5f5f5 100%);
+    color: #333;
+    position: relative;
+    width: 100%;
+
+    min-height: 500px;
+    overflow: hidden;
+  }
+
+  .fs-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .fs-hero-text {
+    position: absolute;
+    top: 50%;
+    left: 8%;
+    transform: translateY(-50%);
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .fs-hero-text h1 {
+    font-size: 5rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .fs-squad-tag {
+    position: absolute;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    text-align: right;
+    color: white;
+  }
+
+  .fs-squad-tag p {
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    margin-bottom: 0.5rem;
+  }
+
+  .fs-squad-tag h2 {
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+  }
+
+  .fs-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+
+  .fs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+    max-width: 1240px;
+    justify-content: center;
+    margin: auto;
+  }
+
+  .fs-product-card {
+    position: relative;
+    background: white;
+    max-width: 350px;
+    /* border-radius: 8px; */
+    overflow: hidden;
+    /* box-shadow: 0 4px 20px rgba(0,0,0,0.08); */
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+
+  /* .fs-product-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    } */
+
+  .fs-product-image {
+    width: 100%;
+    height: 450px;
+    overflow: hidden;
+    background: #f8f8f8;
+  }
+
+  .fs-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    border-radius: 15px;
+  }
+  /* 
+    .fs-product-card:hover .fs-product-image img {
+        transform: scale(1.08);
+    } */
+
+  .fs-product-info {
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .fs-product-name {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2c2c2c;
+    /* margin-bottom: 8px; */
+  }
+
+  .fs-product-link {
+    display: inline-block;
+    /* margin-top: 12px; */
+    font-size: 0.75rem;
+    /* letter-spacing: 0.15em; */
+    text-transform: uppercase;
+    color: #000000;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+
+  .fs-product-link:hover {
+    color: #333;
+  }
+
+  @media (max-width: 768px) {
+    .fs-hero-text h1 {
+      font-size: 3rem;
+    }
+
+    .fs-squad-tag h2 {
+      font-size: 1.5rem;
+    }
+
+    .fs-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .fs-container {
+      padding: 60px 20px;
+    }
+  }
+</style>
+
+<section class="fs-hero">
+  <img
+    src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45102/banner.jpg"
+    alt="Squad Flor de Lis"
+  />
+</section>
+
+<div class="fs-container">
+  <div class="fs-grid">
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/mariana-rios', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45092/1-mari.png"
+          alt="Mariana Rios"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Mariana Rios</h3>
+        <a
+          href="https://www.flordelis.com.br/mariana-rios"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/fernanda-motta', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45093/2-fe.png"
+          alt="Fernanda Motta"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Fernanda Motta</h3>
+        <a
+          href="https://www.flordelis.com.br/fernanda-motta"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/camila-coutinho', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45094/3-camila-coutinho.png"
+          alt="Camila Coutinho"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Camila Coutinho</h3>
+        <a
+          href="https://www.flordelis.com.br/camila-coutinho"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/jessica-cores', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45095/4-jessica.png"
+          alt="Jéssica"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Jéssica Cores</h3>
+        <a
+          href="https://www.flordelis.com.br/jessica-cores"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/giovana-cordeiro', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45096/5-gi-cordeiro.png"
+          alt="Giovana Cordeiro"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Giovana Cordeiro</h3>
+        <a
+          href="https://www.flordelis.com.br/giovana-cordeiro"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/ticiane-pinheiro', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45097/6-tici.png"
+          alt="Ticiane Pinheiro"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Ticiane Pinheiro</h3>
+        <a
+          href="https://www.flordelis.com.br/ticiane-pinheiro"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/amanda-paggi', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45098/7-amanda.png"
+          alt="Amanda"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Amanda Paggi</h3>
+        <a
+          href="https://www.flordelis.com.br/amanda-paggi"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/isabelle-nogueira', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45099/8-isabelle-2.png"
+          alt="Isabelle Nogueira"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Isabelle Nogueira</h3>
+        <a
+          href="https://www.flordelis.com.br/isabelle-nogueira"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/flavia-pavanelli', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45100/9-flavia.png"
+          alt="Flávia Pavanelli"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Flávia Pavanelli</h3>
+        <a
+          href="https://www.flordelis.com.br/flavia-pavanelli"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+
+    <div
+      class="fs-product-card"
+      onclick="window.open('https://www.flordelis.com.br/isabele-temoteo', '_blank')"
+    >
+      <div class="fs-product-image">
+        <img
+          src="https://dlz.cdn.magazord.com.br/img/2025/12/produto/45101/10-isabele.png"
+          alt="Isabele"
+        />
+      </div>
+      <div class="fs-product-info">
+        <h3 class="fs-product-name">Isabele Temoteo</h3>
+        <a
+          href="https://www.flordelis.com.br/isabele-temoteo"
+          class="fs-product-link"
+          target="_blank"
+          >Acesse</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
