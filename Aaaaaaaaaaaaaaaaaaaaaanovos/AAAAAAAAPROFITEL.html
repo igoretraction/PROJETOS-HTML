@@ -1,0 +1,1359 @@
+<style type="text/css">
+  :root {
+    --primary: #1a1a1a;
+    --secondary: #4a4a4a;
+    --accent: #d4af37;
+    --bg-light: #fafafa;
+    --bg-white: #ffffff;
+    --border: #e0e0e0;
+    --text-dark: #2d2d2d;
+    --text-medium: #666;
+    --text-light: #999;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    color: var(--text-dark);
+    background: var(--bg-white);
+    line-height: 1.6;
+  }
+
+  .ptor-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* HERO */
+  .ptor-hero {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 80px 0 60px;
+    text-align: center;
+    border-bottom: 4px solid var(--accent);
+  }
+  .ptor-hero .ptor-title-profitel {
+    font-size: 3rem !important;
+    font-weight: 800;
+    color: var(--primary) !important;
+    margin-bottom: 24px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+  }
+  .ptor-hero .ptor-subtitle {
+    font-size: 1.25rem;
+    color: var(--text-medium);
+    max-width: 900px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+  .ptor-hero .ptor-subtitle strong {
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  /* SEÇÕES */
+  .ptor-section {
+    padding: 80px 0;
+  }
+  .ptor-section-header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .ptor-section .ptor-section-header .ptor-section-title {
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    margin-bottom: 16px;
+    position: relative;
+    display: inline-block;
+  }
+  .ptor-section .ptor-section-header .ptor-section-title::after {
+    content: "";
+    position: absolute;
+    bottom: -21px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .ptor-section-header p {
+    font-size: 1.15rem;
+    color: var(--text-medium);
+    margin-top: 24px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .ptor-section:nth-of-type(odd) {
+    background: var(--bg-white);
+  }
+  .ptor-section:nth-of-type(even) {
+    background: var(--bg-light);
+  }
+
+  /* CARROSSEL (loop suave com variáveis) */
+  .ptor-carousel-wrapper {
+    background: var(--bg-white);
+    padding: 40px 0;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    position: relative;
+  }
+  .ptor-carousel-track {
+    --n: 6; /* qtd de itens únicos */
+    --item-w: 180px; /* largura do item (desktop) */
+    --speed: 40s;
+    display: flex;
+    gap: 0;
+    width: fit-content;
+    animation: ptor-scroll var(--speed) linear infinite;
+  }
+  .ptor-carousel-item {
+    flex-shrink: 0;
+    width: var(--item-w);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .ptor-carousel-icon {
+    width: 64px;
+    height: 64px;
+    color: var(--primary);
+    background: var(--bg-light);
+    border-radius: 50%;
+    padding: 14px;
+  }
+  .ptor-carousel-text {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  @keyframes ptor-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-1 * var(--item-w) * var(--n)));
+    }
+  }
+  .ptor-carousel-wrapper:hover .ptor-carousel-track {
+    animation-play-state: paused;
+  }
+
+  /* ESPECIFICAÇÕES */
+  .ptor-specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .ptor-specs-list {
+    background: var(--bg-white);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  }
+  .ptor-specs-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 32px;
+    padding-bottom: 16px;
+    border-bottom: 3px solid var(--accent);
+  }
+  .ptor-spec-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 2px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .ptor-spec-row:hover {
+    background: var(--bg-light);
+    padding-left: 12px;
+    margin-left: -12px;
+    margin-right: -12px;
+    padding-right: 12px;
+  }
+  .ptor-spec-row:last-child {
+    border-bottom: none;
+  }
+  .ptor-spec-label {
+    font-size: 1.05rem;
+    color: var(--text-medium);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ptor-spec-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .ptor-specs-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  }
+  .ptor-specs-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .ptor-specs-image:hover img {
+    transform: scale(1.05);
+  }
+
+  /* SECTION DARK */
+  .ptor-toronto-section {
+    background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%);
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .ptor-toronto-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent) 0%, #f4d03f 100%);
+  }
+  .ptor-toronto-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .ptor-toronto-title {
+    font-size: 3rem !important;
+    font-weight: 900 !important;
+    color: var(--bg-white) !important;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .ptor-toronto-header p {
+    font-size: 1.2rem;
+    color: #ccc;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.9;
+  }
+  .ptor-toronto-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .ptor-toronto-card {
+    background: var(--bg-white);
+    border-radius: 24px;
+    padding: 48px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .ptor-toronto-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--accent);
+  }
+  .ptor-card-title {
+    font-size: 1.8rem !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ptor-kit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .ptor-kit-item {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 24px;
+    border-radius: 16px;
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .ptor-kit-item:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(212, 175, 55, 0.2);
+  }
+  .ptor-kit-item strong {
+    display: block;
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .ptor-kit-item span {
+    font-size: 0.95rem;
+    color: var(--text-medium);
+    line-height: 1.6;
+  }
+  .ptor-chips-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .ptor-chip {
+    background: var(--primary);
+    color: var(--bg-white);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    cursor: default;
+  }
+  .ptor-chip:hover {
+    background: var(--accent);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+  }
+  .ptor-textile-info {
+    background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+    padding: 24px;
+    border-radius: 16px;
+    border: 3px solid var(--accent);
+    text-align: center;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .ptor-meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .ptor-meta-box {
+    background: var(--bg-light);
+    padding: 28px 20px;
+    border-radius: 16px;
+    text-align: center;
+    border: 2px solid var(--border);
+    transition: all 0.3s ease;
+  }
+  .ptor-meta-box:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+  .ptor-meta-label {
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    display: block;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+  }
+  .ptor-meta-value {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary);
+  }
+  .ptor-category-box {
+    grid-column: 1/-1;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  }
+  .ptor-cta-button {
+    display: block;
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #000 100%);
+    color: var(--bg-white);
+    padding: 20px 40px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .ptor-cta-button:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+    background: linear-gradient(135deg, var(--accent) 0%, #f4d03f 100%);
+    color: var(--primary);
+  }
+  .ptor-note-text {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* CUIDADOS */
+  .ptor-usage-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .ptor-usage-list {
+    background: var(--bg-white);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  }
+  .ptor-usage-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  .ptor-usage-list li {
+    padding: 16px 0 16px 48px;
+    font-size: 1.1rem;
+    color: var(--text-medium);
+    position: relative;
+    border-bottom: 2px solid var(--border);
+  }
+  .ptor-usage-list li:last-child {
+    border-bottom: none;
+  }
+  .ptor-usage-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+  }
+  .ptor-usage-image {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+  }
+  .ptor-usage-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* FAQ */
+  .ptor-faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .ptor-faq-item {
+    background: var(--bg-white);
+    padding: 32px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    border-left: 5px solid var(--accent);
+    transition: all 0.3s ease;
+  }
+  .ptor-faq-item:hover {
+    transform: translateX(8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  .ptor-faq-question {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  .ptor-faq-answer {
+    font-size: 1.05rem;
+    color: var(--text-medium);
+    line-height: 1.8;
+  }
+
+  /* CTA FINAL */
+  .ptor-final-cta {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    padding: 80px 0;
+    text-align: center;
+    color: var(--bg-white);
+  }
+  .ptor-final-cta-title {
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 20px;
+    color: var(--bg-white) !important;
+  }
+  .ptor-final-cta p {
+    font-size: 1.2rem;
+    color: #ccc;
+    max-width: 700px;
+    margin: 0 auto 32px;
+    line-height: 1.8;
+  }
+  .ptor-final-cta .ptor-cta-button {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* SOBRE */
+  .ptor-about-section {
+    background: var(--bg-light);
+    padding: 80px 0;
+    text-align: center;
+  }
+  .ptor-about-content {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    padding: 48px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  }
+  .ptor-about-title {
+    font-size: 2.5rem !important;
+    font-weight: 800 !important;
+    color: var(--primary) !important;
+    margin-bottom: 28px;
+  }
+  .ptor-about-content p {
+    font-size: 1.15rem;
+    color: var(--text-medium);
+    line-height: 1.9;
+  }
+  .ptor-about-content strong {
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  /* RESPONSIVO */
+  @media (max-width: 1024px) {
+    .ptor-specs-grid,
+    .ptor-usage-grid,
+    .ptor-toronto-grid {
+      grid-template-columns: 1fr;
+    }
+    .ptor-section .ptor-section-header .ptor-section-title {
+      font-size: 2rem !important;
+    }
+    .ptor-toronto-title {
+      font-size: 2.5rem !important;
+    }
+  }
+  @media (max-width: 768px) {
+    .ptor-hero {
+      padding: 48px 0 36px;
+    }
+    .ptor-title-profitel {
+      font-size: 2rem !important;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    .ptor-hero .ptor-subtitle {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      padding: 0 8px;
+    }
+    .ptor-section {
+      padding: 48px 0;
+    }
+    .ptor-section-header {
+      margin-bottom: 40px;
+    }
+    .ptor-section .ptor-section-header .ptor-section-title {
+      font-size: 1.75rem !important;
+      margin-bottom: 12px;
+    }
+    .ptor-section .ptor-section-header .ptor-section-title::after {
+      width: 90%;
+      height: 3px;
+      bottom: -21px;
+    }
+    .ptor-section-header p {
+      font-size: 1rem;
+      margin-top: 20px;
+      padding: 0 8px;
+    }
+
+    .ptor-carousel-wrapper {
+      padding: 32px 0;
+      border-radius: 16px;
+      margin: 0 -12px;
+    }
+    .ptor-carousel-track {
+      --item-w: 140px;
+      --speed: 38s;
+    }
+    .ptor-carousel-item {
+      width: var(--item-w);
+      padding: 20px 16px;
+      gap: 10px;
+    }
+    .ptor-carousel-icon {
+      width: 56px;
+      height: 56px;
+      padding: 12px;
+    }
+    .ptor-carousel-text {
+      font-size: 0.8rem;
+      letter-spacing: 0.3px;
+    }
+
+    .ptor-specs-list {
+      padding: 28px 20px;
+      border-radius: 16px;
+    }
+    .ptor-specs-title {
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+    }
+    .ptor-spec-row {
+      padding: 16px 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .ptor-spec-label {
+      font-size: 0.95rem;
+    }
+    .ptor-spec-value {
+      font-size: 1.05rem;
+      font-weight: 800;
+    }
+    .ptor-specs-image {
+      border-radius: 16px;
+      margin-top: 24px;
+    }
+
+    .ptor-toronto-section {
+      padding: 60px 0;
+    }
+    .ptor-toronto-header {
+      margin-bottom: 40px;
+    }
+    .ptor-toronto-title {
+      font-size: 1.85rem !important;
+      line-height: 1.3;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    .ptor-toronto-header p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      padding: 0 8px;
+    }
+    .ptor-toronto-card {
+      padding: 28px 20px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+    .ptor-card-title {
+      font-size: 1.4rem !important;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .ptor-kit-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .ptor-kit-item {
+      padding: 20px;
+      border-radius: 12px;
+    }
+    .ptor-kit-item strong {
+      font-size: 1.15rem;
+    }
+    .ptor-kit-item span {
+      font-size: 0.9rem;
+    }
+    .ptor-chips-container {
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .ptor-chip {
+      padding: 10px 20px;
+      font-size: 0.85rem;
+    }
+    .ptor-textile-info {
+      padding: 20px;
+      font-size: 1.05rem;
+      border-radius: 12px;
+    }
+    .ptor-meta-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .ptor-meta-box {
+      padding: 20px 16px;
+      border-radius: 12px;
+    }
+    .ptor-meta-label {
+      font-size: 0.8rem;
+      margin-bottom: 6px;
+    }
+    .ptor-meta-value {
+      font-size: 1.1rem;
+      line-height: 1.3;
+    }
+    .ptor-category-box {
+      grid-column: 1/-1;
+    }
+    .ptor-cta-button {
+      padding: 18px 32px;
+      font-size: 1.05rem;
+      border-radius: 10px;
+    }
+    .ptor-note-text {
+      margin-top: 16px;
+      font-size: 0.85rem;
+    }
+
+    .ptor-usage-list {
+      padding: 28px 20px;
+      border-radius: 16px;
+    }
+    .ptor-usage-list li {
+      padding: 14px 0 14px 44px;
+      font-size: 1rem;
+    }
+    .ptor-usage-list li::before {
+      width: 28px;
+      height: 28px;
+      top: 14px;
+      font-size: 1.1rem;
+    }
+    .ptor-usage-image {
+      border-radius: 16px;
+      margin-top: 24px;
+    }
+
+    .ptor-faq-item {
+      padding: 24px 20px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      border-left-width: 4px;
+    }
+    .ptor-faq-question {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .ptor-faq-answer {
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .ptor-final-cta {
+      padding: 60px 0;
+    }
+    .ptor-final-cta-title {
+      font-size: 1.85rem !important;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+    .ptor-final-cta p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+      padding: 0 8px;
+    }
+
+    .ptor-about-section {
+      padding: 60px 0;
+    }
+    .ptor-about-content {
+      padding: 32px 24px;
+      border-radius: 16px;
+    }
+    .ptor-about-title {
+      font-size: 1.85rem !important;
+      margin-bottom: 20px;
+    }
+    .ptor-about-content p {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .ptor-container {
+      padding: 0 16px;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .ptor-title-profitel {
+      font-size: 2.5rem !important;
+    }
+    .ptor-hero .ptor-subtitle {
+      font-size: 1.15rem;
+    }
+    .ptor-section .ptor-section-header .ptor-section-title {
+      font-size: 2.2rem !important;
+    }
+    .ptor-toronto-title {
+      font-size: 2.75rem !important;
+    }
+    .ptor-toronto-card {
+      padding: 40px 32px;
+    }
+    .ptor-kit-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .ptor-meta-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
+<!-- HERO -->
+<section class="ptor-hero">
+  <div class="ptor-container">
+    <div class="ptor-title-profitel">
+      Edredom King<br />
+      260x280cm Supremo Hotel 200 Fios Profitel
+    </div>
+
+    <p class="ptor-subtitle">
+      O <strong>Edredom Supremo Hotel</strong> foi desenvolvido para quem
+      precisa de <strong>cama sempre bem-apresentada</strong> e rotina prática
+      de lavanderia. O revestimento em <strong>microfibra 100 g/m²</strong> traz
+      toque macio e acabamento uniforme, enquanto o
+      <strong>enchimento 300 g/m²</strong> entrega volume e aquecimento na
+      medida certa. No tamanho <strong>240x260 cm</strong>, é ideal para
+      enxovais King em hotéis, pousadas e hospedagens por temporada.
+    </p>
+  </div>
+</section>
+<!-- DIFERENCIAIS -->
+
+<section class="ptor-section">
+  <div class="ptor-container">
+    <div class="ptor-section-header">
+      <div class="ptor-section-title">Diferenciais</div>
+
+      <p>
+        Conforto térmico, visual alinhado e manutenção simples para alto giro
+      </p>
+    </div>
+
+    <div class="ptor-carousel-wrapper">
+      <div class="ptor-carousel-track">
+        <!-- 6 ITENS ÚNICOS -->
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <path d="M12 3s6 6 6 10a6 6 0 1 1-12 0c0-4 6-10 6-10Z"></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Enchimento<br />
+            300 g/m²</span
+          >
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <path
+              d="M12 12v7a3 3 0 0 0 3 3h1a3 3 0 0 0 3-3v-2.5a2.5 2.5 0 0 0-5 0V19"
+            ></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Toque<br />
+            Macio</span
+          >
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <path d="M3 7h18M3 15h18"></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Tamanho<br />
+            260x280cm
+          </span>
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <rect height="18" rx="2" width="18" x="3" y="3"></rect>
+            <circle cx="12" cy="12" r="5"></circle>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Microfibra<br />
+            100 g/m²</span
+          >
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 3a9 9 0 0 1 9 9h-9V3Z"></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >200<br />
+            Fios</span
+          >
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <path d="M4 19c2-2 4-3 8-3s6 1 8 3"></path>
+            <path d="M8 14V8a4 4 0 0 1 8 0v6"></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Cor<br />
+            Branco</span
+          >
+        </div>
+        <!-- DUPLICAÇÃO (loop contínuo) -->
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <path d="M12 3s6 6 6 10a6 6 0 1 1-12 0c0-4 6-10 6-10Z"></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Enchimento<br />
+            300 g/m²</span
+          >
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <path
+              d="M12 12v7a3 3 0 0 0 3 3h1a3 3 0 0 0 3-3v-2.5a2.5 2.5 0 0 0-5 0V19"
+            ></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Toque<br />
+            Macio</span
+          >
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <path d="M3 7h18M3 15h18"></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Tamanho<br />
+            260x280cm
+          </span>
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <rect height="18" rx="2" width="18" x="3" y="3"></rect>
+            <circle cx="12" cy="12" r="5"></circle>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Microfibra<br />
+            100 g/m²</span
+          >
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 3a9 9 0 0 1 9 9h-9V3Z"></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >200<br />
+            Fios</span
+          >
+        </div>
+
+        <div class="ptor-carousel-item">
+          <svg
+            class="ptor-carousel-icon"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewbox="0 0 24 24"
+          >
+            <path d="M4 19c2-2 4-3 8-3s6 1 8 3"></path>
+            <path d="M8 14V8a4 4 0 0 1 8 0v6"></path>
+          </svg>
+          <span class="ptor-carousel-text"
+            >Cor<br />
+            Branco</span
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ESPECIFICAÇÕES -->
+
+<section class="ptor-section">
+  <div class="ptor-container">
+    <div class="ptor-section-header">
+      <div class="ptor-section-title">Especificações</div>
+
+      <p>Dados técnicos completos do Edredom King Supremo Hotel</p>
+    </div>
+
+    <div class="ptor-specs-grid">
+      <div class="ptor-specs-list">
+        <div class="ptor-specs-title">Dados do produto</div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">Marca</span>
+          <span class="ptor-spec-value">Profitel</span>
+        </div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">Linha</span>
+          <span class="ptor-spec-value">Supremo Hotel</span>
+        </div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">Tamanho</span>
+          <span class="ptor-spec-value">260x280cm (King )</span>
+        </div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">Cor</span>
+          <span class="ptor-spec-value">Branco</span>
+        </div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">Tecido (revestimento)</span>
+          <span class="ptor-spec-value">Microfibra 100 g/m²</span>
+        </div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">Composição</span>
+          <span class="ptor-spec-value">100% Poliéster</span>
+        </div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">Enchimento</span>
+          <span class="ptor-spec-value">Manta 300 g/m² (100% Poliéster)</span>
+        </div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">Conteúdo</span>
+          <span class="ptor-spec-value">1 Edredom King </span>
+        </div>
+
+        <div class="ptor-spec-row">
+          <span class="ptor-spec-label">SKU / Código</span>
+          <span class="ptor-spec-value">IMP1080</span>
+        </div>
+      </div>
+
+      <div class="ptor-specs-image">
+        <img
+          alt="Edredom King  240x260cm Supremo Hotel Profitel"
+          src="https://cdn.awsli.com.br/1500x1500/2536/2536086/produto/364273905/edredom-supremo-hotel-ambientada-lateral-profitel-vnj1iy5o6t.jpg"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- DESTAQUES -->
+
+<section class="ptor-toronto-section">
+  <div class="ptor-container">
+    <div class="ptor-toronto-header">
+      <div class="ptor-toronto-title">Diferenciais do Supremo Hotel</div>
+
+      <p>
+        Volume bem distribuído, toque agradável e praticidade para manter o
+        padrão do quarto em operações de hospedagem.
+      </p>
+    </div>
+
+    <div class="ptor-toronto-grid">
+      <div class="ptor-toronto-card">
+        <div class="ptor-card-title"> Conteúdo e aplicação</div>
+
+        <div class="ptor-kit-grid">
+          <div class="ptor-kit-item">
+            <strong>Edredom King </strong>
+            <span
+              >Tamanho: 260x280cm cm<br />
+              Enchimento: 300 g/m²</span
+            >
+          </div>
+
+          <div class="ptor-kit-item">
+            <strong>Tecido</strong>
+            <span
+              >Microfibra 100 g/m²<br />
+              Toque macio e uniforme</span
+            >
+          </div>
+
+          <div class="ptor-kit-item">
+            <strong>Cor</strong>
+            <span>Branco (visual “hotel-like” e fácil padronização)</span>
+          </div>
+
+          <div class="ptor-kit-item">
+            <strong>Indicação</strong>
+            <span>Hotéis, pousadas e anfitriões de Airbnb</span>
+          </div>
+        </div>
+
+        <div class="ptor-card-title"> Benefícios na operação</div>
+
+        <div class="ptor-chips-container">
+          <span class="ptor-chip">Cama bem-apresentada</span>
+          <span class="ptor-chip">Conforto térmico</span>
+          <span class="ptor-chip">Toque macio</span>
+          <span class="ptor-chip">Fácil manutenção</span>
+          <span class="ptor-chip">Ótimo custo-benefício</span>
+        </div>
+
+        <div class="ptor-card-title"> Composição</div>
+
+        <div class="ptor-textile-info">
+          100% Poliéster • Revestimento e manta interna
+        </div>
+      </div>
+
+      <div class="ptor-toronto-card">
+        <div class="ptor-card-title"> Ficha Técnica</div>
+
+        <div class="ptor-meta-grid">
+          <div class="ptor-meta-box">
+            <span class="ptor-meta-label">Tamanho</span>
+            <span class="ptor-meta-value">260x280cm </span>
+          </div>
+
+          <div class="ptor-meta-box">
+            <span class="ptor-meta-label">Código</span>
+            <span class="ptor-meta-value">IMP1090</span>
+          </div>
+
+          <div class="ptor-meta-box">
+            <span class="ptor-meta-label">Enchimento</span>
+            <span class="ptor-meta-value">300 g/m²</span>
+          </div>
+
+          <div class="ptor-meta-box ptor-category-box">
+            <span class="ptor-meta-label">Categoria</span>
+            <span class="ptor-meta-value">Edredom King </span>
+          </div>
+        </div>
+        
+
+        <div class="ptor-note-text">
+          Importante: o produto é enviado embalado a vácuo. Após abrir, deixe
+          descansar por até 48h para retornar ao volume normal.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CUIDADOS -->
+
+<section class="ptor-section">
+  <div class="ptor-container">
+    <div class="ptor-section-header">
+      <div class="ptor-section-title">Cuidados e Boas Práticas</div>
+
+      <p>
+        Orientações para preservar o volume, o toque e a aparência do edredom
+      </p>
+    </div>
+
+    <div class="ptor-usage-grid">
+      <div class="ptor-usage-list">
+        <ul>
+          <li>
+            Ao receber a vácuo, abra e deixe o edredom “respirar” até recuperar
+            o volume
+          </li>
+          <li>
+            Prefira sabão neutro e enxágue bem para evitar resíduos no tecido
+          </li>
+          <li>
+            Evite alvejantes clorados e excesso de produtos (podem afetar o
+            toque)
+          </li>
+          <li>
+            Use ciclos moderados e seque em baixa/média temperatura, quando
+            aplicável
+          </li>
+          <li>Guarde totalmente seco para manter maciez e evitar odores</li>
+        </ul>
+      </div>
+
+      <div class="ptor-usage-image">
+        <img
+          alt="Edredom Supremo Hotel ambientado"
+          onerror="this.onerror=null;this.src='https://cdn.awsli.com.br/600x1000/2536/2536086/produto/364275076/edredom-supremo-hotel-ambientada-lateral-profitel-jcbuo5i43x.jpg';"
+          src="https://cdn.awsli.com.br/1500x1500/2536/2536086/produto/364273905/edredom-supremo-hotel-ambientada-frente-profitel-2n6axu38jr.jpg"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<!-- FAQ -->
+
+<section class="ptor-section">
+  <div class="ptor-container">
+    <div class="ptor-section-header">
+      <div class="ptor-section-title">Perguntas Frequentes</div>
+
+      <p>Tire suas dúvidas sobre o Edredom King Supremo Hotel</p>
+    </div>
+
+    <div class="ptor-faq-container">
+      <div class="ptor-faq-item">
+        <div class="ptor-faq-question">
+          Ele chega “murchinho” por causa do vácuo?
+        </div>
+
+        <div class="ptor-faq-answer">
+          Sim, o envio a vácuo reduz o volume no transporte. Após abrir, deixe o
+          produto descansar por até 48 horas para recuperar o enchimento e o
+          caimento.
+        </div>
+      </div>
+
+      <div class="ptor-faq-item">
+        <div class="ptor-faq-question">
+          É indicado para uso intenso (hotel/pousada/Airbnb)?
+        </div>
+
+        <div class="ptor-faq-answer">
+          Sim. Ele foi pensado para rotina de hospedagem: microfibra macia,
+          enchimento equilibrado e praticidade para arrumação e manutenção no
+          dia a dia.
+        </div>
+      </div>
+
+      <div class="ptor-faq-item">
+        <div class="ptor-faq-question">A cor branca amarelar com o tempo?</div>
+
+        <div class="ptor-faq-answer">
+          O cuidado na lavagem faz diferença. Evite excesso de produtos, faça
+          bom enxágue e priorize secagem adequada. Isso ajuda a manter a
+          aparência e o toque por mais tempo.
+        </div>
+      </div>
+
+      <div class="ptor-faq-item">
+        <div class="ptor-faq-question">
+          O tamanho 240x260 cm cobre bem cama King ?
+        </div>
+
+        <div class="ptor-faq-answer">
+          Sim. O 240x260 cm oferece ótimo caimento para camas King , valorizando
+          a apresentação do quarto e deixando o enxoval com visual mais
+          encorpado.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="ptor-about-section">
+  <div class="ptor-container">
+    <div class="ptor-about-content">
+      <div class="ptor-about-title">Sobre a Profitel</div>
+
+      <p>
+        A <strong>Profitel</strong> é especializada em enxoval profissional para
+        hotelaria e hospedagens por temporada, com soluções em
+        <strong>cama, banho e amenities</strong> focadas em desempenho e
+        padronização. Curadoria de produtos com ótimo custo-benefício, pronta
+        entrega e suporte consultivo do pedido ao pós-venda.
+      </p>
+    </div>
+  </div>
+</section>

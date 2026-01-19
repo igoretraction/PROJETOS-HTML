@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categoria em Oferta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .CORE-container {
+            font-family: 'Poppins', sans-serif;
+            background-color: #FFF011;
+    width: 100%;
+    max-width: none;
+    padding: 150px 350px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+        }
+
+        .CORE-content {
+            flex: 1;
+            max-width: 500px;
+        }
+
+        .CORE-content h1 {
+            font-size: 2.5rem;
+            color: #000;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .CORE-content p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .CORE-btn {
+            background: #000;
+            color: #ffffff;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .CORE-btn:active {
+            transform: scale(0.95);
+        }
+
+        .CORE-cards-wrapper {
+            flex: 1;
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .CORE-cards-container {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .CORE-card {
+            position: absolute;
+            width: 260px;
+            height: 360px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .CORE-card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .CORE-card-placeholder {
+            text-align: center;
+            color: #999;
+            font-size: 1rem;
+            padding: 20px;
+        }
+
+
+
+        @media (max-width: 968px) {
+            .CORE-container {
+                flex-direction: column;
+                gap: 40px;
+                padding: 80px 20px;
+            }
+
+            .CORE-content {
+                text-align: center;
+            }
+
+            .CORE-content h1 {
+                font-size: 2rem;
+            }
+
+            .CORE-cards-wrapper {
+                height: 300px;
+            }
+
+            .CORE-cards-container {
+                height: 300px;
+            }
+
+            .CORE-card {
+                width: 200px;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .CORE-container {
+                padding: 50px 15px;
+            }
+
+            .CORE-content h1 {
+                font-size: 1.5rem;
+            }
+
+            .CORE-content p {
+                font-size: 0.95rem;
+            }
+
+            .CORE-cards-wrapper {
+                height: 250px;
+            }
+
+            .CORE-cards-container {
+                height: 250px;
+                display: none !important;
+            }
+
+            .CORE-card {
+                width: 160px;
+                height: 220px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="CORE-container">
+        <div class="CORE-content">
+            <h1>Categoria em Oferta</h1>
+            <p>Conheça a categoria de rodas e rodízios de perto, com as melhores ofertas do mercado disponíveis para você</p>
+            <button class="CORE-btn" onclick="alert('Navegando para produtos!')">Conhecer Produtos!</button>
+        </div>
+
+        <div class="CORE-cards-wrapper">
+            <!-- Desktop: Cards com animação -->
+            <div class="CORE-cards-container" id="cardsContainer"></div>
+        </div>
+    </div>
+
+    <script>
+        // Configuração dos cards - ADICIONE SUAS IMAGENS AQUI
+        const cardsData = [
+            { image: 'https://corebral.cdn.magazord.com.br/img/2026/01/produto/14643/70917-1.jpg', alt: 'Produto 1', link: '#produto1' },
+            { image: 'https://corebral.cdn.magazord.com.br/img/2026/01/produto/14718/70866-2.jpg', alt: 'Produto 2', link: '#produto2' },
+            { image: 'https://corebral.cdn.magazord.com.br/img/2026/01/produto/14630/63426-1.jpg', alt: 'Produto 3', link: '#produto3' },
+            { image: 'https://corebral.cdn.magazord.com.br/img/2026/01/produto/14707/64723-1.jpg', alt: 'Produto 4', link: '#produto4' },
+            { image: 'https://corebral.cdn.magazord.com.br/img/2026/01/produto/14684/63425-1.jpg', alt: 'Produto 5', link: '#produto5' },
+            { image: 'https://corebral.cdn.magazord.com.br/img/2026/01/produto/14700/64728-2.jpg', alt: 'Produto 6', link: '#produto6' }
+        ];
+
+        const desktopContainer = document.getElementById('cardsContainer');
+
+        // Criar cards para desktop
+        function createCard(data, index) {
+            const card = document.createElement('div');
+            card.className = 'CORE-card';
+            card.style.transform = 'translate(0, 0) rotate(0deg)';
+            card.style.zIndex = cardsData.length - index;
+
+            if (data.image) {
+                const img = document.createElement('img');
+                img.src = data.image;
+                img.alt = data.alt;
+                img.className = 'CORE-card-image';
+                card.appendChild(img);
+            } else {
+                const placeholder = document.createElement('div');
+                placeholder.className = 'CORE-card-placeholder';
+                placeholder.textContent = 'Foto de alguns produtos';
+                card.appendChild(placeholder);
+            }
+
+            card.addEventListener('click', () => {
+                if (data.link) window.location.href = data.link;
+            });
+
+            return card;
+        }
+
+        // Renderizar cards desktop
+        cardsData.forEach((data, index) => {
+            const card = createCard(data, index); 
+            desktopContainer.appendChild(card);
+        });
+
+        // Animação de espalhamento desktop (inclinando para direita e subindo)
+        function spreadCards() {
+            const cards = document.querySelectorAll('#cardsContainer .CORE-card');
+            const totalCards = cards.length;
+
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    const angle = index * 6;
+                    const offsetX = index * 50;
+                    const offsetY = -index * 10;
+
+                    card.style.transition = 'transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                    card.style.transform = `translate(${offsetX}px, ${offsetY}px) rotate(${angle}deg)`;
+                    card.style.zIndex = totalCards - index;
+                }, index * 100);
+            });
+        }
+
+        // Inicializa a animação dos cards
+        window.addEventListener('load', () => {
+            setTimeout(spreadCards, 300);
+        });
+
+        // Reiniciar animação ao redimensionar
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                spreadCards();
+            }, 250);
+        });
+    </script>
+</body>
+</html>
