@@ -1,830 +1,829 @@
-
-    <!-- Swiper CSS -->
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/swiper@9/swiper-bundle.min.css"
-    />
-
-    <style>
-   @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-      .page-wrapper {
-        max-width: 1240px;
-        margin: 40px auto 80px;
-        padding: 0 16px;
-      }
-
-      /* HERO (imagem grande do topo) */
-      .hero-section {
-        margin-bottom: 40px;
-        position: relative; /* novo */
-        overflow: hidden;
-        border-radius: 10px; /* opcional, pra garantir */
-      }
-
-      .hero-main-image {
-        width: 100%;
-        border-radius: 20px;
-        display: block;
-      }
-
-      /* Bloco de texto sobre a imagem */
-      .hero-overlay {
-        position: absolute;
-        left: 40px;
-        bottom: 40px;
-        color: #fff;
-        z-index: 2;
-        max-width: 340px;
-      }
-
-      .hero-tag {
-        font-size: 16px;
-        font-weight: 500;
-        margin: 0 0 4px;
-      }
-
-      .hero-title {
-        font-size: 32px;
-        font-weight: 700;
-        margin: 0;
-      }
-
-      /* Responsivo */
-      @media (max-width: 768px) {
-        .hero-overlay {
-          left: 16px;
-          bottom: 20px;
-          max-width: 260px;
-        }
-
-        .hero-title {
-          font-size: 24px;
-        }
-
-        .hero-tag {
-          font-size: 14px;
-        }
-      }
-      /* Seções que só aparecem quando entram na tela */
-      .reveal-section {
-        opacity: 0;
-        transform: translateY(30px);
-        visibility: hidden;
-      }
-
-      .hero-main-image {
-        width: 100%;
-        border-radius: 20px;
-        display: block;
-      }
-
-      /* INTRO (texto + imagem) */
-      .intro-section {
-        display: grid;
-        grid-template-columns: 1fr 1.2fr;
-        gap: 40px;
-        align-items: center;
-        margin-bottom: 60px;
-      }
-
-      .intro-text h1 {
-        font-size: 40px;
-        margin-bottom: 16px;
-        color: #001440;
-        border-bottom: 5px solid #001440;
-        width: 34%;
-      }
-
-      .intro-text p {
-        font-size: 18px;
-        line-height: 1.5;
-        color: #444;
-      }
-
-      .intro-image-wrapper {
-        display: flex;
-        justify-content: flex-end;
-      }
-
-      .intro-image {
-        width: 100%;
-        max-width: 680px;
-        display: block;
-        border-radius: 16px;
-        margin-bottom: 15px;
-      }
-
-      @media (max-width: 900px) {
-        .intro-section {
-          grid-template-columns: 1fr;
-          text-align: center;
-        }
-
-        .intro-image-wrapper {
-          justify-content: center;
-        }
-
-        .intro-text h1 {
-          font-size: 32px;
-          text-align: center;
-          align-items: center;
-          display: flex;
-          justify-content: center;
-          width: 70%;
-          margin: auto;
-        }
-      }
-
-      /* AUDIO SLIDER (fundo azul com imagem imersiva) */
-      .audio-slider-section {
-        margin-bottom: 40px;
-            height: fit-content;
-      }
-
-      .audio-hero {
-        background-color: #001440;
-        border-radius: 20px;
-        padding: 24px 24px 32px;
-      }
-
-      .audio-hero .swiper {
-        border-radius: 12px;
-        overflow: hidden;
-      }
-
-      .audio-hero img {
-        width: 100%;
-        display: block;
-      }
-
-      .audio-hero .hero-prev,
-      .audio-hero .hero-next {
-        color: #fff;
-      }
-
-      .audio-hero .hero-pagination .swiper-pagination-bullet {
-        background: rgba(255, 255, 255, 0.6);
-      }
-
-      .audio-hero .hero-pagination .swiper-pagination-bullet-active {
-        background: #fff;
-      }
-
-      .audio-slide {
-        position: relative;
-      }
-
-      .audio-slide-image {
-        width: 100%;
-        display: block;
-      }
-
-      .audio-slide-text {
-        position: absolute;
-        left: 40px;
-        bottom: 40px;
-        max-width: 520px;
-        padding: 0px 24px;
-        border-radius: 16px;
-        background: transparent;
-        color: #ffffff;
-      }
-
-      .audio-slide-text h2 {
-        margin: 0 0 8px;
-        font-size: 24px;
-        font-weight: 700;
-        letter-spacing: 0.02em;
-      }
-
-      .audio-slide-text p {
-        margin: 0;
-        font-size: 14px;
-        line-height: 1.5;
-      }
-
-      /* Responsivo */
-      @media (max-width: 768px) {
-        .audio-slide-text {
-          left: 16px;
-          right: 16px;
-          bottom: 20px;
-          max-width: none;
-          padding: 14px 16px;
-        }
-
-        .audio-slide-text h2 {
-          font-size: 18px;
-        }
-
-        .audio-slide-text p {
-          font-size: 13px;
-        }
-      }
-
-      /* CONECTIVIDADE (3ª imagem) */
-      .connectivity-section {
-        background: #ffffff;
-        border-radius: 20px;
-        padding: 32px 32px 24px;
-        margin-bottom: 40px;
-        display: grid;
-        grid-template-columns: 1.1fr 1.8fr;
-        gap: 32px;
-        align-items: center;
-      }
-
-      .connectivity-title {
-        font-size: 24px;
-        font-weight: 700;
-        margin-bottom: 10px;
-        color: #111;
-      }
-
-      .connectivity-text p {
-        font-size: 15px;
-        line-height: 1.6;
-        color: #333;
-        margin: 0;
-      }
-
-      .connectivity-image-wrapper {
-        display: flex;
-        justify-content: center;
-      }
-
-      .connectivity-image {
-        width: 100%;
-        max-width: 800px;
-        display: block;
-        border-radius: 16px;
-      }
-
-      @media (max-width: 900px) {
-        .connectivity-section {
-          grid-template-columns: 1fr;
-          text-align: center;
-          padding: 24px 20px 20px;
-        }
-
-        .connectivity-image-wrapper {
-          justify-content: center;
-        }
-      }
-
-      /* FEATURES (ícones em swiper) */
-      .features-section {
-        background: #ffffff;
-        padding: 32px 0 40px;
-        margin-bottom: 40px;
-      }
-
-      .features-inner {
-        max-width: 1240px;
-        margin: 0 auto;
-        height: fit-content;
-      }
-
-      .featureSwiper {
-        padding: 10px 0;
-      }
-
-      .featureSwiper .swiper-slide {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: 10px;
-      }
-
-      .feature-icon-circle {
-        width: 72px;
-        height: 72px;
-        border-radius: 50%;
-        border: 2px solid #e0e0e0;
-        background: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 8px;
-      }
-
-      .feature-icon-svg {
-        width: 32px;
-        height: 32px;
-      }
-
-      .feature-title {
-        font-size: 15px;
-        font-weight: 600;
-        color: #151515;
-      }
-
-      .feature-subtitle {
-        font-size: 13px;
-        line-height: 1.4;
-        color: #555;
-        max-width: 210px;
-      }
-
-      .featureSwiper {
-        padding: 10px 40px; /* espaço lateral para as setas */
-        position: relative;
-      }
-
-      .feature-prev,
-      .feature-next {
-        color: #000;
-        width: 32px;
-        height: 32px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .feature-prev::after,
-      .feature-next::after {
-        font-size: 18px;
-        font-weight: 700;
-      }
-
-      .feature-prev {
-        left: 0;
-      }
-
-      .feature-next {
-        right: 0;
-      }
-
-      @media (max-width: 768px) {
-        .featureSwiper {
-          padding: 10px 28px;
-        }
-      }
-
-      /* COMPARISON SECTION (banner + tabela) */
-      .comparison-section {
-        margin-bottom: 50px;
-      }
-
-      /* wrapper da imagem + textos por cima */
-      .comparison-banner-wrapper {
-        position: relative;
-        border-radius: 20px;
-        overflow: hidden;
-        margin-bottom: 24px;
-      }
-
-      .comparison-banner-image {
-        width: 100%;
-        display: block;
-      }
-
-      /* overlay com título e bullets */
-      .comparison-overlay {
-        position: absolute;
-        inset: 0;
-        padding: 16px 40px 32px;
-        pointer-events: none; /* só visual */
-      }
-
-      .comparison-main-title {
-        text-align: center;
-        color: #ffffff;
-        font-size: 24px;
-        font-weight: 700;
-        margin: 4px 0 0;
-      }
-
-      /* grupos laterais */
-      .comparison-badges {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        gap: 22px;
-        pointer-events: auto;
-      }
-
-      .comparison-badges-left {
-        left: 100px;
-        top: 95px;
-      }
-
-      .comparison-badges-right {
-        right: 100px;
-        top: 115px;
-      }
-
-      .comparison-badge {
-        display: flex;
-        align-items: flex-start;
-        border-radius: 14px;
-        padding: 10px 14px;
-        color: #ffffff;
-      }
-
-      .comparison-icon {
-        flex-shrink: 0;
-        display: inline-flex;
-        margin-right: 10px;
-      }
-
-      .comparison-icon svg {
-        width: 28px;
-        height: 28px;
-      }
-
-      .comparison-badge-text {
-        display: flex;
-        flex-direction: column;
-        font-size: 21px;
-        line-height: 1.4;
-      }
-
-      .comparison-badge-text strong {
-        font-weight: 700;
-      }
-
-      /* responsivo */
-      @media (max-width: 900px) {
-        .comparison-overlay {
-          padding: 14px 16px 18px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-        }
-
-        .comparison-main-title {
-          font-size: 26px;
-          margin-bottom: 10px;
-          display: flex;
-          justify-content: center;
-          text-align: center;
-          width: 100%;
-        }
-
-        .comparison-badges {
-          position: static;
-          gap: 10px;
-          margin-top: 145px;
-        }
-
-        .comparison-badges-right {
-          margin-top: 6px;
-        }
-
-        .comparison-badge {
-          padding: 8px 10px;
-        }
-
-        .comparison-badge-text {
-          font-size: 13px;
-        }
-      }
-
-      .comparison-card {
-        background: #ffffff;
-        border-radius: 20px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-        overflow: hidden;
-      }
-
-      /* Produtos alinhados em cima de cada coluna */
-      .comparison-products {
-        display: grid;
-        grid-template-columns: 28% 1fr 1fr 1fr; /* 1ª coluna rótulos + 3 produtos */
-        align-items: flex-end;
-        text-align: center;
-        padding: 24px 16px 14px;
-      }
-
-      .comparison-product {
-        position: relative;
-        max-width: 150px;
-        margin: 0 auto;
-      }
-
-      .comparison-product--empty {
-        visibility: hidden; /* Apenas para reservar o espaço da 1ª coluna */
-      }
-
-      .comparison-product img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 0 auto 8px;
-      }
-
-      .product-badge {
-        position: absolute;
-        top: -10px;
-        right: 10px;
-        background: #000;
-        color: #fff;
-        font-size: 10px;
-        font-weight: 600;
-        padding: 4px 8px;
-        border-radius: 999px;
-        text-transform: uppercase;
-        z-index: 99;
-      }
-
-      .comparison-product-title {
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 2px;
-      }
-
-      .comparison-product-subtitle {
-        font-size: 12px;
-        color: #777;
-      }
-
-      .comparison-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 13px;
-        table-layout: fixed;
-      }
-
-      .comparison-table th,
-      .comparison-table td {
-        padding: 10px 16px;
-        text-align: center;
-        border-bottom: 1px solid #f0f0f0;
-      }
-
-      .comparison-table th:first-child,
-      .comparison-table td:first-child {
-        text-align: left;
-        color: #666;
-        font-weight: 500;
-        width: 28%;
-      }
-
-      .comparison-group-row td {
-        background: #fafafa;
-        font-weight: 600;
-        color: #888;
-        text-transform: uppercase;
-        font-size: 11px;
-        padding-top: 12px;
-        padding-bottom: 8px;
-      }
-
-      .highlight-text {
-        color: #0a9b37;
-        font-weight: 700;
-      }
-
-      .price-row td {
-        padding-top: 14px;
-        padding-bottom: 14px;
-        font-weight: 600;
-      }
-
-      .price-row td:last-child {
-        font-weight: 700;
-      }
-
-      @media (max-width: 900px) {
-        .comparison-products {
-          display: flex;
-          float: inline-end;
-          gap: 7px;
-        }
-        .comparison-product img {
-          max-width: 80px;
-        }
-
-        .comparison-product--empty {
-          display: none;
-        }
-
-        .comparison-table {
-          font-size: 12px;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-          padding: 8px 10px;
-        }
-      }
-
-      /* HOVER + BALANÇO SUAVE NO 3º COMPARISON-PRODUCT (MELHOR ESCOLHA) */
-      .comparison-product--best {
-        cursor: pointer;
-      }
-
-      .comparison-product--best img {
-        transition: transform 0.2s ease;
-      }
-
-      @keyframes speaker-wiggle {
-        0% {
-          transform: translateY(0) rotate(0deg);
-        }
-        25% {
-          transform: translateY(-2px) rotate(-1.5deg);
-        }
-        50% {
-          transform: translateY(1px) rotate(1.5deg);
-        }
-        75% {
-          transform: translateY(-1px) rotate(-0.75deg);
-        }
-        100% {
-          transform: translateY(0) rotate(0deg);
-        }
-      }
-
-      .comparison-product--best:hover img {
-        animation: speaker-wiggle 0.5s ease-in-out;
-      }
-
-      /* SPECS SECTION */
-      .specs-section {
-        margin-bottom: 60px;
-      }
-
-      .specs-section h2 {
-        font-size: 22px;
-        margin-bottom: 12px;
-        font-weight: 700;
-      }
-
-      .specs-list {
-        font-size: 14px;
-        line-height: 1.7;
-        color: #333;
-        max-width: 900px;
-      }
-
-      .specs-list p {
-        margin: 2px 0;
-      }
-
-      .specs-highlight {
-        margin-top: 16px;
-        font-weight: 500;
-      }
-
-      /* REVIEWS SECTION */
-      .reviews-section {
-        margin-bottom: 40px;
-      }
-
-      .reviews-header {
-        text-align: center;
-        margin-bottom: 16px;
-      }
-
-      .reviews-header h2 {
-        font-size: 22px;
-        font-weight: 600;
-        margin: 0;
-      }
-
-      .reviews-header p {
-        margin: 4px 0 0;
-        font-size: 14px;
-        color: #333;
-      }
-
-      .reviews-slider {
-        position: relative;
-        margin-top: 12px;
-      }
-
-      .reviewSwiper {
-        padding: 0 40px;
-      }
-
-      .review-card {
-        background: #ffffff;
-        border-radius: 16px;
-        border: 1px solid #f0f0f0;
-        padding: 20px 24px 18px;
-        max-width: 100%;
-        margin: 0 auto;
-      }
-
-      .review-stars {
-        color: #f6b400;
-        font-size: 14px;
-        margin-bottom: 6px;
-      }
-
-      .review-author {
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 2px;
-      }
-
-      .review-flag {
-        font-size: 11px;
-        color: #777;
-        margin-bottom: 10px;
-      }
-
-      .review-title {
-        font-size: 14px;
-        font-weight: 700;
-        margin-bottom: 6px;
-      }
-
-      .review-text {
-        font-size: 13px;
-        line-height: 1.6;
-        color: #444;
-      }
-
-      .review-prev,
-      .review-next {
-        color: #000;
-        width: 32px;
-        height: 32px;
-        top: 50%;
-        transform: translateY(-50%);
-      }
-
-      .review-prev::after,
-      .review-next::after {
-        font-size: 18px;
-        font-weight: 700;
-      }
-
-      .review-prev {
-        left: 0;
-      }
-
-      .review-next {
-        right: 0;
-      }
-
-      @media (max-width: 768px) {
-        .audio-hero {
-          padding: 16px;
-        }
-
-        .reviewSwiper {
-          padding: 0 28px;
-        }
-
-        .review-card {
-          padding: 18px 18px 40px; /* espaço pro botão Ver mais */
-          position: relative;
-        }
-
-        /* ALTURA MÁXIMA 283PX + "..." + VER MAIS */
-        .review-card.has-more.is-collapsed {
-          max-height: 283px !important;
-          overflow: hidden;
-        }
-
-        .review-card.has-more.is-collapsed::after {
-          content: "";
-          position: absolute;
-          left: 0;
-          right: 0;
-          bottom: 0px;
-          height: 60px;
-          background: linear-gradient(to top, #ffffff, rgba(255, 255, 255, 0));
-          pointer-events: none;
-        }
-
-        .review-toggle-btn {
-          position: absolute;
-          left: 50%;
-          bottom: 10px;
-          transform: translateX(-50%);
-          border: none;
-          border-radius: 999px;
-          padding: 6px 14px;
-          font-size: 12px;
-          font-weight: 600;
-          background: #001440;
-          color: #fff;
-          cursor: pointer;
-          z-index: 9;
-        }
-      }
-    </style>
+<!-- Swiper CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper@9/swiper-bundle.min.css"
+/>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+  .page-wrapper {
+    max-width: 1240px;
+    margin: 40px auto 80px;
+    padding: 0 16px;
+  }
+
+  /* HERO (imagem grande do topo) */
+  .hero-section {
+    margin-bottom: 40px;
+    position: relative; /* novo */
+    overflow: hidden;
+    border-radius: 10px; /* opcional, pra garantir */
+  }
+
+  .hero-main-image {
+    width: 100%;
+    border-radius: 20px;
+    display: block;
+  }
+
+  /* Bloco de texto sobre a imagem */
+  .hero-overlay {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    color: #fff;
+    z-index: 2;
+    max-width: 340px;
+  }
+
+  .hero-tag {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 4px;
+  }
+
+  .hero-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0;
+  }
+
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .hero-overlay {
+      left: 16px;
+      bottom: 20px;
+      max-width: 260px;
+    }
+
+    .hero-title {
+      font-size: 24px;
+    }
+
+    .hero-tag {
+      font-size: 14px;
+    }
+  }
+  /* Seções que só aparecem quando entram na tela */
+  .reveal-section {
+    opacity: 0;
+    transform: translateY(30px);
+    visibility: hidden;
+  }
+
+  .hero-main-image {
+    width: 100%;
+    border-radius: 20px;
+    display: block;
+  }
+
+  /* INTRO (texto + imagem) */
+  .intro-section {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+
+  .intro-text h1 {
+    font-size: 40px;
+    margin-bottom: 16px;
+    color: #001440;
+    border-bottom: 5px solid #001440;
+    width: 34%;
+  }
+
+  .intro-text p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: #444;
+  }
+
+  .intro-image-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .intro-image {
+    width: 100%;
+    max-width: 680px;
+    display: block;
+    border-radius: 16px;
+    margin-bottom: 15px;
+  }
+
+  @media (max-width: 900px) {
+    .intro-section {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+
+    .intro-image-wrapper {
+      justify-content: center;
+    }
+
+    .intro-text h1 {
+      font-size: 32px;
+      text-align: center;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      width: 70%;
+      margin: auto;
+    }
+  }
+
+  /* AUDIO SLIDER (fundo azul com imagem imersiva) */
+  .audio-slider-section {
+    margin-bottom: 40px;
+    height: fit-content;
+  }
+
+  .audio-hero {
+    background-color: #001440;
+    border-radius: 20px;
+    padding: 24px 24px 32px;
+  }
+
+  .audio-hero .swiper {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .audio-hero img {
+    width: 100%;
+    display: block;
+  }
+
+  .audio-hero .hero-prev,
+  .audio-hero .hero-next {
+    color: #fff;
+  }
+
+  .audio-hero .hero-pagination .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.6);
+  }
+
+  .audio-hero .hero-pagination .swiper-pagination-bullet-active {
+    background: #fff;
+  }
+
+  .audio-slide {
+    position: relative;
+  }
+
+  .audio-slide-image {
+    width: 100%;
+    display: block;
+  }
+
+  .audio-slide-text {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    max-width: 520px;
+    padding: 0px 24px;
+    border-radius: 16px;
+    background: transparent;
+    color: #ffffff;
+  }
+
+  .audio-slide-text h2 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .audio-slide-text p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .audio-slide-text {
+      left: 16px;
+      right: 16px;
+      bottom: 20px;
+      max-width: none;
+      padding: 14px 16px;
+    }
+
+    .audio-slide-text h2 {
+      font-size: 18px;
+    }
+
+    .audio-slide-text p {
+      font-size: 13px;
+    }
+  }
+
+  /* CONECTIVIDADE (3ª imagem) */
+  .connectivity-section {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 32px 32px 24px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 1.8fr;
+    gap: 32px;
+    align-items: center;
+  }
+
+  .connectivity-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #111;
+  }
+
+  .connectivity-text p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333;
+    margin: 0;
+  }
+
+  .connectivity-image-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .connectivity-image {
+    width: 100%;
+    max-width: 800px;
+    display: block;
+    border-radius: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .connectivity-section {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 24px 20px 20px;
+    }
+
+    .connectivity-image-wrapper {
+      justify-content: center;
+    }
+  }
+
+  /* FEATURES (ícones em swiper) */
+  .features-section {
+    background: #ffffff;
+    padding: 32px 0 40px;
+    margin-bottom: 40px;
+  }
+
+  .features-inner {
+    max-width: 1240px;
+    margin: 0 auto;
+    height: fit-content;
+  }
+
+  .featureSwiper {
+    padding: 10px 0;
+  }
+
+  .featureSwiper .swiper-slide {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .feature-icon-circle {
+    width: 72px;
+    height: 72px;
+    border-radius: 50%;
+    border: 2px solid #e0e0e0;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  .feature-icon-svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .feature-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #151515;
+  }
+
+  .feature-subtitle {
+    font-size: 13px;
+    line-height: 1.4;
+    color: #555;
+    max-width: 210px;
+  }
+
+  .featureSwiper {
+    padding: 10px 40px; /* espaço lateral para as setas */
+    position: relative;
+  }
+
+  .feature-prev,
+  .feature-next {
+    color: #000;
+    width: 32px;
+    height: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .feature-prev::after,
+  .feature-next::after {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .feature-prev {
+    left: 0;
+  }
+
+  .feature-next {
+    right: 0;
+  }
+
+  @media (max-width: 768px) {
+    .featureSwiper {
+      padding: 10px 28px;
+    }
+  }
+
+  /* COMPARISON SECTION (banner + tabela) */
+  .comparison-section {
+    margin-bottom: 50px;
+  }
+
+  /* wrapper da imagem + textos por cima */
+  .comparison-banner-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .comparison-banner-image {
+    width: 100%;
+    display: block;
+  }
+
+  /* overlay com título e bullets */
+  .comparison-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 16px 40px 32px;
+    pointer-events: none; /* só visual */
+  }
+
+  .comparison-main-title {
+    text-align: center;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 4px 0 0;
+  }
+
+  /* grupos laterais */
+  .comparison-badges {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    pointer-events: auto;
+  }
+
+  .comparison-badges-left {
+    left: 100px;
+    top: 95px;
+  }
+
+  .comparison-badges-right {
+    right: 100px;
+    top: 115px;
+  }
+
+  .comparison-badge {
+    display: flex;
+    align-items: flex-start;
+    border-radius: 14px;
+    padding: 10px 14px;
+    color: #ffffff;
+  }
+
+  .comparison-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    margin-right: 10px;
+  }
+
+  .comparison-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .comparison-badge-text {
+    display: flex;
+    flex-direction: column;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .comparison-badge-text strong {
+    font-weight: 700;
+  }
+
+  /* responsivo */
+  @media (max-width: 900px) {
+    .comparison-overlay {
+      padding: 14px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .comparison-main-title {
+      font-size: 26px;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+
+    .comparison-badges {
+      position: static;
+      gap: 10px;
+      margin-top: 145px;
+    }
+
+    .comparison-badges-right {
+      margin-top: 6px;
+    }
+
+    .comparison-badge {
+      padding: 8px 10px;
+    }
+
+    .comparison-badge-text {
+      font-size: 13px;
+    }
+  }
+
+  .comparison-card {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+
+  /* Produtos alinhados em cima de cada coluna */
+  .comparison-products {
+    display: grid;
+    grid-template-columns: 28% 1fr 1fr 1fr; /* 1ª coluna rótulos + 3 produtos */
+    align-items: flex-end;
+    text-align: center;
+    padding: 24px 16px 14px;
+  }
+
+  .comparison-product {
+    position: relative;
+    max-width: 150px;
+    margin: 0 auto;
+  }
+
+  .comparison-product--empty {
+    visibility: hidden; /* Apenas para reservar o espaço da 1ª coluna */
+  }
+
+  .comparison-product img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 8px;
+  }
+
+  .product-badge {
+    position: absolute;
+    top: -10px;
+    right: 10px;
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 999px;
+    text-transform: uppercase;
+    z-index: 99;
+  }
+
+  .comparison-product-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .comparison-product-subtitle {
+    font-size: 12px;
+    color: #777;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    table-layout: fixed;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 10px 16px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+  }
+
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    text-align: left;
+    color: #666;
+    font-weight: 500;
+    width: 28%;
+  }
+
+  .comparison-group-row td {
+    background: #fafafa;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    font-size: 11px;
+    padding-top: 12px;
+    padding-bottom: 8px;
+  }
+
+  .highlight-text {
+    color: #0a9b37;
+    font-weight: 700;
+  }
+
+  .price-row td {
+    padding-top: 14px;
+    padding-bottom: 14px;
+    font-weight: 600;
+  }
+
+  .price-row td:last-child {
+    font-weight: 700;
+  }
+
+  @media (max-width: 900px) {
+    .comparison-products {
+      display: flex;
+      float: inline-end;
+      gap: 7px;
+    }
+    .comparison-product img {
+      max-width: 80px;
+    }
+
+    .comparison-product--empty {
+      display: none;
+    }
+
+    .comparison-table {
+      font-size: 12px;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 8px 10px;
+    }
+  }
+
+  /* HOVER + BALANÇO SUAVE NO 3º COMPARISON-PRODUCT (MELHOR ESCOLHA) */
+  .comparison-product--best {
+    cursor: pointer;
+  }
+
+  .comparison-product--best img {
+    transition: transform 0.2s ease;
+  }
+
+  @keyframes speaker-wiggle {
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    25% {
+      transform: translateY(-2px) rotate(-1.5deg);
+    }
+    50% {
+      transform: translateY(1px) rotate(1.5deg);
+    }
+    75% {
+      transform: translateY(-1px) rotate(-0.75deg);
+    }
+    100% {
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+
+  .comparison-product--best:hover img {
+    animation: speaker-wiggle 0.5s ease-in-out;
+  }
+
+  /* SPECS SECTION */
+  .specs-section {
+    margin-bottom: 60px;
+  }
+
+  .specs-section h2 {
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
+  .specs-list {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #333;
+    max-width: 900px;
+  }
+
+  .specs-list p {
+    margin: 2px 0;
+  }
+
+  .specs-highlight {
+    margin-top: 16px;
+    font-weight: 500;
+  }
+
+  /* REVIEWS SECTION */
+  .reviews-section {
+    margin-bottom: 40px;
+  }
+
+  .reviews-header {
+    text-align: center;
+    margin-bottom: 16px;
+  }
+
+  .reviews-header h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .reviews-header p {
+    margin: 4px 0 0;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .reviews-slider {
+    position: relative;
+    margin-top: 12px;
+  }
+
+  .reviewSwiper {
+    padding: 0 40px;
+  }
+
+  .review-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid #f0f0f0;
+    padding: 20px 24px 18px;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .review-stars {
+    color: #f6b400;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+
+  .review-author {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .review-flag {
+    font-size: 11px;
+    color: #777;
+    margin-bottom: 10px;
+  }
+
+  .review-title {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  .review-text {
+    font-size: 13px;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  .review-prev,
+  .review-next {
+    color: #000;
+    width: 32px;
+    height: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .review-prev::after,
+  .review-next::after {
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .review-prev {
+    left: 0;
+  }
+
+  .review-next {
+    right: 0;
+  }
+
+  @media (max-width: 768px) {
+    .audio-hero {
+      padding: 16px;
+    }
+
+    .reviewSwiper {
+      padding: 0 28px;
+    }
+
+    .review-card {
+      padding: 18px 18px 40px; /* espaço pro botão Ver mais */
+      position: relative;
+    }
+
+    /* ALTURA MÁXIMA 283PX + "..." + VER MAIS */
+    .review-card.has-more.is-collapsed {
+      max-height: 283px !important;
+      overflow: hidden;
+    }
+
+    .review-card.has-more.is-collapsed::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0px;
+      height: 60px;
+      background: linear-gradient(to top, #ffffff, rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+
+    .review-toggle-btn {
+      position: absolute;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+      border: none;
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #001440;
+      color: #fff;
+      cursor: pointer;
+      z-index: 9;
+    }
+  }
+</style>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <section class="page-wrapper">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="page-wrapper">
       <!-- HERO TOP -->
       <div class="hero-section">
         <picture>
           <!-- MOBILE -->
           <source
             srcset="
-             https://res.cloudinary.com/dfmbwkvml/image/upload/v1768566843/14d6dfbe-473f-4005-9872-bb876d5461cc_q1llm8.png
+              https://res.cloudinary.com/dfmbwkvml/image/upload/v1768566843/14d6dfbe-473f-4005-9872-bb876d5461cc_q1llm8.png
             "
             media="(max-width: 768px)"
           />
@@ -845,29 +844,25 @@
         </picture>
 
         <div class="hero-overlay">
-         <p class="hero-tag">Patinete Elétrico Dobrável</p>
-<h1 class="hero-title">JOOG PJG-E9T</h1>
+          <p class="hero-tag">Patinete Elétrico Dobrável</p>
+          <h1 class="hero-title">JOOG PJG-E9T</h1>
         </div>
       </div>
 
       <!-- INTRO -->
       <div class="intro-section">
         <div class="intro-text">
-      <h1>JOOG PJG-E9T</h1>
-         <p>
-Mobilidade inteligente para o dia a dia.  
-O JOOG PJG-E9T é um patinete elétrico dobrável, potente e confortável, ideal para deslocamentos urbanos com agilidade, segurança e economia.
-</p>
+          <h1>JOOG PJG-E9T</h1>
+          <p>
+            Mobilidade inteligente para o dia a dia. O JOOG PJG-E9T é um
+            patinete elétrico dobrável, potente e confortável, ideal para
+            deslocamentos urbanos com agilidade, segurança e economia.
+          </p>
         </div>
         <div class="intro-image-wrapper">
           <picture>
             <!-- MOBILE -->
-            <source
-              srcset="
-                
-              "
-              media="(max-width: 768px)"
-            />
+            <source srcset="" media="(max-width: 768px)" />
             <!-- DESKTOP -->
             <source
               srcset="
@@ -916,9 +911,11 @@ O JOOG PJG-E9T é um patinete elétrico dobrável, potente e confortável, ideal
                     />
                   </picture>
                   <div class="audio-slide-text">
-                   <p>
-Motor de 350W com desempenho estável para trajetos urbanos, subidas moderadas e deslocamentos rápidos com velocidade de até 25 km/h.
-</p>
+                    <p>
+                      Motor de 350W com desempenho estável para trajetos
+                      urbanos, subidas moderadas e deslocamentos rápidos com
+                      velocidade de até 25 km/h.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -949,10 +946,12 @@ Motor de 350W com desempenho estável para trajetos urbanos, subidas moderadas e
                     />
                   </picture>
                   <div class="audio-slide-text">
-                <h2>CONFORTO EM CADA TRAJETO</h2>
+                    <h2>CONFORTO EM CADA TRAJETO</h2>
                     <p>
-Rodas de 8,5" combinadas com suspensão traseira garantem mais estabilidade e absorção de impactos em pisos irregulares.
-</p>
+                      Rodas de 8,5" combinadas com suspensão traseira garantem
+                      mais estabilidade e absorção de impactos em pisos
+                      irregulares.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -983,10 +982,12 @@ Rodas de 8,5" combinadas com suspensão traseira garantem mais estabilidade e ab
                     />
                   </picture>
                   <div class="audio-slide-text">
-                   <h2>PRÁTICO, DOBRÁVEL E LEVE</h2>
+                    <h2>PRÁTICO, DOBRÁVEL E LEVE</h2>
                     <p>
-Design dobrável que facilita o transporte e o armazenamento, ideal para quem combina patinete com carro, metrô ou elevador.
-</p>
+                      Design dobrável que facilita o transporte e o
+                      armazenamento, ideal para quem combina patinete com carro,
+                      metrô ou elevador.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -1003,9 +1004,11 @@ Design dobrável que facilita o transporte e o armazenamento, ideal para quem co
       <section class="connectivity-section reveal-section">
         <div class="connectivity-text">
           <h2 class="connectivity-title">Tecnologia e segurança</h2>
-         <p>
-Sistema elétrico 36V com controle inteligente de energia, freios eficientes e estrutura reforçada para oferecer mais segurança durante o uso urbano.
-</p>
+          <p>
+            Sistema elétrico 36V com controle inteligente de energia, freios
+            eficientes e estrutura reforçada para oferecer mais segurança
+            durante o uso urbano.
+          </p>
         </div>
         <div class="connectivity-image-wrapper">
           <picture>
@@ -1043,72 +1046,174 @@ Sistema elétrico 36V com controle inteligente de energia, freios eficientes e e
               <div class="swiper-slide">
                 <div class="feature-icon-circle">
                   <!-- Ícone SVG random: velocimetro -->
-                 <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M5 16a7 7 0 0 1 14 0" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M6.5 16h11" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M12 16l3.7-3.7" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="12" cy="16" r="1.2" fill="#111"/>
-  <path d="M8.2 13.2l-.6-.6M15.8 13.2l.6-.6" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
-</svg>
-
+                  <svg
+                    class="feature-icon-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 16a7 7 0 0 1 14 0"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M6.5 16h11"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M12 16l3.7-3.7"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <circle cx="12" cy="16" r="1.2" fill="#111" />
+                    <path
+                      d="M8.2 13.2l-.6-.6M15.8 13.2l.6-.6"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                  </svg>
                 </div>
                 <div class="feature-title">Velocidade Máxima</div>
 
-            <div class="feature-subtitle">Até 25 km/h para deslocamentos urbanos ágeis.</div>
-
+                <div class="feature-subtitle">
+                  Até 25 km/h para deslocamentos urbanos ágeis.
+                </div>
               </div>
 
               <!-- Feature 2 -->
               <div class="swiper-slide">
                 <div class="feature-icon-circle">
                   <!-- Ícone SVG random: bateria -->
-                <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-  <rect x="3.5" y="8" width="16" height="8" rx="2" ry="2" fill="none" stroke="#111" stroke-width="1.6"/>
-  <rect x="19.5" y="10" width="1.8" height="4" rx="0.8" fill="#111"/>
-  <path d="M12.2 9.4l-2.2 3.2h2l-.2 2.2 2.2-3.2h-2l.4-2.2z"
-        fill="#111"/>
-</svg>
-
+                  <svg
+                    class="feature-icon-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <rect
+                      x="3.5"
+                      y="8"
+                      width="16"
+                      height="8"
+                      rx="2"
+                      ry="2"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                    />
+                    <rect
+                      x="19.5"
+                      y="10"
+                      width="1.8"
+                      height="4"
+                      rx="0.8"
+                      fill="#111"
+                    />
+                    <path
+                      d="M12.2 9.4l-2.2 3.2h2l-.2 2.2 2.2-3.2h-2l.4-2.2z"
+                      fill="#111"
+                    />
+                  </svg>
                 </div>
                 <div class="feature-title">Autonomia Inteligente</div>
-<div class="feature-subtitle">Bateria 36V para percursos diários com eficiência.</div>
-
+                <div class="feature-subtitle">
+                  Bateria 36V para percursos diários com eficiência.
+                </div>
               </div>
 
               <!-- Feature 3 -->
               <div class="swiper-slide">
                 <div class="feature-icon-circle">
                   <!-- Ícone SVG random:roda -->
-                 <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-  <circle cx="12" cy="12" r="7" fill="none" stroke="#111" stroke-width="1.6"/>
-  <circle cx="12" cy="12" r="2" fill="none" stroke="#111" stroke-width="1.6"/>
-  <path d="M12 5v3M12 16v3M5 12h3M16 12h3" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M7.6 7.6l2.1 2.1M14.3 14.3l2.1 2.1M16.4 7.6l-2.1 2.1M9.7 14.3l-2.1 2.1"
-        fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
-</svg>
-
+                  <svg
+                    class="feature-icon-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="7"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="2"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                    />
+                    <path
+                      d="M12 5v3M12 16v3M5 12h3M16 12h3"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M7.6 7.6l2.1 2.1M14.3 14.3l2.1 2.1M16.4 7.6l-2.1 2.1M9.7 14.3l-2.1 2.1"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                  </svg>
                 </div>
                 <div class="feature-title">Rodas 8,5"</div>
-<div class="feature-subtitle">Mais estabilidade e controle em diferentes pisos.</div>
-
+                <div class="feature-subtitle">
+                  Mais estabilidade e controle em diferentes pisos.
+                </div>
               </div>
 
               <!-- Feature 4 -->
               <div class="swiper-slide">
                 <div class="feature-icon-circle">
                   <!-- Ícone SVG random: som potente -->
-                <svg class="feature-icon-svg" viewBox="0 0 24 24" aria-hidden="true">
-  <path d="M8 6v12M16 6v12" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M8 7.5c2 1.2 6 1.2 8 0M8 12c2 1.2 6 1.2 8 0M8 16.5c2 1.2 6 1.2 8 0"
-        fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M10 4.8h4M10 19.2h4" fill="none" stroke="#111" stroke-width="1.6" stroke-linecap="round"/>
-</svg>
-
+                  <svg
+                    class="feature-icon-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M8 6v12M16 6v12"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M8 7.5c2 1.2 6 1.2 8 0M8 12c2 1.2 6 1.2 8 0M8 16.5c2 1.2 6 1.2 8 0"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M10 4.8h4M10 19.2h4"
+                      fill="none"
+                      stroke="#111"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                  </svg>
                 </div>
-              <div class="feature-title">Suspensão Traseira</div>
-<div class="feature-subtitle">Conforto extra em ruas irregulares.</div>
-
-
+                <div class="feature-title">Suspensão Traseira</div>
+                <div class="feature-subtitle">
+                  Conforto extra em ruas irregulares.
+                </div>
               </div>
             </div>
 
@@ -1120,29 +1225,24 @@ Sistema elétrico 36V com controle inteligente de energia, freios eficientes e e
       </div>
 
       <!-- REVIEWS (Swiper igual imagem 4) -->
-      
 
       <!-- COMPARISON (banner + tabela) -->
-      
 
       <!-- SPECS (Especificações técnicas) -->
       <div class="specs-section reveal-section">
         <h2>Especificações técnicas:</h2>
         <div class="specs-list">
           <p>Motor: 350W.</p>
-<p>Velocidade máxima: até 25 km/h.</p>
-<p>Bateria: 36V.</p>
-<p>Rodas: 8,5".</p>
-<p>Suspensão: traseira.</p>
-<p>Estrutura: dobrável.</p>
-<p>Uso indicado: mobilidade urbana.</p>
-<p>Marca: Joog.</p>
+          <p>Velocidade máxima: até 25 km/h.</p>
+          <p>Bateria: 36V.</p>
+          <p>Rodas: 8,5".</p>
+          <p>Suspensão: traseira.</p>
+          <p>Estrutura: dobrável.</p>
+          <p>Uso indicado: mobilidade urbana.</p>
+          <p>Marca: Joog.</p>
         </div>
       </div>
     </section>
-</body>
-</html>
-    
 
     <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
 
@@ -1370,7 +1470,6 @@ Sistema elétrico 36V com controle inteligente de energia, freios eficientes e e
           delay: i * 0.05,
         });
       });
-
 
       // Especificações (título + texto)
       gsap.from(".specs-section h2", {
