@@ -1,0 +1,350 @@
+<style>
+  /* ===== MICAR | CUPOM + TIMER (COMPACTO ~400px) ===== */
+  .micar-cpn{
+    --micar-blue:#0b4ea2;
+    --micar-blue-2:#0a3f86;
+    --micar-yellow:#f7c600;
+    --micar-text:#0f172a;
+    --micar-muted:rgba(15,23,42,.72);
+    --micar-border:rgba(11,78,162,.18);
+    --micar-green:#168a3a;
+    --micar-green-2:#0f6f2d;
+
+    width: 100%;
+    max-width: 400px;              /* <<< encaixe */
+    margin: 12px 0 14px;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid var(--micar-border);
+    background: linear-gradient(180deg, #ffffff, #f7fbff);
+    color: var(--micar-text);
+    box-shadow: 0 14px 28px rgba(2, 22, 60, .10);
+  }
+
+  .micar-cpn__tag{
+    display:inline-flex;
+    align-items:center;
+    font-weight: 900;
+    letter-spacing: .04em;
+    font-size: 11px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(247,198,0,.22);
+    border: 1px solid rgba(247,198,0,.35);
+    color: #5a4300;
+    margin-bottom: 8px;
+  }
+
+  .micar-cpn__title{
+    font-size: 14px;
+    line-height: 1.25;
+    font-weight: 800;
+    color: var(--micar-text);
+  }
+
+  .micar-cpn__codeInline{
+    display:inline-flex;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(11,78,162,.08);
+    border: 1px dashed rgba(11,78,162,.35);
+    color: var(--micar-blue);
+    margin: 0 6px 0 4px;
+    font-weight: 950;
+    letter-spacing: .10em;
+  }
+
+  .micar-cpn__sub{
+    margin-top: 6px;
+    font-size: 12.5px;
+    color: var(--micar-muted);
+  }
+
+  /* timer compacto */
+  .micar-cpn__timer{
+    margin-top: 10px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap:10px;
+    color: var(--micar-blue-2);
+    font-size: 12.5px;
+    font-weight: 900;
+  }
+
+  .micar-cpn__clock{
+    display:flex;
+    align-items:center;
+    gap: 6px;
+  }
+.micar-cpn__clock{ gap: 5px; }
+.micar-cpn__sep{ opacity:.75; font-weight:950; }
+  .micar-cpn__box{
+    min-width: 34px;
+    text-align:center;
+    padding: 7px 8px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid rgba(11,78,162,.22);
+    color: var(--micar-blue-2);
+    font-weight: 950;
+    font-variant-numeric: tabular-nums;
+    box-shadow: 0 8px 18px rgba(11,78,162,.08);
+  }
+
+  .micar-cpn__sep{
+    opacity: .75;
+    font-weight: 950;
+    color: var(--micar-blue-2);
+  }
+
+  /* copiar (igual exemplo) */
+  .micar-cpn__copyWrap{
+    margin-top: 10px;
+    display:flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .micar-cpn__copyLabel{
+    font-size: 12px;
+    font-weight: 900;
+    color: rgba(15,23,42,.65);
+  }
+
+  .micar-cpn__copyBox{
+    width: 100%;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 14px;
+    background: #ffffff;
+    border: 1px solid rgba(15,23,42,.10);
+    box-shadow: 0 10px 22px rgba(2, 22, 60, .08);
+  }
+
+  .micar-cpn__copyCode{
+    appearance:none;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 12px;
+    font-weight: 950;
+    letter-spacing: .14em;
+    color: #0b1220;
+    font-size: 15px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .micar-cpn__copyCode:hover{ background: rgba(15,23,42,.04); }
+  .micar-cpn__copyCode:active{ transform: translateY(1px); }
+
+  .micar-cpn__copyBtn{
+    appearance:none;
+    border: 0;
+    cursor: pointer;
+    display:inline-flex;
+    align-items:center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 999px;
+    font-weight: 950;
+    color: #ffffff;
+    background: linear-gradient(180deg, var(--micar-green), var(--micar-green-2));
+    box-shadow: 0 12px 22px rgba(22,138,58,.22);
+    transition: transform .12s ease, filter .12s ease;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+  .micar-cpn__copyBtn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+  .micar-cpn__copyBtn:active{ transform: translateY(0px); }
+
+  .micar-cpn__copyIco path{ fill: #ffffff; }
+
+  .micar-cpn__ok{
+    font-size: 12px;
+    color: var(--micar-blue);
+    font-weight: 950;
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity .18s ease, transform .18s ease;
+  }
+  .micar-cpn__ok.is-show{ opacity: 1; transform: translateY(0); }
+</style>
+<script>
+(function($){
+  if(!$) return;
+
+  const COUPON = "MICAR";
+
+  /* ==============================
+     DEFINA A DATA FINAL AQUI
+     Formato seguro: "YYYY-MM-DDTHH:mm:ss"
+     Ex: "2026-01-31T23:59:00"
+     ============================== */
+  const END_AT = "2026-01-31T23:59:00";
+
+  // Se quiser forçar fuso de Brasília (UTC-03:00), use:
+  // const END_AT = "2026-01-31T23:59:00-03:00";
+
+  const WRAP_ID = "micarCpn";
+  if(document.getElementById(WRAP_ID)) return;
+
+  const html = `
+    <div class="micar-cpn" id="${WRAP_ID}" aria-live="polite">
+      <div class="micar-cpn__tag">DESCONTO À VISTA</div>
+
+      <div class="micar-cpn__title">
+       Use o cupom e ganhe
+        <strong> 5% OFF</strong> no <strong>PIX</strong> e <strong>Boleto</strong>
+      </div>
+
+      <div class="micar-cpn__sub">
+        Copie o cupom e aplique no checkout • Válido por tempo limitado
+      </div>
+
+      <div class="micar-cpn__timer">
+        <span class="micar-cpn__timerLabel">Termina em</span>
+        <div class="micar-cpn__clock" role="timer" aria-label="Contagem regressiva">
+          <span class="micar-cpn__box" id="micarD">00</span>
+          <span class="micar-cpn__sep">:</span>
+          <span class="micar-cpn__box" id="micarH">00</span>
+          <span class="micar-cpn__sep">:</span>
+          <span class="micar-cpn__box" id="micarM">00</span>
+          <span class="micar-cpn__sep">:</span>
+          <span class="micar-cpn__box" id="micarS">00</span>
+        </div>
+      </div>
+
+      <div class="micar-cpn__copyWrap">
+        <div class="micar-cpn__copyLabel">Copie o cupom:</div>
+
+        <div class="micar-cpn__copyBox" role="group" aria-label="Copiar cupom">
+          <button class="micar-cpn__copyCode" type="button" id="micarCodeBtn" aria-label="Copiar código do cupom">
+            ${COUPON}
+          </button>
+
+          <button class="micar-cpn__copyBtn" type="button" id="micarCopy" aria-label="Copiar cupom">
+            <span class="micar-cpn__copyBtnTxt">Copiar</span>
+            <svg class="micar-cpn__copyIco" width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M16 1H6a2 2 0 0 0-2 2v12h2V3h10V1zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H10V7h9v14z"/>
+            </svg>
+          </button>
+        </div>
+
+        <div class="micar-cpn__ok" id="micarOk" aria-hidden="true">Cupom copiado ✅</div>
+      </div>
+    </div>
+  `;
+
+  // inserir após .mais-formas-pagamento
+  let tries = 0;
+  const maxTries = 40;
+  const t = setInterval(function(){
+    const $target = $('.mais-formas-pagamento').first();
+    if($target.length){
+      $(html).insertAfter($target);
+      clearInterval(t);
+      initMicarFixedDate();
+    }
+    if(++tries >= maxTries) clearInterval(t);
+  }, 100);
+
+  function pad(n){ return String(n).padStart(2, "0"); }
+
+  function initMicarFixedDate(){
+    const endAt = new Date(END_AT).getTime();
+    if(Number.isNaN(endAt)) return;
+
+    const dEl = document.getElementById("micarD");
+    const hEl = document.getElementById("micarH");
+    const mEl = document.getElementById("micarM");
+    const sEl = document.getElementById("micarS");
+
+    const codeBtnEl = document.getElementById("micarCodeBtn");
+    const btnEl = document.getElementById("micarCopy");
+    const okEl  = document.getElementById("micarOk");
+
+    if(!dEl || !hEl || !mEl || !sEl || !btnEl) return;
+
+    function tick(){
+      const now = Date.now();
+      const diff = Math.max(0, endAt - now);
+      const totalSec = Math.floor(diff / 1000);
+
+      const d = Math.floor(totalSec / 86400);
+      const h = Math.floor((totalSec % 86400) / 3600);
+      const m = Math.floor((totalSec % 3600) / 60);
+      const s = totalSec % 60;
+
+      dEl.textContent = pad(d);
+      hEl.textContent = pad(h);
+      mEl.textContent = pad(m);
+      sEl.textContent = pad(s);
+    }
+
+    tick();
+    const itv = setInterval(function(){
+      tick();
+      if(Date.now() >= endAt) clearInterval(itv);
+    }, 1000);
+
+    async function copyText(text){
+      try{
+        if(navigator.clipboard && window.isSecureContext){
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        ta.setAttribute("readonly","");
+        ta.style.position = "fixed";
+        ta.style.left = "-9999px";
+        document.body.appendChild(ta);
+        ta.select();
+        const ok = document.execCommand("copy");
+        document.body.removeChild(ta);
+        return ok;
+      }catch(e){
+        return false;
+      }
+    }
+
+    function showCopied(){
+      if(okEl){
+        okEl.classList.add("is-show");
+        okEl.setAttribute("aria-hidden","false");
+        setTimeout(()=> {
+          okEl.classList.remove("is-show");
+          okEl.setAttribute("aria-hidden","true");
+        }, 1400);
+      }
+    }
+
+    async function handleCopy(){
+      const ok = await copyText(COUPON);
+      if(ok){
+        const txtEl = btnEl.querySelector(".micar-cpn__copyBtnTxt");
+        const old = txtEl ? txtEl.textContent : btnEl.textContent;
+
+        if(txtEl) txtEl.textContent = "Copiado";
+        else btnEl.textContent = "Copiado";
+
+        showCopied();
+
+        setTimeout(()=> {
+          if(txtEl) txtEl.textContent = old;
+          else btnEl.textContent = old;
+        }, 1200);
+      }
+    }
+
+    btnEl.addEventListener("click", handleCopy);
+    if(codeBtnEl) codeBtnEl.addEventListener("click", handleCopy);
+  }
+
+})(window.jQuery);
+</script>
