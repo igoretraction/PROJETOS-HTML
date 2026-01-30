@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -146,6 +146,7 @@
         z-index: 99999;
         width: 128px;
         text-align: center;
+        user-select: none;
         /* backdrop-filter: blur(6px); */
       }
       .launch-label {
@@ -357,7 +358,27 @@
         }
       }
 
+      @keyframes timerPulse {
+        0%,
+        100% {
+          transform: scale(1);
+          text-shadow: 0 0 10px rgba(189, 77, 209, 0);
+        }
+        50% {
+          transform: scale(1.08);
+          text-shadow: 0 0 20px rgba(189, 77, 209, 0.8);
+        }
+      }
+
+      /* .timer-number {
+        animation: timerPulse 0.8s ease-in-out infinite;
+      } */
+
       @media (max-width: 768px) {
+        .card {
+          height: 430px !important;
+          width: 242px !important;
+        }
         .timer-component {
           height: 400px;
         }
@@ -387,7 +408,7 @@
       @media (max-width: 780px) {
         .carrossel-imgs {
           padding: 0 !important;
-          margin-top: 85px;
+          margin-top: 135px;
           margin-bottom: 210px;
         }
         .hero-banner img {
@@ -431,7 +452,35 @@
           text-align: center;
         }
         .image-hotmart img {
-          max-width: 400px !important;
+          max-width: 320px !important;
+        }
+      }
+
+      /* Estilos para confetes */
+      .confetti {
+        position: fixed;
+        pointer-events: none;
+        z-index: 9999999;
+      }
+
+      @keyframes confetti-fall {
+        0% {
+          transform: translateY(0) translateX(var(--swing)) rotateZ(0deg);
+          opacity: 1;
+        }
+        to {
+          transform: translateY(100vh) translateX(var(--swing)) rotateZ(360deg);
+          opacity: 0;
+        }
+      }
+
+      @keyframes confetti-swing {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(100px);
         }
       }
       .timer-section {
@@ -532,7 +581,20 @@
   }
   */
 
-      @media (max-width: 600px) {
+      @media (max-width: 768px) {
+        .image-container .block-image-text {
+          flex-direction: column !important;
+        }
+        .image-container:nth-of-type(even) .block-image-text {
+          flex-direction: column-reverse !important;
+        }
+        .description-hotmart {
+          margin: 0 31px;
+        }
+
+        .image-container {
+          padding: 25px 0px !important;
+        }
         .carousel {
           transform: rotateX(-10deg) scale(0.7) translateY(-40px);
           height: 320px;
@@ -554,7 +616,7 @@
         }
       }
       .img-carrossel {
-        max-width: 200px;
+        max-width: 213px;
       }
       .content-carrossel {
         font-family: "Poppins", sans-serif;
@@ -601,28 +663,289 @@
       .carrossel-imgs {
         padding: 90px;
       }
-      
+      .card-media {
+        max-width: 100%;
+      }
+      .cta-button-hotmart {
+        cursor: pointer;
+      }
+      .description-hotmart {
+        margin-bottom: 28px !important;
+      }
+      .text-cta {
+        user-select: none;
+      }
+      /* Estilos do Accordion */
+      .accordion-wrapper {
+        max-width: 1240px;
+        margin: auto;
+        width: 100%;
+        margin-top: 30px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(189, 77, 209, 0.3);
+      }
+
+      .accordion-item {
+        border-bottom: 1px solid rgba(189, 77, 209, 0.2);
+      }
+
+      .accordion-item:last-child {
+        border-bottom: none;
+      }
+
+      .accordion-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 24px;
+        background: linear-gradient(135deg, rgba(189, 77, 209, 0.1) 0%, rgba(189, 77, 209, 0.05) 100%);
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.3s ease;
+        font-weight: 600;
+        color: #ffffff;
+        font-size: 15px;
+      }
+
+      .accordion-header:hover {
+        background: linear-gradient(135deg, rgba(189, 77, 209, 0.15) 0%, rgba(189, 77, 209, 0.1) 100%);
+      }
+
+      .accordion-icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: transform 0.3s ease;
+        color: #bd4dd1;
+      }
+
+      .accordion-item.active .accordion-icon {
+        transform: rotate(180deg);
+      }
+
+      .accordion-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      .accordion-item.active .accordion-content {
+        max-height: 2000px;
+      }
+
+      .accordion-text {
+        padding: 24px;
+        color: #e0e0e0;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      .accordion-section-title {
+        color: #bd4dd1;
+        font-weight: 700;
+        font-size: 15px;
+        margin-top: 16px;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .accordion-section-title:first-child {
+        margin-top: 0;
+      }
+
+      .accordion-list {
+        list-style: none;
+        padding: 0;
+        margin: 8px 0;
+      }
+
+      .accordion-list li {
+        padding: 6px 0;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .accordion-list li:before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: #bd4dd1;
+        font-weight: bold;
+      }
+
+      .accordion-combo {
+        background: rgba(189, 77, 209, 0.1);
+        border-left: 3px solid #bd4dd1;
+        padding: 12px 16px;
+        margin: 10px 0;
+        border-radius: 4px;
+      }
+
+      .accordion-combo-title {
+        font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 8px;
+        font-size: 13px;
+      }
+
+      .accordion-combo-items {
+        padding-left: 16px;
+        font-size: 13px;
+      }
+
+      .accordion-combo-items li {
+        margin: 4px 0;
+      }
+
+      .accordion-tip {
+        background: rgba(250, 187, 1, 0.1);
+        border-left: 3px solid #fabb01;
+        padding: 12px 16px;
+        margin: 10px 0;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #ffd700;
+      }
+
+      .accordion-tip strong {
+        color: #fabb01;
+      }
+
+      .accordion-error {
+        background: rgba(255, 107, 157, 0.1);
+        border-left: 3px solid #ff6b9d;
+        padding: 12px 16px;
+        margin: 10px 0;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #ff6b9d;
+      }
+
+      .accordion-conclusion {
+        background: rgba(189, 77, 209, 0.15);
+        border-left: 3px solid #bd4dd1;
+        padding: 12px 16px;
+        margin: 10px 0;
+        border-radius: 4px;
+        font-size: 13px;
+        color: #ffffff;
+      }
+
+      .accordion-conclusion strong {
+        color: #fabb01;
+      }
+
+      /* Estilos para Tabs dentro do Accordion */
+      .accordion-tabs {
+        display: flex;
+        gap: 0;
+        border-bottom: 2px solid rgba(189, 77, 209, 0.2);
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+      }
+
+      .accordion-tab-button {
+        padding: 12px 16px;
+        background: rgba(189, 77, 209, 0.05);
+        border: none;
+        color: #b0b0b0;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+        font-family: "Poppins", sans-serif;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .accordion-tab-button:hover {
+        background: rgba(189, 77, 209, 0.1);
+        color: #ffffff;
+      }
+
+      .accordion-tab-button.active {
+        color: #bd4dd1;
+        border-bottom-color: #bd4dd1;
+        background: rgba(189, 77, 209, 0.1);
+      }
+
+      .accordion-tab-content {
+        display: none;
+      }
+
+      .accordion-tab-content.active {
+        display: block;
+        animation: fadeInTab 0.3s ease;
+      }
+
+      @keyframes fadeInTab {
+        from {
+          opacity: 0;
+          transform: translateY(5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .tab-section {
+        margin-bottom: 16px;
+      }
+
+      .tab-section:last-child {
+        margin-bottom: 0;
+      }
+
+      @media (max-width: 768px) {
+        .accordion-header {
+          padding: 14px 16px;
+          font-size: 13px;
+        }
+
+        .accordion-text {
+          padding: 16px;
+          font-size: 12px;
+        }
+
+        .accordion-section-title {
+          font-size: 13px;
+          margin-top: 12px;
+        }
+
+        .accordion-combo,
+        .accordion-tip,
+        .accordion-error,
+        .accordion-conclusion {
+          padding: 10px 12px;
+          font-size: 12px;
+          margin: 8px 0;
+        }
+
+        .accordion-tabs {
+          gap: 0;
+        }
+
+        .accordion-tab-button {
+          padding: 10px 12px;
+          font-size: 11px;
+          flex: 1;
+          min-width: auto;
+        }
+      }
     </style>
   </head>
   <body>
- 
-
     <section class="container-jango">
-      <section class="hero-seection">
-        <div class="hero-banner">
-          <img
-            class="isDesktop"
-            src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/banner/18470/banner-principal-mobile.jpeg"
-            alt=""
-          />
-          <img
-            class="isMobile"
-            src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/banner/18469/banner-principal-desktop.jpeg"
-            alt=""
-          />
-        </div>
-      </section>
-      <section class="timer-section">                                                                                            
+      <section class="timer-section" style="margin-top: 100px">
         <div class="timer-component">
           <div class="diagonal-stripes">
             <div class="diagonal-stripe stripe-1">
@@ -664,11 +987,11 @@
             </div>
           </div>
 
+
           <div class="container-jango">
-            <h1 class="main-title">CATÁLOGO LIBERADO</h1>
+            <h1 class="main-title" style="text-transform: uppercase;">Prepare-se para a Páscoa com a Jango</h1>
             <p class="subtitle">
-              Encontre as embalagens que irão fazer você faturar mais nessa
-              páscoa
+              Corre que ainda dá tempo de se preparar para a sua melhor Páscoa.
             </p>
 
             <div class="timer-container">
@@ -696,11 +1019,25 @@
               <p class="cta-text">
                 Encontre as embalagens que fazem você vender muito mais
               </p>
-              <button class="cta-button">
+              <a href="#" class="cta-button">
                 Quero ter acesso a nova Coleção da Jango
-              </button>
+              </a>
             </div>
           </div>
+        </div>
+      </section>
+      <section class="hero-seection">
+        <div class="hero-banner">
+          <img
+            class="isDesktop"
+            src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/19019/banner-lp.png"
+            alt=""
+          />
+          <img
+            class="isMobile"
+            src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/19019/banner-lp.png"
+            alt=""
+          />
         </div>
       </section>
       <section class="cards-section">
@@ -709,66 +1046,138 @@
             <!-- Card -->
             <div class="swiper-slide">
               <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
-              </div>
-            </div>
-
-         
-
-            <!-- Repete até 10 -->
-            <div class="swiper-slide">
-              <div class="card">
-                <span class="launch-label">Lança dia 12/01</span>
-                <div class="card-image"></div>
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
+                <video
+                  class="card-media"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18544/algo-esta-acontecendo-pistas-ja-estao-no-ar-o-segredo-ainda-nao-pode-ser-revelado-fique-atento.mp4?_gl=1*un02qh*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjkwODUxMzAkbzE3MCRnMSR0MTc2OTA4NTUyMiRqNjAkbDAkaDA."
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
+                <video
+                  class="card-media"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18545/feliz-em-fazer-parte-da-operacao-pascoa-secreta-jangoembalagens-obrigada-pelo-carinho-pela.mp4?_gl=1*1gwvwxs*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjkwODUxMzAkbzE3MCRnMSR0MTc2OTA4NTU4NiRqNjAkbDAkaDA."
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
+                <video
+                  class="card-media"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18546/um-recebido-super-confidencial-estamos-ansiosos-para-te-mostrar-o-que-a-jangoembalagens-prep.mp4?_gl=1*1u2bqu4*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjkwODUxMzAkbzE3MCRnMSR0MTc2OTA4NTU5OCRqNDgkbDAkaDA."
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
+                <video
+                  class="card-media"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18547/operacao-pascoa-secreta-jangoembalagens-pascoasecreta-jangoembalagens-pascoa-conf.mp4?_gl=1*qw9d3o*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjkwODUxMzAkbzE3MCRnMSR0MTc2OTA4NTYwNiRqNDAkbDAkaDA."
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
+                <video
+                  class="card-media"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18548/operacao-pascoa-secreta-2026-jangoembalagensacabei-de-receber-uma-caixa-recheada-com-as-nov-1.mp4?_gl=1*1rgv3ov*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjkwODUxMzAkbzE3MCRnMSR0MTc2OTA4NTYyNyRqMTkkbDAkaDA."
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
+                <video
+                  class="card-media"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18549/aquele-recebidos-que-a-gente-ama-com-bastante-novidades-por-aqui-pascoa2026-confeitaria-j-1-1.mp4?_gl=1*putwt8*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjkwODUxMzAkbzE3MCRnMSR0MTc2OTA4NTY0MiRqNCRsMCRoMA.."
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
+                <video
+                  class="card-media"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18546/um-recebido-super-confidencial-estamos-ansiosos-para-te-mostrar-o-que-a-jangoembalagens-prep.mp4?_gl=1*1u2bqu4*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjkwODUxMzAkbzE3MCRnMSR0MTc2OTA4NTU5OCRqNDgkbDAkaDA."
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card">
-                <span class="launch-label">Lança dia 25/01</span>
-                <div class="card-image"></div>
+                <video
+                  class="card-media"
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                >
+                  <source
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18549/aquele-recebidos-que-a-gente-ama-com-bastante-novidades-por-aqui-pascoa2026-confeitaria-j-1-1.mp4?_gl=1*putwt8*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NjkwODUxMzAkbzE3MCRnMSR0MTc2OTA4NTY0MiRqNCRsMCRoMA.."
+                    type="video/mp4"
+                  />
+                </video>
               </div>
             </div>
           </div>
@@ -777,18 +1186,158 @@
           <div class="swiper-button-prev"></div>
         </div>
       </section>
+  <!-- Accordion Vila Encantada -->
+              <div class="accordion-wrapper">
+                <div class="accordion-item">
+                  <div class="accordion-header">
+                    <span> Dossiê de Vendas: Como Transformar em Produto</span>
+                    <span class="accordion-icon">▼</span>
+                  </div>
+                  <div class="accordion-content">
+                    <div class="accordion-text">
+                      <!-- Tabs Navigation -->
+                      <div class="accordion-tabs">
+                        <button class="accordion-tab-button active" data-tab="tab-1">Tipo de Presente</button>
+                        <button class="accordion-tab-button" data-tab="tab-2">Público Final</button>
+                        <button class="accordion-tab-button" data-tab="tab-3">Combinação Campeã</button>
+                        <button class="accordion-tab-button" data-tab="tab-4">Combos de Venda</button>
+                        <button class="accordion-tab-button" data-tab="tab-5">Foto Que Vende</button>
+                        <button class="accordion-tab-button" data-tab="tab-6">Erros Comuns</button>
+                        <button class="accordion-tab-button" data-tab="tab-7">Conclusão</button>
+                      </div>
 
+                      <!-- Tab 1: Tipo de Presente -->
+                      <div class="accordion-tab-content active" data-tab-content="tab-1">
+                        <div class="tab-section">
+                          <div class="accordion-section-title">Tipo de Presente</div>
+                          <ul class="accordion-list">
+                            <li>Afetivo</li>
+                            <li>Lúdico</li>
+                            <li>Presenteável sem esforço</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <!-- Tab 2: Público Final -->
+                      <div class="accordion-tab-content" data-tab-content="tab-2">
+                        <div class="tab-section">
+                          <div class="accordion-section-title">Público Final</div>
+                          <ul class="accordion-list">
+                            <li>Crianças</li>
+                            <li>Presentes de padrinhos, avós e tios</li>
+                            <li>Compras por impulso emocional</li>
+                          </ul>
+                        </div>
+                      </div>
+
+                      <!-- Tab 3: Combinação Campeã -->
+                      <div class="accordion-tab-content" data-tab-content="tab-3">
+                        <div class="tab-section">
+                          <div class="accordion-section-title">Combinação Campeã</div>
+                          <ul class="accordion-list">
+                            <li>✔ Sacola Grande Vila Encantada</li>
+                            <li>✔ Caixa para Ovo Ajustável com Tampa Termoformada</li>
+                            <li>✔ Cartão para Biscoito</li>
+                            <li>✔ Tags Vila Encantada</li>
+                          </ul>
+                          <div class="accordion-tip" style="margin-top: 12px;">
+                            <strong>💡 Dica Estratégica:</strong> Essa coleção funciona melhor com produtos que aparecem visualmente (cores, formatos, detalhes).
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Tab 4: Combos de Venda -->
+                      <div class="accordion-tab-content" data-tab-content="tab-4">
+                        <div class="tab-section">
+                          <div class="accordion-combo">
+                            <div class="accordion-combo-title">Combo 01 - Presente Encantado (Infantil)</div>
+                            <ul class="accordion-combo-items accordion-list">
+                              <li>Sacola para Kit Confeiteiro</li>
+                              <li>Kit Confeiteiro</li>
+                              <li>Caça aos Ovos</li>
+                              <li>Tag Vila Encantada</li>
+                            </ul>
+                            <div style="margin-top: 6px; color: #fabb01; font-size: 12px;"><strong>→ Ideal para venda rápida</strong></div>
+                          </div>
+
+                          <div class="accordion-combo">
+                            <div class="accordion-combo-title">Combo 02 - Presente Completo</div>
+                            <ul class="accordion-combo-items accordion-list">
+                              <li>Sacola Grande Vila Encantada</li>
+                              <li>Cartão para Biscoito</li>
+                              <li>Caixa para Ovo Ajustável com Tampa</li>
+                              <li>Tag Vila Encantada</li>
+                            </ul>
+                            <div style="margin-top: 6px; color: #fabb01; font-size: 12px;"><strong>→ Ideal para quem quer algo "mais elaborado"</strong></div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Tab 5: Foto Que Vende -->
+                      <div class="accordion-tab-content" data-tab-content="tab-5">
+                        <div class="tab-section">
+                          <div class="accordion-tip">
+                            <strong>⚠️ Nunca fotografe apenas o chocolate.</strong><br>
+                            A venda acontece quando a embalagem aparece.<br><br>
+                            <strong>Enquadramento Ideal:</strong>
+                          </div>
+                          <ul class="accordion-list">
+                            <li>Caixa levemente aberta</li>
+                            <li>Produto visível</li>
+                            <li>Fundo neutro</li>
+                            <li>Luz natural lateral</li>
+                          </ul>
+                          <div class="accordion-tip" style="margin-top: 12px;">
+                            📌 Essa imagem deve ser a primeira foto no WhatsApp, Instagram ou catálogo.
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Tab 6: Erros Comuns -->
+                      <div class="accordion-tab-content" data-tab-content="tab-6">
+                        <div class="tab-section">
+                          <div class="accordion-error">
+                            ❌ Vender como "só um ovo de páscoa"<br>
+                            ❌ Não mostrar o produto dentro<br>
+                            ❌ Imagens sem apelo visual<br>
+                            ❌ Não oferecer sacola compatível
+                          </div>
+                          <div class="accordion-tip" style="margin-top: 12px;">
+                            📌 Esses erros fazem você perder valor, não economizar.
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Tab 7: Conclusão -->
+                      <div class="accordion-tab-content" data-tab-content="tab-7">
+                        <div class="tab-section">
+                          <div class="accordion-conclusion">
+                            <strong>A coleção Vila Encantada é uma ferramenta de venda emocional.</strong><br><br>
+                            Quando bem usada, ela:<br>
+                            ✔ Facilita a decisão do cliente<br>
+                            ✔ Aumenta o valor percebido<br>
+                            ✔ Reduz negociação de preço<br>
+                            ✔ Acelera o fechamento da venda<br><br>
+                            <strong>Use a embalagem como parte do produto, não como custo.</strong><br>
+                            <strong style="color: #fabb01;">Sugestão de combo: Caixa + sacola + tag = Kit simples = Mais valor percebido</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
       <section class="image-container">
         <div class="block-hotmart">
           <div class="block-image-text">
             <div class="image-hotmart">
               <img
-                src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18474/pascoa-secreta-jango-postagem-feed-4.png"
+                src=" https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18927/5487-1.png"
                 alt=""
               />
             </div>
             <div class="text-hotmart">
-              <h1 class="title-hotmart">Feito a mão</h1>
+              <h1 class="title-hotmart">Vila Encantada</h1>
               <p class="description-hotmart">
                 Essa coleção carrega o tempo e o cuidado de quem entende que
                 encantar começa no detalhe. As cores suaves entre verdes, rosés
@@ -804,7 +1353,12 @@
                 emocionar, um encanto que começa no olhar e permanece, antes
                 mesmo de ser aberta.
               </p>
-              <!-- <button class="cta-button-hotmart">Quero faturar mais!</button> -->
+              <a
+                href="https://www.jangoembalagens.com.br/pascoa/linhas/vila-encantada"
+                class="cta-button-hotmart"
+                >Ver coleção</a
+              >
+            
             </div>
           </div>
         </div>
@@ -814,7 +1368,7 @@
         <div class="block-hotmart">
           <div class="block-image-text">
             <div class="text-hotmart">
-              <h1 class="title-hotmart">Suavidade</h1>
+              <h1 class="title-hotmart">Celebrar</h1>
               <p class="description-hotmart">
                 Essa coleção sussurra Páscoa. As formas orgânicas se espalham na
                 superfície, criando um cenário calmo, onde tudo convida ao toque
@@ -822,11 +1376,16 @@
                 coleção não carrega apenas um presente. Ela carrega intenção,
                 delicadeza e a promessa de um momento que fica.
               </p>
-              <!-- <button class="cta-button-hotmart">Quero faturar mais!</button> -->
+              <a
+                href="https://www.jangoembalagens.com.br/pascoa/linhas/celebrar"
+                class="cta-button-hotmart"
+                >Ver coleção</a
+              >
+            
             </div>
             <div class="image-hotmart">
               <img
-                src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18475/pascoa-secreta-jango-postagem-feed-5.png"
+                src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18563/4doces.png"
                 alt=""
               />
             </div>
@@ -839,12 +1398,12 @@
           <div class="block-image-text">
             <div class="image-hotmart">
               <img
-                src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/banner/18469/banner-principal-desktop.jpeg"
+                src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18814/2-sacovisormed.png"
                 alt=""
               />
             </div>
             <div class="text-hotmart">
-              <h1 class="title-hotmart">Delicado</h1>
+              <h1 class="title-hotmart">Amanhecer</h1>
               <p class="description-hotmart">
                 Tons que lembram o céu nos primeiros minutos do dia… Cores que
                 despertam, acolhem e anunciam um novo ciclo. Traços delicados,
@@ -852,7 +1411,12 @@
                 conduzir o olhar com leveza, como a luz que se espalha devagar
                 ao amanhecer. Amanhecer não é sobre pressa. É sobre começo.
               </p>
-              <!-- <button class="cta-button-hotmart">Quero faturar mais!</button> -->
+              <a
+                href=" https://www.jangoembalagens.com.br/pascoa/linhas/amanhecer"
+                class="cta-button-hotmart"
+                >Ver coleção</a
+              >
+             
             </div>
           </div>
         </div>
@@ -862,7 +1426,7 @@
         <div class="block-hotmart">
           <div class="block-image-text">
             <div class="text-hotmart">
-              <h1 class="title-hotmart">Cuidado</h1>
+              <h1 class="title-hotmart">Recordar</h1>
               <p class="description-hotmart">
                 Cada embalagem conversa entre si, como capítulos de uma mesma
                 história. As formas são gentis. Tudo foi desenhado para
@@ -870,11 +1434,73 @@
                 exagera, não compete. Ela encanta em silêncio. Essa coleção é
                 sobre carinho visível. Sobre presentear com intenção.
               </p>
-              <!-- <button class="cta-button-hotmart">Quero faturar mais!</button> -->
+              <a
+                href="https://www.jangoembalagens.com.br/pascoa/linhas/recordar"
+                class="cta-button-hotmart"
+                >Ver coleção</a
+              >
+             
             </div>
             <div class="image-hotmart">
               <img
-                src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/18476/pascoa-secreta-jango-postagem-feed-6.png"
+                src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18895/doce-recordar.png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="image-container">
+        <div class="block-hotmart">
+          <div class="block-image-text">
+            <div class="image-hotmart">
+              <img
+                src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18716/4miniovos.jpg"
+                alt=""
+              />
+            </div>
+            <div class="text-hotmart">
+              <h1 class="title-hotmart">Acolher</h1>
+              <p class="description-hotmart">
+                Sabe aquela sensação de conforto que só um doce feito com amor
+                traz? Foi exatamente isso que inspirou a nossa nova criação:
+                Linha Acolher. Trouxemos a essência do "feito à mão", do cuidado
+                nos detalhes e daquela nostalgia gostosa. Porque a Páscoa merece
+                ser um momento de pausa e conexão. Não é só uma embalagem, é um
+                convite para entrar, sentar e ficar.
+              </p>
+              <a
+                href="https://www.jangoembalagens.com.br/pascoa/linhas/acolher"
+                class="cta-button-hotmart"
+                >Ver coleção</a
+              >
+              
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="image-container">
+        <div class="block-hotmart">
+          <div class="block-image-text">
+            <div class="text-hotmart">
+              <h1 class="title-hotmart">Florir</h1>
+              <p class="description-hotmart">
+                Inspirada no grande sucesso da nossa coleção de 2025, a Linha
+                Florir chega para resgatar o essencial: o toque natural, a
+                textura suave e aquela sensação revigorante de acolhimento. Não
+                é apenas sobre chocolate, é sobre criar um ambiente de leveza
+                para quem você ama.
+              </p>
+              <a
+                href="https://www.jangoembalagens.com.br/pascoa/linhas/florir"
+                class="cta-button-hotmart"
+                >Ver coleção</a
+              >
+             
+            </div>
+            <div class="image-hotmart">
+              <img
+                src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18998/5519-3.png"
                 alt=""
               />
             </div>
@@ -899,54 +1525,90 @@
           <div class="carousel">
             <!-- Troque o conteúdo 1,2,3... pelas suas imagens -->
             <div class="carousel-image">
-              <img
-                class="img-carrossel"
-                src="https://jangoembalagens.cdn.magazord.com.br/img/2025/01/produto/9336/4797-2.jpg"
-                alt=""
+              <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/caixa-para-ovo-ajustavel-com-tampa-termoformada-vila-encantada-5-unidades"
+                > -->
+                <img
+                  class="img-carrossel"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18830/ajustaveltermo-ve.png"
+                  alt=""
               />
+            <!-- </a> -->
             </div>
             <div class="carousel-image">
-              <img
-                class="img-carrossel"
-                src="https://jangoembalagens.cdn.magazord.com.br/img/2025/01/produto/9279/4848.jpg"
-                alt=""
-              />
+              <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/caixa-para-trio-de-ovos-100g-com-alca-celebrar-10-unidades"
+              > -->
+                <img
+                  class="img-carrossel"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18568/trio.png"
+                  alt=""
+                />
+              <!-- </a> -->
             </div>
             <div class="carousel-image">
-              <img
-                class="img-carrossel"
-                src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2025/12/produto/18362/4675.png"
-                alt=""
-              />
+              <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/caixa-com-visor-degustacao-6-mini-ovos-amanhecer-10-unidades"
+              > -->
+                <img
+                  class="img-carrossel"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18481/5499.png"
+                  alt=""
+                />
+              <!-- </a> -->
             </div>
             <div class="carousel-image">
-              <img
-                class="img-carrossel"
-                src="https://jangoembalagens.cdn.magazord.com.br/img/2025/01/produto/9352/4825.jpg"
-                alt=""
-              />
+              <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/casinha-100/150g-recordar-10-unidades"
+              > -->
+                <img
+                  class="img-carrossel"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18491/5661.png"
+                  alt=""
+                />
+              <!-- </a> -->
             </div>
             <div class="carousel-image">
-              <img
-                class="img-carrossel"
-                src="https://jangoembalagens.cdn.magazord.com.br/img/2025/01/produto/9162/4634.jpg"
-                alt=""
-              />
+              <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/cinta-com-blister-1-doce-acolher-10-unidades"
+              > -->
+                <img
+                  class="img-carrossel"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18882/cinta1doce.png"
+                  alt=""
+                />
+              <!-- </a> -->
             </div>
             <div class="carousel-image">
-              <img
-                class="img-carrossel"
-                src="https://jangoembalagens.cdn.magazord.com.br/img/2025/01/produto/9252/4632.jpg"
-                alt=""
-              />
+              <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/sacola-boca-de-palhaco-com-visor-media-florir-10-unidades"
+              > -->
+                <img
+                  class="img-carrossel"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18663/sacovisormed.png"
+                  alt=""
+                />
+              <!-- </a> -->
             </div>
             <div class="carousel-image">
-              <img
-                class="img-carrossel"
-                src="https://jangoembalagens.cdn.magazord.com.br/img/2025/11/produto/16296/4851-ovo-em-pe-350g-2.png"
-                alt=""
-              />
+              <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/caixa-com-visor-degustacao-6-mini-ovos-amanhecer-10-unidades"
+              > -->
+                <img
+                  class="img-carrossel"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18481/5499.png"
+                  alt=""
+                />
+              <!-- </a> -->
             </div>
+            
           </div>
         </div>
       </section>
@@ -956,54 +1618,99 @@
         <div class="swiper cards-swiper2">
           <div class="swiper-wrapper">
             <!-- Repete até 10 -->
+
             <div class="swiper-slide">
               <div class="card" style="max-block-size: 285px !important">
-                <img
-                  class="card-image"
-                  src="https://jangoembalagens.cdn.magazord.com.br/img/2025/02/banner/9565/banner-3.png"
-                />
+                <a
+                  href="https://www.jangoembalagens.com.br/pascoa/caixas-para-cookies"
+                >
+                  <img
+                    src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18788/para-ovos-cokkie.png"
+                    class="card-image"
+                  />
+                </a>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card" style="max-block-size: 285px !important">
-                <img
-                  src="https://jangoembalagens.cdn.magazord.com.br/img/2025/02/banner/9566/banner-4.png"
-                  class="card-image"
-                />
+                <a
+                  href="https://www.jangoembalagens.com.br/pascoa/caixas/brownie"
+                >
+                  <img
+                    src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18787/para-brownie.png"
+                    class="card-image"
+                  />
+                </a>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card" style="max-block-size: 285px !important">
-                <img
-                  src="https://jangoembalagens.cdn.magazord.com.br/img/2025/02/banner/9567/banner-5.png"
-                  class="card-image"
-                />
+                <a href="https://www.jangoembalagens.com.br/pascoa/sacolas">
+                  <img
+                    src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18790/sacolas.png"
+                    class="card-image"
+                  />
+                </a>
               </div>
             </div>
             <div class="swiper-slide">
               <div class="card" style="max-block-size: 285px !important">
-                <img
-                  src="https://jangoembalagens.cdn.magazord.com.br/img/2025/02/banner/9568/banner-6.png"
-                  class="card-image"
-                />
+                <a href="https://www.jangoembalagens.com.br/pascoa/caixas/ovos">
+                  <img
+                    class="card-image"
+                    src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18789/para-ovos.png"
+                  />
+                </a>
               </div>
             </div>
             <div class="swiper-slide">
+              <div class="card" style="max-block-size: 285px !important">
+                <a
+                  href="https://www.jangoembalagens.com.br/pascoa/caixas-para-cookies"
+                >
+                  <img
+                    src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18788/para-ovos-cokkie.png"
+                    class="card-image"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card" style="max-block-size: 285px !important">
+                <a href="https://www.jangoembalagens.com.br/pascoa/sacolas">
+                  <img
+                    src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18790/sacolas.png"
+                    class="card-image"
+                  />
+                </a>
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="card" style="max-block-size: 285px !important">
+                <a href="https://www.jangoembalagens.com.br/pascoa/caixas/ovos">
+                  <img
+                    class="card-image"
+                    src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18789/para-ovos.png"
+                  />
+                </a>
+              </div>
+            </div>
+            <!-- <div class="swiper-slide">
               <div class="card" style="max-block-size: 285px !important">
                 <img
                   src="https://jangoembalagens.cdn.magazord.com.br/img/2025/02/banner/9569/banner-7.png"
                   class="card-image"
                 />
               </div>
-            </div>
-            <div class="swiper-slide">
+            </div> -->
+            <!-- <div class="swiper-slide">
               <div class="card" style="max-block-size: 285px !important">
                 <img
                   src="https://jangoembalagens.cdn.magazord.com.br/img/2025/02/banner/9570/banner-8.png"
                   class="card-image"
                 />
               </div>
-            </div>
+            </div> -->
           </div>
           <!-- Navegação -->
           <div class="swiper-button-next"></div>
@@ -1060,7 +1767,7 @@
             const p = e.deltaY * -0.0002;
             targetProgress += p;
           },
-          { passive: false }
+          { passive: false },
         );
 
         // --- drag / pointer (mouse + touch) ---
@@ -1095,8 +1802,6 @@
         if (!root || root.dataset.abHardInit === "1") return;
         root.dataset.abHardInit = "1";
 
-        const TARGET_ISO = "2026-01-31T23:59:59-03:00";
-
         const map = [
           ["days", "ab-days"],
           ["hours", "ab-hours"],
@@ -1117,9 +1822,11 @@
           ctaBtn: root.querySelector(".cta-button"),
         };
 
-        const targetDate = new Date(TARGET_ISO);
         let intervalId = null;
-        let finished = false;
+
+        // Data de término: 05/04/2026 às 23:59:59 (ALTERAR a data conforme necessário)
+        const TARGET_DATE = new Date("2026-04-05T23:59:59").getTime();
+        const STORAGE_KEY = "timerFinished";
 
         function pad2(n) {
           return String(n).padStart(2, "0");
@@ -1128,34 +1835,82 @@
           if (el && el.textContent !== v) el.textContent = v;
         }
 
-        function endUI() {
-          if (finished) return;
-          finished = true;
+        // Função para criar animação de confetes
+        function createConfetti() {
+          const colors = [
+            "#bd4dd1",
+            "#fabb01",
+            "#ffffff",
+            "#ff6b9d",
+            "#00bfff",
+          ];
+          const confettiCount = 50;
 
-          setText(els.days, "00");
-          setText(els.hours, "00");
-          setText(els.minutes, "00");
-          setText(els.seconds, "00");
+          for (let i = 0; i < confettiCount; i++) {
+            const confetti = document.createElement("div");
+            confetti.className = "confetti";
 
-          if (els.ctaText) els.ctaText.textContent = "Promoção encerrada";
-          if (els.ctaBtn) els.ctaBtn.textContent = "Ver Próximas Ofertas";
+            const size = Math.random() * 10 + 5;
+            confetti.style.width = size + "px";
+            confetti.style.height = size + "px";
+            confetti.style.backgroundColor =
+              colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.left = Math.random() * 100 + "%";
+            confetti.style.top = "-10px";
 
-          if (intervalId) clearInterval(intervalId);
-          root.dataset.abDateDone = "1";
+            const duration = Math.random() * 2 + 2.5;
+            const delay = Math.random() * 0.3;
+            const swingAmount = Math.random() * 200 - 100;
+
+            confetti.style.animation = `confetti-fall ${duration}s linear ${delay}s forwards`;
+            confetti.style.setProperty("--swing", swingAmount + "px");
+
+            document.body.appendChild(confetti);
+
+            setTimeout(
+              () => {
+                confetti.remove();
+              },
+              (duration + delay) * 1000,
+            );
+          }
         }
 
         function tick() {
+          // Verifica se já finalizou
+          if (localStorage.getItem(STORAGE_KEY) === "true") {
+            setText(els.days, "00");
+            setText(els.hours, "00");
+            setText(els.minutes, "00");
+            setText(els.seconds, "00");
+            clearInterval(intervalId);
+            return;
+          }
+
           const now = Date.now();
-          const diff = targetDate.getTime() - now;
+          const diff = TARGET_DATE - now;
 
           if (diff <= 0) {
-            endUI();
+            // Timer chegou a zero
+            setText(els.days, "00");
+            setText(els.hours, "00");
+            setText(els.minutes, "00");
+            setText(els.seconds, "00");
+
+            // Marca como finalizado no localStorage
+            localStorage.setItem(STORAGE_KEY, "true");
+
+            // Libera confetes
+            createConfetti();
+
+            // Para o intervalo
+            clearInterval(intervalId);
             return;
           }
 
           const d = Math.floor(diff / (1000 * 60 * 60 * 24));
           const h = Math.floor(
-            (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+            (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
           );
           const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
           const s = Math.floor((diff % (1000 * 60)) / 1000);
@@ -1166,6 +1921,7 @@
           setText(els.seconds, pad2(s));
         }
 
+        // Inicializa o timer
         tick();
         intervalId = setInterval(tick, 1000);
 
@@ -1222,6 +1978,53 @@
             slidesPerView: 3,
           },
         },
+      });
+
+      // Functionality para Accordions
+      document.addEventListener('DOMContentLoaded', function() {
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+        
+        accordionHeaders.forEach(header => {
+          header.addEventListener('click', function() {
+            const accordionItem = this.closest('.accordion-item');
+            const isActive = accordionItem.classList.contains('active');
+            
+            // Close all accordions
+            document.querySelectorAll('.accordion-item').forEach(item => {
+              item.classList.remove('active');
+            });
+            
+            // Open the clicked accordion if it wasn't already open
+            if (!isActive) {
+              accordionItem.classList.add('active');
+            }
+          });
+        });
+
+        // Tabs functionality
+        const tabButtons = document.querySelectorAll('.accordion-tab-button');
+        tabButtons.forEach(button => {
+          button.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            const accordionItem = this.closest('.accordion-item');
+            
+            // Remove active class from all buttons in this accordion
+            accordionItem.querySelectorAll('.accordion-tab-button').forEach(btn => {
+              btn.classList.remove('active');
+            });
+            
+            // Remove active class from all tab contents in this accordion
+            accordionItem.querySelectorAll('.accordion-tab-content').forEach(content => {
+              content.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Add active class to corresponding tab content
+            accordionItem.querySelector(`[data-tab-content="${tabId}"]`).classList.add('active');
+          });
+        });
       });
       const svgTemplate = `
             <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
@@ -1327,7 +2130,7 @@
               currentY, // Mesma altura
               -10 + (Math.random() * 10 - 5), // Rotação: entre -20° e -10° (variação aleatória)
               // ALTERAR: -15 = inclinação base. -30 = mais inclinada, 0 = reta
-              delay
+              delay,
             );
 
             // Cria pegada DIREITA
@@ -1336,7 +2139,7 @@
               currentY, // Mesma altura
               15 + (Math.random() * 10 - 5), // Rotação: entre 10° e 20° (variação aleatória)
               // ALTERAR: 15 = inclinação base. 30 = mais inclinada, 0 = reta
-              delay + 0.05 // Aparece 0.05s depois da pegada esquerda
+              delay + 0.05, // Aparece 0.05s depois da pegada esquerda
               // ALTERAR: 0.05 = pequeno atraso. 0.2 = atraso maior entre esquerda/direita
             );
 

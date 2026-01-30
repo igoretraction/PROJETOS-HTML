@@ -1,0 +1,838 @@
+<p></p>
+<meta content="width=device-width, initial-scale=1.0" />
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+  /* --- Configurações Gerais --- */
+  /* Prefixo "pd-" adicionado a todas as classes para evitar conflitos */
+
+  .pd-container-geral {
+    font-family: "Open Sans", sans-serif;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 60px;
+    margin-bottom: 60px;
+    padding: 20px;
+    background-color: #fff;
+  }
+
+  .pd-header-area {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .pd-main-title {
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #d7a904;
+    margin: 0;
+  }
+
+  .pd-intro-section {
+    width: 100%;
+    max-width: 1200px;
+    background-color: #fff;
+    border-top: 4px solid #d7a904;
+    border-radius: 0 0 15px 15px;
+    /* box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.1); */
+    padding: 40px;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  .pd-intro-headline {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    margin-top: 0;
+    color: #444;
+    font-weight: 700;
+  }
+
+  .pd-intro-text {
+    text-align: center;
+    margin: 0 auto 20px auto;
+    max-width: 900px;
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  .pd-highlight {
+    font-weight: 700;
+    color: #000;
+    background: linear-gradient(120deg, #fcf2cfc5 0%, #fcf2cfc5 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 40%;
+    background-position: 0 88%;
+  }
+
+  /* --- Ícones --- */
+  .pd-icons-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  .pd-icon-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #eee;
+    border-bottom: 3px solid #d7a904;
+    border-radius: 12px;
+    padding: 15px;
+    min-height: 100px;
+    width: 180px;
+    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); */
+    transition: transform 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .pd-icon-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .pd-icon-card svg {
+    margin-bottom: 8px;
+    fill: #333;
+  }
+
+  .pd-icon-label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0;
+    text-align: center;
+  }
+
+  /* --- Vantagens --- */
+  .pd-benefits-section {
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  .pd-benefits-title-area {
+    text-align: center;
+    margin: 50px 0px;
+  }
+
+  .pd-benefits-title-area h4 {
+    font-size: 1.8rem;
+    color: #2c2c2c;
+    margin: 0;
+    display: inline-block;
+    border-bottom: 3px solid #d7a904;
+    padding-bottom: 10px;
+  }
+
+  .pd-benefit-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    margin-bottom: 80px;
+    background-color: #fff;
+  }
+
+  .pd-benefit-row:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  .pd-benefit-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .pd-benefit-content h5 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+    font-weight: 700;
+    text-align: left;
+  }
+
+  .pd-benefit-content p {
+    color: #666;
+    text-align: justify;
+    margin: 0;
+  }
+
+  .pd-benefit-row img[class*="pd-img-vantagem-"] {
+    flex: 1;
+    width: 100%;
+    max-width: 550px;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+    border-radius: 12px;
+    /* box-shadow: -25px 25px 25px rgba(0, 0, 0, 0.1); */
+  }
+
+  /* --- Especificações --- */
+  .pd-specs-section-table {
+    width: 100%;
+    max-width: 900px;
+    justify-content: center;
+  }
+
+  .pd-specs-title,
+  .pd-dims-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c2c2c;
+    font-weight: 700;
+    margin-top: 0;
+  }
+
+  .pd-specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.05); */
+  }
+
+  .pd-specs-row td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+    width: 50%;
+  }
+
+  .pd-specs-row td:first-child {
+    font-weight: 700;
+    color: #444;
+    background-color: #fdfdfd;
+  }
+
+  .pd-specs-row:nth-child(even) {
+    background-color: #fcf8e360;
+  }
+
+  /* --- Dimensões --- */
+  .pd-dimensoes-section {
+    text-align: center;
+    display: inline-block;
+    align-items: center;
+    gap: 20px;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .pd-dimensoes-section img {
+    max-width: 70%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid #eee;
+  }
+
+  .pd-dims-images {
+    justify-content: center;
+    display: flex;
+  }
+
+  .pd-img-responsiva {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Por padrão (telas grandes), escondemos a imagem mobile e mostramos a desktop */
+  .img-mobile {
+    display: none;
+  }
+
+  .img-desktop {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  /* --- MOBILE / RESPONSIVIDADE --- */
+  @media (max-width: 768px) {
+    .pd-intro-section {
+      padding: 20px 15px;
+    }
+    .pd-icons-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .pd-icon-card {
+      width: 100%;
+      min-height: 90px;
+      padding: 10px;
+    }
+    .pd-benefit-row,
+    .pd-benefit-row:nth-child(even) {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .pd-benefit-content {
+      display: contents;
+    }
+    .pd-benefit-content h5 {
+      order: 1;
+      text-align: center;
+    }
+    .pd-benefit-row img {
+      order: 2;
+      max-height: 300px;
+      margin: 10px 0;
+      object-fit: cover !important;
+    }
+    .pd-benefit-content p {
+      order: 3;
+    }
+    .pd-dimensoes-section {
+      justify-content: center;
+      width: 100%;
+    }
+    .pd-dimensoes-section img {
+      max-width: 100%;
+    }
+
+    .pd-specs-table {
+      display: block;
+      width: 100%;
+      border: none;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .pd-specs-table tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .pd-specs-row {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      background-color: #fff;
+      border: 1px solid #dcdcdc;
+      border-radius: 6px;
+      padding: 12px 15px;
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    .pd-specs-row:nth-child(even),
+    .pd-specs-row:nth-child(odd) {
+      background-color: #fff;
+    }
+
+    .pd-specs-row td {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: none !important;
+      text-align: left;
+    }
+
+    .pd-specs-row td:first-child {
+      color: #999;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      font-weight: 600;
+    }
+
+    .pd-specs-row td:last-child {
+      color: #333;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    /* Controle das imagens responsivas */
+    .img-desktop {
+      display: none;
+    }
+    .img-mobile {
+      display: block;
+      width: 100%;
+    }
+  }
+</style>
+
+<div class="pd-container-geral">
+  <section class="pd-intro-section">
+    <h3 class="pd-intro-headline">
+      Cadeira Escritório Slim Vegas Base Giratória Estofada - Nude: Sofisticação
+      e Aconchego para o seu Espaço
+    </h3>
+
+    <p class="pd-intro-text">
+      A verdadeira sofisticação não precisa gritar para ser notada. Ela aparece
+      na harmonia dos tons, no design bem resolvido e na sensação de um ambiente
+      <span class="pd-highlight">profissional</span> — sem perder o
+      <span class="pd-highlight">conforto</span>.
+    </p>
+
+    <p class="pd-intro-text">
+      A <span class="pd-highlight">Cadeira Giratória Vegas Slim Nude</span> une
+      o visual minimalista com um toque acolhedor: assento estofado, linhas
+      leves e base cromada que comunica um luxo discreto. Ideal para escritório,
+      home office e consultórios, com
+      <span class="pd-highlight">ajuste de altura</span> para encaixar na sua
+      rotina e uma estrutura projetada para durar.
+    </p>
+
+    <div class="pd-icons-wrapper">
+      <div class="pd-icon-card">
+        <span id="pd-icone-cor"></span>
+        <p class="pd-icon-label">Cor Versátil</p>
+      </div>
+
+      <div class="pd-icon-card">
+        <span id="pd-icone-conforto"></span>
+        <p class="pd-icon-label">Assento Estofado</p>
+      </div>
+
+      <div class="pd-icon-card">
+        <span id="pd-icone-ergonomia"></span>
+        <p class="pd-icon-label">Ajuste de Altura</p>
+      </div>
+
+      <div class="pd-icon-card">
+        <span id="pd-icone-peso"></span>
+        <p class="pd-icon-label">Suporta 120kg</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pd-benefits-section">
+    <div class="pd-benefits-title-area">
+      <h4>Vantagens do Produto</h4>
+    </div>
+
+    <div class="pd-benefit-row">
+      <div class="pd-benefit-content">
+        <h5 class="headline-vantagem-1">Base Neutra e Elegante</h5>
+        <p class="text-vantagem-1">
+          A cadeira <strong>Vegas</strong> é atemporal e fácil de combinar: cria uma
+          base sofisticada para qualquer estilo de decoração e harmoniza com
+          <strong>madeira</strong>, <strong>metais</strong> (dourado, cobre,
+          prata), <strong>vidro</strong> e uma ampla paleta — do branco aos tons
+          terrosos e pastéis. É a cor perfeita para um espaço sério, mas
+          convidativo.
+        </p>
+      </div>
+
+      <!-- Troque a imagem pela do produto/ambiente -->
+      <img
+        class="pd-img-vantagem-1"
+        src="https://dkadidecor.cdn.magazord.com.br/img/2026/01/produto/19424/design-sem-nome-3.gif"
+        alt="Cadeira Vegas Slim Nude em ambiente"
+      />
+    </div>
+
+    <div class="pd-benefit-row">
+      <div class="pd-benefit-content">
+        <h5 class="headline-vantagem-2">Conforto que Acolhe no Dia a Dia</h5>
+        <p class="text-vantagem-2">
+          Trabalhar por horas fica mais leve quando o assento entrega a sensação
+          certa. O <strong>estofado macio</strong>
+          e o design slim criam um equilíbrio entre presença e leveza visual,
+          tornando a cadeira ideal para home office, escritório e consultórios —
+          sem pesar no ambiente.
+        </p>
+      </div>
+
+      <!-- Troque a imagem pela do produto/close do estofado -->
+      <img
+        class="pd-img-vantagem-2"
+        src="https://dkadidecor.cdn.magazord.com.br/img/2026/01/produto/19427/screenshot-1.png"
+        alt="Detalhe do assento estofado da cadeira"
+      />
+    </div>
+
+    <div class="pd-benefit-row">
+      <div class="pd-benefit-content">
+        <h5 class="headline-vantagem-3">
+          Mobilidade, Ajuste e Estrutura Robusta
+        </h5>
+        <p class="text-vantagem-3">
+          A base <strong>giratória</strong> facilita a rotina, enquanto o
+          <strong>ajuste de altura</strong> permite um encaixe melhor na sua
+          mesa e postura. A construção alia estética e força:
+          <strong>estrutura em metal cromado</strong>, assento com base em
+          <strong>madeira</strong> e resistência de <strong>até 120kg</strong>.
+          <br /><br />
+          <strong>Importante:</strong> o produto é enviado
+          <strong>desmontado</strong> e acompanha <strong>manual</strong>; a
+          montagem é feita com <strong>parafusos</strong>.
+        </p>
+      </div>
+
+      <!-- Troque a imagem pela do produto/lado/base cromada -->
+      <img
+        class="pd-img-vantagem-3"
+        src="https://dkadidecor.cdn.magazord.com.br/img/2026/01/produto/19426/screenshot-2.png"
+        alt="Base cromada e sistema giratório da cadeira"
+      />
+    </div>
+     <div class="pd-benefit-row">
+      <div class="pd-benefit-content">
+        <h5 class="headline-vantagem-2">Alavanca de Regulagem</h5>
+        <p class="text-vantagem-2">
+          A Cadeira Office Vegas Slim conta com alavanca de regulagem que permite ajustar a altura do assento de forma prática e suave. Com um simples movimento, você adapta a cadeira à sua mesa e à sua postura, garantindo mais conforto, ergonomia e facilidade no uso diário.
+        </p>
+      </div>
+
+      <!-- Troque a imagem pela do produto/close do estofado -->
+      <img
+        class="pd-img-vantagem-2"
+        src="https://dkadidecor.cdn.magazord.com.br/img/2026/01/produto/19425/screenshot-3.png"
+        alt="Detalhe do assento estofado da cadeira"
+      />
+    </div>
+  </section>
+
+  <section class="pd-specs-section-table">
+    <h6 class="pd-specs-title">Especificações do Produto</h6>
+
+    <table class="pd-specs-table">
+      <tbody>
+        <tr class="pd-specs-row">
+          <td>Produto</td>
+          <td>Cadeira Escritório Slim Vegas Base Giratória Estofada</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Linha/Coleção</td>
+          <td>Office Vegas Slim</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Cor</td>
+          <td>Nude, Ciano, Rosa Quartzo, Turquesa, Vinho</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Segmento</td>
+          <td>Cadeiras para Escritório</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Modelo</td>
+          <td>Slim</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Base Giratória</td>
+          <td>Sim</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Altura</td>
+          <td>75 a 87 cm</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Altura do Assento</td>
+          <td>43 a 54 cm</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Altura do Encosto</td>
+          <td>33 cm</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Largura</td>
+          <td>47 cm</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Profundidade</td>
+          <td>36 cm</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Material da Estrutura</td>
+          <td>Metal Cromado</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Material do Assento</td>
+          <td>Madeira</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Resistência</td>
+          <td>120 kg</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Peso do Produto</td>
+          <td>6 kg</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Acompanha Manual</td>
+          <td>Sim (manual de montagem)</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Montagem</td>
+          <td>Parafusos</td>
+        </tr>
+
+        <tr class="pd-specs-row">
+          <td>Produto Enviado</td>
+          <td>
+            Enviado desmontado, acondicionado em caixa de papelão reforçada
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="pd-dimensoes-section">
+    <h6 class="pd-dims-title">Dimensões do Produto</h6>
+
+    <div class="pd-dims-images">
+      <!-- Se você tiver imagens de medidas (desktop e mobile), substitua as URLs abaixo -->
+      <img
+        class="pd-img-responsiva img-desktop"
+        src="https://dkadidecor.cdn.magazord.com.br/img/2026/01/produto/19398/213-cadeira-escritorio-slim-vegas-base-giratoria-estofada.jpeg"
+        alt="Medidas da cadeira (desktop)"
+      />
+
+      <img
+        class="pd-img-responsiva img-mobile"
+        src="https://dkadidecor.cdn.magazord.com.br/img/2026/01/produto/19398/213-cadeira-escritorio-slim-vegas-base-giratoria-estofada.jpeg"
+        alt="Medidas da cadeira (mobile)"
+      />
+    </div>
+  </section>
+</div>
+
+<script>
+  // <![CDATA[
+
+  /* ÍCONES (SVG inline) */
+  const pdIconeCor = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2C8.134 2 5 5.134 5 9c0 4.167 3.41 9.297 6.13 12.26a1.12 1.12 0 0 0 1.74 0C15.59 18.297 19 13.167 19 9c0-3.866-3.134-7-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+    </svg>
+  `;
+
+  const pdIconeConforto = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 12c0-2.761 2.239-5 5-5h6c2.761 0 5 2.239 5 5v6a2 2 0 0 1-2 2h-1a1 1 0 0 1-1-1v-2H9v2a1 1 0 0 1-1 1H7a2 2 0 0 1-2-2v-6zm5-3a3 3 0 0 0-3 3v3h12v-3a3 3 0 0 0-3-3H9z"/>
+    </svg>
+  `;
+
+  const pdIconeErgonomia = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2a1 1 0 0 1 1 1v2h3a1 1 0 1 1 0 2h-3v2a1 1 0 1 1-2 0V7H8a1 1 0 1 1 0-2h3V3a1 1 0 0 1 1-1z"/>
+      <path d="M7 10a3 3 0 0 1 3-3h4a3 3 0 0 1 3 3v5a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4v-5zm3-1a1 1 0 0 0-1 1v5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-5a1 1 0 0 0-1-1h-4z"/>
+      <path d="M6 22a1 1 0 0 1 1-1h10a1 1 0 1 1 0 2H7a1 1 0 0 1-1-1z"/>
+    </svg>
+  `;
+
+  const pdIconePeso = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 7a3 3 0 1 1 6 0h2a2 2 0 0 1 2 2l-1.2 10.2A2 2 0 0 1 17.82 21H6.18a2 2 0 0 1-1.98-1.8L3 9a2 2 0 0 1 2-2h2zm2 0h2a1 1 0 1 0-2 0z"/>
+    </svg>
+  `;
+
+  function pdRenderizaIcone(idElemento, conteudoSVG) {
+    const elemento = document.getElementById(idElemento);
+    if (elemento) elemento.innerHTML = conteudoSVG;
+  }
+
+  pdRenderizaIcone("pd-icone-cor", pdIconeCor);
+  pdRenderizaIcone("pd-icone-conforto", pdIconeConforto);
+  pdRenderizaIcone("pd-icone-ergonomia", pdIconeErgonomia);
+  pdRenderizaIcone("pd-icone-peso", pdIconePeso);
+
+  // ]]>
+</script>
+
+
+<!-- descrição antiga
+ <style>
+/* --- CONFIGURAÇÃO GERAL --- */
+    .content-description-product, .characteristics {
+        margin: 10px 0;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    /* --- LÓGICA DE CENTRALIZAÇÃO (PADRÃO APROVADO) --- */
+    .content-description, .characteristics {
+        width: 80%;       /* O conteúdo ocupa 80% da tela */
+        margin: 0 auto;   /* Centraliza: 10% Esq. / 10% Dir. */
+        font-family: Arial, sans-serif; 
+        color: #333;
+    }
+
+    /* --- REGRA PARA CELULAR (MOBILE) --- */
+    @media (max-width: 768px) {
+        .content-description, .characteristics {
+            width: 100%;  /* No celular usa a tela toda */
+            margin: 0;    /* Remove as margens laterais */
+            padding: 5px;
+        }
+    }
+
+    /* --- TIPOGRAFIA --- */
+    .content-description h2 {
+        color: #222;
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+    }
+
+    .content-description h3, .characteristics h2 {
+        font-size: 1.1rem;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        color: #222;
+    }
+
+    .content-description p, .content-description ul, .characteristics ul {
+        font-size: 1rem;
+        line-height: 1.5; 
+        margin-bottom: 15px;
+    }
+
+    /* --- ESTILO DA TABELA COMPACTA --- */
+    .tabela-specs {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .tabela-specs th, .tabela-specs td {
+        border: 1px solid #ddd;
+        padding: 3px 6px; 
+        text-align: left;
+        font-size: 0.9rem;
+    }
+    .tabela-specs th {
+        background-color: #4CAF50; /* Verde Dkadi */
+        color: white;
+        font-weight: bold;
+        text-transform: uppercase;
+        width: 35%;
+    }
+    .tabela-specs tr:nth-child(even) { background-color: #f9f9f9; }
+    .tabela-specs tr:hover { background-color: #f1f1f1; }
+    
+    /* --- DETALHES (ACCORDION) --- */
+    details {
+        margin-top: 15px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 4px;
+        background-color: #fafafa;
+    }
+    summary { font-weight: bold; cursor: pointer; list-style: none; }
+    summary::before { content: '+ '; margin-right: 5px; color: #4CAF50; }
+    details[open] summary::before { content: '− '; color: #d32f2f; }
+    details[open] summary { margin-bottom: 10px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+</style> -->
+<!-- <div class="content-description-product clearfix">
+<div class="content-description" style="text-align: justify;">
+<h2>Cadeira Escrit&oacute;rio Slim Vegas Base Girat&oacute;ria Estofada - Amarelo: Injete Energia e Criatividade no seu Espa&ccedil;o</h2>
+<p>A monotonia &eacute; a maior inimiga das grandes ideias. Seu espa&ccedil;o de trabalho precisa de um ponto de luz, uma fa&iacute;sca de ousadia que desperte a mente e inspire a pr&oacute;xima solu&ccedil;&atilde;o inovadora.</p>
+<ul>
+<li><strong>Ponto de Destaque:</strong> A cor amarela vibrante transforma a cadeira na pe&ccedil;a central do ambiente, estimulando a criatividade.</li>
+<li><strong>Fluxo de Trabalho Din&acirc;mico:</strong> A base girat&oacute;ria com rod&iacute;zios de deslize f&aacute;cil acompanha seu ritmo, da lousa ao computador.</li>
+<li><strong>Conforto para Maratonas Criativas:</strong> Assento estofado e encosto ergon&ocirc;mico para suportar longas sess&otilde;es de brainstorming.</li>
+<li><strong>Design que Inspira:</strong> Linhas modernas e minimalistas que complementam ambientes de startup, ag&ecirc;ncias e est&uacute;dios.</li>
+<li><strong>Estrutura Robusta:</strong> Fabricada em metal cromado e madeira, suporta at&eacute; 120kg para aguentar o ritmo intenso do dia a dia.</li>
+</ul>
+<br /><hr />
+<h3>Como posso quebrar a seriedade do meu escrit&oacute;rio e torn&aacute;-lo mais inspirador?</h3>
+<p>A Cadeira Vegas Amarela &eacute; a solu&ccedil;&atilde;o perfeita para injetar personalidade e energia no seu ambiente. Ela funciona como um ponto de cor estrat&eacute;gico que quebra a monotonia e estimula o pensamento criativo, provando que um espa&ccedil;o de trabalho pode ser ao mesmo tempo profissional e vibrante, uma filosofia que a <strong>Dkadi Decor</strong> aplica em sua curadoria de produtos.</p>
+<h3>O design parece &oacute;timo, mas ela &eacute; confort&aacute;vel para quem trabalha o dia todo?</h3>
+<p>Sim, o conforto &eacute; um pilar do seu design. Projetada para o uso cont&iacute;nuo, seu encosto se adapta &agrave; curvatura das costas e o assento estofado alivia a press&atilde;o, permitindo que voc&ecirc; se concentre totalmente em suas ideias, sem o desconforto como distra&ccedil;&atilde;o.</p>
+<h3>Essa cadeira &eacute; resistente o suficiente para um ambiente de trabalho agitado?</h3>
+<p>Com certeza. Sua estrutura foi pensada para o dinamismo, com base em metal cromado e assento em madeira capazes de suportar at&eacute; 120kg. E para qualquer quest&atilde;o sobre seu processo de compra ou status do pedido, o <strong>suporte humanizado da Dkadi Decor</strong> oferece um atendimento r&aacute;pido e eficiente para voc&ecirc;.</p>
+<p>D&ecirc; ao seu espa&ccedil;o de trabalho a energia que suas ideias merecem. Adquira a Cadeira Vegas Amarela e transforme seu ambiente em uma usina de criatividade.</p>
+</div>
+</div>
+<hr />
+<div class="characteristics">
+<h2 style="border-bottom: 2px solid #4CAF50; display: inline-block; padding-bottom: 5px;">Especifica&ccedil;&otilde;es T&eacute;cnicas</h2>
+<table class="tabela-specs">
+<tbody>
+<tr><th>Linha/Cole&ccedil;&atilde;o</th>
+<td>Office Vegas Slim</td>
+</tr>
+<tr><th>Modelo</th>
+<td>Slim</td>
+</tr>
+<tr><th>Segmento</th>
+<td>Cadeiras para Escrit&oacute;rio</td>
+</tr>
+<tr><th>Cor</th>
+<td>Amarelo</td>
+</tr>
+<tr><th>Material da Estrutura</th>
+<td>Metal Cromado</td>
+</tr>
+<tr><th>Material do Assento</th>
+<td>Madeira</td>
+</tr>
+<tr><th>Altura Total (cm)</th>
+<td>72 a 83</td>
+</tr>
+<tr><th>Altura do Assento (cm)</th>
+<td>40 a 51</td>
+</tr>
+<tr><th>Altura do Encosto (cm)</th>
+<td>33</td>
+</tr>
+<tr><th>Largura (cm)</th>
+<td>47</td>
+</tr>
+<tr><th>Profundidade (cm)</th>
+<td>36</td>
+</tr>
+<tr><th>Base Girat&oacute;ria</th>
+<td>Sim</td>
+</tr>
+<tr><th>Resist&ecirc;ncia (Kg)</th>
+<td>120</td>
+</tr>
+<tr><th>Peso do Produto (Kg)</th>
+<td>6</td>
+</tr>
+<tr><th>Sistema de Montagem</th>
+<td>Parafusos</td>
+</tr>
+<tr><th>Acompanha Manual</th>
+<td>Sim (Acompanha manual de montagem)</td>
+</tr>
+<tr><th>Produto Enviado</th>
+<td>Desmontado, acondicionado em caixa de papel&atilde;o refor&ccedil;ada</td>
+</tr>
+</tbody>
+</table>
+</div> -->
+<!--

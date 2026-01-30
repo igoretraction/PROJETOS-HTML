@@ -1,0 +1,632 @@
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css"
+/>
+<style type="text/css">
+  @import url("https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap");
+  @import url("https://fonts.googleapis.com/css2?family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap");
+  body {
+    font-family: "Radio Canada", sans-serifa !important;
+  }
+  .container-descricao-geral {
+    font-family: "Radio Canada", sans-serif;
+
+    max-width: 1240px;
+    margin: auto;
+    padding: 10px;
+  }
+  .content-descricao-geral {
+    font-family: "Radio Canada", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .item-descricao {
+    font-family: "Radio Canada", sans-serif;
+
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    justify-content: center;
+  }
+  .imagem-primeiro {
+    font-family: "Radio Canada", sans-serif;
+
+    /*Imagem na Esquerda*/
+    order: 0; /*Aqui a ordem é mudada*/
+    justify-content: flex-start !important;
+  }
+  .imagem-segundo {
+    font-family: "Radio Canada", sans-serif;
+    /*Imagem na Direita*/
+    order: 2; /*Aqui a ordem é mudada*/
+    justify-content: flex-end !important;
+  }
+  .item-imagem-descricao {
+    font-family: "Radio Canada", sans-serif;
+    display: flex;
+    justify-content: center;
+    width: 620px;
+  }
+  .item-imagem-descricao img {
+    width: 620px;
+    font-family: "Radio Canada", sans-serif;
+    height: 300px;
+  }
+  .item-imagem-descricao video {
+    font-family: "Radio Canada", sans-serif;
+    width: 620px;
+    height: 300px;
+  }
+  .item-texto-descricao {
+    font-family: "Radio Canada", sans-serif;
+    width: 600px;
+    font-size: 15px;
+  }
+  .content-descricao-principal {
+    font-family: "Radio Canada", sans-serif;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .tabela-medidas {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  .tabela-mobile {
+    display: none;
+  }
+  .tabela-desktop {
+    display: block;
+  }
+  .colapsavel-desc {
+    width: 600px;
+  }
+  @media (max-width: 768px) {
+    .container-descricao-geral {
+      width: 100%;
+    }
+    .item-imagem-descricao {
+      width: 100%;
+    }
+    .item-texto-descricao {
+      width: 100%;
+    }
+    .item-descricao {
+      flex-direction: column;
+    }
+    .imagem-primeiro {
+      /*Imagem na Esquerda*/
+      order: 0; /*Aqui a ordem é mudada*/
+      justify-content: center !important;
+    }
+    .imagem-segundo {
+      /*Imagem na Direita*/
+      order: 0; /*Aqui a ordem é mudada*/
+      justify-content: center !important;
+    }
+    .tabela-mobile {
+      display: block;
+    }
+    .tabela-mobile img {
+      width: 100%;
+    }
+    .tabela-desktop {
+      display: none;
+    }
+    .content-descricao-principal {
+      flex-direction: column;
+    }
+    .item-imagem-descricao video {
+      width: 100%;
+      height: auto;
+    }
+    .item-imagem-descricao img {
+      width: 100%;
+      height: auto;
+    }
+    .colapsavel-desc {
+      width: 100%;
+    }
+  }
+
+  .accordion-descricao .accordion-descricao-item {
+    border-bottom: 1px solid #e5e5e5;
+  }
+  .accordion-descricao .accordion-descricao-item button[aria-expanded="true"] {
+    border-bottom: 1px solid #474747;
+  }
+  .accordion-descricao button {
+    position: relative;
+    display: block;
+    text-align: left;
+    width: 100%;
+    padding: 1em 0;
+    color: #333;
+    font-size: 18px;
+    font-weight: 400;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+  }
+  .accordion-descricao button:hover,
+  .accordion-descricao button:focus {
+    cursor: pointer;
+    color: #474747;
+  }
+  .accordion-descricao button:hover::after,
+  .accordion-descricao button:focus::after {
+    cursor: pointer;
+    color: #474747;
+    border: 1px solid #474747;
+  }
+  .accordion-descricao button .accordion-descricao-title {
+    padding: 1em 1.5em 1em 0;
+  }
+  .accordion-descricao button .icon {
+    display: inline-block;
+    position: absolute;
+    top: 18px;
+    right: 0;
+    width: 22px;
+    height: 22px;
+    border: 1px solid;
+    border-radius: 22px;
+  }
+  .accordion-descricao button .icon::before {
+    display: block;
+    position: absolute;
+    content: "";
+    top: 9px;
+    left: 5px;
+    width: 10px;
+    height: 2px;
+    background: currentColor;
+  }
+  .accordion-descricao button .icon::after {
+    display: block;
+    position: absolute;
+    content: "";
+    top: 5px;
+    left: 9px;
+    width: 2px;
+    height: 10px;
+    background: currentColor;
+  }
+  .accordion-descricao button[aria-expanded="true"] {
+    color: #474747;
+  }
+  .accordion-descricao button[aria-expanded="true"] .icon::after {
+    width: 0;
+  }
+  .accordion-descricao
+    button[aria-expanded="true"]
+    + .accordion-descricao-content {
+    opacity: 1;
+    max-height: 9em;
+    transition: all 200ms linear;
+    will-change: opacity, max-height;
+  }
+  .accordion-descricao .accordion-descricao-content {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition:
+      opacity 200ms linear,
+      max-height 200ms linear;
+    will-change: opacity, max-height;
+  }
+  .accordion-descricao .accordion-descricao-content p {
+    font-size: 15px;
+    font-weight: 300;
+    margin: 2em 0;
+  }
+  .image-table {
+    max-width: 390px;
+    max-height: 530px;
+  }
+
+  .images-new {
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    margin-top: 45px;
+  }
+  .accordion-descricao-item img {
+    max-width: 20px;
+    max-height: 20px;
+  }
+  .card-icons {
+    max-height: 40px;
+    max-width: 1240px;
+    margin: auto;
+  }
+  .swiper-wrapper {
+    height: 10% !important;
+  }
+  .card-title {
+    font-family: "Radio Canada", sans-serif;
+    text-align: left;
+    font-size: 24px;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 10px;
+  }
+  .card-texts {
+    width: 100%;
+    text-align: left;
+  }
+  .card-texts hr {
+    margin-left: inherit;
+    max-width: 20%;
+  }
+  .accordion-descricao button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    max-height: 60px;
+  }
+
+  .card-icon {
+    place-items: center;
+    align-items: center;
+    margin: 0;
+    justify-content: center;
+    display: flex;
+    gap: 11px;
+  }
+  .container-description {
+    margin: auto;
+    max-width: 1240px;
+  }
+</style>
+<section class="container-description">
+  <div class="card-icons">
+    <div class="swiper-container card-icons-swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="card-icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2484/magnifying-glass-8904110-1.png"
+              alt=""
+            />
+            <span>Zero Transparência</span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="card-icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2483/bra-17162092.png"
+              alt=""
+            />
+            <span>Teste</span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="card-icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2481/pattern-design-1011978.png"
+              alt=""
+            />
+            <span>Costuras Reforçadas</span>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="card-icon">
+            <img
+              src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2480/arrows-10009671.png"
+              alt=""
+            />
+            <span>Cós Alto com Alta Compressão</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-texts" style="text-align: left">
+    <h1 class="card-title">Descrição do Produto</h1>
+    <hr style="text-align: left" />
+  </div>
+  <div class="container-descricao-geral">
+    <div class="content-descricao-principal">
+      <div class="video-descricao">
+        <img
+          alt=""
+          src="https://evorianactivewear.cdn.magazord.com.br/img/2024/02/produto/460/evorian-1300.jpg"
+          width="380"
+        />
+      </div>
+
+      <div class="colapsavel-desc">
+        <div class="accordion-descricao">
+          <div class="accordion-descricao-item">
+            <button aria-expanded="true" id="accordion-descricao-button-1">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2479/look-2698633.png"
+                alt=""
+              />
+              <span class="accordion-descricao-title"
+                >Zero Transpar&ecirc;ncia</span
+              >
+            </button>
+
+            <div class="accordion-descricao-content">
+              <p>
+                Confian&ccedil;a total com tecidos de alta qualidade que
+                eliminam qualquer preocupa&ccedil;&atilde;o com
+                transpar&ecirc;ncia.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-descricao-item">
+            <button aria-expanded="false" id="accordion-descricao-button-2">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2478/castanets-6600762.png"
+                alt=""
+              />
+              <span class="accordion-descricao-title"
+                >Top com entrada para Bojo</span
+              >
+            </button>
+
+            <div class="accordion-descricao-content">
+              <p>
+                O top do conjunto n&atilde;o acompanha bojo, mas possui entradas
+                especiais para a inser&ccedil;&atilde;o de bojo, permitindo
+                personalizar o suporte e o formato conforme sua
+                prefer&ecirc;ncia.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-descricao-item">
+            <button aria-expanded="false" id="accordion-descricao-button-3">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2477/sewing-7926336.png"
+                alt=""
+              />
+              <span class="accordion-descricao-title"
+                >Costuras Refor&ccedil;adas</span
+              >
+            </button>
+
+            <div class="accordion-descricao-content">
+              <p>
+                Confeccionado com costuras refor&ccedil;adas para maior
+                durabilidade e resist&ecirc;ncia durante treinos intensos.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-descricao-item">
+            <button aria-expanded="false" id="accordion-descricao-button-4">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2476/income-12525794.png"
+                alt=""
+              />
+              <span class="accordion-descricao-title"
+                >C&oacute;s Alto com Alta Compress&atilde;o</span
+              >
+            </button>
+
+            <div class="accordion-descricao-content">
+              <p>
+                teste
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-descricao-item">
+            <button aria-expanded="false" id="accordion-descricao-button-5">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2475/doll-6515150.png"
+                alt=""
+              />
+              <span class="accordion-descricao-title"
+                >Defini&ccedil;&atilde;o da Silhueta</span
+              >
+            </button>
+
+            <div class="accordion-descricao-content">
+              <p>
+                A cintura alta e o design que modela o corpo garantem uma
+                silhueta definida, proporcionando um ajuste perfeito que
+                real&ccedil;a suas curvas.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-descricao-item">
+            <button aria-expanded="false" id="accordion-descricao-button-6">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2474/decrease-9727663.png"
+                alt=""
+              />
+              <span class="accordion-descricao-title"
+                >Elasticidade Superior</span
+              >
+            </button>
+
+            <div class="accordion-descricao-content">
+              <p>
+                A combina&ccedil;&atilde;o de poliamida com elastano proporciona
+                grande elasticidade, permitindo liberdade de movimento e ajuste
+                din&acirc;mico ao seu corpo.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-descricao-item">
+            <button aria-expanded="false" id="accordion-descricao-button-7">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2473/wind-627220.png"
+                alt=""
+              />
+              <span class="accordion-descricao-title">Conforto e Frescor</span>
+            </button>
+
+            <div class="accordion-descricao-content">
+              <p>
+                A tecnologia avan&ccedil;ada do tecido proporciona uma
+                sensa&ccedil;&atilde;o de frescor durante todo o treino,
+                mantendo voc&ecirc; confort&aacute;vel e focada.
+              </p>
+            </div>
+          </div>
+
+          <div class="accordion-descricao-item">
+            <button aria-expanded="false" id="accordion-descricao-button-8">
+              <img
+                src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2472/increase-9727671.png"
+                alt=""
+              />
+              <span class="accordion-descricao-title">Desempenho Elevado</span>
+            </button>
+
+            <div class="accordion-descricao-content">
+              <p>
+                A modelagem anat&ocirc;mica e o c&oacute;s com alta
+                compress&atilde;o s&atilde;o ideais para melhorar sua
+                performance, oferecendo suporte adicional em cada movimento.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr
+    style="width: 50%; color: #bbbbbb; margin-top: 20px; margin-bottom: 40px"
+  />
+  <div class="content-descricao-geral">
+    <div class="item-descricao">
+      <div class="item-imagem-descricao imagem-primeiro">
+        <img
+          alt=""
+          src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2485/design-sem-nome-3.png"
+        />
+      </div>
+
+      <div class="item-texto-descricao">
+        <p>
+          <strong>Teste</strong>
+        </p>
+
+        <p>
+          O tecido Evolution oferece uma composição de 100% poliamida em uma
+          gramatura leve e com características únicas, entregando uma
+          experiência de uso diferenciada. Por ser uma poliamida opaca com
+          efeito diagonal, contribui para sua textura suave e confortável. A
+          baixa gramatura adiciona uma sensação de leveza às peças, tornando-o
+          uma escolha agradável para diversas ocasiões.
+        </p>
+      </div>
+    </div>
+
+    <div class="item-descricao">
+      <div class="item-imagem-descricao imagem-segundo">
+        <img
+          alt=""
+          src="https://magazord-public.s3.amazonaws.com/evorianactivewear/img/2026/01/produto/2470/design-sem-nome.gif"
+        />
+      </div>
+
+      <div class="item-texto-descricao">
+        <p>
+          <strong>A Escolha Perfeita para Mulheres de Alta Performance</strong>
+        </p>
+
+        <p>
+          Ideal para atividades de alta performance, nosso conjunto fitness
+          &eacute; a escolha perfeita para mulheres que buscam aliar estilo e
+          funcionalidade em cada treino. Sinta a diferen&ccedil;a e conquiste
+          seus objetivos com confian&ccedil;a e conforto.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="card-texts" style="text-align: left">
+    <h1 class="card-title">Tabela de Medidas</h1>
+    <hr style="text-align: left" />
+  </div>
+  <div class="content-images">
+    <div class="images-new">
+      <div class="image">
+        <img
+          class="image-table"
+          src="https://evorianactivewear.cdn.magazord.com.br/img/2025/06/produto/2095/tabela-de-medidas.jpg"
+          alt=""
+        />
+      </div>
+      <div class="image">
+        <img
+          class="image-table"
+          src="https://evorianactivewear.cdn.magazord.com.br/img/2025/06/produto/2095/tabela-de-medidas.jpg"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+<script>
+  // Inicializa Swiper
+  const swiper = new Swiper(".card-icons-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    breakpoints: {
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+      640: {
+        slidesPerView: 4,
+        spaceBetween: 40,
+      },
+    },
+  });
+
+  // Accordion functionality
+  (function () {
+    const buttons = document.querySelectorAll(".accordion-descricao button");
+    console.log("Total de buttons encontrados:", buttons.length);
+
+    buttons.forEach((button, index) => {
+      console.log("Adicionando evento ao button", index);
+      button.addEventListener("click", function (e) {
+        console.log("CLICOU NO BUTTON", index);
+        e.preventDefault();
+        e.stopPropagation();
+
+        const isExpanded = this.getAttribute("aria-expanded") === "true";
+        console.log("Estado atual:", isExpanded);
+
+        // Fecha todos os accordions
+        buttons.forEach((btn) => {
+          btn.setAttribute("aria-expanded", "false");
+        });
+
+        // Abre o clicado se estava fechado
+        if (!isExpanded) {
+          this.setAttribute("aria-expanded", "true");
+          console.log("Expandiu button", index);
+        }
+      });
+    });
+  })();
+</script>

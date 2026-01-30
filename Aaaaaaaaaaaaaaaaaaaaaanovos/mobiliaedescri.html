@@ -1,0 +1,870 @@
+<!-- =======================
+  DIMENSÕES (insere antes de .descricao-produto)
+======================== -->
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Rubik:wght@400;600&display=swap");
+
+  .dimensoes-container {
+    margin: 8px 0 20px 80px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    font-family: "Rubik", sans-serif;
+    max-width: 680px;
+    animation: fadeInUp 0.6s ease-out;
+  }
+  .dimensoes-container ::selection {
+    background-color: transparent;
+  }
+  .dimensoes-titulo {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+  }
+  .dimensoes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .dimensao-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    animation: fadeInUp 0.6s ease-out;
+  }
+  .dimensao-item:hover {
+    background: rgba(0, 0, 0, 0.03);
+    transform: scale(1.02);
+  }
+  .dimensao-icone {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    border-radius: 6px;
+    font-size: 22px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+  .dimensao-info {
+    flex: 1;
+  }
+  .dimensao-label {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .dimensao-valor {
+    font-size: 16px;
+    color: #2c3e50;
+    font-weight: 600;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .dimensao-item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .dimensao-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .dimensao-item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @media (max-width: 768px) {
+    .dimensoes-container {
+      margin: 10px;
+      padding: 15px;
+    }
+    .dimensoes-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .dimensoes-titulo {
+      font-size: 16px;
+      margin-left: 0;
+    }
+    .dimensao-valor {
+      font-size: 15px;
+    }
+  }
+
+  .tooltip {
+    position: relative;
+  }
+  .tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #2c3e50;
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 1000;
+  }
+  .tooltip:hover::after {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  // <![CDATA[
+  $(document).ready(function () {
+    const html = `
+      <div class="dimensoes-container" role="region" aria-label="Dimensões do produto">
+        <div class="dimensoes-titulo">Dimensões</div>
+        <div class="dimensoes-grid">
+
+          <div class="dimensao-item tooltip" data-tooltip="Medida horizontal do produto">
+            <div class="dimensao-icone" aria-hidden="true">↔</div>
+            <div class="dimensao-info">
+              <div class="dimensao-label">Largura:</div>
+              <div class="dimensao-valor">L - 131.2cm</div>
+            </div>
+          </div>
+
+          <div class="dimensao-item tooltip" data-tooltip="Medida vertical do produto">
+            <div class="dimensao-icone" aria-hidden="true">↕</div>
+            <div class="dimensao-info">
+              <div class="dimensao-label">Altura:</div>
+              <div class="dimensao-valor">A - 213.5cm</div>
+            </div>
+          </div>
+
+          <div class="dimensao-item tooltip" data-tooltip="Medida de profundidade do produto">
+            <div class="dimensao-icone" aria-hidden="true">↧</div>
+            <div class="dimensao-info">
+              <div class="dimensao-label">Profundidade:</div>
+              <div class="dimensao-valor">P - 55cm</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+
+    $(html).insertBefore(".descricao-produto");
+  });
+  // ]]>
+</script>
+
+<!-- =======================
+  DESCRIÇÃO COMPLETA (HTML)
+======================== -->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
+
+  /* ===== Escopo ===== */
+  #rd-scope .rn-container {
+    font-family: "Instrument Sans", sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  #rd-scope .product-description {
+    font-family: "Instrument Sans", sans-serif;
+    padding: 60px 0;
+    text-align: center;
+  }
+  #rd-scope .product-description h1 {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #333;
+  }
+
+  #rd-scope .product-details {
+    font-family: "Instrument Sans", sans-serif;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 40px;
+  }
+
+  #rd-scope .gif-placeholder {
+    border-radius: 15px;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #f0f0f0;
+    overflow: hidden;
+  }
+  #rd-scope .gif-placeholder img {
+    border-radius: 15px;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  #rd-scope .product-info h2 {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  #rd-scope .product-info p {
+    font-family: "Instrument Sans", sans-serif;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+  }
+
+  #rd-scope .tech-specs {
+    padding: 50px 0;
+    background: #f7f7f7;
+  }
+  #rd-scope .tech-specs__title {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #333;
+    position: relative;
+    margin-bottom: 26px;
+  }
+  #rd-scope .tech-specs__title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: #333;
+    margin: 10px auto 0;
+    border-radius: 2px;
+    opacity: 0.25;
+  }
+
+  #rd-scope .spec-cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+  }
+  #rd-scope .spec-card {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 14px;
+    align-items: start;
+    background: #fff;
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+  #rd-scope .spec-card__icon {
+    width: 56px;
+    height: 56px;
+    display: grid;
+    place-items: center;
+  }
+  #rd-scope .spec-card__icon img {
+    width: 56px;
+    height: 56px;
+    object-fit: contain;
+    display: block;
+  }
+  #rd-scope .spec-card__body h3 {
+    margin: 2px 0 6px;
+    font-weight: 800;
+    color: #0c0c0c;
+  }
+  #rd-scope .spec-card__body ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+  }
+  #rd-scope .spec-card__body li {
+    color: #555;
+    line-height: 1.35;
+  }
+
+  /* breakpoints */
+  @media (max-width: 1200px) {
+    #rd-scope .spec-cards {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  @media (max-width: 900px) {
+    #rd-scope .spec-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 520px) {
+    #rd-scope .spec-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  #rd-scope .sophistication-section {
+    padding: 60px 0;
+    background: #ffffff;
+  }
+  #rd-scope .sophistication-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 60px;
+  }
+  #rd-scope .sophistication-text h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  #rd-scope .sophistication-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 18px;
+  }
+  #rd-scope .origin-tag {
+    background: #f0f0f0;
+    padding: 8px 16px;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  #rd-scope .layout-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-top: 40px;
+  }
+  #rd-scope .layout-text h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  #rd-scope .layout-text p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+  }
+
+  /* ===== Swiper base (escopo) ===== */
+  #rd-scope .swiper {
+    width: 1240px;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 20px 0;
+    overflow: hidden;
+  }
+  #rd-scope .swiper-wrapper {
+    align-items: stretch;
+  }
+  #rd-scope .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 410px;
+    height: 410px;
+  }
+  #rd-scope .features-swiper .swiper-slide {
+    width: 320px;
+    height: auto;
+  }
+
+  #rd-scope .feature-card {
+    text-align: center;
+    width: 100%;
+    max-width: 320px;
+  }
+  #rd-scope .feature-gif {
+    background: #f0f0f0;
+    border-radius: 15px;
+    margin-bottom: 12px;
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  #rd-scope .feature-gif img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Controles (escopo) */
+  #rd-scope .features-nav {
+    color: #666;
+    background: #e0e0e0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+  }
+  #rd-scope .features-nav:after {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  #rd-scope .swiper-pagination-bullet {
+    background: #ccc;
+    opacity: 0.5;
+  }
+  #rd-scope .swiper-pagination-bullet-active {
+    background: #666;
+    opacity: 1;
+  }
+  #rd-scope .swiper-button-next,
+  #rd-scope .swiper-button-prev,
+  #rd-scope .features-nav {
+    top: 50% !important;
+    transform: translateY(-50%);
+  }
+
+  #rd-scope .testimonials-carousel {
+    width: 1240px;
+    max-width: 100vw;
+    margin: 0 auto 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  @media (max-width: 1300px) {
+    #rd-scope .testimonials-carousel,
+    #rd-scope .swiper {
+      width: 100vw;
+      max-width: 100vw;
+    }
+  }
+
+  /* ======== MOBILE FIX ======== */
+  @media (max-width: 1024px) {
+    #rd-scope .swiper,
+    #rd-scope .testimonials-carousel {
+      margin: 0 auto !important;
+    }
+    #rd-scope .swiper-wrapper {
+      margin: 0 !important;
+    }
+    #rd-scope .swiper-slide {
+      width: 100% !important;
+      height: auto !important;
+    }
+    #rd-scope .features-nav {
+      display: none !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #rd-scope .product-details,
+    #rd-scope .sophistication-content,
+    #rd-scope .layout-section {
+      text-align: center;
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    #rd-scope .product-details {
+      display: flex;
+      flex-direction: column;
+    }
+    #rd-scope .product-details .gif-placeholder {
+      order: 1;
+      max-width: 420px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    #rd-scope .product-details .product-info {
+      order: 2;
+    }
+    #rd-scope .product-description h1 {
+      font-size: 2rem;
+    }
+    #rd-scope .rn-container {
+      padding: 0 15px;
+    }
+  }
+
+  /* animação sections */
+  @media (min-width: 800px) {
+    #rd-scope .about-section {
+      overflow: hidden;
+    }
+  }
+</style>
+
+<div id="rd-scope">
+  <!-- ======= Descrição / header ======= -->
+  <section class="product-description">
+    <div class="rn-container">
+      <h1>Descrição do produto</h1>
+
+      <div class="product-details">
+        <div class="gif-placeholder">
+          <!-- Troque a imagem abaixo pela principal do produto (Mobiliaê/CDN) -->
+          <img
+            src="https://mobiliae.cdn.magazord.com.br/img/2026/01/produto/747/04-roupeiro-varsovia-2-portas.jpeg"
+            alt="Guarda-roupa Casal Varsóvia 2 Portas de Correr Branco em ambiente"
+          />
+        </div>
+
+        <div class="product-info">
+          <h2>Guarda-roupa Casal Varsóvia 2 Portas de Correr – Branco</h2>
+          <p>
+            O Roupeiro Varsóvia foi feito para quem quer <strong>organização</strong> sem abrir mão de um
+            visual clean. Com <strong>2 portas de correr</strong>, ele facilita a circulação no quarto e
+            otimiza o espaço, enquanto as <strong>2 gavetas</strong> deixam as peças do dia a dia sempre à mão.
+            A divisão interna foi pensada para roupas dobradas e penduradas, trazendo praticidade para a rotina
+            e um acabamento branco que combina com diferentes estilos de decoração.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Características (cards) ======= -->
+  <section class="tech-specs">
+    <div class="rn-container">
+      <h2 class="tech-specs__title">Características</h2>
+
+      <div class="spec-cards">
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <!-- Troque pelos ícones do seu S3, se quiser -->
+            <img src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2026/01/produto/756/warehouse-1712760.png" alt="Ícone de organização" />
+          </div>
+          <div class="spec-card__body">
+            <h3>Organização</h3>
+            <ul>
+              <li>Divisão interna para roupas dobradas e penduradas</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2026/01/produto/757/door-1791609.png" alt="Ícone de portas de correr" />
+          </div>
+          <div class="spec-card__body">
+            <h3>Portas</h3>
+            <ul>
+              <li>2 portas de correr: mais espaço livre no quarto</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2026/01/produto/758/mail-box-4490081.png" alt="Ícone de gavetas" />
+          </div>
+          <div class="spec-card__body">
+            <h3>Gavetas</h3>
+            <ul>
+              <li>2 gavetas para itens menores e roupas do dia a dia</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2026/01/produto/759/wood-1845973.png" alt="Ícone de estrutura" />
+          </div>
+          <div class="spec-card__body">
+            <h3>Estrutura</h3>
+            <ul>
+              <li>Projeto pensado para uso diário e boa estabilidade</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2026/01/produto/760/broom-4851448.png" alt="Ícone de limpeza" />
+          </div>
+          <div class="spec-card__body">
+            <h3>Acabamento</h3>
+            <ul>
+              <li>Superfície fácil de limpar e manter</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2026/01/produto/761/color-1435835.png" alt="Ícone de estilo" />
+          </div>
+          <div class="spec-card__body">
+            <h3>Estilo</h3>
+            <ul>
+              <li>Branco: visual clean, leve e versátil</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2026/01/produto/762/measuring-tape-2084974.png" alt="Ícone de tamanho" />
+          </div>
+          <div class="spec-card__body">
+            <h3>Medidas</h3>
+            <ul>
+              <li>L 131.2cm • A 213.5cm • P 55cm</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="spec-card">
+          <div class="spec-card__icon">
+            <img src="https://magazord-public.s3.amazonaws.com/mobiliae/img/2026/01/produto/763/box-964328.png" alt="Ícone do que vem na caixa" />
+          </div>
+          <div class="spec-card__body">
+            <h3>Na caixa</h3>
+            <ul>
+              <li>Manual de montagem + parafusos e ferragens</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Benefícios / Conteúdo ======= -->
+  <section class="sophistication-section">
+    <div class="rn-container">
+      <div class="sophistication-content">
+        <div class="gif-placeholder">
+          <!-- Troque pela imagem/gif do produto -->
+          <img
+            src="https://mobiliae.cdn.magazord.com.br/img/2026/01/produto/746/03-roupeiro-varsovia-2-portas.jpeg"
+            alt="Detalhes do Roupeiro Varsóvia"
+          />
+        </div>
+
+        <div class="sophistication-text">
+          <h2>Por que ele funciona tão bem no dia a dia?</h2>
+          <p>
+            O Varsóvia combina <strong>praticidade</strong> e <strong>aproveitamento interno</strong>.
+            As portas de correr deixam o uso confortável mesmo em quartos menores, e as gavetas ajudam a separar
+            roupas íntimas, camisetas, acessórios e itens que você precisa acessar rápido.
+          </p>
+          <p>
+            A cor <strong>Branco</strong> mantém o ambiente leve e combina fácil com cabeceiras, criados e
+            cômodas — do quarto de casal ao juvenil.
+          </p>
+          <div class="origin-tag">Fabricado no Brasil</div>
+        </div>
+      </div>
+
+      <div class="layout-section">
+        <div class="layout-text">
+          <h2>Sustentabilidade</h2>
+          <p>
+            A Mobiliae valoriza a sustentabilidade em cada etapa: escolha responsável de matérias-primas,
+            processos eficientes e reaproveitamento de resíduos. Buscamos reduzir emissões, economizar água e
+            energia, e promover fornecedores conscientes. Assim entregamos produtos duráveis e bonitos,
+            sempre cuidando do planeta, das pessoas e do futuro.
+          </p>
+        </div>
+
+        <div class="gif-placeholder">
+          <img
+            src="https://mobiliae.cdn.magazord.com.br/img/2026/01/produto/744/01-roupeiro-varsovia-2-portas.jpeg"
+            alt="Roupeiro Varsóvia em ambiente decorado"
+          />
+        </div>
+      </div>
+
+      <div class="layout-section">
+        <div class="gif-placeholder">
+          <img
+            src="https://mobiliae.cdn.magazord.com.br/img/2026/01/produto/745/02-roupeiro-varsovia-2-portas.jpeg"
+            alt="Detalhes de portas e gavetas do Roupeiro Varsóvia"
+          />
+        </div>
+
+        <div class="layout-text">
+          <h2>Qualidade Mobiliae</h2>
+          <p>
+            O Roupeiro Varsóvia foi projetado para acompanhar a rotina por muitos anos, com foco em
+            aproveitamento do espaço, resistência no uso e manutenção simples. Um móvel pensado para
+            deixar o quarto mais organizado, bonito e funcional.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= Bloco institucional ======= -->
+  <div class="testimonials-carousel">
+    <div class="sophistication-text" style="text-align: center; margin-left: -10px">
+      <h2>Por que escolher a Mobiliae?</h2>
+      <p>
+        A Mobiliae é referência em móveis de alta qualidade no Brasil, com produtos desenvolvidos com design
+        contemporâneo, funcionalidade e durabilidade. Com atendimento especializado e entrega confiável,
+        buscamos garantir a melhor experiência de compra online para o seu lar.
+      </p>
+    </div>
+  </div>
+
+  <!-- ======= Carrossel de selos / imagens ======= -->
+  <div class="testimonials-carousel">
+    <div class="swiper features-swiper features-swiper-1">
+      <div class="swiper-wrapper">
+        <!-- Troque as imagens abaixo pelas imagens/selos do seu S3 (como no seu modelo anterior) -->
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/690/8.png" alt="Selo 1" />
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/688/6.png" alt="Selo 2" />
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/689/7.png" alt="Selo 3" />
+            </div>
+          </div>
+        </div>
+
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/685/3.png" alt="Selo 4" />
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/683/1.png" alt="Selo 4" />
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/684/2.png" alt="Selo 4" />
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/687/5.png" alt="Selo 4" />
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-card">
+            <div class="feature-gif">
+              <img src="https://mobiliae.cdn.magazord.com.br/img/2025/12/produto/686/4.png" alt="Selo 4" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="features-nav swiper-button-next features-next-1"></div>
+      <div class="features-nav swiper-button-prev features-prev-1"></div>
+      <div class="swiper-pagination features-pagination-1"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  // <![CDATA[
+  // Carrossel de selos/imagens
+  new Swiper("#rd-scope .features-swiper-1", {
+    slidesPerView: 3,
+    spaceBetween: 20,
+    loop: true,
+    navigation: {
+      nextEl: "#rd-scope .features-next-1",
+      prevEl: "#rd-scope .features-prev-1",
+    },
+    pagination: {
+      el: "#rd-scope .features-pagination-1",
+      clickable: true,
+    },
+    autoplay: { delay: 5000, disableOnInteraction: false },
+    speed: 600,
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      769: { slidesPerView: 3 },
+    },
+  });
+
+  // Smooth scroll + animações
+  document.querySelectorAll('#rd-scope a[href^="#"]').forEach((a) => {
+    a.addEventListener("click", (e) => {
+      e.preventDefault();
+      const t = document.querySelector(a.getAttribute("href"));
+      if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = "1";
+        entry.target.style.transform = "translateY(0)";
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll("#rd-scope section").forEach((section) => {
+    section.style.opacity = "0";
+    section.style.transform = "translateY(30px)";
+    section.style.transition = "opacity .6s ease, transform .6s ease";
+    observer.observe(section);
+  });
+  // ]]>
+</script>

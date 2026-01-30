@@ -1,0 +1,97 @@
+<div class="mmb-medidas-title">Navegue por categorias!</div>
+<div class="medidas-container">
+  <a
+    class="medida-btn"
+    href="https://www.luzesdovale.com.br/pendentes-globo-lustres"
+    >Pendentes de Globo</a
+  >
+  <a
+    class="medida-btn"
+    href="https://www.luzesdovale.com.br/pendentesled"
+    >Pendentes de Led</a
+  >
+  <a
+    class="medida-btn"
+    href="https://www.luzesdovale.com.br/pendentes-de-tubo"
+    >Pendentes de Tubo</a
+  >
+  <a
+    class="medida-btn"
+    href="https://www.luzesdovale.com.br/pendentes-de-cristal"
+    >Pendentes de Cristal</a
+  >
+  <a
+    class="medida-btn"
+    href="https://www.luzesdovale.com.br/pendentes-industriais"
+    >Pendentes Industriais</a
+  >
+  <a
+    class="medida-btn"
+    href="https://www.luzesdovale.com.br/luminaria-pendente"
+    >Ver Todos</a
+  >
+</div>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+  .mmb-medidas-title{
+      text-align:center;  font-family: "Rubik", sans-serif;
+      font-weight:700;
+      margin:15px 0 8px;
+      font-size:16px; /* reduzido */
+    }
+
+    /* MOBILE/TABLET: uma única linha com scroll lateral */
+    .medidas-container{
+          font-family: "Rubik", sans-serif;
+      display:flex;
+      flex-wrap:nowrap;
+      align-items:center;
+      gap:8px;
+      margin:0;
+      padding:6px 12px;
+      font-family:Arial, sans-serif;
+      max-height:100px !important;
+      overflow-x:auto;
+      overflow-y:hidden;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:thin;
+      box-sizing:border-box;
+    }
+    .medidas-container::-webkit-scrollbar{ height:6px; }
+    .medidas-container::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.15); border-radius:10px; }
+
+    .medida-btn{
+          font-family: "Rubik", sans-serif;
+      flex:0 0 auto;
+      border:2px solid #000;
+      border-radius:22px;
+      padding:6px 12px;
+      font-size:13px;
+      line-height:1;
+      background:#fff;
+      color:#000;
+      text-decoration:none;
+      transition:all .18s ease-in-out;
+      white-space:nowrap;
+    }
+    .medida-btn:hover,
+    .medida-btn:focus-visible{
+      background:#000; color:#fff;
+    }
+
+    /* DESKTOP */
+    @media (min-width:1024px){
+      .medidas-container{
+        justify-content:center;
+        overflow-x:hidden;
+        flex-wrap:wrap;
+        padding:6px 0;
+      }
+      .medida-btn{
+        padding:8px 16px;
+        font-size:14px;
+        border-radius:24px;
+      }
+    }
+  -->
+</style>
