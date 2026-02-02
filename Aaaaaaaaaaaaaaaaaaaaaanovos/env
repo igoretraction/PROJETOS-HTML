@@ -1,0 +1,15 @@
+NEXT_PUBLIC_FIREBASE_API_KEY=AIzaSyAucEDjSDW_hEo9xiD7Pgx4Sg0vuuebBDI
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=bot-c09ed.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=bot-c09ed
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=bot-c09ed.firebasestorage.app
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=1:47416460573:web:a06a6cd2b7e69d54290df4
+NEXT_PUBLIC_FIREBASE_APP_ID=G-XLBXN5QSSL
+
+
+#  apiKey: "AIzaSyAucEDjSDW_hEo9xiD7Pgx4Sg0vuuebBDI",
+#   authDomain: "bot-c09ed.firebaseapp.com",
+#   projectId: "bot-c09ed",
+#   storageBucket: "bot-c09ed.firebasestorage.app",
+#   messagingSenderId: "47416460573",
+#   appId: "1:47416460573:web:a06a6cd2b7e69d54290df4",
+#   measurementId: "G-XLBXN5QSSL"
