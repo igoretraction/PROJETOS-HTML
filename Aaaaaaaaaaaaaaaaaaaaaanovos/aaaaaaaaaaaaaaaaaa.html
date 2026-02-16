@@ -1,0 +1,153 @@
+<p>
+<script>// <![CDATA[
+(function () {
+  const HTML_BLOCO = `
+    <p><meta content="width=device-width, initial-scale=1.0" /></p>
+    <div class="mmb-medidas-title">Navegue por categorias!</div>
+    <div class="medidas-container">
+      <!-- 1) Pendentes de Globo -->
+      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentes-globo-lustres">
+        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9979/destkop-1-pendentes-de-globo.png" alt="Pendentes de Globo" />
+        <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9985/mobile-1-pendentes-de-globo.png" alt="Pendentes de Globo" />
+      </a>
+      <!-- 2) Pendentes de Led -->
+      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentesled">
+        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/10059/destkop-2-pendentes-de-led.png" alt="Pendentes de Led" />
+         <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/10060/mobile-2-pendentes-de-led.png" alt="Pendentes de Led" />
+      </a>
+      <!-- 3) Pendentes de Tubo -->
+      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentes-de-tubo">
+        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9981/destkop-3-pendentes-de-tubo.png" alt="Pendentes de Tubo" />
+        <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9987/mobile-3-pendentes-de-tubo.png" alt="Pendentes de Tubo" />
+      </a>
+      <!-- 4) Pendentes de Cristal -->
+      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentes-de-cristal">
+        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9982/destkop-4-pendentes-de-cristal.png" alt="Pendentes de Cristal" />
+        <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9988/mobile-4-pendentes-de-cristal.png" alt="Pendentes de Cristal" />
+      </a>
+      <!-- 5) Pendentes Industriais -->
+      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentes-industriais">
+        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9983/destkop-5-pendentes-de-industriais.png" alt="Pendentes Industriais" />
+         <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9989/mobile-5-pendentes-de-industriais.png" alt="Pendentes Industriais" />
+      </a>
+    </div>
+
+    <style>
+        .descricao-pesquisa h1{
+        display: none !important;}
+         @media (max-width:768px){
+         .mmb-medidas-title{
+         display:none !important;}
+          .isDesk{ display:none !important; }
+        }
+        @media (min-width:769px){
+          .isMobile{ display:none !important; }
+        }
+      :root{
+        --mmb-gap: 10px;
+        --mmb-radius: 22px;
+        --mmb-mob-w: 365px;
+        --mmb-mob-h: 60px;
+        --mmb-desk-w: 225px;
+        --mmb-desk-h: 73px;
+      }
+
+      .mmb-medidas-title{
+        text-align:center;
+        font-family: "Rubik", sans-serif;
+        font-weight:700;
+        margin:15px 0 10px;
+        font-size:16px;
+      }
+
+      .medidas-container{
+        font-family: "Rubik", sans-serif;
+        display:flex;
+        flex-wrap:nowrap;
+        align-items:center;
+        gap:var(--mmb-gap);
+        margin:0;
+        padding:6px 12px;
+        overflow-x:auto;
+        overflow-y:hidden;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:thin;
+        box-sizing:border-box;
+      }
+      .medidas-container::-webkit-scrollbar{ height:6px; }
+      .medidas-container::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.15); border-radius:10px; }
+
+      .medida-btn{
+        flex:0 0 auto;
+        display:block;
+        text-decoration:none;
+        background:#fff;
+      }
+
+      .medida-img{
+        display:block;
+        border-radius:var(--mmb-radius);
+        width:var(--mmb-mob-w);
+        height:var(--mmb-mob-h);
+        object-fit:contain;
+        object-position:center;
+      }
+
+      @media (min-width:1024px){
+        .medidas-container{
+          justify-content:center;
+          overflow-x:hidden;
+          flex-wrap:wrap;
+          padding:0;
+        }
+        .medida-img{
+          width:var(--mmb-desk-w);
+          height:var(--mmb-desk-h);
+          object-fit:contain;
+        }
+      }
+       @media (max-width:768px){
+        .medidas-container{
+          flex-direction:column;
+          max-height:none !important;
+        }
+      }
+    </style>
+  `;
+
+  const TARGET_SELECTOR = '.descricao-pesquisa h1';
+  const UNIQUE_ID = 'mmb-categorias-bloco';
+
+  function inject() {
+    const h1 = document.querySelector(TARGET_SELECTOR);
+    if (!h1) return false;
+
+    // evita duplicar
+    if (document.getElementById(UNIQUE_ID)) return true;
+
+    const wrap = document.createElement('div');
+    wrap.id = UNIQUE_ID;
+    wrap.innerHTML = HTML_BLOCO;
+
+    h1.insertAdjacentElement('afterend', wrap);
+    return true;
+  }
+
+  // tenta agora
+  if (inject()) return;
+
+  // observa mudanças no DOM (caso carregue depois)
+  const obs = new MutationObserver(() => {
+    if (inject()) obs.disconnect();
+  });
+
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+
+  // fallback
+  setTimeout(() => {
+    inject();
+    obs.disconnect();
+  }, 8000);
+})();
+// ]]></script>
+</p>

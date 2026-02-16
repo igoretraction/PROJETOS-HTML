@@ -1,0 +1,64 @@
+<!-- AVALIAÇÕES: ajuste de copy + esconder/mostrar -->
+<script>
+(function ($) {
+  $(function () {
+
+    function getN() {
+      // cobre: .num-avaliacao (print) e .num-avaliacoes (variações do tema)
+      const $a = $(".num-avaliacao a, .num-avaliacoes a").first();
+      if (!$a.length) return null; // ainda não carregou
+      const n = parseInt(($a.text() || "").replace(/\D/g, ""), 10) || 0;
+      return n;
+    }
+
+    function makeLink(text) {
+      // mantém classes do tema quando existir (pra não perder estilo)
+      const $orig = $(".avaliacoes a").first();
+      const cls = $orig.length ? $orig.attr("class") : "avaliacoes-link";
+      return `
+        <a href="#avaliacoes" class="${cls} avaliacoes-link" title="Avaliações do Produto">
+          <span style="font-size:12px;">${text}</span>
+        </a>
+      `;
+    }
+
+    function apply() {
+      const n = getN();
+      if (n === null) return false; // ainda não carregou
+
+      if (n === 0) {
+        $(".avaliacoes").remove();
+        return true;
+      }
+
+      if (n < 10) {
+        $(".faca-avaliacao").html(makeLink("Ver " + n + " Avaliações"));
+      } else {
+        
+        $(".faca-avaliacao").html(makeLink("Mais de " + n + " avaliações!"));
+      }
+
+      return true;
+    }
+
+    // roda agora
+    if (apply()) return;
+
+    // tenta por alguns segundos caso seja carregado depois
+    let tries = 0;
+    const timer = setInterval(function () {
+      tries++;
+      if (apply() || tries >= 20) clearInterval(timer); // ~6s
+    }, 300);
+  });
+})(jQuery);
+</script>
+
+<style>
+    .num-avaliacao > .avaliacoes-link{
+        display:none;
+    }
+    .separador{
+        display:none;
+    }
+</style>
