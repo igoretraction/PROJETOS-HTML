@@ -1,153 +1,376 @@
-<p>
-<script>// <![CDATA[
-(function () {
-  const HTML_BLOCO = `
-    <p><meta content="width=device-width, initial-scale=1.0" /></p>
-    <div class="mmb-medidas-title">Navegue por categorias!</div>
-    <div class="medidas-container">
-      <!-- 1) Pendentes de Globo -->
-      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentes-globo-lustres">
-        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9979/destkop-1-pendentes-de-globo.png" alt="Pendentes de Globo" />
-        <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9985/mobile-1-pendentes-de-globo.png" alt="Pendentes de Globo" />
-      </a>
-      <!-- 2) Pendentes de Led -->
-      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentesled">
-        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/10059/destkop-2-pendentes-de-led.png" alt="Pendentes de Led" />
-         <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/10060/mobile-2-pendentes-de-led.png" alt="Pendentes de Led" />
-      </a>
-      <!-- 3) Pendentes de Tubo -->
-      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentes-de-tubo">
-        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9981/destkop-3-pendentes-de-tubo.png" alt="Pendentes de Tubo" />
-        <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9987/mobile-3-pendentes-de-tubo.png" alt="Pendentes de Tubo" />
-      </a>
-      <!-- 4) Pendentes de Cristal -->
-      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentes-de-cristal">
-        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9982/destkop-4-pendentes-de-cristal.png" alt="Pendentes de Cristal" />
-        <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9988/mobile-4-pendentes-de-cristal.png" alt="Pendentes de Cristal" />
-      </a>
-      <!-- 5) Pendentes Industriais -->
-      <a class="medida-btn" href="https://www.luzesdovale.com.br/pendentes-industriais">
-        <img class="medida-img isDesk" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9983/destkop-5-pendentes-de-industriais.png" alt="Pendentes Industriais" />
-         <img class="medida-img isMobile" src="https://magazord-public.s3.amazonaws.com/lumixiluminacao/img/2026/02/produto/9989/mobile-5-pendentes-de-industriais.png" alt="Pendentes Industriais" />
-      </a>
-    </div>
-
-    <style>
-        .descricao-pesquisa h1{
-        display: none !important;}
-         @media (max-width:768px){
-         .mmb-medidas-title{
-         display:none !important;}
-          .isDesk{ display:none !important; }
-        }
-        @media (min-width:769px){
-          .isMobile{ display:none !important; }
-        }
-      :root{
-        --mmb-gap: 10px;
-        --mmb-radius: 22px;
-        --mmb-mob-w: 365px;
-        --mmb-mob-h: 60px;
-        --mmb-desk-w: 225px;
-        --mmb-desk-h: 73px;
-      }
-
-      .mmb-medidas-title{
-        text-align:center;
-        font-family: "Rubik", sans-serif;
-        font-weight:700;
-        margin:15px 0 10px;
-        font-size:16px;
-      }
-
-      .medidas-container{
-        font-family: "Rubik", sans-serif;
-        display:flex;
-        flex-wrap:nowrap;
-        align-items:center;
-        gap:var(--mmb-gap);
-        margin:0;
-        padding:6px 12px;
-        overflow-x:auto;
-        overflow-y:hidden;
-        -webkit-overflow-scrolling:touch;
-        scrollbar-width:thin;
-        box-sizing:border-box;
-      }
-      .medidas-container::-webkit-scrollbar{ height:6px; }
-      .medidas-container::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.15); border-radius:10px; }
-
-      .medida-btn{
-        flex:0 0 auto;
-        display:block;
-        text-decoration:none;
-        background:#fff;
-      }
-
-      .medida-img{
-        display:block;
-        border-radius:var(--mmb-radius);
-        width:var(--mmb-mob-w);
-        height:var(--mmb-mob-h);
-        object-fit:contain;
-        object-position:center;
-      }
-
-      @media (min-width:1024px){
-        .medidas-container{
-          justify-content:center;
-          overflow-x:hidden;
-          flex-wrap:wrap;
-          padding:0;
-        }
-        .medida-img{
-          width:var(--mmb-desk-w);
-          height:var(--mmb-desk-h);
-          object-fit:contain;
-        }
-      }
-       @media (max-width:768px){
-        .medidas-container{
-          flex-direction:column;
-          max-height:none !important;
-        }
-      }
-    </style>
-  `;
-
-  const TARGET_SELECTOR = '.descricao-pesquisa h1';
-  const UNIQUE_ID = 'mmb-categorias-bloco';
-
-  function inject() {
-    const h1 = document.querySelector(TARGET_SELECTOR);
-    if (!h1) return false;
-
-    // evita duplicar
-    if (document.getElementById(UNIQUE_ID)) return true;
-
-    const wrap = document.createElement('div');
-    wrap.id = UNIQUE_ID;
-    wrap.innerHTML = HTML_BLOCO;
-
-    h1.insertAdjacentElement('afterend', wrap);
-    return true;
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roleta</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --surface: #16161a;
+    --gold: #f5c842;
+    --gold2: #e8a020;
+    --text: #f0ede8;
+    --muted: #666;
+    --radius: 16px;
   }
 
-  // tenta agora
-  if (inject()) return;
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  // observa mudanças no DOM (caso carregue depois)
-  const obs = new MutationObserver(() => {
-    if (inject()) obs.disconnect();
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 24px;
+    overflow-x: hidden;
+  }
+
+  h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    letter-spacing: 0.12em;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+  }
+
+  .wheel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Pointer */
+  .pointer {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 32px solid var(--gold);
+    z-index: 20;
+    filter: drop-shadow(0 4px 8px rgba(245,200,66,0.5));
+  }
+
+  canvas {
+    border-radius: 50%;
+    box-shadow: 0 0 60px rgba(245,200,66,0.15), 0 0 0 4px var(--gold2), 0 0 0 8px #2a2a2a;
+    display: block;
+  }
+
+  /* Center cap */
+  .cap {
+    position: absolute;
+    width: 52px;
+    height: 52px;
+    background: radial-gradient(circle at 35% 35%, #fff8e8, var(--gold));
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #111, 0 4px 12px rgba(0,0,0,0.6);
+    z-index: 10;
+    cursor: pointer;
+    transition: transform 0.15s;
+  }
+  .cap:hover { transform: scale(1.1); }
+  .cap::after {
+    content: '▶';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: #5a3a00;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .items-editor {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+
+  input[type="text"] {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid #2a2a2a;
+    border-radius: var(--radius);
+    color: var(--text);
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="text"]:focus { border-color: var(--gold); }
+  input[type="text"]::placeholder { color: var(--muted); }
+
+  button {
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    color: #1a0e00;
+    border: none;
+    border-radius: var(--radius);
+    padding: 12px 20px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    white-space: nowrap;
+  }
+  button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,200,66,0.3); }
+  button:active { transform: translateY(0); }
+  button:disabled { opacity: 0.4; cursor: default; transform: none; box-shadow: none; }
+
+  .btn-spin {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.6rem;
+    letter-spacing: 0.15em;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .tag {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface);
+    border: 1px solid #2a2a2a;
+    border-radius: 999px;
+    padding: 4px 12px 4px 14px;
+    font-size: 0.85rem;
+    color: var(--text);
+  }
+  .tag-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tag button {
+    background: none;
+    color: var(--muted);
+    padding: 0;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1;
+    border-radius: 50%;
+    width: 16px; height: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: color 0.15s;
+    letter-spacing: 0;
+  }
+  .tag button:hover { color: #ff6b6b; transform: none; box-shadow: none; }
+
+  .result {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    letter-spacing: 0.1em;
+    text-align: center;
+    min-height: 3rem;
+    transition: all 0.4s;
+  }
+  .result span {
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  @media (max-width: 480px) {
+    canvas { width: 280px !important; height: 280px !important; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Roleta da Sorte</h1>
+
+<div class="wheel-wrapper">
+  <div class="pointer"></div>
+  <canvas id="wheel" width="360" height="360"></canvas>
+  <div class="cap" id="cap" title="Girar"></div>
+</div>
+
+<div class="result" id="result"></div>
+
+<div class="controls">
+  <div class="items-editor">
+    <input type="text" id="newItem" placeholder="Adicionar opção..." maxlength="30">
+    <button onclick="addItem()">ADICIONAR</button>
+  </div>
+  <div class="tags" id="tags"></div>
+  <button class="btn-spin" id="spinBtn" onclick="spin()">GIRAR!</button>
+</div>
+
+<script>
+const canvas = document.getElementById('wheel');
+const ctx = canvas.getContext('2d');
+const W = canvas.width;
+const H = canvas.height;
+const cx = W / 2, cy = H / 2, R = W / 2 - 6;
+
+const PALETTE = [
+  '#c0392b','#e67e22','#f1c40f','#27ae60',
+  '#1abc9c','#2980b9','#8e44ad','#e91e63',
+  '#00bcd4','#ff5722','#4caf50','#3f51b5'
+];
+
+let items = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4', 'Opção 5'];
+let angle = 0;
+let spinning = false;
+
+function drawWheel() {
+  ctx.clearRect(0, 0, W, H);
+  const n = items.length;
+  const arc = (2 * Math.PI) / n;
+
+  for (let i = 0; i < n; i++) {
+    const start = angle + i * arc;
+    const end = start + arc;
+    const color = PALETTE[i % PALETTE.length];
+
+    // Slice
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, R, start, end);
+    ctx.closePath();
+    ctx.fillStyle = color;
+    ctx.fill();
+
+    // Subtle border
+    ctx.strokeStyle = 'rgba(0,0,0,0.3)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Text
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(start + arc / 2);
+    ctx.textAlign = 'right';
+    ctx.fillStyle = 'rgba(255,255,255,0.95)';
+    ctx.font = `bold ${Math.min(15, 200 / n)}px DM Sans`;
+    ctx.shadowColor = 'rgba(0,0,0,0.5)';
+    ctx.shadowBlur = 3;
+    const label = items[i].length > 18 ? items[i].slice(0, 16) + '…' : items[i];
+    ctx.fillText(label, R - 14, 5);
+    ctx.restore();
+  }
+
+  // Outer ring
+  ctx.beginPath();
+  ctx.arc(cx, cy, R, 0, 2 * Math.PI);
+  ctx.strokeStyle = 'rgba(245,200,66,0.6)';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+}
+
+function spin() {
+  if (spinning || items.length < 2) return;
+  spinning = true;
+  document.getElementById('spinBtn').disabled = true;
+  document.getElementById('result').innerHTML = '';
+
+  const totalRot = (Math.random() * 4 + 6) * 2 * Math.PI;
+  const duration = 4000 + Math.random() * 2000;
+  const start = performance.now();
+  const startAngle = angle;
+
+  function easeOut(t) { return 1 - Math.pow(1 - t, 4); }
+
+  function frame(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    angle = startAngle + totalRot * easeOut(progress);
+    drawWheel();
+
+    if (progress < 1) {
+      requestAnimationFrame(frame);
+    } else {
+      spinning = false;
+      document.getElementById('spinBtn').disabled = false;
+      showResult();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function showResult() {
+  const n = items.length;
+  const arc = (2 * Math.PI) / n;
+  // Pointer is at top (−π/2), normalize
+  const norm = (((-Math.PI / 2) - angle) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI);
+  const idx = Math.floor(norm / arc) % n;
+  const winner = items[idx];
+  document.getElementById('result').innerHTML = `🎉 <span>${winner}</span>`;
+}
+
+function renderTags() {
+  const container = document.getElementById('tags');
+  container.innerHTML = '';
+  items.forEach((item, i) => {
+    const tag = document.createElement('div');
+    tag.className = 'tag';
+    tag.innerHTML = `
+      <div class="tag-dot" style="background:${PALETTE[i % PALETTE.length]}"></div>
+      ${item}
+      <button onclick="removeItem(${i})" title="Remover">×</button>
+    `;
+    container.appendChild(tag);
   });
+}
 
-  obs.observe(document.documentElement, { childList: true, subtree: true });
+function addItem() {
+  const input = document.getElementById('newItem');
+  const val = input.value.trim();
+  if (!val) return;
+  items.push(val);
+  input.value = '';
+  drawWheel();
+  renderTags();
+}
 
-  // fallback
-  setTimeout(() => {
-    inject();
-    obs.disconnect();
-  }, 8000);
-})();
-// ]]></script>
-</p>
+function removeItem(i) {
+  if (items.length <= 2) return alert('Mínimo de 2 opções.');
+  items.splice(i, 1);
+  drawWheel();
+  renderTags();
+}
+
+document.getElementById('newItem').addEventListener('keydown', e => {
+  if (e.key === 'Enter') addItem();
+});
+
+document.getElementById('cap').addEventListener('click', spin);
+
+drawWheel();
+renderTags();
+</script>
+</body>
+</html>

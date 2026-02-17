@@ -1,0 +1,3104 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background-color: #242424;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .trail-container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            /* Permite clicar através das pegadas */
+            opacity: 0.4;
+        }
+
+        /* Estilo individual de cada pegada */
+        .paw-print {
+            position: absolute;
+            width: 40px;
+            /* ALTERAR: Aumenta/diminui o tamanho da pegada (ex: 60px = pegadas maiores) */
+            height: 40px;
+            /* ALTERAR: Aumenta/diminui o tamanho da pegada */
+            opacity: 0;
+            /* Começa invisível para animação */
+            animation: fadeIn 0.5s ease-in forwards;
+            /* ALTERAR: 0.5s = velocidade do fade (1s = mais lento) */
+        }
+
+        /* Cor do SVG da pegada */
+        .paw-print svg {
+            width: 100%;
+            height: 100%;
+            fill: #bd4dd1;
+            /* ALTERAR: Muda cor da pegada (ex: #ff0000 = vermelho) */
+        }
+
+        /* Cor específica das elipses do SVG */
+        .paw-print ellipse {
+            fill: #bd4dd1;
+            /* ALTERAR: Muda cor das elipses da pegada */
+        }
+
+        /* Animação que faz as pegadas aparecerem gradualmente */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                /* ALTERAR: 0.5 = pegadas semi-transparentes */
+            }
+        }
+
+        .info {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 20px;
+            color: #333;
+            font-family: "Arial", sans-serif;
+        }
+
+        .hero-banner img {
+            /* banner 100% full na tela */
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .cards-section {
+            width: 100%;
+            padding: 0px 0;
+            margin-bottom: 0;
+            background: #080808;
+            display: flex;
+            justify-content: center;
+            /* centraliza o swiper na página */
+        }
+
+        .trail-container {
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .cards-swiper {
+            width: 100%;
+            max-width: 1400px;
+            /* controla o “miolo” central (3 cards + gaps) */
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .cards-swiper2 {
+            width: 100%;
+            max-width: 1400px;
+            /* controla o “miolo” central (3 cards + gaps) */
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .swiper-wrapper {
+            align-items: center;
+        }
+
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            /* centraliza cada card dentro do slide */
+        }
+
+        .card {
+            width: 393px;
+            height: 400px;
+            border-radius: 18px;
+            overflow: hidden;
+            position: relative;
+            background: #e0e0e0;
+            /* filter: blur(6px); */
+            opacity: 1;
+            transition: all 0.4s ease;
+        }
+
+        /* Card ativo (central) */
+        .swiper-slide-active .card {
+            /* filter: blur(4px); */
+            opacity: 1;
+        }
+
+        /* Placeholder da imagem */
+        .card-image {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #2f2f2f, #141414);
+        }
+
+        /* Label */
+        .launch-label {
+            position: absolute;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #bd4dd1;
+            color: #fff;
+            padding: 6px 4px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            z-index: 99999;
+            width: 128px;
+            text-align: center;
+            user-select: none;
+            /* backdrop-filter: blur(6px); */
+        }
+
+        .launch-label {
+            z-index: 9999;
+        }
+
+        /* Botões */
+        .swiper-button-next,
+        .swiper-button-prev {
+            color: #b7b7b7;
+        }
+
+        /* Estilização do container do Link Kit */
+        .link-kit {
+            margin-top: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            /* Opcional: use justify-content: center se quiser o botão centralizado */
+        }
+
+        /* Estilização do Botão CTA (Link) */
+        .link-kit a {
+            display: inline-block;
+            background-color: #bd4dd1;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 10000px;
+            /* Mantém o formato arredondado dos outros botões */
+            font-weight: 600;
+            font-size: 13px;
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(189, 77, 209, 0.2);
+        }
+
+        /* Efeito Hover do Botão */
+        .link-kit a:hover {
+            background-color: #080808;
+            color: #ffffff;
+            border: 2px solid #bd4dd1;
+            transform: translateY(-2px);
+            /* Efeito de elevação suave */
+            box-shadow: 0 6px 20px rgba(189, 77, 209, 0.4);
+            /* Brilho roxo ao redor */
+        }
+
+        @media (max-width: 768px) {
+            .isDesktop {
+                display: none !important;
+            }
+
+            .accordion-tabs {
+                flex-wrap: wrap !important;
+            }
+
+            .isMobile {
+                max-width: 100% !important;
+            }
+
+            .link-kit a {
+                padding: 8px 20px;
+                font-size: 12px;
+                width: 100%;
+                /* Faz o botão ocupar toda a largura no mobile */
+                text-align: center;
+                box-sizing: border-box;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .isMobile {
+                display: none !important;
+            }
+        }
+
+        .container-jango {
+            margin-top: -100px;
+        }
+
+        .timer-component {
+            position: relative;
+            max-width: 2340px;
+            width: 100%;
+            height: 500px;
+            margin: 0 auto;
+            background: transparent;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            z-index: 9;
+        }
+
+        .diagonal-stripes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            margin-top: -30px;
+        }
+
+        .diagonal-stripe {
+            position: absolute;
+            width: 120%;
+            height: 60px;
+            background: #fabb01;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            left: -10%;
+        }
+
+        .stripe-1 {
+            top: 50%;
+            transform: translateY(-50%) rotate(6deg);
+            transform-origin: center;
+        }
+
+        .stripe-2 {
+            top: 50%;
+            transform: translateY(-50%) rotate(-6deg);
+            transform-origin: center;
+        }
+
+        .moving-text {
+            display: inline-block;
+            color: rgb(0, 0, 0);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            white-space: nowrap;
+            animation: moveTextInfinite 60s linear infinite;
+            text-transform: uppercase;
+        }
+
+        .stripe-2 .moving-text {
+            animation-direction: reverse;
+            animation-duration: 65s;
+        }
+
+        @keyframes moveTextInfinite {
+            0% {
+                transform: translateX(0%);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .main-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .subtitle {
+            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            color: #ffffff;
+            margin-bottom: 1.8rem;
+            font-weight: 400;
+        }
+
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+            z-index: 999999;
+        }
+
+        .timer-box {
+            background: #bd4dd1e0;
+            border-radius: 8px;
+            padding: 1.5rem 1.2rem;
+            min-width: 100px;
+            box-shadow: 0 2px 15px rgba(140, 124, 104, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 999999;
+            border: 4px solid #6f1280;
+        }
+
+        .timer-box:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(140, 124, 104, 0.15);
+        }
+
+        .timer-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: rgb(255, 255, 255);
+            display: block;
+            line-height: 1;
+            z-index: 999999;
+        }
+
+        .timer-label {
+            font-size: 0.75rem;
+            color: rgb(255, 255, 255) !important;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .cta-text {
+            font-size: 1rem;
+            color: #8a8a8a;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #080808;
+            color: #ffffff;
+            padding: 0.6rem 3rem;
+            border-radius: 10000px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid #bd4dd1;
+            cursor: pointer;
+            transition: all 0.6s ease;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .cta-button:hover {
+            background: #bd4dd1;
+            border: 2px solid white;
+            transition: all 0.6s ease;
+            /* transform: translateY(-1px);
+        box-shadow: 0 4px 15px rgba(184, 160, 130, 0.3); */
+        }
+
+        .accent-line {
+            width: 40px;
+            height: 2px;
+            background: #b8a082;
+            margin: 0.5rem auto;
+        }
+
+        @keyframes numberChange {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+                color: #b8a082;
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes timerPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 10px rgba(189, 77, 209, 0);
+            }
+
+            50% {
+                transform: scale(1.08);
+                text-shadow: 0 0 20px rgba(189, 77, 209, 0.8);
+            }
+        }
+
+        /* .timer-number {
+        animation: timerPulse 0.8s ease-in-out infinite;
+      } */
+
+        @media (max-width: 768px) {
+            .card {
+                height: auto !important;
+                width: 243px !important;
+            }
+
+            .timer-component {
+                height: 400px;
+            }
+
+            .timer-container {
+                gap: 0.8rem;
+            }
+
+            .timer-box {
+                padding: 1.2rem 1rem;
+                min-width: 85px;
+            }
+
+            .timer-number {
+                font-size: 2rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 2rem;
+                font-size: 0.9rem;
+            }
+
+            .diagonal-stripe {
+                height: 50px;
+            }
+
+            .moving-text {
+                font-size: 0.8rem;
+                letter-spacing: 1px;
+            }
+        }
+
+        @media (max-width: 780px) {
+            .carrossel-imgs {
+                padding: 0 !important;
+                margin-top: 135px;
+                margin-bottom: 210px;
+            }
+
+            .hero-banner img {
+                margin-top: 100px;
+            }
+
+            .timer-component {
+                height: 350px;
+                margin-top: 100px;
+                overflow: visible;
+                margin-bottom: 60px;
+            }
+
+            .timer-container {
+                gap: 0.6rem;
+                z-index: 9999999;
+            }
+
+            .timer-box {
+                padding: 1rem 0.8rem;
+                min-width: 50px;
+                z-index: 9999999;
+            }
+
+            .timer-number {
+                font-size: 1.8rem;
+                z-index: 9999999;
+            }
+
+            .timer-label {
+                font-size: 0.7rem;
+                z-index: 9999999;
+                color: black !important;
+            }
+
+            .diagonal-stripe {
+                height: 40px;
+                z-index: 10;
+                margin-top: -40px;
+            }
+
+            .moving-text {
+                font-size: 0.7rem;
+            }
+
+            .block-image-text {
+                max-width: 100%;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .image-hotmart img {
+                max-width: 410px !important;
+                border: 2px solid white;
+                border-radius: 20px;
+                margin: 10px !important;
+            }
+        }
+
+        /* Estilos para confetes */
+        .confetti {
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999999;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) translateX(var(--swing)) rotateZ(0deg);
+                opacity: 1;
+            }
+
+            to {
+                transform: translateY(100vh) translateX(var(--swing)) rotateZ(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confetti-swing {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            50% {
+                transform: translateX(100px);
+            }
+        }
+
+        .timer-section {
+            padding: 90px 0px 30px 0px;
+        }
+
+        .image-hotmart img {
+            max-width: 500px;
+            border: 2px solid white;
+            border-radius: 20px;
+        }
+
+        .block-image-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .title-hotmart {
+            color: white;
+            font-size: clamp(24px, 4vw, 40px);
+            max-width: 500px;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .description-hotmart {
+            color: #ffffff;
+            font-size: clamp(14px, 2.5vw, 18px);
+            max-width: 500px;
+            line-height: 1.6;
+            font-family: "Poppins", sans-serif;
+        }
+
+        .image-container {
+            padding: 60px 0px;
+        }
+
+        .cards-section {
+            padding: 0px 0;
+            margin-top: 40px;
+        }
+
+        .cta-button-hotmart {
+            padding: 12px;
+            width: 250px;
+            background-color: #080808;
+            border: 2px solid #bd4dd1;
+            color: white;
+            font-weight: bold;
+            border-radius: 10000px;
+            cursor: pointer;
+            font-family: "Poppins", sans-serif;
+            /* animação de hover suave  */
+            transition: all 0.6s ease;
+        }
+
+        .cta-button-hotmart:hover {
+            background: #bd4dd1;
+            border: 2px solid white;
+            /* animação de hover suave  */
+            transition: all 0.3s ease;
+        }
+
+        .carousel {
+            font-family: "Poppins", sans-serif;
+
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 600px;
+            transform: rotateX(-20deg) translateY(-70px);
+            transform-style: preserve-3d;
+            perspective: 800px;
+            user-select: none;
+            cursor: grab;
+            position: relative;
+            touch-action: none;
+        }
+
+        .carousel-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -100px 0 0 -100px;
+            width: 200px;
+            height: 197px;
+            transform: translate3d(0, 0, -10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            transform-origin: 50% 50%;
+            border-radius: 18px;
+            overflow: hidden;
+            /* box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); */
+            background: #333;
+        }
+
+        /* Se quiser usar imagens reais, pode usar assim:
+  .carousel-image {
+    background-size: cover;
+    background-position: center;
+  }
+  */
+
+        @media (max-width: 768px) {
+            .image-container .block-image-text {
+                flex-direction: column !important;
+            }
+
+            .image-container:nth-of-type(even) .block-image-text {
+                flex-direction: column-reverse !important;
+            }
+
+            .description-hotmart {
+                margin: 0 31px;
+            }
+
+            .image-container {
+                padding: 25px 0px !important;
+            }
+
+            .carousel {
+                transform: rotateX(-10deg) scale(0.7) translateY(-40px);
+                height: 320px;
+            }
+
+            .content-carrossel {
+                flex-direction: column !important;
+            }
+
+            .carousel {
+                width: 100% !important;
+            }
+
+            .carousel-image {
+                height: 200px;
+            }
+
+            .content-text {
+                max-width: 100% !important;
+            }
+
+            .content-carrossel {
+                gap: 220px !important;
+            }
+        }
+
+        .img-carrossel {
+            max-width: 213px;
+        }
+
+        .content-carrossel {
+            font-family: "Poppins", sans-serif;
+            margin-top: 200px;
+            display: flex;
+            flex-direction: row;
+            max-height: 390px;
+            margin: auto;
+            max-width: 85%;
+            justify-content: center;
+        }
+
+        .content-text {
+            align-items: center;
+            color: white;
+            max-width: 40%;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            font-family: "Poppins", sans-serif;
+            justify-content: center;
+        }
+
+        .title-carrossel h2 {
+            font-weight: 600;
+            padding: 10px;
+            font-size: 40px;
+            margin: 0;
+        }
+
+        .content-p {
+            font-size: 18px;
+        }
+
+        .img-carrossel {
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .text-card {
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            color: white;
+            margin-top: 25px;
+            margin-bottom: -20px;
+            font-size: 40px;
+        }
+
+        .carrossel-imgs {
+            padding: 90px;
+        }
+
+        .card-media {
+            max-width: 100%;
+        }
+
+        .cta-button-hotmart {
+            cursor: pointer;
+        }
+
+        .description-hotmart {
+            margin-bottom: 28px !important;
+        }
+
+        .text-cta {
+            user-select: none;
+        }
+
+        /* Estilos do Accordion */
+        .accordion-wrapper {
+            max-width: 1240px;
+            margin: auto;
+            width: 100%;
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(189, 77, 209, 0.3);
+        }
+
+        .accordion-item {
+            border-bottom: 1px solid rgba(189, 77, 209, 0.2);
+        }
+
+        .accordion-item:last-child {
+            border-bottom: none;
+        }
+
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            background: linear-gradient(135deg,
+                    rgba(189, 77, 209, 0.1) 0%,
+                    rgba(189, 77, 209, 0.05) 100%);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 15px;
+        }
+
+        .accordion-header:hover {
+            background: linear-gradient(135deg,
+                    rgba(189, 77, 209, 0.15) 0%,
+                    rgba(189, 77, 209, 0.1) 100%);
+        }
+
+        .accordion-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: transform 0.3s ease;
+            color: #bd4dd1;
+        }
+
+        .accordion-item.active .accordion-icon {
+            transform: rotate(180deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .accordion-item.active .accordion-content {
+            max-height: 2000px;
+        }
+
+        .accordion-text {
+            padding: 24px;
+            color: #e0e0e0;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .accordion-section-title {
+            color: #bd4dd1;
+            font-weight: 700;
+            font-size: 15px;
+            margin-top: 16px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .accordion-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .accordion-list {
+            list-style: none;
+            padding: 0;
+            margin: 8px 0;
+        }
+
+        .accordion-list li {
+            padding: 6px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .accordion-list li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #bd4dd1;
+            font-weight: bold;
+        }
+
+        .accordion-combo {
+            background: rgba(189, 77, 209, 0.1);
+            border-left: 3px solid #bd4dd1;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 4px;
+        }
+
+        .accordion-combo-title {
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .accordion-combo-items {
+            padding-left: 16px;
+            font-size: 13px;
+        }
+
+        .accordion-combo-items li {
+            margin: 4px 0;
+        }
+
+        .accordion-tip {
+            background: rgba(250, 187, 1, 0.1);
+            border-left: 3px solid #fabb01;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #ffd700;
+        }
+
+        .accordion-tip strong {
+            color: #fabb01;
+        }
+
+        .accordion-error {
+            background: rgba(255, 107, 157, 0.1);
+            border-left: 3px solid #ff6b9d;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #ff6b9d;
+        }
+
+        .accordion-conclusion {
+            background: rgba(189, 77, 209, 0.15);
+            border-left: 3px solid #bd4dd1;
+            padding: 12px 16px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #ffffff;
+        }
+
+        .accordion-conclusion strong {
+            color: #fabb01;
+        }
+
+        /* Estilos para Tabs dentro do Accordion */
+        .accordion-tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 2px solid rgba(189, 77, 209, 0.2);
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .accordion-tab-button {
+            padding: 12px 16px;
+            background: rgba(189, 77, 209, 0.05);
+            border: none;
+            color: #b0b0b0;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            font-family: "Poppins", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .accordion-tab-button:hover {
+            background: rgba(189, 77, 209, 0.1);
+            color: #ffffff;
+        }
+
+        .accordion-tab-button.active {
+            color: #bd4dd1;
+            border-bottom-color: #bd4dd1;
+            background: rgba(189, 77, 209, 0.1);
+        }
+
+        .accordion-tab-content {
+            display: none;
+        }
+
+        .accordion-tab-content.active {
+            display: block;
+            animation: fadeInTab 0.3s ease;
+        }
+
+        @keyframes fadeInTab {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .tab-section {
+            margin-bottom: 16px;
+        }
+
+        .tab-section:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 768px) {
+            .accordion-header {
+                padding: 14px 16px;
+                font-size: 13px;
+            }
+
+            .accordion-text {
+                padding: 16px;
+                font-size: 12px;
+            }
+
+            .accordion-section-title {
+                font-size: 13px;
+                margin-top: 12px;
+            }
+
+            .accordion-combo,
+            .accordion-tip,
+            .accordion-error,
+            .accordion-conclusion {
+                padding: 10px 12px;
+                font-size: 12px;
+                margin: 8px 0;
+            }
+
+            .accordion-tabs {
+                gap: 0;
+            }
+
+            .accordion-tab-button {
+                padding: 10px 12px;
+                font-size: 11px;
+                flex: 1;
+                min-width: auto;
+            }
+        }
+
+        .hero-banner-2>.isDesktop {
+            margin: auto;
+            justify-content: center;
+            display: flex;
+            margin-top: 40px;
+            border-radius: 25px;
+            max-width: 1240px;
+        }
+
+        /* Adiciona layout para os Tabs */
+        .accordion-tabs {
+            display: flex;
+            gap: 10px;
+            /* Alinha os tabs horizontalmente */
+            border-bottom: 2px solid rgba(189, 77, 209, 0.2);
+            margin-bottom: 16px;
+            flex-wrap: nowrap;
+        }
+
+        /* Alinha os botões das tabs */
+        .accordion-tab-button {
+            padding: 12px 16px;
+            background: rgba(189, 77, 209, 0.05);
+            border: none;
+            color: #b0b0b0;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-family: "Poppins", sans-serif;
+        }
+
+        /* Modifica o comportamento do botão da tab quando está ativo */
+        .accordion-tab-button.active {
+            color: #bd4dd1;
+            border-bottom-color: #bd4dd1;
+            background: rgba(189, 77, 209, 0.1);
+        }
+
+        /* Alinha o conteúdo do tab */
+        .accordion-tab-content {
+            display: none;
+        }
+
+        .accordion-tab-content.active {
+            display: block;
+            animation: fadeInTab 0.3s ease;
+        }
+
+        @keyframes fadeInTab {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .title-after-florir {
+            font-size: 40px !important;
+            text-align: center;
+        }
+
+        .hero-banner-3-img {
+            max-width: 1240px;
+            margin: auto;
+            justify-content: center;
+            display: flex;
+        }
+
+        .hero-banner-3 {
+            max-width: 1240px;
+            margin: auto;
+            margin-bottom: 60px;
+        }
+
+        .title-banner3 {
+            color: white;
+        }
+
+        .accordion-list li a {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container-jango">
+        <section class="timer-section" style="margin-top: 100px">
+            <div class="timer-component">
+                <div class="diagonal-stripes">
+                    <div class="diagonal-stripe stripe-1">
+                        <div class="moving-text">
+                            CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO
+                            🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO
+                            LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 •
+                            CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO
+                            🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO
+                            LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥•
+                            CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO
+                            🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO
+                            LIBERADO 🔥• ESTAMPAS NOVAS 🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO
+                            LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 •
+                            CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO
+                            🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO
+                            LIBERADO 🔥 • 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 •
+                            OPERAÇÃO PÁSCOA 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥
+                            • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO
+                            🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO
+                            LIBERADO 🔥 •
+                        </div>
+                    </div>
+                    <div class="diagonal-stripe stripe-2">
+                        <div class="moving-text">
+                            CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO
+                            🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO
+                            LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 •
+                            CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO
+                            🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥• CATÁLOGO
+                            LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥•
+                            CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO
+                            🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO
+                            LIBERADO 🔥• ESTAMPAS NOVAS 🔥 • CATÁLOGO LIBERADO 🔥 • CATÁLOGO
+                            LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO 🔥 •
+                            CATÁLOGO LIBERADO 🔥• CATÁLOGO LIBERADO 🔥 • CATÁLOGO LIBERADO
+                            🔥 •
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-jango">
+                    <h1 class="main-title" style="text-transform: uppercase">
+                        Prepare-se para a Páscoa com a Jango
+                    </h1>
+                    <p class="subtitle">
+                        Corre que ainda dá tempo de se preparar para a sua melhor Páscoa.
+                    </p>
+
+                    <div class="timer-container">
+                        <div class="timer-box">
+                            <span class="timer-number" id="days">00</span>
+                            <span class="timer-label">DIAS</span>
+                        </div>
+                        <div class="timer-box">
+                            <span class="timer-number" id="hours">00</span>
+                            <span class="timer-label">HORAS</span>
+                        </div>
+                        <div class="timer-box">
+                            <span class="timer-number" id="minutes">00</span>
+                            <span class="timer-label">MINUTOS</span>
+                        </div>
+                        <div class="timer-box">
+                            <span class="timer-number" id="seconds">00</span>
+                            <span class="timer-label">SEGUNDOS</span>
+                        </div>
+                    </div>
+
+                    <div class="accent-line"></div>
+
+                    <div class="cta-section">
+                        <p class="cta-text">
+                            Encontre as embalagens que fazem você vender muito mais
+                        </p>
+                        <a href="#" class="cta-button">
+                            Quero ter acesso a nova Coleção da Jango
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="hero-seection">
+            <div class="hero-banner">
+                <img class="isDesktop"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/01/produto/19019/banner-lp.png"
+                    alt="" />
+                <img class="isMobile"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19322/banner-lp-mobile.png"
+                    alt="" />
+            </div>
+        </section>
+
+        <!-- CARROSSEL PARA TROCA DE VIDEOS  -->
+        <span class="plan-web"></span>
+
+        <!-- Accordion Vila Encantada -->
+        <div class="accordion-wrapper">
+            <div class="accordion-item active">
+                <div class="accordion-header">
+                    <span>
+                        Dossiê de Vendas Vila Encantada: Como Transformar Embalagens em
+                        Produtos</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <!-- Tabs Navigation -->
+                        <div class="accordion-tabs">
+                            <button class="accordion-tab-button active" data-tab="tab-1">
+                                Tipo de Presente
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-2">
+                                Público Final
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-3">
+                                Combinação Campeã
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-4">
+                                Combos de Venda
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-5">
+                                Foto Que Vende
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-6">
+                                Erros Comuns
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-7">
+                                Conclusão
+                            </button>
+                        </div>
+
+                        <!-- Tab 1: Tipo de Presente -->
+                        <div class="accordion-tab-content" data-tab-content="tab-1">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Tipo de Presente</div>
+                                <ul class="accordion-list">
+                                    <li>Afetivo</li>
+                                    <li>Lúdico</li>
+                                    <li>Presenteável sem esforço</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: Público Final -->
+                        <div class="accordion-tab-content" data-tab-content="tab-2">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Público Final</div>
+                                <ul class="accordion-list">
+                                    <li>Crianças</li>
+                                    <li>Presentes de padrinhos, avós e tios</li>
+                                    <li>Compras por impulso emocional</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Combinação Campeã -->
+                        <div class="accordion-tab-content" data-tab-content="tab-3">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Combinação Campeã</div>
+                                <ul class="accordion-list">
+                                    <li>✔ Sacola Grande Vila Encantada</li>
+                                    <li>✔ Caixa para Ovo Ajustável com Tampa Termoformada</li>
+                                    <li>✔ Cartão para Biscoito</li>
+                                    <li>✔ Tags Vila Encantada</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    <strong>💡 Dica Estratégica:</strong> Essa coleção funciona
+                                    melhor com produtos que aparecem visualmente (cores,
+                                    formatos, detalhes).
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 4: Combos de Venda -->
+                        <div class="accordion-tab-content" data-tab-content="tab-4">
+                            <div class="tab-section">
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 01 - Presente Encantado (Infantil)
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Sacola para Kit Confeiteiro</li>
+                                        <li>Kit Confeiteiro</a></li>
+                                        <li>Caça aos Ovos</li>
+                                        <li>Tag Vila Encantada</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5491%3B5%2C5809%3B5%2C4795%3B50%2C5692%3B3&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para venda rápida</strong>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 02 - Presente Completo
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Sacola Grande Vila Encantada</li>
+                                        <li>Cartão para Biscoito</li>
+                                        <li>Caixa para Ovo Ajustável com Tampa</li>
+                                        <li>Tag Vila Encantada</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5463%3B5%2C5526%3B5%2C5840%3B10%2C5692%3B3&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para quem quer algo "mais elaborado"</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 5: Foto Que Vende -->
+                        <div class="accordion-tab-content" data-tab-content="tab-5">
+                            <div class="tab-section">
+                                <div class="accordion-tip">
+                                    <strong>⚠️ Nunca fotografe apenas o chocolate.</strong><br />
+                                    A venda acontece quando a embalagem aparece.<br /><br />
+                                    <strong>Enquadramento Ideal:</strong>
+                                </div>
+                                <ul class="accordion-list">
+                                    <li>Caixa levemente aberta</li>
+                                    <li>Produto visível</li>
+                                    <li>Fundo neutro</li>
+                                    <li>Luz natural lateral</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Essa imagem deve ser a primeira foto no WhatsApp,
+                                    Instagram ou catálogo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 6: Erros Comuns -->
+                        <div class="accordion-tab-content" data-tab-content="tab-6">
+                            <div class="tab-section">
+                                <div class="accordion-error">
+                                    ❌ Vender como "só um ovo de páscoa"<br />
+                                    ❌ Não mostrar o produto dentro<br />
+                                    ❌ Imagens sem apelo visual<br />
+                                    ❌ Não oferecer sacola compatível
+                                </div>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Esses erros fazem você perder valor, não economizar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 7: Conclusão -->
+                        <div class="accordion-tab-content" data-tab-content="tab-7">
+                            <div class="tab-section">
+                                <div class="accordion-conclusion">
+                                    <strong>A coleção Vila Encantada é uma ferramenta de venda
+                                        emocional.</strong><br /><br />
+                                    Quando bem usada, ela:<br />
+                                    ✔ Facilita a decisão do cliente<br />
+                                    ✔ Aumenta o valor percebido<br />
+                                    ✔ Reduz negociação de preço<br />
+                                    ✔ Acelera o fechamento da venda<br /><br />
+                                    <strong>Use a embalagem como parte do produto, não como
+                                        custo.</strong><br />
+                                    <strong style="color: #fabb01">Sugestão de combo: Caixa + sacola + tag = Kit simples
+                                        =
+                                        Mais valor percebido</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="image-container">
+            <div class="block-hotmart">
+                <div class="block-image-text">
+                    <div class="image-hotmart">
+                        <img src=" https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18927/5487-1.png"
+                            alt="" />
+                    </div>
+                    <div class="text-hotmart">
+                        <h1 class="title-hotmart">Vila Encantada</h1>
+                        <p class="description-hotmart">
+                            Essa coleção carrega o tempo e o cuidado de quem entende que
+                            encantar começa no detalhe. As cores suaves entre verdes, rosés
+                            e azuis delicados, criam um cenário leve, onde cada ilustração
+                            parece contar uma pequena história de Páscoa. As formas
+                            geométricas se misturam a casas, árvores e símbolos doces,
+                            criando uma narrativa visual que desperta afeto, memória e
+                            expectativa. Parte da nova coleção de Páscoa 2026, essas
+                            ilustrações nascem das mãos de artistas de Santa Catarina, onde
+                            cada detalhe carrega intenção, sensibilidade e história. Nada se
+                            repete. Tudo é único. Essas embalagens não envolvem apenas um
+                            produto. Envolvem cuidado, tempo e afeto. Um gesto pensado para
+                            emocionar, um encanto que começa no olhar e permanece, antes
+                            mesmo de ser aberta.
+                        </p>
+                        <a href="https://www.jangoembalagens.com.br/pascoa/linhas/vila-encantada"
+                            class="cta-button-hotmart">Ver
+                            coleção</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="hero-seection-2">
+            <div class="hero-banner-2">
+                <img class="isDesktop"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19496/agente-jumorais.png"
+                    alt="" />
+                <img class="isMobile"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19495/agente-ju-morais-mobile.png"
+                    alt="" />
+            </div>
+        </section>
+
+        <!-- Accordion Vila Encantada -->
+        <div class="accordion-wrapper">
+            <div class="accordion-item active">
+                <div class="accordion-header">
+                    <span>
+                        Dossiê de Vendas Celebrar: Como Transformar Embalagens em
+                        Produtos</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <!-- Tabs Navigation -->
+                        <div class="accordion-tabs">
+                            <button class="accordion-tab-button active" data-tab="tab-1">
+                                Tipo de Presente
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-2">
+                                Público Final
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-3">
+                                Combinação Campeã
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-4">
+                                Combos de Venda
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-5">
+                                Foto Que Vende
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-6">
+                                Erros Comuns
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-7">
+                                Conclusão
+                            </button>
+                        </div>
+
+                        <!-- Tab 1: Tipo de Presente -->
+                        <div class="accordion-tab-content" data-tab-content="tab-1">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Tipo de Presente</div>
+                                <ul class="accordion-list">
+                                    <li>Afetivo</li>
+                                    <li>Elegante</li>
+                                    <li>Presente de “momento especial”</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: Público Final -->
+                        <div class="accordion-tab-content" data-tab-content="tab-2">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Público Final</div>
+                                <ul class="accordion-list">
+                                    <li>Adultos</li>
+                                    <li>Casais</li>
+                                    <li>
+                                        Clientes que compram para marcar uma data (almoço de
+                                        Páscoa, visita, agradecimento)
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Combinação Campeã -->
+                        <div class="accordion-tab-content" data-tab-content="tab-3">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Combinação Campeã</div>
+                                <ul class="accordion-list">
+                                    <li>Cinta com Blister para Ovo 50g Celebrar</li>
+                                    <li>Caixa para Barra 300g com Visor Celebrar</li>
+                                    <li>Sacola Mini Celebrar</li>
+                                </ul>
+                                <div class="accordion-tip">
+                                    <strong>💡 Dica Estratégica:</strong> Celebrar vende
+                                    intenção, não quantidade. Funciona bem com ovos, brownies ou
+                                    kits médios, bem apresentados.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 4: Combos de Venda -->
+                        <div class="accordion-tab-content" data-tab-content="tab-4">
+                            <div class="tab-section">
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 01 - Presente que Fica
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Caixa para Ovo em Pé 100/150g Celebrar</li>
+                                        <li>Lembrancinha sem Visor Celebrar</li>
+                                        <li>Sacola Horizontal Celebrar</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5683%3B5%2C5670%3B5%2C5470%3B5&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para venda fácil que encanta</strong>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">Combo 02 - Afeto</div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Caixa com Blister kit completo para 6 Bombons Celebrar</li>
+                                        <li>Lembrancinha Grande com Visor Celebrar</li>
+                                        <li>Sacola Grande Celebrar</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5807%3B5%2C5539%3B5%2C5464%3B5&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para clientes que querem algo bonito, sem
+                                            exagero.</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 5: Foto Que Vende -->
+                        <div class="accordion-tab-content" data-tab-content="tab-5">
+                            <div class="tab-section">
+                                <div class="accordion-tip">
+                                    <strong>⚠️ Nunca fotografe apenas o chocolate.</strong><br />
+                                    A venda acontece quando a embalagem aparece.
+                                </div>
+                                <ul class="accordion-list">
+                                    <li>
+                                        Sacola com todos os produtos dentro e também com os
+                                        produtos fora
+                                    </li>
+                                    <li>Fundo claro ou tom pastel (rosa, amarelo, azul)</li>
+                                    <li>Luz natural</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Essa imagem deve ser a primeira foto no WhatsApp,
+                                    Instagram ou catálogo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 6: Erros Comuns -->
+                        <div class="accordion-tab-content" data-tab-content="tab-6">
+                            <div class="tab-section">
+                                <div class="accordion-error">
+                                    ❌ Vender como “só um ovo de páscoa”<br />
+                                    ❌ Não mostrar o produto dentro<br />
+                                    ❌ Imagens sem apelo visual<br />
+                                    ❌ Não oferecer sacola compatível
+                                </div>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Esses erros fazem você perder valor, não economizar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 7: Conclusão -->
+                        <div class="accordion-tab-content" data-tab-content="tab-7">
+                            <div class="tab-section">
+                                <div class="accordion-conclusion">
+                                    <strong>Celebrar transforma um produto simples em um gesto
+                                        memorável.</strong><br /><br />
+                                    Ajuda a aumentar o ticket médio sem justificar preço. Quando
+                                    bem usada, ela:<br />
+                                    ✔ Facilita a decisão do cliente<br />
+                                    ✔ Aumenta o valor percebido<br />
+                                    ✔ Reduz negociação de preço<br />
+                                    ✔ Acelera o fechamento da venda<br /><br />
+                                    <strong>Use a embalagem como parte do produto, não como
+                                        custo.</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="image-container">
+            <div class="block-hotmart">
+                <div class="block-image-text">
+                    <div class="text-hotmart">
+                        <h1 class="title-hotmart">Celebrar</h1>
+                        <p class="description-hotmart">
+                            Essa coleção sussurra Páscoa. As formas orgânicas se espalham na
+                            superfície, criando um cenário calmo, onde tudo convida ao toque
+                            e ao olhar atento. Parte da nova coleção de Páscoa 2026, essa
+                            coleção não carrega apenas um presente. Ela carrega intenção,
+                            delicadeza e a promessa de um momento que fica.
+                        </p>
+                        <a href="https://www.jangoembalagens.com.br/pascoa/linhas/celebrar"
+                            class="cta-button-hotmart">Ver
+                            coleção</a>
+                    </div>
+                    <div class="image-hotmart">
+                        <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18563/4doces.png"
+                            alt="" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="hero-seection-2">
+            <div class="hero-banner-2">
+                <img class="isDesktop"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19498/agente-amortentia.png"
+                    alt="" />
+                <img class="isMobile"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19497/agente-amortentia-mobile.png"
+                    alt="" />
+            </div>
+        </section>
+        <!-- Accordion Vila Encantada -->
+        <div class="accordion-wrapper">
+            <div class="accordion-item active">
+                <div class="accordion-header">
+                    <span>
+                        Dossiê de Vendas Amanhecer: Como Transformar Embalagens em
+                        Produtos</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <!-- Tabs Navigation -->
+                        <div class="accordion-tabs">
+                            <button class="accordion-tab-button active" data-tab="tab-1">
+                                Tipo de Presente
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-2">
+                                Público Final
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-3">
+                                Combinação Campeã
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-4">
+                                Combos de Venda
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-5">
+                                Foto Que Vende
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-6">
+                                Erros Comuns
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-7">
+                                Conclusão
+                            </button>
+                        </div>
+
+                        <!-- Tab 1: Tipo de Presente -->
+                        <div class="accordion-tab-content" data-tab-content="tab-1">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Tipo de Presente</div>
+                                <ul class="accordion-list">
+                                    <li>Leve</li>
+                                    <li>Contemporâneo</li>
+                                    <li>Inspirador</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: Público Final -->
+                        <div class="accordion-tab-content" data-tab-content="tab-2">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Público Final</div>
+                                <ul class="accordion-list">
+                                    <li>Jovens adultos</li>
+                                    <li>Clientes que buscam algo moderno</li>
+                                    <li>Clientes que buscam algo moderno</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Combinação Campeã -->
+                        <div class="accordion-tab-content" data-tab-content="tab-3">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Combinação Campeã</div>
+                                <ul class="accordion-list">
+                                    <li>✔ Caixa para Ovo Ajustável com Tampa Termoformada Amanhecer</li>
+                                    <li>✔ Caixa com Blister kit completo 3 Pães de Mel Amanhecer</li>
+                                    <li>✔ Sacola Grande Amanhecer</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    <strong>💡 Dica Estratégica:</strong> Amanhecer funciona muito bem com <strong>kits
+                                        limpos e
+                                        organizados.</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 4: Combos de Venda -->
+                        <div class="accordion-tab-content" data-tab-content="tab-4">
+                            <div class="tab-section">
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 01 - Presente Sugerido
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Caixa com Blister para Ovo em Pé 250g Amanhecer</li>
+                                        <li>Tags Oval Amanhecer</li>
+                                        <li>Sacola Grande Amanhecer</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?">Link do Kit
+                                            Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para venda rápida</strong>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 02 - Presente Completo
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Sacola Boca de Palhaço com Visor Média Amanhecer</li>
+                                        <li>Tecido 38x38cm Amanhecer</li>
+                                        <li>Caixa para Barra 150g com Visor Amanhecer</li>
+                                        <li>Caixa para Brownie Amanhecer</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5607%3B5%2C5771%3B10%2C5493%3B5%2C5583%3B2&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para quem quer algo "mais elaborado"</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 5: Foto Que Vende -->
+                        <div class="accordion-tab-content" data-tab-content="tab-5">
+                            <div class="tab-section">
+                                <div class="accordion-tip">
+                                    <strong>⚠️ Nunca fotografe apenas o chocolate.</strong><br />
+                                    A venda acontece quando a embalagem aparece.<br /><br />
+                                    <strong>Enquadramento Ideal:</strong>
+                                </div>
+                                <ul class="accordion-list">
+                                    <li>Fundo tons pastéis (azul, amarelo)
+                                    </li>
+                                    <li>Luz Natural</li>
+                                    <li>Poucos elementos</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Essa imagem deve ser a primeira foto no WhatsApp,
+                                    Instagram ou catálogo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 6: Erros Comuns -->
+                        <div class="accordion-tab-content" data-tab-content="tab-6">
+                            <div class="tab-section">
+                                <div class="accordion-error">
+                                    ❌ Vender como "só um ovo de páscoa"<br />
+                                    ❌ Não mostrar o produto dentro<br />
+                                    ❌ Imagens sem apelo visual<br />
+                                    ❌ Não oferecer sacola compatível
+                                </div>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Esses erros fazem você perder valor, não economizar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 7: Conclusão -->
+                        <div class="accordion-tab-content" data-tab-content="tab-7">
+                            <div class="tab-section">
+                                <div class="accordion-conclusion">
+                                    <strong>A coleção Amanhecer é uma ferramenta de venda
+                                        emocional.</strong><br /><br />
+                                    Quando bem usada, ela:<br />
+                                    ✔ Facilita a decisão do cliente<br />
+                                    ✔ Aumenta o valor percebido<br />
+                                    ✔ Reduz negociação de preço<br />
+                                    ✔ Acelera o fechamento da venda<br /><br />
+                                    <strong>Use a embalagem como parte do produto, não como
+                                        custo.</strong><br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="image-container">
+            <div class="block-hotmart">
+                <div class="block-image-text">
+                    <div class="image-hotmart">
+                        <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18814/2-sacovisormed.png"
+                            alt="" />
+                    </div>
+                    <div class="text-hotmart">
+                        <h1 class="title-hotmart">Amanhecer</h1>
+                        <p class="description-hotmart">
+                            Tons que lembram o céu nos primeiros minutos do dia… Cores que
+                            despertam, acolhem e anunciam um novo ciclo. Traços delicados,
+                            que evocam calma e renascimento. Cada detalhe existe para
+                            conduzir o olhar com leveza, como a luz que se espalha devagar
+                            ao amanhecer. Amanhecer não é sobre pressa. É sobre começo.
+                        </p>
+                        <a href=" https://www.jangoembalagens.com.br/pascoa/linhas/amanhecer"
+                            class="cta-button-hotmart">Ver
+                            coleção</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero-seection-2">
+            <div class="hero-banner-2">
+                <img class="isDesktop"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19499/vito-ria-rocha-felicidade-gourmet.png"
+                    alt="" />
+                <img class="isMobile"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19500/felicidade-gourmet-mobile.png"
+                    alt="" />
+            </div>
+        </section>
+
+
+        <!-- Accordion Vila Encantada -->
+        <div class="accordion-wrapper">
+            <div class="accordion-item active">
+                <div class="accordion-header">
+                    <span>
+                        Dossiê de Vendas Recordar: Como Transformar Embalagens em
+                        Produtos</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <!-- Tabs Navigation -->
+                        <div class="accordion-tabs">
+                            <button class="accordion-tab-button active" data-tab="tab-1">
+                                Tipo de Presente
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-2">
+                                Público Final
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-3">
+                                Combinação Campeã
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-4">
+                                Combos de Venda
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-5">
+                                Foto Que Vende
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-6">
+                                Erros Comuns
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-7">
+                                Conclusão
+                            </button>
+                        </div>
+
+                        <!-- Tab 1: Tipo de Presente -->
+                        <div class="accordion-tab-content" data-tab-content="tab-1">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Tipo de Presente</div>
+                                <ul class="accordion-list">
+                                    <li>Nostálgico</li>
+                                    <li>Emocional</li>
+                                    <li>Afetivo profundo</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: Público Final -->
+                        <div class="accordion-tab-content" data-tab-content="tab-2">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Público Final</div>
+                                <ul class="accordion-list">
+                                    <li>Famílias (Mães, Avós)</li>
+                                    <li>Clientes que valorizam tradição</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Combinação Campeã -->
+                        <div class="accordion-tab-content" data-tab-content="tab-3">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Combinação Campeã</div>
+                                <ul class="accordion-list">
+                                    <li>Cinta com Blister para Ovo 50g Recordar</li>
+                                    <li>Caixa para Ovo em Pé 100/150g Recordar</li>
+                                    <li>Caixa 9x9x5cm Recordar</li>
+                                    <li>Sacola horizontal Recordar</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    <strong>💡 Dica Estratégica:</strong> Recordar vende melhor quando o produto
+                                    aparece.
+                                    Transparência e enquadramento são essenciais.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 4: Combos de Venda -->
+                        <div class="accordion-tab-content" data-tab-content="tab-4">
+                            <div class="tab-section">
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 01 - Presente Sugerido
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Lembrancinha sem Visor Recordar</li>
+                                        <li>Caixa para Barra 150g com Visor Recordar</li>
+                                        <li>Sacola Pequena Recordar</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5667%3B5%2C5494%3B5%2C5455%3B5&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para venda rápida</strong>
+                                    </div>
+                                </div>
+
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 02 - Presente Completo
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Caixa para Ovo em Pé 100/150g Recordar</li>
+                                        <li>Caixa para Barra 150g com Visor Recordar</li>
+                                        <li>Sacola Boca de Palhaço Com Visor Pequena Recordar</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5680%3B5%2C5494%3B5%2C5673%3B5&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para quem quer algo "mais elaborado"</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 5: Foto Que Vende -->
+                        <div class="accordion-tab-content" data-tab-content="tab-5">
+                            <div class="tab-section">
+                                <div class="accordion-tip">
+                                    <strong>⚠️ Nunca fotografe apenas o chocolate.</strong><br />
+                                    A venda acontece quando a embalagem aparece.<br /><br />
+                                    <strong>Enquadramento Ideal:</strong>
+                                </div>
+                                <ul class="accordion-list">
+                                    <li>Fundo com alguma cor presente na embalagem, tons pastéis (verde claro, salmão,
+                                        bege)</li>
+                                    <li>Produto central</li>
+                                    <li>Composição acolhedora</li>
+                                    <li>Decoração com flores amarelas, matinho verde</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Essa imagem deve ser a primeira foto no WhatsApp,
+                                    Instagram ou catálogo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 6: Erros Comuns -->
+                        <div class="accordion-tab-content" data-tab-content="tab-6">
+                            <div class="tab-section">
+                                <div class="accordion-error">
+                                    ❌ Vender como "só um ovo de páscoa"<br />
+                                    ❌ Não mostrar o produto dentro<br />
+                                    ❌ Imagens sem apelo visual<br />
+                                    ❌ Não oferecer sacola compatível
+                                </div>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Esses erros fazem você perder valor, não economizar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 7: Conclusão -->
+                        <div class="accordion-tab-content" data-tab-content="tab-7">
+                            <div class="tab-section">
+                                <div class="accordion-conclusion">
+                                    <strong>A coleção Recordar é uma ferramenta de venda
+                                        emocional.</strong><br /><br />
+                                    Quando bem usada, ela:<br />
+                                    ✔ Facilita a decisão do cliente<br />
+                                    ✔ Aumenta o valor percebido<br />
+                                    ✔ Reduz negociação de preço<br />
+                                    ✔ Acelera o fechamento da venda<br /><br />
+                                    <strong>Use a embalagem como parte do produto, não como
+                                        custo.</strong><br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="image-container">
+            <div class="block-hotmart">
+                <div class="block-image-text">
+                    <div class="text-hotmart">
+                        <h1 class="title-hotmart">Recordar</h1>
+                        <p class="description-hotmart">
+                            Cada embalagem conversa entre si, como capítulos de uma mesma
+                            história. As formas são gentis. Tudo foi desenhado para
+                            envolver, proteger e emocionar. É uma Páscoa que não grita, não
+                            exagera, não compete. Ela encanta em silêncio. Essa coleção é
+                            sobre carinho visível. Sobre presentear com intenção.
+                        </p>
+                        <a href="https://www.jangoembalagens.com.br/pascoa/linhas/recordar"
+                            class="cta-button-hotmart">Ver
+                            coleção</a>
+                    </div>
+                    <div class="image-hotmart">
+                        <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18895/doce-recordar.png"
+                            alt="" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero-seection-2">
+            <div class="hero-banner-2">
+                <img class="isDesktop"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19516/dany-brigadeiro.png"
+                    alt="" />
+                <img class="isMobile"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19515/dany-brigadeiro-mobile.png"
+                    alt="" />
+            </div>
+        </section>
+
+        <!-- Accordion Vila Encantada -->
+        <div class="accordion-wrapper">
+            <div class="accordion-item active">
+                <div class="accordion-header">
+                    <span>
+                        Dossiê de Vendas Acolher: Como Transformar Embalagens em
+                        Produtos</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <!-- Tabs Navigation -->
+                        <div class="accordion-tabs">
+                            <button class="accordion-tab-button active" data-tab="tab-1">
+                                Tipo de Presente
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-2">
+                                Público Final
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-3">
+                                Combinação Campeã
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-4">
+                                Combos de Venda
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-5">
+                                Foto Que Vende
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-6">
+                                Erros Comuns
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-7">
+                                Conclusão
+                            </button>
+                        </div>
+
+                        <!-- Tab 1: Tipo de Presente -->
+                        <div class="accordion-tab-content" data-tab-content="tab-1">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Tipo de Presente</div>
+                                <ul class="accordion-list">
+                                    <li>Conforto</li>
+                                    <li>Simplicidade sofisticada</li>
+                                    <li>Presente de cuidado</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: Público Final -->
+                        <div class="accordion-tab-content" data-tab-content="tab-2">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Público Final</div>
+                                <ul class="accordion-list">
+                                    <li>Pessoas próximas e familiares</li>
+                                    <li>Clientes que compram para agradecer ou demonstrar carinho</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Combinação Campeã -->
+                        <div class="accordion-tab-content" data-tab-content="tab-3">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Combinação Campeã</div>
+                                <ul class="accordion-list">
+                                    <li>Caixa para Duo Acolher</li>
+                                    <li>Lata Acolher</li>
+                                    <li>Sacola Grande Acolher</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    <strong>💡 Dica Estratégica:</strong> Recordar vende melhor quando o produto
+                                    aparece.
+                                    Transparência e enquadramento são essenciais.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 4: Combos de Venda -->
+                        <div class="accordion-tab-content" data-tab-content="tab-4">
+                            <div class="tab-section">
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 01 - Presente Sugerido
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Maleta Trio de Ovos 50g Acolher</li>
+                                        <li>Lembrancinha Grande com Visor Acolher</li>
+                                        <li>Embalagem para Pão de Mel Acolher</li>
+                                        <li>Sacola pequena Acolher</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5724%3B5%2C5534%3B5%2C5743%3B5%2C5453%3B5&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para venda rápida</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 5: Foto Que Vende -->
+                        <div class="accordion-tab-content" data-tab-content="tab-5">
+                            <div class="tab-section">
+                                <div class="accordion-tip">
+                                    <strong>⚠️ Nunca fotografe apenas o chocolate.</strong><br />
+                                    A venda acontece quando a embalagem aparece.<br /><br />
+                                    <strong>Enquadramento Ideal:</strong>
+                                </div>
+                                <ul class="accordion-list">
+                                    <li>Texturas</li>
+                                    <li>Tons quentes</li>
+                                    <li>Ítens de decoração estilo fazenda</li>
+                                    <li>Sensação de proximidade, mas com profundidade</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Essa imagem deve ser a primeira foto no WhatsApp,
+                                    Instagram ou catálogo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 6: Erros Comuns -->
+                        <div class="accordion-tab-content" data-tab-content="tab-6">
+                            <div class="tab-section">
+                                <div class="accordion-error">
+                                    ❌ Vender como "só um ovo de páscoa"<br />
+                                    ❌ Não mostrar o produto dentro<br />
+                                    ❌ Imagens sem apelo visual<br />
+                                    ❌ Não oferecer sacola compatível
+                                </div>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Esses erros fazem você perder valor, não economizar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 7: Conclusão -->
+                        <div class="accordion-tab-content" data-tab-content="tab-7">
+                            <div class="tab-section">
+                                <div class="accordion-conclusion">
+                                    <strong>A coleção Acolher é uma ferramenta de venda
+                                        emocional.</strong><br /><br />
+                                    Quando bem usada, ela:<br />
+                                    ✔ Facilita a decisão do cliente<br />
+                                    ✔ Aumenta o valor percebido<br />
+                                    ✔ Reduz negociação de preço<br />
+                                    ✔ Acelera o fechamento da venda<br /><br />
+                                    <strong>Use a embalagem como parte do produto, não como
+                                        custo.</strong><br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="image-container">
+            <div class="block-hotmart">
+                <div class="block-image-text">
+                    <div class="image-hotmart">
+                        <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18716/4miniovos.jpg"
+                            alt="" />
+                    </div>
+                    <div class="text-hotmart">
+                        <h1 class="title-hotmart">Acolher</h1>
+                        <p class="description-hotmart">
+                            Sabe aquela sensação de conforto que só um doce feito com amor
+                            traz? Foi exatamente isso que inspirou a nossa nova criação:
+                            Linha Acolher. Trouxemos a essência do "feito à mão", do cuidado
+                            nos detalhes e daquela nostalgia gostosa. Porque a Páscoa merece
+                            ser um momento de pausa e conexão. Não é só uma embalagem, é um
+                            convite para entrar, sentar e ficar.
+                        </p>
+                        <a href="https://www.jangoembalagens.com.br/pascoa/linhas/acolher"
+                            class="cta-button-hotmart">Ver
+                            coleção</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <section class="hero-seection-2">
+            <div class="hero-banner-2">
+                <img class="isDesktop"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19558/marcia-docci-bnu.png"
+                    alt="" />
+                <img class="isMobile"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19557/marcia-docci-bnu-mobile.png"
+                    alt="" />
+            </div>
+        </section>
+
+
+        <!-- Accordion Vila Encantada -->
+        <div class="accordion-wrapper">
+            <div class="accordion-item active">
+                <div class="accordion-header">
+                    <span>
+                        Dossiê de Vendas Florir: Como Transformar Embalagens em
+                        Produtos</span>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-text">
+                        <!-- Tabs Navigation -->
+                        <div class="accordion-tabs">
+                            <button class="accordion-tab-button active" data-tab="tab-1">
+                                Tipo de Presente
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-2">
+                                Público Final
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-3">
+                                Combinação Campeã
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-4">
+                                Combos de Venda
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-5">
+                                Foto Que Vende
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-6">
+                                Erros Comuns
+                            </button>
+                            <button class="accordion-tab-button" data-tab="tab-7">
+                                Conclusão
+                            </button>
+                        </div>
+
+                        <!-- Tab 1: Tipo de Presente -->
+                        <div class="accordion-tab-content" data-tab-content="tab-1">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Tipo de Presente</div>
+                                <ul class="accordion-list">
+                                    <li>Delicado</li>
+                                    <li>Sensorial</li>
+                                    <li>Afetuoso</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 2: Público Final -->
+                        <div class="accordion-tab-content" data-tab-content="tab-2">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Público Final</div>
+                                <ul class="accordion-list">
+                                    <li>Mulheres</li>
+                                    <li>Presentes entre amigas</li>
+                                    <li>Clientes sensíveis à estética</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Tab 3: Combinação Campeã -->
+                        <div class="accordion-tab-content" data-tab-content="tab-3">
+                            <div class="tab-section">
+                                <div class="accordion-section-title">Combinação Campeã</div>
+                                <ul class="accordion-list">
+                                    <li>Caixa para Ovo de Colher Ajustável 250g-350g-500g Florir</li>
+                                    <li>Cinta para Caixa Ajustável 250g-350g-500g Florir</li>
+                                </ul>
+                                <div class="accordion-tip">
+                                    <strong>💡 Dica Estratégica:</strong> Florir vende sensação. Textura, luz e
+                                    proximidade fazem toda a
+                                    diferença.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 4: Combos de Venda -->
+                        <div class="accordion-tab-content" data-tab-content="tab-4">
+                            <div class="tab-section">
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 01 - Presente Sugerido
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Caixa com Visor para 6 Doces ou 2 Mini Ovos 50g Florir</li>
+                                        <li>Lata Florir</li>
+                                        <li>Tag Oval</li>
+                                        <li>Sacola Horizontal Florir</li>
+                                    </ul>
+                                    <div class="link-kit"><a
+                                            href="https://www.jangoembalagens.com.br/checkout/cart?type=dynamic&skus=5488%3B5%2C5633%3B50%2C5693%3B3%2C5468%3B5&action=clear">Link
+                                            do Kit Aqui!</a></div>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para venda rápida</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-tab-content" data-tab-content="tab-4">
+                            <div class="tab-section">
+                                <div class="accordion-combo">
+                                    <div class="accordion-combo-title">
+                                        Combo 02 - Presente Sugerido
+                                    </div>
+                                    <ul class="accordion-combo-items accordion-list">
+                                        <li>Tecido 50x50cm Florir</li>
+                                        <li>Sacola Grande FloriR</li>
+                                        <li>Cartão para Biscoito Florir</li>
+                                    </ul>
+                                    <div style="margin-top: 6px; color: #fabb01; font-size: 12px">
+                                        <strong>→ Ideal para venda rápida</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 5: Foto Que Vende -->
+                        <div class="accordion-tab-content" data-tab-content="tab-5">
+                            <div class="tab-section">
+                                <div class="accordion-tip">
+                                    <strong>⚠️ Nunca fotografe apenas o chocolate.</strong><br />
+                                    A venda acontece quando a embalagem aparece.<br /><br />
+                                    <strong>Enquadramento Ideal:</strong>
+                                </div>
+                                <ul class="accordion-list">
+                                    <li>Tire fotos do produto por inteiro</li>
+                                    <li>Luz natural</li>
+                                    <li>Produto em contexto (mesa, tecido, flores), mas não esqueça! Menos é mais!</li>
+                                </ul>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Essa imagem deve ser a primeira foto no WhatsApp,
+                                    Instagram ou catálogo.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 6: Erros Comuns -->
+                        <div class="accordion-tab-content" data-tab-content="tab-6">
+                            <div class="tab-section">
+                                <div class="accordion-error">
+                                    ❌ Vender como "só um ovo de páscoa"<br />
+                                    ❌ Não mostrar o produto dentro<br />
+                                    ❌ Imagens sem apelo visual<br />
+                                    ❌ Não oferecer sacola compatível
+                                </div>
+                                <div class="accordion-tip" style="margin-top: 12px">
+                                    📌 Esses erros fazem você perder valor, não economizar.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tab 7: Conclusão -->
+                        <div class="accordion-tab-content" data-tab-content="tab-7">
+                            <div class="tab-section">
+                                <div class="accordion-conclusion">
+                                    <strong>A coleção Florir é uma ferramenta de venda
+                                        emocional.</strong><br /><br />
+                                    Quando bem usada, ela:<br />
+                                    ✔ Facilita a decisão do cliente<br />
+                                    ✔ Aumenta o valor percebido<br />
+                                    ✔ Reduz negociação de preço<br />
+                                    ✔ Acelera o fechamento da venda<br /><br />
+                                    <strong>Use a embalagem como parte do produto, não como
+                                        custo.</strong><br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="image-container">
+            <div class="block-hotmart">
+                <div class="block-image-text">
+                    <div class="text-hotmart">
+                        <h1 class="title-hotmart">Florir</h1>
+                        <p class="description-hotmart">
+                            Inspirada no grande sucesso da nossa coleção de 2025, a Linha
+                            Florir chega para resgatar o essencial: o toque natural, a
+                            textura suave e aquela sensação revigorante de acolhimento. Não
+                            é apenas sobre chocolate, é sobre criar um ambiente de leveza
+                            para quem você ama.
+                        </p>
+                        <a href="https://www.jangoembalagens.com.br/pascoa/linhas/florir" class="cta-button-hotmart">Ver
+                            coleção</a>
+                    </div>
+                    <div class="image-hotmart">
+                        <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18998/5519-3.png"
+                            alt="" />
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero-seection-3">
+            <div class="hero-banner-3">
+
+                <img class="hero-banner-3-img"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19824/central3.png"
+                    alt="" />
+
+                <img class="hero-banner-3-img"
+                    src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19825/conservacao2.png"
+                    alt="" />
+            </div>
+        </section>
+
+        <h1 style="color: white; margin: auto; justify-content: center;display: flex;" class="title-after-florir">Dicas
+            de
+            Produtos Jango para Páscoa</h1>
+        <section class="cards-section">
+            <div class="swiper cards-swiper">
+                <div class="swiper-slide" style="gap: 30px;">
+                    <div class="card" style="height: 690px;">
+                        <video class="card-media" autoplay muted loop playsinline preload="metadata">
+                            <source
+                                src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19603/caneca-fran-menor-1.mp4?_gl=1*1c14ltp*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NzA2NDQ4NTkkbzMwJGcxJHQxNzcwNjQ0OTE2JGozJGwwJGgw"
+                                type="video/mp4" />
+                        </video>
+                    </div>
+                    <div class="card" style="height: 690px;">
+                        <video class="card-media" autoplay muted loop playsinline preload="metadata">
+                            <source
+                                src="https://magazord-public.s3.amazonaws.com/jangoembalagens/img/2026/02/produto/19644/sacofran-menor-2-1.mp4?_gl=1*1of6ktb*_ga*Mzg4MDY0NC4xNzYyODY2NzQ1*_ga_4JXK3QVJ6X*czE3NzA2NDQ4NTkkbzMwJGcxJHQxNzcwNjQ5MzYxJGo0OCRsMCRoMA.."
+                                type="video/mp4" />
+                        </video>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+
+            </div>
+        </section>
+
+        <section class="carrossel-imgs">
+            <div class="content-carrossel">
+                <div class="content-text">
+                    <div class="title-carrossel">
+                        <h2>Entenda mais sobre a Jango:</h2>
+                    </div>
+                    <div class="content-p">
+                        A Jango nasceu do sonho de uma família e da dedicação à
+                        confeitaria. Após desafios, recomeços e muita superação, a empresa
+                        encontrou seu propósito ao focar exclusivamente no segmento
+                        confeiteiro. Hoje, desenvolve embalagens e produtos com qualidade,
+                        proximidade com o cliente e experiência diferenciada, buscando se
+                        consolidar como referência nacional no mercado.
+                    </div>
+                </div>
+                <div class="carousel">
+                    <!-- Troque o conteúdo 1,2,3... pelas suas imagens -->
+                    <div class="carousel-image">
+                        <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/caixa-para-ovo-ajustavel-com-tampa-termoformada-vila-encantada-5-unidades"
+                > -->
+                        <img class="img-carrossel"
+                            src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18830/ajustaveltermo-ve.png"
+                            alt="" />
+                        <!-- </a> -->
+                    </div>
+                    <div class="carousel-image">
+                        <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/caixa-para-trio-de-ovos-100g-com-alca-celebrar-10-unidades"
+              > -->
+                        <img class="img-carrossel"
+                            src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18568/trio.png"
+                            alt="" />
+                        <!-- </a> -->
+                    </div>
+                    <div class="carousel-image">
+                        <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/caixa-com-visor-degustacao-6-mini-ovos-amanhecer-10-unidades"
+              > -->
+                        <img class="img-carrossel"
+                            src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18481/5499.png"
+                            alt="" />
+                        <!-- </a> -->
+                    </div>
+                    <div class="carousel-image">
+                        <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/casinha-100/150g-recordar-10-unidades"
+              > -->
+                        <img class="img-carrossel"
+                            src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18491/5661.png"
+                            alt="" />
+                        <!-- </a> -->
+                    </div>
+                    <div class="carousel-image">
+                        <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/cinta-com-blister-1-doce-acolher-10-unidades"
+              > -->
+                        <img class="img-carrossel"
+                            src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18882/cinta1doce.png"
+                            alt="" />
+                        <!-- </a> -->
+                    </div>
+                    <div class="carousel-image">
+                        <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/sacola-boca-de-palhaco-com-visor-media-florir-10-unidades"
+              > -->
+                        <img class="img-carrossel"
+                            src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18663/sacovisormed.png"
+                            alt="" />
+                        <!-- </a> -->
+                    </div>
+                    <div class="carousel-image">
+                        <!-- <a
+                class="text-cta"
+                href="https://www.jangoembalagens.com.br/caixa-com-visor-degustacao-6-mini-ovos-amanhecer-10-unidades"
+              > -->
+                        <img class="img-carrossel"
+                            src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/produto/18481/5499.png"
+                            alt="" />
+                        <!-- </a> -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- <h1 class="text-card">Navegue por nossas categorias!</h1>
+
+    <section class="cards-section">
+      <div class="swiper cards-swiper2">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <div class="card" style="max-block-size: 285px !important">
+              <a href="https://www.jangoembalagens.com.br/pascoa/caixas-para-cookies">
+                <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18788/para-ovos-cokkie.png"
+                  class="card-image" />
+              </a>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card" style="max-block-size: 285px !important">
+              <a href="https://www.jangoembalagens.com.br/pascoa/caixas/brownie">
+                <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18787/para-brownie.png"
+                  class="card-image" />
+              </a>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card" style="max-block-size: 285px !important">
+              <a href="https://www.jangoembalagens.com.br/pascoa/sacolas">
+                <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18790/sacolas.png"
+                  class="card-image" />
+              </a>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card" style="max-block-size: 285px !important">
+              <a href="https://www.jangoembalagens.com.br/pascoa/caixas/ovos">
+                <img class="card-image"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18789/para-ovos.png" />
+              </a>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card" style="max-block-size: 285px !important">
+              <a href="https://www.jangoembalagens.com.br/pascoa/caixas-para-cookies">
+                <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18788/para-ovos-cokkie.png"
+                  class="card-image" />
+              </a>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card" style="max-block-size: 285px !important">
+              <a href="https://www.jangoembalagens.com.br/pascoa/sacolas">
+                <img src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18790/sacolas.png"
+                  class="card-image" />
+              </a>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="card" style="max-block-size: 285px !important">
+              <a href="https://www.jangoembalagens.com.br/pascoa/caixas/ovos">
+                <img class="card-image"
+                  src="https://jangoembalagens.cdn.magazord.com.br/img/2026/01/banner/18789/para-ovos.png" />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </section> -->
+        <div class="trail-container" id="trailContainer"></div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+
+        // ===== ACCORDION E TABS - CÓDIGO UNIFICADO =====
+        document.addEventListener('DOMContentLoaded', function () {
+            // Seleciona todos os headers de accordion
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            // Funcionalidade do Accordion
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', function () {
+                    const accordionItem = this.closest('.accordion-item');
+                    const isActive = accordionItem.classList.contains('active');
+
+                    // Fecha todos os accordions
+                    document.querySelectorAll('.accordion-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+
+                    // Abre o accordion clicado se não estava aberto
+                    if (!isActive) {
+                        accordionItem.classList.add('active');
+                    }
+                });
+            });
+
+            // Funcionalidade das Tabs
+            const tabButtons = document.querySelectorAll('.accordion-tab-button');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function (e) {
+                    e.stopPropagation(); // Impede que o clique propague para o accordion
+
+                    const tabId = this.getAttribute('data-tab');
+                    const accordionItem = this.closest('.accordion-item');
+
+                    // Remove active de todos os botões deste accordion
+                    accordionItem.querySelectorAll('.accordion-tab-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+
+                    // Remove active de todos os conteúdos de tab deste accordion
+                    accordionItem.querySelectorAll('.accordion-tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+
+                    // Adiciona active ao botão clicado
+                    this.classList.add('active');
+
+                    // Adiciona active ao conteúdo correspondente
+                    const targetContent = accordionItem.querySelector(`[data-tab-content="${tabId}"]`);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // ===== CAROUSEL 3D =====
+        (function () {
+            const carousel = document.querySelector(".carousel");
+            const images = document.querySelectorAll(".carousel-image");
+
+            if (!carousel || !images.length) return;
+
+            const radius = 210;
+            let progress = 0;
+            let targetProgress = 0;
+
+            let isPointerDown = false;
+            let lastClientX = 0;
+
+            function animate() {
+                progress += (targetProgress - progress) * 0.08;
+
+                images.forEach((image, index) => {
+                    const theta = index / images.length - progress;
+                    const x = -Math.sin(theta * Math.PI * 2) * radius;
+                    const z = Math.cos(theta * Math.PI * 2) * radius;
+
+                    image.style.transform = `
+        translate3d(${x}px, -50%, ${z}px)
+        rotateY(${360 * -theta}deg)
+      `;
+
+                    const c = Math.floor((index / images.length) * 360);
+                    image.style.background = `hsla(${c}, 90%, 50%, .5)`;
+                });
+
+                requestAnimationFrame(animate);
+            }
+
+            carousel.addEventListener(
+                "wheel",
+                function (e) {
+                    e.preventDefault();
+                    const p = e.deltaY * -0.0002;
+                    targetProgress += p;
+                },
+                { passive: false },
+            );
+
+            carousel.addEventListener("pointerdown", function (e) {
+                isPointerDown = true;
+                lastClientX = e.clientX;
+                carousel.setPointerCapture(e.pointerId);
+                carousel.style.cursor = "grabbing";
+            });
+
+            carousel.addEventListener("pointermove", function (e) {
+                if (!isPointerDown) return;
+                const dx = e.clientX - lastClientX;
+                lastClientX = e.clientX;
+                targetProgress += dx * 0.0008;
+            });
+
+            function stopDrag() {
+                isPointerDown = false;
+                carousel.style.cursor = "grab";
+            }
+
+            carousel.addEventListener("pointerup", stopDrag);
+            carousel.addEventListener("pointercancel", stopDrag);
+            carousel.addEventListener("pointerleave", stopDrag);
+
+            animate();
+        })();
+
+        // ===== TIMER =====
+        (function () {
+            const root = document.querySelector(".timer-component");
+            if (!root || root.dataset.abHardInit === "1") return;
+            root.dataset.abHardInit = "1";
+
+            const map = [
+                ["days", "ab-days"],
+                ["hours", "ab-hours"],
+                ["minutes", "ab-minutes"],
+                ["seconds", "ab-seconds"],
+            ];
+            for (const [oldId, newId] of map) {
+                const el = root.querySelector("#" + oldId);
+                if (el) el.id = newId;
+            }
+
+            const els = {
+                days: root.querySelector("#ab-days"),
+                hours: root.querySelector("#ab-hours"),
+                minutes: root.querySelector("#ab-minutes"),
+                seconds: root.querySelector("#ab-seconds"),
+                ctaText: root.querySelector(".cta-text"),
+                ctaBtn: root.querySelector(".cta-button"),
+            };
+
+            let intervalId = null;
+
+            const TARGET_DATE = new Date("2026-04-05T23:59:59").getTime();
+            const STORAGE_KEY = "timerFinished";
+
+            function pad2(n) {
+                return String(n).padStart(2, "0");
+            }
+            function setText(el, v) {
+                if (el && el.textContent !== v) el.textContent = v;
+            }
+
+            function createConfetti() {
+                const colors = [
+                    "#bd4dd1",
+                    "#fabb01",
+                    "#ffffff",
+                    "#ff6b9d",
+                    "#00bfff",
+                ];
+                const confettiCount = 50;
+
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement("div");
+                    confetti.className = "confetti";
+
+                    const size = Math.random() * 10 + 5;
+                    confetti.style.width = size + "px";
+                    confetti.style.height = size + "px";
+                    confetti.style.backgroundColor =
+                        colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.left = Math.random() * 100 + "%";
+                    confetti.style.top = "-10px";
+
+                    const duration = Math.random() * 2 + 2.5;
+                    const delay = Math.random() * 0.3;
+                    const swingAmount = Math.random() * 200 - 100;
+
+                    confetti.style.animation = `confetti-fall ${duration}s linear ${delay}s forwards`;
+                    confetti.style.setProperty("--swing", swingAmount + "px");
+
+                    document.body.appendChild(confetti);
+
+                    setTimeout(
+                        () => {
+                            confetti.remove();
+                        },
+                        (duration + delay) * 1000,
+                    );
+                }
+            }
+
+            function tick() {
+                if (localStorage.getItem(STORAGE_KEY) === "true") {
+                    setText(els.days, "00");
+                    setText(els.hours, "00");
+                    setText(els.minutes, "00");
+                    setText(els.seconds, "00");
+                    clearInterval(intervalId);
+                    return;
+                }
+
+                const now = Date.now();
+                const diff = TARGET_DATE - now;
+
+                if (diff <= 0) {
+                    setText(els.days, "00");
+                    setText(els.hours, "00");
+                    setText(els.minutes, "00");
+                    setText(els.seconds, "00");
+
+                    localStorage.setItem(STORAGE_KEY, "true");
+                    createConfetti();
+                    clearInterval(intervalId);
+                    return;
+                }
+
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor(
+                    (diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60),
+                );
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                setText(els.days, pad2(d));
+                setText(els.hours, pad2(h));
+                setText(els.minutes, pad2(m));
+                setText(els.seconds, pad2(s));
+            }
+
+            tick();
+            intervalId = setInterval(tick, 1000);
+
+            if (els.ctaBtn) {
+                els.ctaBtn.addEventListener("click", function () {
+                    this.style.transform = "translateY(-1px) scale(0.98)";
+                    setTimeout(() => {
+                        this.style.transform = "translateY(-1px)";
+                    }, 150);
+                });
+            }
+        })();
+
+        // ===== SWIPER =====
+        const swiper = new Swiper(".cards-swiper", {
+            slidesPerView: 4,
+            spaceBetween: 10,
+            centeredSlides: true,
+            loop: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1.2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 4,
+                },
+            },
+        });
+
+        const swiper2 = new Swiper(".cards-swiper2", {
+            slidesPerView: 4,
+            spaceBetween: 6,
+            centeredSlides: true,
+            loop: true,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1.2,
+                },
+                768: {
+                    slidesPerView: 3,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+            },
+        });
+
+        // ===== PEGADAS DE COELHO =====
+        const svgTemplate = `
+  <svg enable-background="new 0 0 512 512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <g id="Layer_2">
+      <g>
+        <path d="m357.01 315.879c-.444-.793.038-1.82.038-2.734 0-55.807-45.241-101.048-101.048-101.048s-101.048 45.241-101.048 101.048c0 .914.482 1.941.038 2.734-16.971 30.333-50.387 49.851-50.561 87.067-.26 55.703 45.343 101.53 101.047 101.53 12.395 0 24.268-2.233 35.241-6.317 9.876-3.676 20.691-3.676 30.567 0 10.972 4.084 22.845 6.317 35.241 6.317 55.704 0 101.307-45.826 101.047-101.53-.175-37.215-33.591-56.734-50.562-87.067z" fill="#bd4dd1"/>
+        <ellipse cx="168.516" cy="100.861" fill="#bd4dd1" rx="69.833" ry="94.569" transform="matrix(.971 -.24 .24 .971 -19.288 43.412)"/>
+        <ellipse cx="343.484" cy="100.861" fill="#bd4dd1" rx="94.569" ry="69.833" transform="matrix(.24 -.971 .971 .24 163.102 410.08)"/>
+        <ellipse cx="70.93" cy="255.379" fill="#bd4dd1" rx="61.918" ry="83.85" transform="matrix(.971 -.24 .24 .971 -59.243 24.501)"/>
+        <ellipse cx="441.07" cy="255.379" fill="#bd4dd1" rx="83.85" ry="61.918" transform="matrix(.24 -.971 .971 .24 87.258 622.229)"/>
+      </g>
+    </g>
+  </svg>
+`;
+
+        class BunnyTrail {
+            constructor() {
+                this.container = document.getElementById("trailContainer");
+                this.createTrail();
+            }
+
+            createPawPrint(x, y, rotation, delay) {
+                const paw = document.createElement("div");
+                paw.className = "paw-print";
+                paw.innerHTML = svgTemplate;
+                paw.style.left = `${x}px`;
+                paw.style.top = `${y}px`;
+                paw.style.transform = `rotate(${rotation}deg)`;
+                paw.style.animationDelay = `${delay}s`;
+                this.container.appendChild(paw);
+            }
+
+            createTrail() {
+                const startX = 50;
+                const startY = window.innerHeight - -4350;
+                const stepLength = 67;
+                const stepWidth = 25;
+
+                let currentX = startX;
+                let currentY = startY;
+                let direction = 1;
+
+                for (let i = 0; i < 80; i++) {
+                    const delay = i * 0.1;
+
+                    this.createPawPrint(
+                        currentX - stepWidth,
+                        currentY,
+                        -10 + (Math.random() * 10 - 5),
+                        delay,
+                    );
+
+                    this.createPawPrint(
+                        currentX + stepWidth,
+                        currentY,
+                        15 + (Math.random() * 10 - 5),
+                        delay + 0.05,
+                    );
+
+                    currentX += direction * (30 + Math.random() * 20);
+                    currentY -= stepLength + Math.random() * 50;
+
+                    if (Math.random() > 0.7) {
+                    }
+
+                    if (currentX < 200) {
+                        currentX = 200;
+                        direction = 4;
+                    }
+
+                    if (currentX > window.innerWidth - 100) {
+                        currentX = window.innerWidth - 100;
+                        direction = -13;
+                    }
+                }
+            }
+        }
+
+        window.addEventListener("load", () => {
+            new BunnyTrail();
+        });
+
+        let resizeTimer;
+        window.addEventListener("resize", () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                document.getElementById("trailContainer").innerHTML = "";
+                new BunnyTrail();
+            }, 250);
+        });
+    </script>
+</body>
+
+</html>
